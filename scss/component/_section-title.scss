@@ -37,10 +37,16 @@
         font-size: clamp(45px, 11vw, 96px);
         letter-spacing: 0.1em;
       }
+
+      &.__middle {
+        font-size: clamp(35px, 11vw, 84px);
+      }
     }
 
     &__white {
       color: #ffffff;
+      font-family: $font-sub;
+      letter-spacing: 0.1em;
 
       &.__bold {
         font-weight: 900;
@@ -48,6 +54,14 @@
 
       &.__large {
         font-size: clamp(45px, 11vw, 96px);
+      }
+
+      &.__middle {
+        font-size: clamp(35px, 11vw, 74px);
+      }
+
+      &.__italic {
+        font-style: italic;
       }
     }
   }
@@ -60,6 +74,10 @@
     line-height: 1;
     letter-spacing: 0.2rem;
     margin-bottom: -20px;
+
+    &__up {
+      margin-top: -20px;
+    }
 
     &__white {  
       color: #ffffff;

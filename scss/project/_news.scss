@@ -1,13 +1,17 @@
 @use "../foundation/variables" as *;
 @use "../foundation/mixin" as *;
 
+$news-item-size: 80px;
+$news-item-gap: 20px;
+$news-visible-count: 3;
+
 // ============================================================
 //  NEWS SECTION
 // ============================================================
 .news {
   padding: $section-pad-v 0;
-  background-color: rgba(15, 101, 163, 0.08);
-  background-image: url("../images/news-back.png");
+  background-color: #A9C5DA;
+  background-image: url("../images/news-check.png");
   background-repeat: repeat;
 
   @include sp {
@@ -27,27 +31,29 @@
   }
 
   &__grid {
+    display: flex;
+    flex-direction: column;
     background-color: $color-white;
-    padding: 30px;
-    border-radius: 10px;
+    padding: 28px 28px 24px;
+    border-radius: 16px;
     margin-top: -40px;
-    max-height: 460px;
-
-    overflow: hidden;
   }
 
   &__scroll {
-    max-height: 380px;
-    overflow-y: auto;
-
-    // スクロールバーを少し内側に見せる余白
-    padding-right: 24px;
+    height: calc(
+      #{$news-item-size} * #{$news-visible-count} +
+      #{$news-item-gap} * (#{$news-visible-count} - 1)
+    );
+    overflow-y: scroll;
+    scrollbar-gutter: stable;
+    padding-right: 20px;
+    margin-right: -4px;
 
     scrollbar-width: thin;
     scrollbar-color: #343434 #f1f1f1;
 
     &::-webkit-scrollbar {
-      width: 6px;
+      width: 5px;
     }
 
     &::-webkit-scrollbar-track {
@@ -60,43 +66,37 @@
       border-radius: 999px;
     }
   }
-  
+
   &__list {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 0 32px;
-  
-    @include sp {
-      grid-template-columns: 1fr;
-    }
+    display: flex;
+    flex-direction: column;
+    gap: $news-item-gap;
   }
-  
+
   &__item {
-    border-bottom: 1px solid $color-border;
     list-style: none;
-  
+    flex-shrink: 0;
+
     a {
       display: flex;
       align-items: flex-start;
-      gap: 14px;
-      padding: 16px 0;
-  
+      gap: 16px;
+      min-height: $news-item-size;
+
       @include transition;
-  
+
       &:hover {
-        opacity: 1;
-        background: $color-bg-light;
-        padding-left: 8px;
+        opacity: 0.75;
       }
     }
   }
 
   &__thumb {
     flex-shrink: 0;
-    width: 92px;
-    height: 92px;
+    width: $news-item-size;
+    height: $news-item-size;
     overflow: hidden;
-    border-radius: 4px;
+    background-color: #d9d9d9;
 
     img {
       width: 100%;
@@ -108,12 +108,13 @@
   &__body {
     flex: 1;
     min-width: 0;
+    padding-top: 2px;
   }
 
   &__date {
-    font-size: 16px;
+    font-size: 14px;
     color: $color-text-sub;
-    margin-right: 8px;
+    margin-right: 10px;
     font-family: $font-en;
   }
 
@@ -121,31 +122,33 @@
     display: inline-block;
     font-size: 10px;
     font-weight: 700;
-    padding: 2px 8px;
+    padding: 2px 10px;
     border-radius: 2px;
     background: $color-tag-bg;
     color: $color-text-sub;
-    margin-bottom: 6px;
     line-height: 1.6;
+    vertical-align: middle;
 
     &--blue {
-      background: $color-tag-blue;
+      background: #3b639f;
       color: $color-white;
     }
   }
 
   &__title {
-    font-size: 16px;
+    margin-top: 6px;
+    font-size: 14px;
     font-weight: 500;
     line-height: 1.6;
     display: -webkit-box;
-    -webkit-line-clamp: 2;
+    -webkit-line-clamp: 1;
     -webkit-box-orient: vertical;
     overflow: hidden;
   }
 
   &__link {
+    flex-shrink: 0;
     text-align: center;
-    margin-top: 20px;
+    margin-top: 24px;
   }
 }

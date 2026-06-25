@@ -491,8 +491,8 @@
     <section class="news" id="news" data-side-nav-theme="blue">
       <div class="news__inner container">
         <h2 class="section-title section-title--inline">
-          <span class="section-title__en__blue __large">NEWS</span>
-          <span class="section-title__ruby">お知らせ</span>
+          <span class="section-title__en section-title__en__white __middle __italic">NEWS</span>
+          <span class="section-title__ruby section-title__ruby__white">お知らせ</span>
         </h2>
 
         <div class="news__grid">
@@ -774,12 +774,12 @@
           
             </ul>
           </div>
-        </div>
 
-        <div class="news__link">
-          <a href="news.html" class="c-more-btn">
-            NEWS ALL
-          </a>
+          <div class="news__link">
+            <a href="news.html" class="c-more-btn">
+              NEWS ALL
+            </a>
+          </div>
         </div>
       </div>
     </section>
@@ -789,54 +789,44 @@
     <section class="clients" id="clients" data-side-nav-theme="light">
       <div class="clients__inner container">
         <h2 class="section-title section-title">
-          <span class="section-title__en__blue">OUR CLIENTS</span>
-          <span class="section-title__ruby">制作実績</span>
+          <span class="section-title__en__blue __middle">OUR CLIENTS</span>
+          <span class="section-title__ruby section-title__ruby__up">お取引先企業</span>
         </h2>
 
-        <!-- 仮置き -->
-        <div class="works__logo-sample">
-          <img src="images/clients-image.png" alt="制作実績ロゴ一覧">
-        </div>
+        <div class="clients__logos">
+          <div class="clients__row clients__row--top">
+            <div class="clients__logo-item">
+              <img src="images/client01.png" alt="クライアントロゴ1">
+            </div>
+            <div class="clients__logo-item">
+              <img src="images/client02.png" alt="クライアントロゴ2">
+            </div>
+            <div class="clients__logo-item">
+              <img src="images/client03.png" alt="クライアントロゴ3">
+            </div>
+          </div>
 
-        <!-- WordPressカスタムフィールドやACFでロゴ管理を想定 -->
-        <!-- <div class="clients__logos">
-          <div class="clients__logo-item">
-            <img src="https://placehold.co/120x50/ffffff/555?text=KAO" alt="KAO">
+          <div class="clients__row clients__row--bottom">
+            <div class="clients__logo-item">
+              <img src="images/client04.png" alt="クライアントロゴ4">
+            </div>
+            <div class="clients__logo-item">
+              <img src="images/client05.png" alt="クライアントロゴ5">
+            </div>
+            <div class="clients__logo-item">
+              <img src="images/client06.png" alt="クライアントロゴ6">
+            </div>
+            <div class="clients__logo-item">
+              <img src="images/client07.png" alt="クライアントロゴ7">
+            </div>
+            <div class="clients__logo-item">
+              <img src="images/client08.png" alt="クライアントロゴ8">
+            </div>
+            <div class="clients__logo-item">
+              <img src="images/client09.png" alt="クライアントロゴ9">
+            </div>
           </div>
-          <div class="clients__logo-item">
-            <img src="https://placehold.co/120x50/ffffff/555?text=JAL" alt="JAL">
-          </div>
-          <div class="clients__logo-item">
-            <img src="https://placehold.co/120x50/ffffff/555?text=伊藤園" alt="伊藤園">
-          </div>
-          <div class="clients__logo-item">
-            <img src="https://placehold.co/120x50/ffffff/555?text=Client" alt="Client">
-          </div>
-          <div class="clients__logo-item">
-            <img src="https://placehold.co/120x50/ffffff/555?text=SEIUR+SIBON" alt="SEIUR SIBON">
-          </div>
-          <div class="clients__logo-item">
-            <img src="https://placehold.co/120x50/ffffff/555?text=TAKARA+TOMY" alt="TAKARA TOMY">
-          </div>
-          <div class="clients__logo-item">
-            <img src="https://placehold.co/120x50/ffffff/555?text=LOTTERIA" alt="LOTTERIA">
-          </div>
-          <div class="clients__logo-item">
-            <img src="https://placehold.co/120x50/ffffff/555?text=PEACH+JOHN" alt="PEACH JOHN">
-          </div>
-          <div class="clients__logo-item">
-            <img src="https://placehold.co/120x50/ffffff/555?text=PINK+HOUSE" alt="PINK HOUSE">
-          </div>
-          <div class="clients__logo-item">
-            <img src="https://placehold.co/120x50/ffffff/555?text=大東建託" alt="大東建託">
-          </div>
-          <div class="clients__logo-item">
-            <img src="https://placehold.co/120x50/ffffff/555?text=Jantique" alt="Jantique">
-          </div>
-          <div class="clients__logo-item">
-            <img src="https://placehold.co/120x50/ffffff/555?text=Client" alt="Client">
-          </div>
-        </div> -->
+        </div>
       </div>
     </section>
 
@@ -847,7 +837,10 @@
       <div class="contact__inner container">
         <h2 class="section-title section-title">
           <span class="section-title__ruby">お問い合わせ</span>
-          <span class="section-title__en__blue __large">CONTACT</span>
+          <span class="contact__title-row">
+            <span class="section-title__en__blue __middle">CONTACT</span>
+            <img class="contact__title-icon" src="images/contact-mail.svg" alt="" width="80" height="56" aria-hidden="true">
+          </span>
         </h2>
         <p class="contact__lead">「おもしろい商品を考えて欲しい」「こんなデザインの商品はできる？」など、<br />どんなご依頼、ご相談でも大歓迎です。ぜひお気軽にお問い合わせください。<br />以下のお問い合わせフォームよりご連絡ください。</p>
 
@@ -924,71 +917,72 @@
   <footer class="footer">
 
     <div class="footer__inner container">
-  
+
       <div class="footer__head">
-        <p class="footer__index">Index</p>
-        <!-- <div class="to-top-wrap">
-          <a href="#top" class="c-more-link c-more-link--top">
-            <span class="c-more-link__text">Top Page</span>
-            <img src="images/button-arrow.svg" alt="" class="c-more-link__arrow">
-          </a>
-        </div> -->
+        <p class="footer__index">INDEX</p>
       </div>
-  
+
       <div class="footer__line"></div>
 
       <div class="footer__content">
         <div class="footer__nav">
-    
+
           <div class="footer__col">
-            <a href="#about"  class="footer__title">ABOUT</a>
-            <ul>
-              <li><a href="#">会社について</a></li>
-              <li><a href="#">仕事の流れ</a></li>
-            </ul>
-          </div>
-    
-          <div class="footer__col">
-            <a href="#news" class="footer__title">NEWS</a>
-            <ul>
-              <li><a href="#">お知らせ一覧</a></li>
-            </ul>
-          </div>
-    
-          <div class="footer__col">
-            <a href="#company" class="footer__title">COMPANY</a>
-            <ul>
-              <li><a href="#">会社概要</a></li>
-              <li><a href="#">企業理念</a></li>
-              <li><a href="#">アクセス</a></li>
-            </ul>
-          </div>
-    
-          <div class="footer__col footer__col--works">
-            <a href="#works" class="footer__title">WORKS</a>
-            <ul>
-              <li><a href="#">業務実績一覧</a></li>
-            </ul>
-          </div>
-    
-          <div class="footer__col footer__col--service">
-            <a href="#service" class="footer__title">SERVICE</a>
+            <div class="footer__group">
+              <a href="#about" class="footer__title">ABOUT</a>
+              <ul>
+                <li><a href="#">会社について</a></li>
+                <li><a href="#">仕事の流れ</a></li>
+              </ul>
+            </div>
+            <div class="footer__group">
+              <a href="#news" class="footer__title">NEWS</a>
+              <ul>
+                <li><a href="#">お知らせ一覧</a></li>
+              </ul>
+            </div>
           </div>
 
-          <a href="#contact" class="footer__recruit">
-            RECRUIT
+          <div class="footer__col">
+            <div class="footer__group">
+              <a href="#company" class="footer__title">COMPANY</a>
+              <ul>
+                <li><a href="#">会社概要</a></li>
+                <li><a href="#">企業理念</a></li>
+                <li><a href="#">代表挨拶</a></li>
+                <li><a href="#">アクセス</a></li>
+              </ul>
+            </div>
+            <div class="footer__group">
+              <a href="#service" class="footer__title">SERVICE</a>
+            </div>
+          </div>
+
+          <div class="footer__col">
+            <div class="footer__group">
+              <a href="#works" class="footer__title">WORK</a>
+              <ul>
+                <li><a href="#">業務実績一覧</a></li>
+              </ul>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="footer__brand">
+          <a href="#top" class="footer__logo">
+            <img src="images/logo.png" alt="DELIGHT">
           </a>
-    
+          <a href="#contact" class="footer__recruit">RECRUIT</a>
         </div>
       </div>
-        
-  
+
+      <div class="footer__copyright">
+        <p>&copy; 2022 DELIGHT All rights reserved</p>
+      </div>
+
     </div>
 
-    <div class="footer__copyright">
-      <p>&copy; DELIGHT All rights reserved</p>
-    </div>
-  
   </footer>
 
   <a href="#top" id="pageTop" class="page-top" aria-label="ページ上部へ戻る">
