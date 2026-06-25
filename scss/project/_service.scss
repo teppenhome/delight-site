@@ -14,7 +14,7 @@
 
   &__inner {
     max-width: $container-width;
-    margin: 0 40px 0 auto;
+    margin: 0 100px 0 auto;
     padding: 0 40px; //サイドバーのかぶり防止
     @include sp { padding: 0 20px; }
 

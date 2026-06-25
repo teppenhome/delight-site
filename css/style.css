@@ -1219,7 +1219,7 @@ body.is-menu-open {
 }
 .service__inner {
   max-width: 1100px;
-  margin: 0 40px 0 auto;
+  margin: 0 100px 0 auto;
   padding: 0 40px;
 }
 @media (max-width: 768px) {
@@ -1386,7 +1386,7 @@ body.is-menu-open {
 }
 .news__inner {
   max-width: 1100px;
-  margin: 0 60px 0 auto;
+  margin: 0 100px 0 auto;
   padding: 0 40px;
 }
 @media (max-width: 768px) {
@@ -1713,7 +1713,7 @@ body.is-menu-open {
 }
 .clients__inner {
   max-width: 1100px;
-  margin: 0 60px 0 auto;
+  margin: 0 100px 0 auto;
   padding: 0 40px;
 }
 @media (max-width: 768px) {
