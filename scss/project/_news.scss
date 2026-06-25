@@ -18,18 +18,6 @@ $news-visible-count: 3;
     margin-top: 0;
   }
 
-  &__inner {
-    max-width: $container-width;
-    margin: 0 100px 0 auto;
-    padding: 0 40px; //サイドバーのかぶり防止
-    @include sp { padding: 0 20px; }
-
-    @include lg {
-      max-width: 950px;
-      margin: 0 20px 0 auto;
-    }
-  }
-
   &__grid {
     display: flex;
     flex-direction: column;

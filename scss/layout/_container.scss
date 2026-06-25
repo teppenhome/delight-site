@@ -7,10 +7,30 @@
 .container {
   max-width: $container-width;
   margin: 0 auto;
-  padding: 0 40px; //サイドバーのかぶり防止
+  padding: 0 40px;
   @include sp { padding: 0 20px; }
 
   @include lg {
     max-width: 800px;
+  }
+
+  // サイドナビとのバランスで右寄せ（tab以上で表示）
+  &--side-offset {
+    @media (min-width: #{$breakpoint-tab + 1px}) {
+      margin: 0 $container-side-offset-right 0 auto;
+    }
+
+    // lg幅: auto の左マージンが大きくなりすぎるため、中央寄せとサイドナビ余白の間で調整
+    @include lg {
+      max-width: $container-side-offset-width-lg;
+      margin-right: $container-side-offset-right-lg;
+      margin-left: min(
+        max(
+          $side-nav-gutter,
+          calc((100vw - #{$container-side-offset-width-lg} - #{$container-side-offset-right-lg}) / 2)
+        ),
+        calc(100vw - #{$container-side-offset-width-lg} - #{$container-side-offset-right-lg})
+      );
+    }
   }
 }

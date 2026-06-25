@@ -23,3 +23,13 @@ $breakpoint-lg:  1439px;
 
 $container-width: 1100px;
 $section-pad-v:   80px;
+
+// サイドナビとのバランス（container--side-offset 用）
+$side-nav-left:   40px;
+$side-nav-width:  130px;
+$side-nav-gap:    20px;
+$side-nav-gutter: $side-nav-left + $side-nav-width + $side-nav-gap;
+
+$container-side-offset-width-lg: 950px;
+$container-side-offset-right:      100px;
+$container-side-offset-right-lg:   20px;
