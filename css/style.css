@@ -1513,11 +1513,12 @@ body.is-menu-open {
 }
 .contact__lead {
   text-align: center;
-  font-size: 18px;
+  font-size: 16px;
   font-weight: bold;
   color: #343434;
   line-height: 1.9;
   margin-bottom: 48px;
+  margin-top: -40px;
 }
 @media (max-width: 768px) {
   .contact__lead {
@@ -1587,7 +1588,7 @@ body.is-menu-open {
   gap: 8px;
   cursor: pointer;
 }
-.contact__checkboxes input[type=checkbox] {
+.contact__checkboxes input[type=radio] {
   appearance: none;
   -webkit-appearance: none;
   width: 20px;
@@ -1598,11 +1599,11 @@ body.is-menu-open {
   cursor: pointer;
   flex-shrink: 0;
 }
-.contact__checkboxes input[type=checkbox]:checked {
+.contact__checkboxes input[type=radio]:checked {
   border-color: #3AA0FF;
   background: #3AA0FF;
 }
-.contact__checkboxes input[type=checkbox]:checked::after {
+.contact__checkboxes input[type=radio]:checked::after {
   content: "";
   position: absolute;
   width: 10px;

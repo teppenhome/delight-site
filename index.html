@@ -846,8 +846,8 @@
     <section class="contact" id="contact">
       <div class="contact__inner container">
         <h2 class="section-title section-title">
-          <span class="section-title__en__blue __large">CONTACT</span>
           <span class="section-title__ruby">お問い合わせ</span>
+          <span class="section-title__en__blue __large">CONTACT</span>
         </h2>
         <p class="contact__lead">「おもしろい商品を考えて欲しい」「こんなデザインの商品はできる？」など、<br />どんなご依頼、ご相談でも大歓迎です。ぜひお気軽にお問い合わせください。<br />以下のお問い合わせフォームよりご連絡ください。</p>
 
@@ -857,16 +857,16 @@
           <div class="contact__row">
             <label class="contact__label">お問い合わせ項目</label>
             <div class="contact__checkboxes">
-              <label><input type="checkbox" name="type" value="service"> サービスについて</label>
-              <label><input type="checkbox" name="type" value="works"> お見積り</label>
-              <label><input type="checkbox" name="type" value="recruit"> ご相談</label>
-              <label><input type="checkbox" name="type" value="media"> 取材</label>
-              <label><input type="checkbox" name="type" value="other"> その他</label>
+              <label><input type="radio" name="type" value="service"> サービスについて</label>
+              <label><input type="radio" name="type" value="works"> お見積り</label>
+              <label><input type="radio" name="type" value="recruit"> ご相談</label>
+              <label><input type="radio" name="type" value="media"> 取材</label>
+              <label><input type="radio" name="type" value="other"> その他</label>
             </div>
           </div>
 
           <div class="contact__row">
-            <label class="contact__label" for="company_name">お名前 <span class="required">必須</span></label>
+            <label class="contact__label" for="company_name">お名前</label>
             <input type="text" id="company_name" name="company_name" class="contact__input" placeholder="例）横浜 太郎">
           </div>
 
@@ -891,7 +891,7 @@
           </div>
 
           <div class="contact__row">
-            <label class="contact__label" for="email">メールアドレス <span class="required">必須</span></label>
+            <label class="contact__label" for="email">メールアドレス</label>
             <input type="email" id="email" name="email" class="contact__input" placeholder="例）delight@example.com">
           </div>
 
