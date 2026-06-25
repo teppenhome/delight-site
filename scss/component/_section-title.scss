@@ -3,12 +3,11 @@
 
 // セクション共通ラベル（英語小見出し）
 .section-label {
-  font-family: $font-en;
-  font-size: 20px;
-  font-weight: 700;
-  letter-spacing: 0.15em;
+  font-family: $font-sub;
+  font-size: 30px;
+  font-weight: 600;
+  letter-spacing: 0.03em;
   color: #0F65A3;
-  margin-bottom: 4px;
 
   @include sp {
     font-size: 18px;
@@ -19,36 +18,52 @@
 // セクション共通タイトル
 .section-title {
   font-family: $font-ja;
-  font-size: 48px;
+  font-size: 58px;
   font-weight: 700;
   color: #343434;
   margin-bottom: 40px;
-  line-height: 1.3;
 
   &__en {
-    font-family: $font-en;
+    font-family: $font-sub;
     letter-spacing: 0.1em;
+    font-size: 64px;
 
     &__blue {
       color: #0F65A3;
-      font-family: $font-en;
+      font-family: $font-sub;
       letter-spacing: 0.1em;
 
       &.__large {
-        font-size: clamp(45px, 11vw, 64px);
+        font-size: clamp(45px, 11vw, 96px);
         letter-spacing: 0.1em;
+      }
+    }
+
+    &__white {
+      color: #ffffff;
+
+      &.__bold {
+        font-weight: 900;
+      }
+
+      &.__large {
+        font-size: clamp(45px, 11vw, 96px);
       }
     }
   }
 
   &__ruby {
     display: block;
-    margin-top: 6px;
     font-size: 24px;
     font-weight: 700;
     color: #343434;
     line-height: 1;
     letter-spacing: 0.2rem;
+    margin-bottom: -20px;
+
+    &__white {  
+      color: #ffffff;
+    }
   }
 
   &--inline {

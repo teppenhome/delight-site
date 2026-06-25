@@ -7,7 +7,7 @@
 .container {
   max-width: $container-width;
   margin: 0 auto;
-  padding: 0 40px;
+  padding: 0 40px; //サイドバーのかぶり防止
   @include sp { padding: 0 20px; }
 
   @include lg {

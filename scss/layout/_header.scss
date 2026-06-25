@@ -12,6 +12,7 @@
   z-index: 10;
   background: transparent;
   border-bottom: none;
+  background-color: #fff;
 
   @include tab {
     position: fixed;
@@ -32,7 +33,7 @@
     display: flex;
     align-items: flex-start;
     justify-content: space-between;
-    padding: 40px 48px 0 64px;
+    padding: 20px 48px 10px 64px;
     height: auto;
     position: relative;
 
@@ -76,18 +77,12 @@
 
   &__logo--side {
     margin-bottom: 30px;
-
-    img {
-      height: 32px;
-      width: auto;
-      display: block;
-    }
   }
 
   &__nav {
     position: absolute;
     right: 48px;
-    top: 300px;
+    top: 250px;
     z-index: 20;
 
     @include tab {
@@ -106,7 +101,7 @@
       flex-direction: column;
       align-items: center;
       text-align: center;
-      color: $color-text;
+      color: #fff;
       line-height: 1.2;
       transition: opacity 0.3s ease, color 0.3s ease;
 
@@ -129,7 +124,7 @@
 
   &__nav-en {
     display: block;
-    font-family: $font-en;
+    font-family: $font-sub;
     font-size: 1rem;
     font-weight: 500;
     font-style: italic;
@@ -145,8 +140,9 @@
     font-weight: 400;
     font-style: normal;
     letter-spacing: 0.05em;
-    color: #0F65A3;
+    color: #fff ;
     line-height: 1;
+    opacity: 0.7;
   }
 
   &__hamburger {

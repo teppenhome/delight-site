@@ -116,20 +116,41 @@ function initSideNav() {
   const hero = document.querySelector('.hero');
   const contact = document.querySelector('.contact');
   const sideNav = document.getElementById('sideNav');
+  const themedSections = Array.from(
+    document.querySelectorAll('[data-side-nav-theme]')
+  );
 
   if (!hero || !contact || !sideNav) return;
 
   const contactThreshold = () => window.innerHeight * 0.2;
 
+  const getActiveTheme = () => {
+    const checkY = sideNav.getBoundingClientRect().top + 80;
+
+    for (const section of themedSections) {
+      const rect = section.getBoundingClientRect();
+      if (rect.top <= checkY && rect.bottom > checkY) {
+        return section.dataset.sideNavTheme;
+      }
+    }
+
+    return themedSections[0]?.dataset.sideNavTheme ?? 'light';
+  };
+
   const syncState = () => {
     const heroRect = hero.getBoundingClientRect();
     const heroVisible = heroRect.bottom > 0 && heroRect.top < window.innerHeight;
     const reachedContact = contact.getBoundingClientRect().top < contactThreshold();
+    const isVisible = !heroVisible && !reachedContact;
 
-    sideNav.classList.toggle(
-      'is-visible',
-      !heroVisible && !reachedContact
-    );
+    sideNav.classList.toggle('is-visible', isVisible);
+
+    if (isVisible) {
+      sideNav.classList.toggle(
+        'is-on-blue-section',
+        getActiveTheme() === 'blue'
+      );
+    }
   };
 
   window.addEventListener('scroll', syncState, { passive: true });

@@ -16,6 +16,20 @@ $works-arrow-size:    55px;
   --works-arrow-size: #{$works-arrow-size};
   --works-next-offset: -28px; // PC: nextボタンの左右微調整（左へ寄せる場合はマイナス）
   --works-prev-offset: -24px; // PC: prevボタンの左右微調整（左へ寄せる場合はマイナス）
+  // 表示枚数分のカード群を画面中央（50vw）に合わせる（左のcontainer余白は維持）
+  --works-content-offset: calc(
+    (100vw - min(100vw, #{$container-width})) / 2 + 40px
+  );
+  --works-viewport-inset: max(
+    0px,
+    calc(
+      50vw - var(--works-content-offset) -
+      (
+        var(--works-card-width) * var(--works-visible-cards) +
+        var(--works-card-gap) * (var(--works-visible-cards) - 1)
+      ) / 2
+    )
+  );
 
   padding: $section-pad-v 0;
   position: relative;
@@ -45,6 +59,7 @@ $works-arrow-size:    55px;
     flex: 1 1 auto;
     min-width: 0;
     overflow: hidden;
+    padding-left: var(--works-viewport-inset);
   }
 
   &__slider {
@@ -151,11 +166,12 @@ $works-arrow-size:    55px;
   &__more-text {
     margin-right: 40px;
   
-    font-family: "Inter", sans-serif;
+    font-family: $font-sub;
     font-size: 18px;
     font-weight: 600;
     line-height: 1;
-    color: rgba(52, 52, 52, 0.5);
+    color: rgba(52, 52, 52, 0.8);
+    letter-spacing: 0.05em;
   }
   
   &__more-arrow {
@@ -196,7 +212,7 @@ $works-arrow-size:    55px;
   
     &--prev {
       position: absolute;
-      left: var(--works-prev-offset);
+      left: calc(var(--works-viewport-inset) + var(--works-prev-offset));
       top: calc(50% - 100px);
       transform: translateY(-50%);
       margin-right: 0;
@@ -213,6 +229,7 @@ $works-arrow-size:    55px;
       transform: translateY(-50%);
       left: min(
         calc(
+          var(--works-viewport-inset) +
           var(--works-arrow-size) / 2 +
           var(--works-card-width) * var(--works-visible-cards) +
           var(--works-card-gap) * (var(--works-visible-cards) - 1) +
@@ -237,7 +254,7 @@ $works-arrow-size:    55px;
 
   &__link {
     text-align: center;
-    margin-top: 60px;
+    margin-top: 20px;
 
     @include sp {
       margin-top: 50px;
@@ -247,11 +264,15 @@ $works-arrow-size:    55px;
 
   @include lg {
     --works-visible-cards: 2;
+    --works-content-offset: calc(
+      (100vw - min(100vw, 800px)) / 2 + 40px
+    );
   }
 
   @include sp {
     --works-visible-cards: 1;
     --works-prev-offset: 0px;
+    --works-viewport-inset: 0px;
 
     &__slider-wrap {
       margin-left: calc(50% - 50vw);
@@ -262,6 +283,7 @@ $works-arrow-size:    55px;
     &__slider-viewport {
       flex: 1 1 100%;
       width: 100%;
+      padding-left: 0;
     }
 
     &__slider {
