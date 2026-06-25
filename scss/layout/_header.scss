@@ -114,11 +114,29 @@
 
   &__nav-contact {
     display: block;
+    position: relative;
+    width: 72px;
 
-    img {
+    &__img {
       display: block;
       width: 72px;
       height: auto;
+      transition: opacity 0.3s ease;
+
+      &--hover {
+        position: absolute;
+        top: 0;
+        left: 0;
+        opacity: 0;
+      }
+    }
+
+    &:hover &__img--default {
+      opacity: 0;
+    }
+
+    &:hover &__img--hover {
+      opacity: 1;
     }
   }
 

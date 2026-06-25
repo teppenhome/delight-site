@@ -14,6 +14,18 @@
     margin-top: 0;
   }
 
+  &__inner {
+    max-width: $container-width;
+    margin: 0 60px 0 auto;
+    padding: 0 40px; //サイドバーのかぶり防止
+    @include sp { padding: 0 20px; }
+
+    @include lg {
+      max-width: 950px;
+      margin: 0 20px 0 auto;
+    }
+  }
+
   &__grid {
     background-color: $color-white;
     padding: 30px;

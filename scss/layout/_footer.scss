@@ -206,10 +206,18 @@
     opacity 0.3s ease,
     visibility 0.3s ease;
 
-  img {
+  &__img {
     width: 100%;
     height: auto;
     display: block;
+    transition: opacity 0.3s ease;
+
+    &--hover {
+      position: absolute;
+      top: 0;
+      left: 0;
+      opacity: 0;
+    }
   }
 
   &.is-visible {
@@ -219,7 +227,15 @@
   }
 
   &:hover {
-    opacity: 0.85;
+    opacity: 1;
+
+    .page-top__img--default {
+      opacity: 0;
+    }
+
+    .page-top__img--hover {
+      opacity: 1;
+    }
   }
 
   @include sp {
