@@ -14,31 +14,30 @@
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
-  padding: 20px 14px;
-  border-radius: 12px;
-  background-color: rgba($color-primary, 0.85);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
   transition:
     opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
     transform 0.7s cubic-bezier(0.22, 1, 0.36, 1),
-    visibility 0s linear 0.7s,
-    background-color 0.4s ease;
+    visibility 0s linear 0.7s;
 
   &.is-on-blue-section {
-    background-color: rgba($color-white, 0.85);
-    box-shadow: 0 4px 24px rgba($color-primary, 0.08);
-
-    a {
-      color: $color-text;
+    a:not(.header__nav-contact) {
+      color: $color-white;
     }
 
     .side-nav__en {
-      color: $color-text;
+      color: $color-white;
     }
 
     .side-nav__ja {
-      color: $color-primary;
+      color: rgba($color-white, 0.85);
+    }
+
+    .header__logo--side__img--default {
+      opacity: 0;
+    }
+
+    .header__logo--side__img--white {
+      opacity: 1;
     }
   }
 
@@ -61,14 +60,24 @@
 
     a {
       display: block;
+      position: relative;
     }
 
-    img {
+    &__img {
+      display: block;
       width: 100%;
       height: auto;
       max-height: 28px;
       object-fit: contain;
       object-position: left center;
+      transition: opacity 0.4s ease;
+
+      &--white {
+        position: absolute;
+        top: 0;
+        left: 0;
+        opacity: 0;
+      }
     }
   }
 
@@ -78,20 +87,24 @@
     gap: 28px;
   }
 
-  a {
+  a:not(.header__nav-contact) {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     text-align: left;
-    color: $color-white;
+    color: $color-text;
     line-height: 1.2;
     @include transition(color);
 
     &:hover {
       opacity: 0.7;
     }
+  }
 
-    &.header__nav-contact:hover {
+  a.header__nav-contact {
+    display: block;
+
+    &:hover {
       opacity: 1;
     }
   }
@@ -103,7 +116,7 @@
     font-weight: 600;
     font-style: italic;
     letter-spacing: 0.12em;
-    color: $color-white;
+    color: $color-text;
     line-height: 1;
     white-space: nowrap;
     @include transition(color);
@@ -117,7 +130,7 @@
     font-weight: 400;
     font-style: normal;
     letter-spacing: 0.05em;
-    color: rgba($color-white, 0.85);
+    color: $color-primary;
     line-height: 1;
     white-space: nowrap;
     @include transition(color);

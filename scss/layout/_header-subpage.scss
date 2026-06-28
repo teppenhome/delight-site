@@ -1,0 +1,122 @@
+@use "../foundation/variables" as *;
+@use "../foundation/mixin" as *;
+
+// ============================================================
+//  HEADER（下層ページ：トップビジュアルなし）
+// ============================================================
+body[class*="page-"] {
+  .header {
+    position: relative;
+    z-index: 10;
+
+    @include tab {
+      position: fixed;
+      left: 0;
+      right: 0;
+      width: auto;
+      z-index: 300;
+    }
+  }
+
+  .header__nav {
+    top: 60px;
+  }
+
+  .header__nav-list li a {
+    color: $color-text;
+  }
+
+  .header__nav-en {
+    color: $color-text;
+    font-style: normal;
+
+    &.__is-active {
+      color: $color-primary;
+    }
+  }
+
+  .header__nav-ja {
+    color: $color-primary;
+    opacity: 0.85;
+  }
+}
+
+// WORK / NEWS 一覧・詳細：ナビ左揃え
+.page-work,
+.page-work-detail,
+.page-news,
+.page-news-detail,
+.page-recruit,
+.page-privacy {
+  .header__nav-list {
+    align-items: flex-start;
+  }
+
+  .header__nav-list li a {
+    align-items: flex-start;
+    text-align: left;
+  }
+}
+
+// ABOUT 配下：ナビ左揃え + 子メニュー
+.page-about,
+.page-philosophy,
+.page-message,
+.page-access {
+  .header__nav-list {
+    align-items: flex-start;
+  }
+
+  .header__nav-list > li > a {
+    align-items: flex-start;
+    text-align: left;
+  }
+
+  .header__nav-item--has-child {
+    display: inline-block;
+    vertical-align: top;
+    text-align: left;
+  }
+
+  .header__nav-en.__is-active {
+    display: block;
+    font-weight: 700;
+    color: $color-primary;
+  }
+
+  .header__nav-list .header__nav-child {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 10px;
+    width: 0;
+    min-width: 100%;
+    margin-top: 14px;
+    padding: 0;
+    list-style: none;
+    text-align: right;
+
+    li {
+      width: 100%;
+    }
+
+    li a {
+      display: block;
+      font-family: $font-ja;
+      font-size: 0.875rem;
+      font-weight: 400;
+      color: $color-text-sub;
+      line-height: 1.4;
+      letter-spacing: 0.04em;
+      white-space: nowrap;
+      text-align: right;
+      transition: color 0.3s ease;
+
+      &:hover,
+      &.is-current {
+        color: $color-primary;
+        opacity: 1;
+      }
+    }
+  }
+}

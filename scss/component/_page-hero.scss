@@ -1,0 +1,49 @@
+@use "../foundation/variables" as *;
+@use "../foundation/mixin" as *;
+
+// ============================================================
+//  下層ページ共通ヒーロー
+// ============================================================
+.c-page-hero {
+  margin-bottom: 48px;
+
+  @include sp {
+    margin-bottom: 36px;
+  }
+
+  &--center {
+    text-align: center;
+  }
+}
+
+.c-page-title {
+  margin: 0;
+  font-family: $font-sub;
+  font-size: clamp(40px, 8vw, 64px);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  line-height: 1.1;
+  color: $color-primary;
+
+  &.__mini {
+    font-size: clamp(32px, 5vw, 56px);
+    font-style: normal;
+    letter-spacing: 0.08em;
+  }
+}
+
+.c-page-subtitle {
+  margin: 0;
+  font-family: $font-ja;
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: 0.25em;
+  color: $color-text;
+
+  &.__mini {
+    font-size: 15px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    color: $color-text-sub;
+  }
+}

@@ -6,12 +6,24 @@
 //  FOOTER
 // ============================================================
 $footer-brand-width: 330px;
+$footer-brand-width-md: 240px;
+$footer-brand-width-sm: 200px;
 
 .footer {
   background: #fff;
-  padding: 120px 0 0;
+  padding: 0;
   display: flex;
   flex-direction: column;
+}
+
+.footer__inner {
+  // tab 以上: サイドナビ右の余白を活かして通常コンテナより広く
+  @media (min-width: #{$breakpoint-tab + 1px}) and (max-width: #{$breakpoint-lg}) {
+    max-width: min($container-width, calc(100vw - #{$side-nav-gutter} - 40px));
+    margin-left: auto;
+    margin-right: auto;
+    width: auto;
+  }
 }
 
 .footer__head {
@@ -163,7 +175,65 @@ $footer-brand-width: 330px;
   }
 }
 
+// tab 以上〜lg: 横並びを維持しつつブランド幅・余白を調整
+@media (min-width: #{$breakpoint-tab + 1px}) and (max-width: #{$breakpoint-lg}) {
+  .footer__content {
+    grid-template-columns: 1fr $footer-brand-width-md;
+    column-gap: 40px;
+  }
+
+  .footer__nav {
+    column-gap: 48px;
+  }
+
+  .footer__brand {
+    width: $footer-brand-width-md;
+  }
+
+  .footer__recruit {
+    height: 80px;
+    font-size: 18px;
+  }
+}
+
+// さらに狭い中間幅: ブランドをさらに縮小
+@media (min-width: #{$breakpoint-tab + 1px}) and (max-width: 1200px) {
+  .footer__content {
+    grid-template-columns: 1fr $footer-brand-width-sm;
+    column-gap: 32px;
+  }
+
+  .footer__nav {
+    column-gap: 32px;
+  }
+
+  .footer__brand {
+    width: $footer-brand-width-sm;
+  }
+
+  .footer__group {
+    .footer__title {
+      font-size: 20px;
+    }
+
+    a:not(.footer__title) {
+      font-size: 14px;
+    }
+  }
+
+  .footer__recruit {
+    height: 72px;
+    font-size: 16px;
+  }
+}
+
 @include tab {
+  .footer__inner {
+    margin-left: auto;
+    margin-right: auto;
+    width: auto;
+  }
+
   .footer__content {
     display: flex;
     flex-direction: column;
@@ -250,6 +320,155 @@ $footer-brand-width: 330px;
   }
 }
 
+// ── 下層ページフッター ──────────────────────────────
+$footer-contact-width: 220px;
+
+.footer--sub {
+  background: $color-primary;
+  padding: 80px 0 0;
+
+  .footer__index {
+    color: $color-white;
+  }
+
+  .footer__line {
+    background: $color-white;
+    max-width: 100%;
+  }
+
+  .footer__content {
+    grid-template-columns: 1fr $footer-contact-width;
+  }
+
+  .footer__group {
+    .footer__title,
+    a:not(.footer__title) {
+      color: $color-white;
+      letter-spacing: 0.08em;
+    }
+  }
+
+  .footer__copyright {
+    p {
+      color: $color-white;
+    }
+  }
+
+  .footer__contact {
+    grid-column: 2;
+    grid-row: span 2;
+    align-self: start;
+    width: $footer-contact-width;
+    max-width: 100%;
+  }
+
+  .footer__contact-link {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    color: $color-white;
+    transition: opacity 0.3s;
+
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+
+  .footer__contact-icon {
+    flex-shrink: 0;
+    width: 64px;
+    height: 64px;
+  }
+
+  .footer__contact-icon-svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+
+  .footer__contact-body {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding-top: 6px;
+  }
+
+  .footer__contact-title {
+    font-family: $font-sub;
+    font-size: 24px;
+    font-style: italic;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    line-height: 1;
+  }
+
+  .footer__contact-text {
+    display: inline-flex;
+    align-items: center;
+    font-size: 15px;
+    font-weight: 700;
+  }
+}
+
+@media (min-width: #{$breakpoint-tab + 1px}) and (max-width: #{$breakpoint-lg}) {
+  .footer--sub .footer__content {
+    grid-template-columns: 1fr $footer-brand-width-md;
+  }
+
+  .footer--sub .footer__contact {
+    width: $footer-brand-width-md;
+  }
+}
+
+@media (min-width: #{$breakpoint-tab + 1px}) and (max-width: 1200px) {
+  .footer--sub .footer__content {
+    grid-template-columns: 1fr $footer-brand-width-sm;
+  }
+
+  .footer--sub .footer__contact {
+    width: $footer-brand-width-sm;
+  }
+
+  .footer--sub .footer__contact-title {
+    font-size: 20px;
+  }
+
+  .footer--sub .footer__contact-text {
+    font-size: 14px;
+  }
+}
+
+@include tab {
+  .footer--sub .footer__content {
+    display: flex;
+    flex-direction: column;
+    gap: 60px;
+  }
+
+  .footer--sub .footer__contact {
+    grid-column: auto;
+    grid-row: auto;
+    width: 100%;
+    max-width: $footer-contact-width;
+  }
+}
+
+@include sp {
+  .footer--sub {
+    padding-top: 60px;
+  }
+
+  .footer--sub .footer__contact-icon {
+    width: 56px;
+    height: 56px;
+  }
+
+  .footer--sub .footer__contact-title {
+    font-size: 20px;
+  }
+}
+
 .page-top {
   position: fixed;
   right: 40px;
@@ -278,6 +497,35 @@ $footer-brand-width: 330px;
       top: 0;
       left: 0;
       opacity: 0;
+    }
+  }
+
+  &__icon {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+
+  &__circle {
+    fill: none;
+    stroke: $color-text;
+    stroke-width: 2;
+    transition: stroke 0.3s ease;
+  }
+
+  &__arrow {
+    fill: none;
+    stroke: $color-text;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    transition: stroke 0.3s ease;
+  }
+
+  &:hover {
+    .page-top__circle,
+    .page-top__arrow {
+      stroke: $color-primary;
     }
   }
 

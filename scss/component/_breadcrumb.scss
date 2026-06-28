@@ -1,0 +1,14 @@
+@use "../foundation/mixin" as *;
+
+// ============================================================
+//  下層ページ共通パンくず（先頭配置時の上余白）
+// ============================================================
+body[class*="page-"] {
+  main > [class$="__breadcrumb"]:first-child {
+    padding-top: 32px;
+
+    @include sp {
+      padding-top: 20px;
+    }
+  }
+}

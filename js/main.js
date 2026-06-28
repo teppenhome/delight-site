@@ -351,16 +351,34 @@ function initScrollReveal() {
 //  ページトップボタンの表示 / 非表示
 // ============================================================
 function initPageTop() {
-  const btn = document.getElementById('pageTop');
-  if (!btn) return;
+  const pageTopBtn = document.getElementById('pageTop');
+  const floatActions = document.querySelector('.c-float-actions');
+  const footer = document.querySelector('.footer--sub');
+
+  if (!pageTopBtn && !floatActions) return;
 
   const toggle = () => {
-    btn.classList.toggle('is-visible', window.scrollY > 400);
+    const isVisible = window.scrollY > 400;
+
+    if (floatActions) {
+      floatActions.classList.toggle('is-visible', isVisible);
+
+      if (footer) {
+        const floatRect = floatActions.getBoundingClientRect();
+        const isOverFooter = footer.getBoundingClientRect().top < floatRect.bottom;
+        floatActions.classList.toggle('is-over-footer', isOverFooter);
+      }
+
+      return;
+    }
+
+    pageTopBtn.classList.toggle('is-visible', isVisible);
   };
 
   window.addEventListener('scroll', toggle, { passive: true });
+  window.addEventListener('resize', toggle, { passive: true });
 
-  toggle(); // 初回実行
+  toggle();
 }
 
 

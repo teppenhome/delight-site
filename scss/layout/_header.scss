@@ -106,8 +106,13 @@
       transition: opacity 0.3s ease, color 0.3s ease;
 
       &:hover {
-        color: $color-primary;
+        color: $color-pink;
         opacity: 1;
+
+        .header__nav-ja {
+          color: $color-pink;
+          opacity: 1;
+        }
       }
     }
   }

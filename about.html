@@ -1,0 +1,260 @@
+﻿<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ABOUT US | DELIGHT</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=Montserrat:wght@500;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./css/style.css">
+</head>
+<body class="page-about">
+
+  <div class="drawer" id="drawer" aria-hidden="true" role="dialog" aria-modal="true" aria-label="メニュー">
+    <div class="drawer__backdrop" id="drawerBackdrop" aria-hidden="true"></div>
+    <div class="drawer__panel" id="drawerPanel" tabindex="-1">
+      <nav class="drawer__nav" aria-label="ドロワーメニュー">
+        <ul class="drawer__list">
+          <li class="drawer__item">
+            <a href="about.html" class="drawer__link">
+              <span class="drawer__en">ABOUT US</span>
+              <span class="drawer__ja">会社概要</span>
+            </a>
+          </li>
+          <li class="drawer__item">
+            <a href="work.html" class="drawer__link">
+              <span class="drawer__en">WORKS</span>
+              <span class="drawer__ja">制作実績</span>
+            </a>
+          </li>
+          <li class="drawer__item">
+            <a href="index.html#service" class="drawer__link">
+              <span class="drawer__en">SERVICE</span>
+              <span class="drawer__ja">できること</span>
+            </a>
+          </li>
+          <li class="drawer__item">
+            <a href="news.html" class="drawer__link">
+              <span class="drawer__en">NEWS</span>
+              <span class="drawer__ja">お知らせ</span>
+            </a>
+          </li>
+          <li class="drawer__item drawer__item--contact">
+            <a href="index.html#contact" class="drawer__link drawer__link--contact">
+              <img src="images/contact.png" alt="お問い合わせ">
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+
+  <header class="header" id="header">
+      <div class="header__inner">
+        <h1 class="header__logo">
+          <a href="index.html">
+            <img src="images/logo.png" alt="DELIGHT">
+          </a>
+        </h1>
+        <nav class="header__nav" id="globalNav" aria-label="メインナビゲーション">
+          <ul class="header__nav-list">
+            <li class="header__nav-item header__nav-item--has-child">
+              <span class="header__nav-en __is-active">ABOUT US</span>
+              <ul class="header__nav-child">
+                <li><a href="about.html">会社概要</a></li>
+                <li><a href="philosophy.html">企業理念</a></li>
+                <li><a href="message.html">代表挨拶</a></li>
+                <li><a href="access.html">アクセス</a></li>
+              </ul>
+            </li>
+            <li>
+              <a href="work.html">
+                <span class="header__nav-en">WORK</span>
+              </a>
+            </li>
+            <li>
+              <a href="index.html#service">
+                <span class="header__nav-en">SERVICE</span>
+              </a>
+            </li>
+            <li>
+              <a href="news.html">
+                <span class="header__nav-en">NEWS</span>
+              </a>
+            </li>
+          </ul>
+        </nav>
+        <button
+          class="header__hamburger"
+          id="hamburger"
+          type="button"
+          aria-label="メニューを開く"
+          aria-expanded="false"
+          aria-controls="drawerPanel">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </header>
+
+
+  <main class="about-page" id="top">
+<div class="about-page__breadcrumb">
+      <a href="index.html">TOP</a>
+      <span>&gt;</span>
+      <span>ABOUT US</span>
+    </div>
+
+    <div class="about-page__layout">
+
+      <div class="about-page__content">
+
+        <div class="about-page__hero c-page-hero c-page-hero--center">
+          <h1 class="c-page-title">ABOUT US</h1>
+          <p class="c-page-subtitle">私たちについて</p>
+        </div>
+
+        <div class="about-page__body">
+          <p>私たちが目指しているのは、単に商品を提供することではありません。<br />お客様の想いに寄り添い、企画からデザイン、<br />製造までを一貫して支えながら、人の心を動かす価値を創り出すこと。<br />そして、そのものづくりの過程そのものを、<br />お客様にも私たち自身にも楽しんでいただくことを大切にしています。</p>
+          <p>私たちが掲げる「DELIGHT」には、そんな想いが込められています。<br />ものづくりを通じて生まれる喜びや感動が、人から人へ、<br />そして未来へと広がっていくことを信じています。<br />DELIGHTに込めた理念や価値観、私たちの歩みについてご紹介します。</p>
+        </div>
+
+        <nav class="about-page__links" aria-label="下層ページ">
+          <a href="#" class="about-page__link-btn">
+            <span class="about-page__link-btn-text">会社概要</span>
+            <span class="about-page__link-btn-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M3 12H21M21 12L12 3M21 12L12 21" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </span>
+          </a>
+          <a href="philosophy.html" class="about-page__link-btn">
+            <span class="about-page__link-btn-text">企業理念</span>
+            <span class="about-page__link-btn-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M3 12H21M21 12L12 3M21 12L12 21" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </span>
+          </a>
+          <a href="message.html" class="about-page__link-btn">
+            <span class="about-page__link-btn-text">代表挨拶</span>
+            <span class="about-page__link-btn-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M3 12H21M21 12L12 3M21 12L12 21" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </span>
+          </a>
+          <a href="access.html" class="about-page__link-btn">
+            <span class="about-page__link-btn-text">アクセス</span>
+            <span class="about-page__link-btn-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M3 12H21M21 12L12 3M21 12L12 21" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </span>
+          </a>
+        </nav>
+
+      </div>
+
+    </div>
+
+  </main>
+
+  <footer class="footer footer--sub">
+    <div class="footer__inner container">
+
+      <div class="footer__head">
+        <p class="footer__index">INDEX</p>
+      </div>
+
+      <div class="footer__line"></div>
+
+      <div class="footer__content">
+        <div class="footer__nav">
+
+          <div class="footer__col">
+            <div class="footer__group">
+              <a href="about.html" class="footer__title">ABOUT</a>
+              <ul>
+                <li><a href="about.html">会社について</a></li>
+                <li><a href="index.html#service">仕事の流れ</a></li>
+              </ul>
+            </div>
+            <div class="footer__group">
+              <a href="news.html" class="footer__title">NEWS</a>
+              <ul>
+                <li><a href="news.html">お知らせ一覧</a></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="footer__col">
+            <div class="footer__group">
+              <a href="about.html" class="footer__title">COMPANY</a>
+              <ul>
+                <li><a href="about.html">会社概要</a></li>
+                <li><a href="philosophy.html">企業理念</a></li>
+                <li><a href="message.html">代表挨拶</a></li>
+                <li><a href="access.html">アクセス</a></li>
+              </ul>
+            </div>
+            <div class="footer__group">
+              <a href="index.html#service" class="footer__title">SERVICE</a>
+            </div>
+          </div>
+
+          <div class="footer__col">
+            <div class="footer__group">
+              <a href="work.html" class="footer__title">WORK</a>
+              <ul>
+                <li><a href="work.html">業務実績一覧</a></li>
+              </ul>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="footer__contact">
+          <a href="index.html#contact" class="footer__contact-link">
+            <span class="footer__contact-icon" aria-hidden="true">
+              <svg class="footer__contact-icon-svg" viewBox="0 0 52 52" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="26" cy="26" r="24" fill="#fff"/>
+                <path d="M15.5 19 H36.5 Q38 19 38 20.5 V32.5 Q38 34 36.5 34 H15.5 Q14 34 14 32.5 V20.5 Q14 19 15.5 19 Z" fill="none" stroke="#0F65A3" stroke-width="1.5" stroke-linejoin="round"/>
+                <path d="M15 19.5 L26 27.5 L37 19.5" fill="none" stroke="#0F65A3" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"/>
+              </svg>
+            </span>
+            <span class="footer__contact-body">
+              <span class="footer__contact-title">CONTACT</span>
+              <span class="footer__contact-text">
+                相談してみる
+              </span>
+            </span>
+          </a>
+        </div>
+      </div>
+
+      <div class="footer__copyright">
+        <p>&copy; 2022 DELIGHT All rights reserved</p>
+      </div>
+
+    </div>
+  </footer>
+  <div class="c-float-actions">
+    <a href="index.html#contact" class="c-float-contact" aria-label="お問い合わせ">
+      <svg class="c-float-icon c-float-contact__icon" viewBox="0 0 52 52" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+        <circle class="c-float-icon__circle" cx="26" cy="26" r="24"/>
+        <path class="c-float-icon__symbol" d="M15.5 19 H36.5 Q38 19 38 20.5 V32.5 Q38 34 36.5 34 H15.5 Q14 34 14 32.5 V20.5 Q14 19 15.5 19 Z"/>
+        <path class="c-float-icon__symbol" d="M15 19.5 L26 27.5 L37 19.5"/>
+      </svg>
+    </a>
+    <a href="#top" id="pageTop" class="page-top" aria-label="ページ上部へ戻る">
+      <svg class="c-float-icon page-top__icon" viewBox="0 0 52 52" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+        <circle class="c-float-icon__circle" cx="26" cy="26" r="24"/>
+        <path class="c-float-icon__symbol" d="M16 30 L26 18 L36 30"/>
+      </svg>
+    </a>
+  </div>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

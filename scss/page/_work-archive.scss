@@ -1,0 +1,305 @@
+@use "../foundation/variables" as *;
+@use "../foundation/mixin" as *;
+
+// ============================================================
+//  WORK ARCHIVE PAGE（一覧ページ専用）
+//  トップの .works セクションとは独立した命名
+// ============================================================
+
+.work-archive {
+  padding: 0 0 100px;
+  background: $color-white;
+
+  @include sp {
+    padding: 0 0 72px;
+  }
+
+  // ── パンくず ──────────────────────────────────────
+  &__breadcrumb {
+    max-width: $container-width;
+    margin: 0 auto 40px;
+    padding: 0 40px;
+    font-family: $font-en;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    color: $color-primary;
+
+    @include sp {
+      margin-bottom: 28px;
+      padding: 0 20px;
+      font-size: 12px;
+    }
+
+    a {
+      color: inherit;
+
+      &:hover {
+        opacity: 0.7;
+      }
+    }
+
+    span {
+      margin: 0 8px;
+    }
+  }
+
+  // ── フィルター ────────────────────────────────────
+  &__hero {
+    padding: 0 40px;
+
+    @include sp {
+      padding: 0 20px;
+    }
+  }
+
+  &__filter {
+    max-width: $container-width;
+    margin: 0 auto 48px;
+    padding: 0 40px;
+
+    @include sp {
+      margin-bottom: 36px;
+      padding: 0 20px;
+    }
+  }
+
+  &__categories {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    gap: 12px;
+    margin-bottom: 28px;
+
+    @include sp {
+      gap: 8px;
+      margin-bottom: 24px;
+    }
+
+    button {
+      appearance: none;
+      border: 1px solid $color-text;
+      border-radius: 999px;
+      background: $color-white;
+      padding: 8px 24px;
+      font-family: $font-ja;
+      font-size: 14px;
+      font-weight: 500;
+      line-height: 1.4;
+      color: $color-text;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+
+      @include sp {
+        padding: 6px 16px;
+        font-size: 13px;
+      }
+
+      &:hover {
+        opacity: 1;
+        border-color: $color-primary;
+        color: $color-primary;
+      }
+
+      &.is-active {
+        background: $color-primary;
+        border-color: $color-primary;
+        color: $color-white;
+      }
+    }
+  }
+
+  &__tags {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    gap: 12px 28px;
+    width: 880px;
+    margin: 0;
+
+    @include sp {
+      gap: 10px 20px;
+      justify-content: flex-start;
+    }
+
+    label {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 14px;
+      font-weight: 500;
+      color: $color-text;
+      cursor: pointer;
+      user-select: none;
+
+      @include sp {
+        font-size: 13px;
+      }
+
+      input[type="checkbox"] {
+        appearance: none;
+        width: 18px;
+        height: 18px;
+        margin: 0;
+        border: 1px solid $color-text;
+        border-radius: 2px;
+        background: $color-white;
+        flex-shrink: 0;
+        cursor: pointer;
+        position: relative;
+        transition: background 0.2s ease, border-color 0.2s ease;
+
+        &:checked {
+          background: $color-primary;
+          border-color: $color-primary;
+
+          &::after {
+            content: "";
+            position: absolute;
+            left: 5px;
+            top: 1px;
+            width: 5px;
+            height: 10px;
+            border: solid $color-white;
+            border-width: 0 2px 2px 0;
+            transform: rotate(45deg);
+          }
+        }
+      }
+
+      &:hover input[type="checkbox"]:not(:checked) {
+        border-color: $color-primary;
+      }
+    }
+  }
+
+  // ── 実績グリッド ──────────────────────────────────
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    max-width: $container-width;
+    margin: 0 auto 64px;
+    padding: 0 40px;
+
+    @include tab {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+
+    @include sp {
+      grid-template-columns: 1fr;
+      gap: 16px;
+      margin-bottom: 48px;
+      padding: 0 20px;
+    }
+  }
+
+  &__card {
+    aspect-ratio: 360 / 240;
+    background: #d9d9d9;
+    border-radius: 4px;
+    overflow: hidden;
+
+    a {
+      display: block;
+      position: relative;
+      width: 100%;
+      height: 100%;
+
+      @media (hover: hover) and (pointer: fine) {
+        &:hover {
+          .work-archive__overlay {
+            opacity: 1;
+          }
+
+          .work-archive__title,
+          .work-archive__more {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+      }
+    }
+
+    img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  &__overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.45);
+    color: $color-white;
+    text-align: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+
+    @media (hover: none), (pointer: coarse) {
+      display: none;
+    }
+  }
+
+  &__meta {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0 0.4em;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.5;
+  }
+
+  &__title {
+    font-size: clamp(14px, 2vw, 18px);
+    font-weight: 700;
+    line-height: 1.5;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+  }
+
+  &__more {
+    margin-top: 80px;
+    font-family: $font-sub;
+    font-size: 16px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+  }
+
+  &__year {
+    font-weight: 500;
+    font-family: $font-sub;
+    font-size: 12px;
+    letter-spacing: 0.08em;
+  }
+
+  &__category {
+    font-weight: 500;
+    font-family: $font-ja;
+    font-size: 12px;
+    letter-spacing: 0.08em;
+  }
+
+  &__title {
+    font-weight: 500;
+    font-family: $font-ja;
+    font-size: 16px;
+    letter-spacing: 0.08em;
+  }
+}
