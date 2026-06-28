@@ -357,6 +357,22 @@ function initPageTop() {
 
   if (!pageTopBtn && !floatActions) return;
 
+  if (pageTopBtn && !floatActions) {
+    pageTopBtn.addEventListener('click', () => {
+      pageTopBtn.classList.add('is-no-hover');
+    });
+
+    pageTopBtn.addEventListener('mouseenter', () => {
+      pageTopBtn.classList.remove('is-no-hover');
+    });
+
+    pageTopBtn.addEventListener('touchend', () => {
+      pageTopBtn.classList.add('is-no-hover');
+    }, { passive: true });
+  }
+
+  let wasVisible = false;
+
   const toggle = () => {
     const isVisible = window.scrollY > 400;
 
@@ -369,10 +385,19 @@ function initPageTop() {
         floatActions.classList.toggle('is-over-footer', isOverFooter);
       }
 
+      wasVisible = isVisible;
       return;
     }
 
     pageTopBtn.classList.toggle('is-visible', isVisible);
+
+    if (!isVisible) {
+      pageTopBtn.classList.add('is-no-hover');
+    } else if (!wasVisible) {
+      pageTopBtn.classList.remove('is-no-hover');
+    }
+
+    wasVisible = isVisible;
   };
 
   window.addEventListener('scroll', toggle, { passive: true });
