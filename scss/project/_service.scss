@@ -21,7 +21,12 @@
     font-weight: 500;
     margin-top: -60px;
 
-    @include sp { text-align: left; }
+    @include sp {
+      margin-top: 0;
+      margin-bottom: 40px;
+      font-size: 16px;
+      line-height: 1.8;
+    }
   }
 
   &__steps {
@@ -29,6 +34,11 @@
     flex-direction: column;
     gap: 48px;
     align-items: flex-end;
+
+    @include sp {
+      align-items: stretch;
+      gap: 56px;
+    }
   }
 
   &__step {
@@ -59,8 +69,8 @@
 
     @include sp {
       grid-template-columns: 1fr;
-      padding: 24px;
-      gap: 0;
+      padding: 32px 20px 24px;
+      gap: 16px;
     }
 
     p {
@@ -72,6 +82,17 @@
       @include lg {
         font-size: 16px;
       }
+
+      @include sp {
+        font-size: 15px;
+        line-height: 1.8;
+      }
+    }
+  }
+
+  &__step-body {
+    @include sp {
+      padding-top: 8px;
     }
   }
 
@@ -95,6 +116,16 @@
 
     @include tab {
       margin-top: 40px;
+    }
+
+    @include sp {
+      margin-top: 0;
+      max-width: none;
+      margin-inline: auto;
+
+      img {
+        width: 100%;
+      }
     }
   }
 
@@ -129,7 +160,11 @@
 
     @include sp {
       left: 50%;
+      top: -18px;
       transform: translateX(-50%);
+      font-size: 22px;
+      padding: 8px 16px;
+      white-space: nowrap;
     }
   }
 
@@ -142,10 +177,20 @@
     color: $color-text;
     line-height: 1.6;
     margin-bottom: 12px;
+
+    @include sp {
+      font-size: 24px;
+      margin-bottom: 8px;
+    }
   }
 
   &__link {
     text-align: right;
     margin-top: 20px;
+
+    @include sp {
+      text-align: center;
+      margin-top: 40px;
+    }
   }
 }

@@ -5,7 +5,7 @@
 //  CONTACT SECTION
 // ============================================================
 .contact {
-  padding: $section-pad-v 0;
+  padding: 0 0 $section-pad-v;
   position: relative;
 
   .section-label,
@@ -34,7 +34,10 @@
     margin-bottom: 48px;
     margin-top: -40px;
 
-    @include sp { text-align: left; }
+    @include sp { 
+      text-align: left; 
+      margin-bottom: 20px;
+    }
   }
 
   &__form {

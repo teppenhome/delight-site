@@ -129,6 +129,10 @@ $footer-brand-width-sm: 200px;
   align-self: start;
   transition: opacity 0.3s;
 
+  @include sp {
+    width: 60%;
+  }
+
   &:hover {
     opacity: 0.8;
   }
@@ -271,7 +275,6 @@ $footer-brand-width-sm: 200px;
 
 @include sp {
   .footer {
-    padding: 80px 0 0;
     overflow-x: clip;
   }
 
@@ -315,8 +318,19 @@ $footer-brand-width-sm: 200px;
     font-size: 20px;
   }
 
+  .footer__brand {
+    align-items: center;
+  }
+
+  .footer__logo {
+    margin-inline: auto;
+  }
+
   .footer__recruit {
     height: 80px;
+    width: 60%;
+    max-width: $footer-brand-width;
+    align-self: center;
   }
 }
 
@@ -539,20 +553,22 @@ $footer-contact-width: 220px;
     }
   }
 
-  &:hover:not(.is-no-hover) {
-    opacity: 1;
-
-    .page-top__circle,
-    .page-top__arrow {
-      stroke: $color-primary;
-    }
-
-    .page-top__img--default {
-      opacity: 0;
-    }
-
-    .page-top__img--hover {
+  @media (hover: hover) and (pointer: fine) {
+    &:hover:not(.is-no-hover) {
       opacity: 1;
+
+      .page-top__circle,
+      .page-top__arrow {
+        stroke: $color-primary;
+      }
+
+      .page-top__img--default {
+        opacity: 0;
+      }
+
+      .page-top__img--hover {
+        opacity: 1;
+      }
     }
   }
 

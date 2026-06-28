@@ -358,17 +358,20 @@ function initPageTop() {
   if (!pageTopBtn && !floatActions) return;
 
   if (pageTopBtn && !floatActions) {
-    pageTopBtn.addEventListener('click', () => {
+    const resetPageTopHover = () => {
       pageTopBtn.classList.add('is-no-hover');
-    });
+      pageTopBtn.blur();
+    };
 
-    pageTopBtn.addEventListener('mouseenter', () => {
+    pageTopBtn.addEventListener('click', resetPageTopHover);
+
+    pageTopBtn.addEventListener('mouseenter', (e) => {
+      // タップ後に発火する擬似 mouseenter で is-no-hover が外れ、ピンクが残るのを防ぐ
+      if (e.sourceCapabilities?.firesTouchEvents) return;
       pageTopBtn.classList.remove('is-no-hover');
     });
 
-    pageTopBtn.addEventListener('touchend', () => {
-      pageTopBtn.classList.add('is-no-hover');
-    }, { passive: true });
+    pageTopBtn.addEventListener('touchend', resetPageTopHover, { passive: true });
   }
 
   let wasVisible = false;
@@ -393,6 +396,7 @@ function initPageTop() {
 
     if (!isVisible) {
       pageTopBtn.classList.add('is-no-hover');
+      pageTopBtn.blur();
     } else if (!wasVisible) {
       pageTopBtn.classList.remove('is-no-hover');
     }

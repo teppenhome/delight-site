@@ -22,6 +22,11 @@
     margin-right: auto;
     max-width: 900px;
     width: 100%;
+
+    @include sp {
+      margin-top: 40px;
+      gap: 24px;
+    }
   }
 
   &__row {
@@ -30,17 +35,11 @@
     align-items: center;
     width: 100%;
 
-    &--bottom {
-      @include sp {
-        flex-wrap: wrap;
-        justify-content: center;
-        row-gap: 16px;
-        column-gap: 12px;
-
-        .clients__logo-item {
-          flex: 0 0 calc(33.333% - 8px);
-        }
-      }
+    @include sp {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px 12px;
+      justify-items: center;
     }
   }
 
@@ -48,9 +47,15 @@
     flex: 0 0 auto;
     @include flex-center;
 
+    @include sp {
+      width: 100%;
+      min-width: 0;
+    }
+
     img {
       width: auto;
       height: auto;
+      max-width: 100%;
       object-fit: contain;
     }
   }
