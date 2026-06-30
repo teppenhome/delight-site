@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
@@ -46,9 +46,12 @@
         </a>
       </li>
       <li>
-        <a href="#contact" class="header__nav-contact">
-          <img class="header__nav-contact__img header__nav-contact__img--default" src="images/contact.png" alt="お問い合わせ">
-          <img class="header__nav-contact__img header__nav-contact__img--hover" src="images/contact-pink.png" alt="" aria-hidden="true">
+        <a href="#contact" class="header__nav-contact" aria-label="お問い合わせ">
+          <svg class="header__nav-contact__icon" viewBox="0 0 52 52" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+            <circle class="header__nav-contact__circle" cx="26" cy="26" r="24"/>
+            <path class="header__nav-contact__envelope" d="M15.5 19 H36.5 Q38 19 38 20.5 V32.5 Q38 34 36.5 34 H15.5 Q14 34 14 32.5 V20.5 Q14 19 15.5 19 Z"/>
+            <path class="header__nav-contact__symbol" d="M15 19.5 L26 27.5 L37 19.5"/>
+          </svg>
         </a>
       </li>
     </ul>
@@ -138,9 +141,12 @@
                 </a>
               </li>         
               <li>
-                <a href="#contact" class="header__nav-contact">
-                  <img class="header__nav-contact__img header__nav-contact__img--default" src="images/contact.png" alt="お問い合わせ">
-                  <img class="header__nav-contact__img header__nav-contact__img--hover" src="images/contact-pink.png" alt="" aria-hidden="true">
+                <a href="#contact" class="header__nav-contact" aria-label="お問い合わせ">
+                  <svg class="header__nav-contact__icon" viewBox="0 0 52 52" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+                    <circle class="header__nav-contact__circle" cx="26" cy="26" r="24"/>
+                    <path class="header__nav-contact__envelope" d="M15.5 19 H36.5 Q38 19 38 20.5 V32.5 Q38 34 36.5 34 H15.5 Q14 34 14 32.5 V20.5 Q14 19 15.5 19 Z"/>
+                    <path class="header__nav-contact__symbol" d="M15 19.5 L26 27.5 L37 19.5"/>
+                  </svg>
                 </a>
               </li>
             </ul>
@@ -489,8 +495,8 @@
     <section class="news" id="news" data-side-nav-theme="blue">
       <div class="news__inner container container--side-offset">
         <h2 class="section-title section-title--inline">
-          <span class="section-title__en section-title__en__white __middle __italic">NEWS</span>
-          <span class="section-title__ruby section-title__ruby__white">お知らせ</span>
+          <span class="section-title__en section-title__en__blue __middle __italic">NEWS</span>
+          <span class="section-title__ruby section-title__ruby__blue">お知らせ</span>
         </h2>
 
         <div class="news__grid">
@@ -786,7 +792,7 @@
     ============================================================ -->
     <section class="clients" id="clients" data-side-nav-theme="light">
       <div class="clients__inner container container--side-offset">
-        <h2 class="section-title section-title">
+        <h2 class="section-title section-title--inline">
           <span class="section-title__en__blue __middle">OUR CLIENTS</span>
           <span class="section-title__ruby section-title__ruby__up">お取引先企業</span>
         </h2>
@@ -832,15 +838,15 @@
       CONTACT SECTION
     ============================================================ -->
     <section class="contact" id="contact">
-      <div class="contact__inner container">
+      <div class="contact__inner">
         <h2 class="section-title section-title">
           <span class="section-title__ruby">お問い合わせ</span>
           <span class="contact__title-row">
-            <span class="section-title__en__blue __middle">CONTACT</span>
+            <span class="section-title__en __middle">CONTACT</span>
             <img class="contact__title-icon" src="images/contact-mail.svg" alt="" width="80" height="56" aria-hidden="true">
           </span>
         </h2>
-        <p class="contact__lead">「おもしろい商品を考えて欲しい」「こんなデザインの商品はできる？」など、<br />どんなご依頼、ご相談でも大歓迎です。ぜひお気軽にお問い合わせください。<br />以下のお問い合わせフォームよりご連絡ください。</p>
+        <p class="contact__lead">どんなご依頼、ご相談でも大歓迎です。ぜひお気軽にお問い合わせください。<br />以下のお問い合わせフォームよりご連絡ください。</p>
 
         <!-- WordPressではContact Form 7やWPFormsなどで置き換え -->
         <form class="contact__form" id="contactForm" novalidate>
@@ -922,56 +928,65 @@
 
       <div class="footer__line"></div>
 
-      <div class="footer__content">
-        <div class="footer__nav">
+      <div class="footer__nav">
 
-          <div class="footer__col">
-            <div class="footer__group">
-              <a href="about.html" class="footer__title">ABOUT</a>
-              <ul>
-                <li><a href="about.html">会社について</a></li>
-                <li><a href="#service">仕事の流れ</a></li>
-              </ul>
-            </div>
-            <div class="footer__group">
-              <a href="news.html" class="footer__title">NEWS</a>
-              <ul>
-                <li><a href="news.html">お知らせ一覧</a></li>
-              </ul>
-            </div>
+        <div class="footer__col">
+          <div class="footer__group">
+            <a href="about.html" class="footer__title">ABOUT US</a>
+            <ul>
+              <li><a href="company.html">会社概要</a></li>
+              <li><a href="philosophy.html">企業理念</a></li>
+              <li><a href="message.html">代表挨拶</a></li>
+              <li><a href="access.html">アクセス</a></li>
+            </ul>
           </div>
-
-          <div class="footer__col">
-            <div class="footer__group">
-              <a href="about.html" class="footer__title">COMPANY</a>
-              <ul>
-                <li><a href="about.html">会社概要</a></li>
-                <li><a href="philosophy.html">企業理念</a></li>
-                <li><a href="message.html">代表挨拶</a></li>
-                <li><a href="access.html">アクセス</a></li>
-              </ul>
-            </div>
-            <div class="footer__group">
-              <a href="#service" class="footer__title">SERVICE</a>
-            </div>
-          </div>
-
-          <div class="footer__col">
-            <div class="footer__group">
-              <a href="work.html" class="footer__title">WORK</a>
-              <ul>
-                <li><a href="work.html">業務実績一覧</a></li>
-              </ul>
-            </div>
-          </div>
-
         </div>
 
-        <div class="footer__brand">
-          <a href="#top" class="footer__logo">
-            <img src="images/logo.png" alt="DELIGHT">
+        <div class="footer__col">
+          <div class="footer__group">
+            <a href="work.html" class="footer__title">WORK</a>
+            <ul>
+              <li><a href="work.html">業務実績一覧</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="footer__col">
+          <div class="footer__group">
+            <a href="#service" class="footer__title">SERVICE</a>
+            <ul>
+              <li><a href="#about">DELIGHTの強み</a></li>
+              <li><a href="philosophy.html">環境への取り組み</a></li>
+              <li><a href="#service">仕事の流れ</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="footer__col">
+          <div class="footer__group">
+            <a href="news.html" class="footer__title">NEWS</a>
+            <ul>
+              <li><a href="news.html">お知らせ一覧</a></li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="footer__bottom">
+        <a href="#top" class="footer__logo">
+          <img src="images/logo.png" alt="DELIGHT">
+        </a>
+        <div class="footer__contact">
+          <a href="#contact" class="footer__contact-link">
+            <span class="footer__contact-icon" aria-hidden="true">
+              <img class="footer__contact-icon-img" src="images/footer-contact-icon.png" alt="" width="64" height="64">
+            </span>
+            <span class="footer__contact-body">
+              <span class="footer__contact-title">CONTACT</span>
+              <span class="footer__contact-text">相談してみる 🙌</span>
+            </span>
           </a>
-          <a href="recruit.html" class="footer__recruit">RECRUIT</a>
         </div>
       </div>
 
@@ -984,8 +999,10 @@
   </footer>
 
   <a href="#top" id="pageTop" class="page-top" aria-label="ページ上部へ戻る">
-    <img class="page-top__img page-top__img--default" src="images/to-top.png" alt="トップへ戻る">
-    <img class="page-top__img page-top__img--hover" src="images/to-top-pink.png" alt="" aria-hidden="true">
+    <svg class="page-top__icon" viewBox="0 0 52 52" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+      <circle class="page-top__circle" cx="26" cy="26" r="24"/>
+      <path class="page-top__arrow" d="M16 30 L26 18 L36 30"/>
+    </svg>
   </a>
 
   <script src="js/main.js"></script>

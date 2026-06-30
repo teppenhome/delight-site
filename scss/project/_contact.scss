@@ -5,8 +5,9 @@
 //  CONTACT SECTION
 // ============================================================
 .contact {
-  padding: 0 0 $section-pad-v;
+  padding: $section-pad-v 0;
   position: relative;
+  background-color: #F1F1F1;
 
   .section-label,
   .section-title {
@@ -27,7 +28,7 @@
 
   &__lead {
     text-align: center;
-    font-size: 16px;
+    font-size: 14px;
     font-weight: bold;
     color: $color-text;
     line-height: 1.9;
@@ -41,10 +42,12 @@
   }
 
   &__form {
-    max-width: 1020px;
+    max-width: 900px;
+    width: 100%;
     margin: 0 auto;
-    background: $color-white;
-    padding: 0 40px;
+
+
+    padding: 0;
 
     @include sp { padding: 24px 0; }
   }
@@ -76,6 +79,10 @@
     padding-top: 10px;
 
     @include sp { padding-top: 0; }
+  }
+
+  &__row:has(.contact__checkboxes) .contact__label {
+    padding-top: 0;
   }
 
   .required {
@@ -111,6 +118,7 @@
 
       border: 2px solid #8B8B8B;
       border-radius: 50%;
+      background: $color-white;
 
       position: relative;
       cursor: pointer;
@@ -141,13 +149,14 @@
   &__input,
   &__textarea {
     width: 100%;
-    border: 1px solid $color-border;
+    border: none;
+    border-bottom: 4px solid #AEC5DF;
     border-radius: 4px;
     padding: 10px 14px;
     font-family: $font-ja;
     font-size: 14px;
     color: $color-text;
-    background: #ECF3F8;
+    background: #fff;
     @include transition(border-color, box-shadow);
     outline: none;
 
@@ -225,7 +234,7 @@
     font-size: 18px;
     font-weight: 700;
     border: 1px solid $color-text;
-    border-radius: 0;
+    border-radius: 5px;
     cursor: pointer;
     @include transition(background, opacity);
 

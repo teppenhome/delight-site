@@ -8,6 +8,8 @@
 $footer-brand-width: 330px;
 $footer-brand-width-md: 240px;
 $footer-brand-width-sm: 200px;
+$footer-contact-width: 220px;
+$footer-contact-inset: 200px;
 
 .footer {
   background: #fff;
@@ -17,13 +19,11 @@ $footer-brand-width-sm: 200px;
 }
 
 .footer__inner {
-  // tab 以上: サイドナビ右の余白を活かして通常コンテナより広く
-  @media (min-width: #{$breakpoint-tab + 1px}) and (max-width: #{$breakpoint-lg}) {
-    max-width: min($container-width, calc(100vw - #{$side-nav-gutter} - 40px));
-    margin-left: auto;
-    margin-right: auto;
-    width: auto;
-  }
+  max-width: 920px;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  padding-top: 60px;
 }
 
 .footer__head {
@@ -49,32 +49,6 @@ $footer-brand-width-sm: 200px;
   margin-bottom: 40px;
   max-width: 90%;
   width: 100%;
-}
-
-.footer__content {
-  display: grid;
-  grid-template-columns: 1fr $footer-brand-width;
-  grid-template-rows: auto auto;
-  column-gap: 60px;
-  row-gap: 48px;
-  align-items: start;
-}
-
-.footer__nav {
-  grid-column: 1;
-  grid-row: span 2;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: subgrid;
-  column-gap: 80px;
-  width: 100%;
-  min-width: 0;
-}
-
-.footer__col {
-  display: grid;
-  grid-template-rows: subgrid;
-  grid-row: span 2;
 }
 
 .footer__group {
@@ -113,58 +87,6 @@ $footer-brand-width-sm: 200px;
   }
 }
 
-.footer__brand {
-  grid-column: 2;
-  grid-row: span 2;
-  display: grid;
-  grid-template-rows: subgrid;
-  width: $footer-brand-width;
-  max-width: 100%;
-  align-self: start;
-}
-
-.footer__logo {
-  display: block;
-  width: 100%;
-  align-self: start;
-  transition: opacity 0.3s;
-
-  @include sp {
-    width: 60%;
-  }
-
-  &:hover {
-    opacity: 0.8;
-  }
-
-  img {
-    display: block;
-    width: 100%;
-    height: auto;
-  }
-}
-
-.footer__recruit {
-  width: 100%;
-  height: 96px;
-  align-self: start;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: $color-primary;
-  color: #fff;
-  border-radius: 4px;
-  font-family: $font-en;
-  font-size: 20px;
-  font-weight: 400;
-  letter-spacing: 0.08em;
-  transition: opacity 0.3s;
-
-  &:hover {
-    opacity: 0.85;
-  }
-}
-
 .footer__copyright {
   margin-top: 80px;
   padding-bottom: 40px;
@@ -179,97 +101,177 @@ $footer-brand-width-sm: 200px;
   }
 }
 
-// tab 以上〜lg: 横並びを維持しつつブランド幅・余白を調整
-@media (min-width: #{$breakpoint-tab + 1px}) and (max-width: #{$breakpoint-lg}) {
-  .footer__content {
-    grid-template-columns: 1fr $footer-brand-width-md;
-    column-gap: 40px;
+// ── トップページフッター ──────────────────────────────
+.footer:not(.footer--sub) {
+  .footer__line {
+    max-width: 100%;
   }
 
   .footer__nav {
-    column-gap: 48px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    column-gap: 80px;
+    width: 100%;
+    margin-bottom: 48px;
   }
 
-  .footer__brand {
-    width: $footer-brand-width-md;
+  .footer__col {
+    display: flex;
+    flex-direction: column;
   }
 
-  .footer__recruit {
-    height: 80px;
-    font-size: 18px;
+  .footer__bottom {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 40px;
+  }
+
+  .footer__logo {
+    display: block;
+    width: $footer-brand-width;
+    max-width: 55%;
+    flex-shrink: 0;
+    transition: opacity 0.3s;
+
+    &:hover {
+      opacity: 0.8;
+    }
+
+    img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+  }
+
+  .footer__contact {
+    flex-shrink: 0;
+    width: $footer-contact-width;
+    max-width: 100%;
+    margin-left: auto;
+    margin-right: $footer-contact-inset;
+  }
+
+  .footer__contact-link {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    color: $color-text;
+    transition: opacity 0.3s;
+
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+
+  .footer__contact-icon {
+    flex-shrink: 0;
+    width: 64px;
+    height: 64px;
+  }
+
+  .footer__contact-icon-img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  .footer__contact-body {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding-top: 6px;
+  }
+
+  .footer__contact-title {
+    font-family: $font-sub;
+    font-size: 24px;
+    font-style: italic;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    line-height: 1;
+  }
+
+  .footer__contact-text {
+    display: inline-flex;
+    align-items: center;
+    font-size: 15px;
+    font-weight: 700;
+  }
+
+  .footer__copyright {
+    text-align: left;
   }
 }
 
-// さらに狭い中間幅: ブランドをさらに縮小
+@media (min-width: #{$breakpoint-tab + 1px}) and (max-width: #{$breakpoint-lg}) {
+  .footer:not(.footer--sub) .footer__nav {
+    column-gap: 48px;
+  }
+
+  .footer:not(.footer--sub) .footer__logo {
+    width: $footer-brand-width-md;
+  }
+}
+
 @media (min-width: #{$breakpoint-tab + 1px}) and (max-width: 1200px) {
-  .footer__content {
-    grid-template-columns: 1fr $footer-brand-width-sm;
-    column-gap: 32px;
-  }
+  .footer:not(.footer--sub) {
+    .footer__nav {
+      column-gap: 32px;
+    }
 
-  .footer__nav {
-    column-gap: 32px;
-  }
+    .footer__logo {
+      width: $footer-brand-width-sm;
+    }
 
-  .footer__brand {
-    width: $footer-brand-width-sm;
-  }
+    .footer__group {
+      .footer__title {
+        font-size: 20px;
+      }
 
-  .footer__group {
-    .footer__title {
+      a:not(.footer__title) {
+        font-size: 14px;
+      }
+    }
+
+    .footer__contact-title {
       font-size: 20px;
     }
 
-    a:not(.footer__title) {
+    .footer__contact-text {
       font-size: 14px;
     }
-  }
-
-  .footer__recruit {
-    height: 72px;
-    font-size: 16px;
   }
 }
 
 @include tab {
-  .footer__inner {
-    margin-left: auto;
-    margin-right: auto;
-    width: auto;
-  }
+  .footer:not(.footer--sub) {
+    .footer__nav {
+      grid-template-columns: repeat(2, 1fr);
+      row-gap: 48px;
+      column-gap: 40px;
+    }
 
-  .footer__content {
-    display: flex;
-    flex-direction: column;
-    gap: 60px;
-  }
+    .footer__bottom {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 48px;
+    }
 
-  .footer__nav {
-    grid-column: auto;
-    grid-row: auto;
-    grid-template-rows: auto auto;
-    row-gap: 48px;
-  }
+    .footer__logo {
+      width: 60%;
+      max-width: $footer-brand-width;
+    }
 
-  .footer__col {
-    grid-row: auto;
-    grid-template-rows: none;
-  }
-
-  .footer__brand {
-    display: flex;
-    flex-direction: column;
-    grid-column: auto;
-    grid-row: auto;
-    grid-template-rows: none;
-    align-items: flex-start;
-    width: 100%;
-    gap: 40px;
-  }
-
-  .footer__recruit {
-    width: 100%;
-    max-width: $footer-brand-width;
+    .footer__contact {
+      margin-left: 0;
+      margin-right: 0;
+      width: 100%;
+      max-width: $footer-contact-width;
+    }
   }
 }
 
@@ -298,45 +300,44 @@ $footer-brand-width-sm: 200px;
     max-width: 100%;
   }
 
-  .footer__nav {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 32px 20px;
-  }
+  .footer:not(.footer--sub) {
+    .footer__nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 32px 20px;
+      margin-bottom: 40px;
+    }
 
-  .footer__col {
-    display: flex;
-    flex-direction: column;
-    flex: 1 1 calc(50% - 10px);
-    min-width: calc(50% - 10px);
-    gap: 32px;
-    grid-row: auto;
-    grid-template-rows: none;
-  }
+    .footer__col {
+      flex: 1 1 calc(50% - 10px);
+      min-width: calc(50% - 10px);
+    }
 
-  .footer__group .footer__title {
-    font-size: 20px;
-  }
+    .footer__group .footer__title {
+      font-size: 20px;
+    }
 
-  .footer__brand {
-    align-items: center;
-  }
+    .footer__logo {
+      width: 60%;
+      margin-inline: auto;
+    }
 
-  .footer__logo {
-    margin-inline: auto;
-  }
+    .footer__bottom {
+      align-items: center;
+    }
 
-  .footer__recruit {
-    height: 80px;
-    width: 60%;
-    max-width: $footer-brand-width;
-    align-self: center;
+    .footer__contact-icon {
+      width: 56px;
+      height: 56px;
+    }
+
+    .footer__contact-title {
+      font-size: 20px;
+    }
   }
 }
 
 // ── 下層ページフッター ──────────────────────────────
-$footer-contact-width: 220px;
-
 .footer--sub {
   background: $color-primary;
   padding: 80px 0 0;
@@ -351,7 +352,29 @@ $footer-contact-width: 220px;
   }
 
   .footer__content {
-    grid-template-columns: 1fr $footer-contact-width;
+    display: grid;
+    grid-template-columns: 1fr calc(#{$footer-contact-width} + #{$footer-contact-inset});
+    grid-template-rows: auto auto;
+    column-gap: 60px;
+    row-gap: 48px;
+    align-items: start;
+  }
+
+  .footer__nav {
+    grid-column: 1;
+    grid-row: span 2;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: subgrid;
+    column-gap: 80px;
+    width: 100%;
+    min-width: 0;
+  }
+
+  .footer__col {
+    display: grid;
+    grid-template-rows: subgrid;
+    grid-row: span 2;
   }
 
   .footer__group {
@@ -372,6 +395,7 @@ $footer-contact-width: 220px;
     grid-column: 2;
     grid-row: span 2;
     align-self: start;
+    justify-self: start;
     width: $footer-contact-width;
     max-width: 100%;
   }
@@ -427,7 +451,11 @@ $footer-contact-width: 220px;
 
 @media (min-width: #{$breakpoint-tab + 1px}) and (max-width: #{$breakpoint-lg}) {
   .footer--sub .footer__content {
-    grid-template-columns: 1fr $footer-brand-width-md;
+    grid-template-columns: 1fr calc(#{$footer-brand-width-md} + #{$footer-contact-inset});
+  }
+
+  .footer--sub .footer__nav {
+    column-gap: 48px;
   }
 
   .footer--sub .footer__contact {
@@ -437,11 +465,25 @@ $footer-contact-width: 220px;
 
 @media (min-width: #{$breakpoint-tab + 1px}) and (max-width: 1200px) {
   .footer--sub .footer__content {
-    grid-template-columns: 1fr $footer-brand-width-sm;
+    grid-template-columns: 1fr calc(#{$footer-brand-width-sm} + #{$footer-contact-inset});
+  }
+
+  .footer--sub .footer__nav {
+    column-gap: 32px;
   }
 
   .footer--sub .footer__contact {
     width: $footer-brand-width-sm;
+  }
+
+  .footer--sub .footer__group {
+    .footer__title {
+      font-size: 20px;
+    }
+
+    a:not(.footer__title) {
+      font-size: 14px;
+    }
   }
 
   .footer--sub .footer__contact-title {
@@ -460,6 +502,18 @@ $footer-contact-width: 220px;
     gap: 60px;
   }
 
+  .footer--sub .footer__nav {
+    grid-column: auto;
+    grid-row: auto;
+    grid-template-rows: auto auto;
+    row-gap: 48px;
+  }
+
+  .footer--sub .footer__col {
+    grid-row: auto;
+    grid-template-rows: none;
+  }
+
   .footer--sub .footer__contact {
     grid-column: auto;
     grid-row: auto;
@@ -471,6 +525,26 @@ $footer-contact-width: 220px;
 @include sp {
   .footer--sub {
     padding-top: 60px;
+  }
+
+  .footer--sub .footer__nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 32px 20px;
+  }
+
+  .footer--sub .footer__col {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 calc(50% - 10px);
+    min-width: calc(50% - 10px);
+    gap: 32px;
+    grid-row: auto;
+    grid-template-rows: none;
+  }
+
+  .footer--sub .footer__group .footer__title {
+    font-size: 20px;
   }
 
   .footer--sub .footer__contact-icon {
@@ -500,20 +574,6 @@ $footer-contact-width: 220px;
     opacity 0.3s ease,
     visibility 0.3s ease;
 
-  &__img {
-    width: 100%;
-    height: auto;
-    display: block;
-    transition: opacity 0.3s ease;
-
-    &--hover {
-      position: absolute;
-      top: 0;
-      left: 0;
-      opacity: 0;
-    }
-  }
-
   &__icon {
     display: block;
     width: 100%;
@@ -521,19 +581,18 @@ $footer-contact-width: 220px;
   }
 
   &__circle {
-    fill: none;
-    stroke: $color-text;
-    stroke-width: 2;
-    transition: stroke 0.3s ease;
+    fill: $color-white;
+    stroke: $color-primary;
+    stroke-width: 1.5;
+    transition: fill 0.3s ease;
   }
 
   &__arrow {
     fill: none;
-    stroke: $color-text;
-    stroke-width: 2;
+    stroke: $color-primary;
+    stroke-width: 1.5;
     stroke-linecap: round;
     stroke-linejoin: round;
-    transition: stroke 0.3s ease;
   }
 
   &.is-visible {
@@ -542,32 +601,12 @@ $footer-contact-width: 220px;
     pointer-events: auto;
   }
 
-  &:not(.is-visible),
-  &.is-no-hover {
-    .page-top__img--default {
-      opacity: 1;
-    }
-
-    .page-top__img--hover {
-      opacity: 0;
-    }
-  }
-
   @media (hover: hover) and (pointer: fine) {
     &:hover:not(.is-no-hover) {
       opacity: 1;
 
-      .page-top__circle,
-      .page-top__arrow {
-        stroke: $color-primary;
-      }
-
-      .page-top__img--default {
-        opacity: 0;
-      }
-
-      .page-top__img--hover {
-        opacity: 1;
+      .page-top__circle {
+        fill: #fffcab;
       }
     }
   }

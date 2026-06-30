@@ -43,7 +43,11 @@
       }
 
       &.__middle {
-        font-size: clamp(35px, 11vw, 84px);
+        font-size: clamp(35px, 11vw, 64px);
+      }
+
+      &.__italic {
+        font-style: italic;
       }
     }
 
@@ -61,7 +65,7 @@
       }
 
       &.__middle {
-        font-size: clamp(35px, 11vw, 74px);
+        font-size: clamp(35px, 11vw, 64px);
       }
 
       &.__italic {
@@ -90,6 +94,10 @@
 
     &__white {  
       color: #ffffff;
+    }
+
+    &__blue {
+      color: #0F65A3;
     }
   }
 

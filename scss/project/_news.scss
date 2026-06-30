@@ -10,9 +10,7 @@ $news-visible-count: 3;
 // ============================================================
 .news {
   padding: $section-pad-v 0;
-  background-color: #A9C5DA;
-  background-image: url("../images/news-check.png");
-  background-repeat: repeat;
+  background-color: #FFCDC7;
 
   @include sp {
     margin-top: 0;

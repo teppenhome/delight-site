@@ -366,7 +366,7 @@ function initPageTop() {
     pageTopBtn.addEventListener('click', resetPageTopHover);
 
     pageTopBtn.addEventListener('mouseenter', (e) => {
-      // タップ後に発火する擬似 mouseenter で is-no-hover が外れ、ピンクが残るのを防ぐ
+      // タップ後に発火する擬似 mouseenter で is-no-hover が外れ、ホバー色が残るのを防ぐ
       if (e.sourceCapabilities?.firesTouchEvents) return;
       pageTopBtn.classList.remove('is-no-hover');
     });

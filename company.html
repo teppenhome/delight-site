@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>アクセス | ABOUT US | DELIGHT</title>
+  <title>会社概要 | ABOUT US | DELIGHT</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=Montserrat:wght@500;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./css/style.css">
 </head>
-<body class="page-access">
+<body class="page-company">
 
   <div class="drawer" id="drawer" aria-hidden="true" role="dialog" aria-modal="true" aria-label="メニュー">
     <div class="drawer__backdrop" id="drawerBackdrop" aria-hidden="true"></div>
@@ -62,10 +62,10 @@
             <li class="header__nav-item header__nav-item--has-child">
               <span class="header__nav-en __is-active">ABOUT US</span>
               <ul class="header__nav-child">
-                <li><a href="company.html">会社概要</a></li>
+                <li><a href="company.html" class="is-current">会社概要</a></li>
                 <li><a href="philosophy.html">企業理念</a></li>
                 <li><a href="message.html">代表挨拶</a></li>
-                <li><a href="access.html" class="is-current">アクセス</a></li>
+                <li><a href="access.html">アクセス</a></li>
               </ul>
             </li>
             <li>
@@ -98,89 +98,88 @@
     </header>
 
 
-  <main class="access-page" id="top">
-<div class="access-page__breadcrumb">
+  <main class="company-page" id="top">
+    <div class="company-page__breadcrumb">
       <a href="index.html">TOP</a>
       <span>&gt;</span>
       <a href="about.html">ABOUT US</a>
       <span>&gt;</span>
-      <span>アクセス</span>
+      <span>会社概要</span>
     </div>
 
-    <div class="access-page__content">
+    <div class="company-page__content">
 
-        <div class="access-page__hero c-page-hero">
-          <h1 class="c-page-title __mini">ACCESS</h1>
-          <p class="c-page-subtitle __mini">アクセス</p>
+      <div class="company-page__hero c-page-hero">
+        <h1 class="c-page-title __mini">COMPANY</h1>
+        <p class="c-page-subtitle __mini">会社概要</p>
+      </div>
+
+      <section class="company-page__overview" aria-labelledby="company-overview-heading">
+        <div class="company-page__overview-heading" id="company-overview-heading">
+          <p class="company-page__overview-en">OVERVIEW</p>
+          <p class="company-page__overview-ja">概要</p>
         </div>
 
-        <div class="access-page__info-map">
-          <div class="access-page__info">
-            <p class="access-page__company-name">株式会社 DELIGHT（株式会社ディライト）</p>
-            <address class="access-page__address">
+        <dl class="company-page__table">
+          <div class="company-page__row">
+            <dt class="company-page__term">社名</dt>
+            <dd class="company-page__desc">株式会社 DELIGHT（株式会社ディライト）</dd>
+          </div>
+          <div class="company-page__row">
+            <dt class="company-page__term">所在地</dt>
+            <dd class="company-page__desc">
               〒222-0033<br>
-              神奈川県横浜市港北区新横浜3-1-4 プラスタリアビル402
-            </address>
-            <p class="access-page__contact">電話 045-577-0268／FAX 045-577-0269</p>
-            <a
-              href="/"
-              class="access-page__map-btn"
-              target="_blank"
-              rel="noopener noreferrer">
-
-              <span class="access-page__map-btn-text">
-                <span class="font-sub">Google Map</span> を開く
-              </span>
-
-              <span class="access-page__map-btn-icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path
-                    d="M3 12H21M21 12L12 3M21 12L12 21"
-                    stroke="currentColor"
-                    stroke-width="2.5"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  />
-                </svg>
-              </span>
-            </a>
+              神奈川県横浜市港北区新横浜3-1-4 プラスタリアビル402<br />
+              <a href="access.html" class="company-page__map-link">アクセスマップ &gt;</a>
+            </dd>
           </div>
-
-          <figure class="access-page__map-image">
-            <img src="images/access/access-map.png" alt="新横浜駅周辺アクセスマップ">
-          </figure>
-        </div>
-
-        <div class="access-page__directions">
-          <h2 class="access-page__directions-title">【当社へのアクセス】</h2>
-
-          <div class="access-page__directions-item">
-            <h3 class="access-page__directions-heading">JR・新幹線「新横浜駅」からお越しの場合</h3>
-            <p>横浜アリーナ方面出口より徒歩約10分</p>
+          <div class="company-page__row">
+            <dt class="company-page__term">電話</dt>
+            <dd class="company-page__desc">045-577-0268</dd>
           </div>
-
-          <div class="access-page__directions-item">
-            <h3 class="access-page__directions-heading">横浜市営地下鉄ブルーライン・相鉄新横浜線・東急新横浜線からお越しの場合</h3>
-            <p>「新横浜駅」8番出口より徒歩約8分</p>
+          <div class="company-page__row">
+            <dt class="company-page__term">FAX</dt>
+            <dd class="company-page__desc">045-577-0269</dd>
           </div>
-
-          <div class="access-page__directions-item">
-            <h3 class="access-page__directions-heading">「羽田空港」からお越しの場合</h3>
-            <ol class="access-page__directions-list">
-              <li>第1・第2・第3ターミナルより、<br />空港連絡バス（リムジンバス）「新横浜駅・新横浜プリンスホテル行き」にお乗りください。</li>
-              <li>「新横浜プリンスホテル」で下車してください。</li>
-              <li>ホテルより徒歩約8分です。</li>
-            </ol>
-            <p class="access-page__directions-link">
-              <a href="#" target="_blank" rel="noopener noreferrer">時刻表 &gt;</a>
-            </p>
+          <div class="company-page__row">
+            <dt class="company-page__term">設立</dt>
+            <dd class="company-page__desc">令和4年9月16日</dd>
           </div>
-        </div>
+          <div class="company-page__row">
+            <dt class="company-page__term">資本金</dt>
+            <dd class="company-page__desc">1000万円
+            </dd>
+          </div>
+          <div class="company-page__row">
+            <dt class="company-page__term">代表取締役</dt>
+            <dd class="company-page__desc">山藤 輝明</dd>
+          </div>
+          <div class="company-page__row">
+            <dt class="company-page__term">従業員数</dt>
+            <dd class="company-page__desc">9名（2026年7月1日時点）</dd>
+          </div>
+          <div class="company-page__row">
+            <dt class="company-page__term">営業種目</dt>
+            <dd class="company-page__desc">各種広告宣伝用品および<br />販売用品・グッズの企画・製造販売</dd>
+          </div>
+          <div class="company-page__row">
+            <dt class="company-page__term">取引銀行</dt>
+            <dd class="company-page__desc">横浜信用金庫<br />城南信用金庫</dd>
+          </div>
+          <div class="company-page__row">
+            <dt class="company-page__term">事業内容</dt>
+            <dd class="company-page__desc">スポーツ・アミューズメント業界へ、<br />各種広告宣伝用品および販売用品・グッズの企画、生産、販売を行う</dd>
+          </div>
+        </dl>
+      </section>
 
-        <div class="access-page__actions">
-          <a href="work.html" class="c-sub-btn c-sub-btn--en access-page__list-back">WORK LIST</a>
-          <a href="index.html" class="c-sub-btn access-page__top-back">TOPにもどる</a>
-        </div>
+      <figure class="company-page__photo">
+        <span class="company-page__photo-placeholder" aria-hidden="true">会社の正面写真予定</span>
+      </figure>
+
+      <div class="company-page__actions">
+        <a href="index.html" class="c-sub-btn company-page__top-back">TOPにもどる</a>
+      </div>
 
     </div>
 
