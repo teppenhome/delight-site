@@ -101,8 +101,8 @@ $footer-contact-inset: 200px;
   }
 }
 
-// ── トップページフッター ──────────────────────────────
-.footer:not(.footer--sub) {
+// ── フッターレイアウト ──────────────────────────────
+.footer {
   .footer__line {
     max-width: 100%;
   }
@@ -208,17 +208,17 @@ $footer-contact-inset: 200px;
 }
 
 @media (min-width: #{$breakpoint-tab + 1px}) and (max-width: #{$breakpoint-lg}) {
-  .footer:not(.footer--sub) .footer__nav {
+  .footer .footer__nav {
     column-gap: 48px;
   }
 
-  .footer:not(.footer--sub) .footer__logo {
+  .footer .footer__logo {
     width: $footer-brand-width-md;
   }
 }
 
 @media (min-width: #{$breakpoint-tab + 1px}) and (max-width: 1200px) {
-  .footer:not(.footer--sub) {
+  .footer {
     .footer__nav {
       column-gap: 32px;
     }
@@ -248,7 +248,7 @@ $footer-contact-inset: 200px;
 }
 
 @include tab {
-  .footer:not(.footer--sub) {
+  .footer {
     .footer__nav {
       grid-template-columns: repeat(2, 1fr);
       row-gap: 48px;
@@ -300,7 +300,7 @@ $footer-contact-inset: 200px;
     max-width: 100%;
   }
 
-  .footer:not(.footer--sub) {
+  .footer {
     .footer__nav {
       display: flex;
       flex-wrap: wrap;
@@ -334,226 +334,6 @@ $footer-contact-inset: 200px;
     .footer__contact-title {
       font-size: 20px;
     }
-  }
-}
-
-// ── 下層ページフッター ──────────────────────────────
-.footer--sub {
-  background: $color-primary;
-  padding: 80px 0 0;
-
-  .footer__index {
-    color: $color-white;
-  }
-
-  .footer__line {
-    background: $color-white;
-    max-width: 100%;
-  }
-
-  .footer__content {
-    display: grid;
-    grid-template-columns: 1fr calc(#{$footer-contact-width} + #{$footer-contact-inset});
-    grid-template-rows: auto auto;
-    column-gap: 60px;
-    row-gap: 48px;
-    align-items: start;
-  }
-
-  .footer__nav {
-    grid-column: 1;
-    grid-row: span 2;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: subgrid;
-    column-gap: 80px;
-    width: 100%;
-    min-width: 0;
-  }
-
-  .footer__col {
-    display: grid;
-    grid-template-rows: subgrid;
-    grid-row: span 2;
-  }
-
-  .footer__group {
-    .footer__title,
-    a:not(.footer__title) {
-      color: $color-white;
-      letter-spacing: 0.08em;
-    }
-  }
-
-  .footer__copyright {
-    p {
-      color: $color-white;
-    }
-  }
-
-  .footer__contact {
-    grid-column: 2;
-    grid-row: span 2;
-    align-self: start;
-    justify-self: start;
-    width: $footer-contact-width;
-    max-width: 100%;
-  }
-
-  .footer__contact-link {
-    display: flex;
-    align-items: flex-start;
-    gap: 16px;
-    color: $color-white;
-    transition: opacity 0.3s;
-
-    &:hover {
-      opacity: 0.8;
-    }
-  }
-
-  .footer__contact-icon {
-    flex-shrink: 0;
-    width: 64px;
-    height: 64px;
-  }
-
-  .footer__contact-icon-svg {
-    display: block;
-    width: 100%;
-    height: 100%;
-  }
-
-  .footer__contact-body {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    padding-top: 6px;
-  }
-
-  .footer__contact-title {
-    font-family: $font-sub;
-    font-size: 24px;
-    font-style: italic;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    line-height: 1;
-  }
-
-  .footer__contact-text {
-    display: inline-flex;
-    align-items: center;
-    font-size: 15px;
-    font-weight: 700;
-  }
-}
-
-@media (min-width: #{$breakpoint-tab + 1px}) and (max-width: #{$breakpoint-lg}) {
-  .footer--sub .footer__content {
-    grid-template-columns: 1fr calc(#{$footer-brand-width-md} + #{$footer-contact-inset});
-  }
-
-  .footer--sub .footer__nav {
-    column-gap: 48px;
-  }
-
-  .footer--sub .footer__contact {
-    width: $footer-brand-width-md;
-  }
-}
-
-@media (min-width: #{$breakpoint-tab + 1px}) and (max-width: 1200px) {
-  .footer--sub .footer__content {
-    grid-template-columns: 1fr calc(#{$footer-brand-width-sm} + #{$footer-contact-inset});
-  }
-
-  .footer--sub .footer__nav {
-    column-gap: 32px;
-  }
-
-  .footer--sub .footer__contact {
-    width: $footer-brand-width-sm;
-  }
-
-  .footer--sub .footer__group {
-    .footer__title {
-      font-size: 20px;
-    }
-
-    a:not(.footer__title) {
-      font-size: 14px;
-    }
-  }
-
-  .footer--sub .footer__contact-title {
-    font-size: 20px;
-  }
-
-  .footer--sub .footer__contact-text {
-    font-size: 14px;
-  }
-}
-
-@include tab {
-  .footer--sub .footer__content {
-    display: flex;
-    flex-direction: column;
-    gap: 60px;
-  }
-
-  .footer--sub .footer__nav {
-    grid-column: auto;
-    grid-row: auto;
-    grid-template-rows: auto auto;
-    row-gap: 48px;
-  }
-
-  .footer--sub .footer__col {
-    grid-row: auto;
-    grid-template-rows: none;
-  }
-
-  .footer--sub .footer__contact {
-    grid-column: auto;
-    grid-row: auto;
-    width: 100%;
-    max-width: $footer-contact-width;
-  }
-}
-
-@include sp {
-  .footer--sub {
-    padding-top: 60px;
-  }
-
-  .footer--sub .footer__nav {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 32px 20px;
-  }
-
-  .footer--sub .footer__col {
-    display: flex;
-    flex-direction: column;
-    flex: 1 1 calc(50% - 10px);
-    min-width: calc(50% - 10px);
-    gap: 32px;
-    grid-row: auto;
-    grid-template-rows: none;
-  }
-
-  .footer--sub .footer__group .footer__title {
-    font-size: 20px;
-  }
-
-  .footer--sub .footer__contact-icon {
-    width: 56px;
-    height: 56px;
-  }
-
-  .footer--sub .footer__contact-title {
-    font-size: 20px;
   }
 }
 

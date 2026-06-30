@@ -353,7 +353,6 @@ function initScrollReveal() {
 function initPageTop() {
   const pageTopBtn = document.getElementById('pageTop');
   const floatActions = document.querySelector('.c-float-actions');
-  const footer = document.querySelector('.footer--sub');
 
   if (!pageTopBtn && !floatActions) return;
 
@@ -381,12 +380,6 @@ function initPageTop() {
 
     if (floatActions) {
       floatActions.classList.toggle('is-visible', isVisible);
-
-      if (footer) {
-        const floatRect = floatActions.getBoundingClientRect();
-        const isOverFooter = footer.getBoundingClientRect().top < floatRect.bottom;
-        floatActions.classList.toggle('is-over-footer', isOverFooter);
-      }
 
       wasVisible = isVisible;
       return;

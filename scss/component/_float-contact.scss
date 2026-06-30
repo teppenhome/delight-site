@@ -110,26 +110,4 @@ body[class*="page-"] {
       }
     }
   }
-
-  .c-float-actions.is-over-footer {
-    .c-float-icon__circle {
-      stroke: $color-white;
-    }
-
-    .c-float-icon__symbol {
-      stroke: $color-white;
-    }
-
-    .c-float-contact:hover,
-    .page-top:hover {
-      .c-float-icon__circle {
-        fill: $color-white;
-        stroke: $color-white;
-      }
-
-      .c-float-icon__symbol {
-        stroke: $color-primary;
-      }
-    }
-  }
 }
