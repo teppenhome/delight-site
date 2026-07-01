@@ -26,7 +26,7 @@
   color: $color-primary;
 
   &.__mini {
-    font-size: clamp(32px, 5vw, 56px);
+    font-size: clamp(24px, 5vw, 32px);
     font-style: normal;
     letter-spacing: 0.08em;
   }

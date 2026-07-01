@@ -381,6 +381,27 @@ function initPageTop() {
     if (floatActions) {
       floatActions.classList.toggle('is-visible', isVisible);
 
+      if (document.body.classList.contains('page-philosophy')) {
+        const blueSection = document.querySelector('.philosophy-page__body');
+        const footer = document.querySelector('.footer');
+
+        if (blueSection) {
+          const floatRect = floatActions.getBoundingClientRect();
+          const checkY = floatRect.top + floatRect.height * 0.5;
+          const blueRect = blueSection.getBoundingClientRect();
+          const isOnBlue =
+            checkY >= blueRect.top && checkY <= blueRect.bottom;
+          const isOverFooter =
+            footer &&
+            footer.getBoundingClientRect().top < floatRect.bottom;
+
+          floatActions.classList.toggle(
+            'is-on-blue-bg',
+            isOnBlue && !isOverFooter
+          );
+        }
+      }
+
       wasVisible = isVisible;
       return;
     }

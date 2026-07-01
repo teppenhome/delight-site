@@ -5,19 +5,55 @@
 //  PHILOSOPHY PAGE（ABOUT US下層・企業理念固定ページ専用）
 // ============================================================
 
+body.page-philosophy {
+  position: relative;
+
+  .header {
+    @media (min-width: #{$breakpoint-tab + 1px}) {
+      background-color: transparent;
+    }
+  }
+}
+
+// ヘッダーナビ下の黄雲背景（philosophy-nav-back.png）
+.philosophy-page__nav-bg {
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 8;
+  // 1230px幅時の 62vw（≒763px）以上は広げない
+  width: clamp(600px, 62vw, 1230px * 0.62);
+  aspect-ratio: 860 / 640;
+  background-image: url("../../images/philosophy/philosophy-nav-back.png");
+  background-repeat: no-repeat;
+  background-position: top right;
+  background-size: contain;
+  pointer-events: none;
+
+  @include tab {
+    display: none;
+  }
+}
+
 .philosophy-page {
-  padding: 0 0 100px;
+  padding: 0;
   background: $color-white;
 
-  @include sp {
-    padding: 0 0 72px;
+  // ── 白背景ヘッダー領域 ────────────────────────────
+  &__head {
+    position: relative;
+    z-index: 9;
+    max-width: 1200px;
+    margin: 20px auto 0;
+    padding: 0 40px;
+
+    @include sp {
+      padding: 0 20px;
+    }
   }
 
-  // ── パンくず ──────────────────────────────────────
   &__breadcrumb {
-    max-width: 1200px;
-    margin: 0 auto 40px;
-    padding: 0 40px;
+    margin-bottom: 40px;
     font-family: $font-en;
     font-size: 13px;
     font-weight: 500;
@@ -26,7 +62,6 @@
 
     @include sp {
       margin-bottom: 28px;
-      padding: 0 20px;
       font-size: 12px;
     }
 
@@ -43,63 +78,145 @@
     }
   }
 
-  // ── レイアウト ──────────────────────────────────
-  &__layout {
-    display: flex;
-    align-items: flex-start;
-    justify-content: center;
-    gap: 64px;
-    max-width: 1200px;
+  &__hero {
+    margin-bottom: 10px;
+  }
+
+  // ── 青背景メイン領域 ──────────────────────────────
+  &__body {
+    background-color: $color-primary;
+    padding: 90px 0 0;
+
+    @include sp {
+      padding: 48px 0 0;
+    }
+  }
+
+  &__body-inner {
+    max-width: 960px;
     margin: 0 auto;
     padding: 0 40px;
 
-    @include tab {
-      flex-direction: column;
-      gap: 48px;
+    @include sp {
       padding: 0 20px;
     }
   }
 
-  &__content {
-    flex: 1;
-    min-width: 0;
-    max-width: 820px;
-    width: 100%;
-  }
-
-  // ── メインメッセージ ────────────────────────────
+  // ── イントロ（黄雲 + キャッチコピー） ─────────────
   &__intro {
-    display: grid;
-    grid-template-columns: 340px 1fr;
-    gap: 40px;
-    align-items: start;
-    margin-bottom: 64px;
+    margin-bottom: 80px;
+    overflow: visible;
 
     @include sp {
-      grid-template-columns: 1fr;
-      gap: 24px;
-      margin-bottom: 48px;
+      margin-bottom: 56px;
     }
   }
 
-  &__intro-heading {
-    margin: 0;
-    font-size: clamp(22px, 3vw, 28px);
-    font-weight: 700;
-    line-height: 1.6;
-    letter-spacing: 0.05em;
-    color: $color-text;
+  &__intro-cloud {
+    position: relative;
+    display: grid;
+    width: 100%;
+    overflow: visible;
+
+    // イントロ左イラスト（親要素基準の%指定。vwだと1600px超で文字に被る）
+    &::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      z-index: 2;
+      width: clamp(200px, 38%, 360px);
+      aspect-ratio: 1;
+      background-image: url("../../images/philosophy/philosophy01.png");
+      background-repeat: no-repeat;
+      background-position: center bottom;
+      background-size: contain;
+      pointer-events: none;
+      transform: translateX(-30%) translateY(-30px);
+
+      @media (min-width: 1600px) {
+        width: 360px;
+        transform: translateX(-45%) translateY(-30px);
+      }
+
+      @include sp {
+        width: min(160px, 40vw);
+        transform: translateX(-8%);
+      }
+    }
+
+    > * {
+      grid-area: 1 / 1;
+    }
   }
 
-  &__intro-body {
+  &__intro-cloud-bg {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-width: 880px;
+    justify-self: center;
+    pointer-events: none;
+    user-select: none;
+    object-fit: contain;
+    object-position: center;
+  }
+
+  &__intro-cloud-inner {
+    position: relative;
+    z-index: 1;
+    align-self: center;
+    width: 100%;
+    box-sizing: border-box;
+    // 黄雲画像の余白に合わせて調整（画像差し替え時に微調整）
+    padding: 14% 10% 16% 14%;
+
+    @media (min-width: 1600px) {
+      padding-left: 18%;
+    }
+
+    @include sp {
+      padding: 18% 12% 20% 12%;
+    }
+  }
+
+  &__catch-en {
+    margin: 0;
+    font-family: "Knewave", cursive;
+    font-size: clamp(36px, 5vw, 64px);
+    font-weight: 400;
+    line-height: 1.1;
+    letter-spacing: 0.02em;
+    color: $color-pink;
+    text-align: center;
+  }
+
+  &__catch-ja {
+    margin: 0 0 28px;
+    font-size: clamp(16px, 2vw, 24px);
+    font-weight: 400;
+    letter-spacing: 0.12em;
+    color: $color-pink;
+    text-align: center;
+
+    @include sp {
+      margin-bottom: 24px;
+    }
+  }
+
+  &__intro-text {
+    width: fit-content;
+    max-width: 100%;
+    margin-inline: auto;
+    text-align: left;
+
     p {
-      margin: 0 0 1.8em;
-      font-size: 15px;
+      margin: 0 0 1.6em;
+      font-size: 16px;
+      font-weight: 700;
       line-height: 2.2;
       color: $color-text;
-      font-weight: 700;
-      max-width: 440px;
-      width: 100%;
+      text-align: left;
 
       &:last-child {
         margin-bottom: 0;
@@ -107,80 +224,212 @@
     }
   }
 
-  // ── 理念セクション ────────────────────────────────
+  // ── イラスト枠（画像は後から挿入） ────────────────
+  &__figure {
+    margin: 0;
+
+    img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    &--section {
+      width: 100%;
+      max-width: 260px;
+      min-height: 180px;
+
+      @include sp {
+        max-width: 220px;
+        min-height: 140px;
+      }
+    }
+
+    &--outro {
+      width: 100%;
+      max-width: none;
+      min-height: 0;
+      margin: 0;
+      align-self: end;
+
+      img {
+        display: block;
+        width: min(1100px, 100%);
+        margin-inline: auto;
+        object-fit: contain;
+        object-position: bottom center;
+      }
+    }
+  }
+
+  // ── 理念3セクション ─────────────────────────────
   &__sections {
     display: flex;
     flex-direction: column;
-    gap: 56px;
-    margin-bottom: 56px;
+    gap: 64px;
+    max-width: 850px;
+    width: 100%;
+    margin: 0 auto 72px;
 
     @include sp {
-      gap: 40px;
-      margin-bottom: 40px;
+      gap: 48px;
+      margin-bottom: 56px;
     }
   }
 
   &__section {
     display: grid;
-    grid-template-columns: 340px 1fr;
-    gap: 40px;
+    grid-template-columns: minmax(0, 300px) 1fr;
+    gap: 32px 68px;
     align-items: start;
 
     @include sp {
       grid-template-columns: 1fr;
       gap: 20px;
     }
+
+    &--no-figure {
+      .philosophy-page__section-col--head {
+        align-self: start;
+      }
+    }
+  }
+
+  &__section-col {
+    &--head {
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+
+      @include sp {
+        gap: 20px;
+      }
+    }
   }
 
   &__section-heading {
     display: flex;
-    flex-direction: column;
-    gap: 6px;
+    flex-direction: column;   
+    gap: 8px;
   }
 
   &__section-en {
     margin: 0;
     font-family: $font-sub;
-    font-size: clamp(20px, 2vw, 24px);
+    font-size: clamp(18px, 2.2vw, 24px);
     font-weight: 700;
     line-height: 1.5;
     letter-spacing: 0.03em;
-    color: rgba(15, 101, 163, 0.7);
+    color: rgba($color-white, 0.6);
+    white-space: nowrap;
   }
 
   &__section-ja {
     margin: 0;
-    font-size: 16px;
+    font-size: clamp(15px, 1.8vw, 16px);
     font-weight: 700;
     line-height: 1.6;
     letter-spacing: 0.06em;
-    color: #343434;
-    padding-left: 30px;
+    color: $color-white;
+    padding-left: 24px;
+
+    @include sp {
+      padding-left: 16px;
+    }
   }
 
   &__section-body {
+
     p {
       margin: 0;
       font-size: 16px;
+      font-weight: 400;
       line-height: 2.2;
-      font-weight: 500;
-      color: $color-text;
+      color: $color-white;
+      letter-spacing: 0.08em;
+
+      @include sp {
+        font-size: 14px;
+        line-height: 2;
+      }
+    }
+  }
+
+  &__tight {
+    letter-spacing: 0.075em;
+  }
+
+  // ── 下部イラスト ─────────────────────────────────
+  &__outro {
+    width: 100%;
+    margin-bottom: 0;
+    margin-top: -60px;
+  }
+
+  &__outro-cloud {
+    position: relative;
+    display: grid;
+    width: min(1200px, 100%);
+    margin: 0 auto;
+    padding: 0 40px;
+
+    @include sp {
+      padding: 0 20px;
+    }
+
+    > * {
+      grid-area: 1 / 1;
     }
   }
 
   // ── ナビゲーションボタン ────────────────────────
   &__actions {
+    position: relative;
+    z-index: 2;
+    align-self: end;
+    justify-self: center;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 16px;
-
-    @include sp {
-      gap: 12px;
-    }
+    transform: translateY(-40%);
   }
 
   &__top-back {
     width: auto;
+    min-width: 295px;
+    background: $color-white;
+  }
+}
+
+body.page-philosophy .footer {
+  padding-top: 32px;
+
+  @include sp {
+    padding-top: 28px;
+  }
+}
+
+body.page-philosophy .c-float-actions.is-on-blue-bg {
+  .c-float-icon__circle {
+    fill: $color-white;
+    stroke: $color-white;
+  }
+
+  .c-float-icon__symbol {
+    stroke: $color-primary;
+  }
+
+  .c-float-contact:hover,
+  .page-top:hover {
+    opacity: 1;
+
+    .c-float-icon__circle {
+      fill: transparent;
+      stroke: $color-white;
+    }
+
+    .c-float-icon__symbol {
+      stroke: $color-white;
+    }
   }
 }
