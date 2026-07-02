@@ -2,22 +2,31 @@
 @use "../foundation/mixin" as *;
 
 // ============================================================
-//  SERVICE SECTION (WORK FLOW)
+//  SERVICE SECTION（トップページ）
 // ============================================================
 .service {
   padding: $section-pad-v 0;
-  background-color: #0F65A3;
+  background-color: $color-primary;
 
   .section-title {
     text-align: left;
   }
 
+  &__inner.container.container--side-offset {
+    @media (min-width: #{$breakpoint-tab + 1px}) {
+      @include lg {
+        // 950px コンテナ内でカード 900px を確保（950 - 25×2 = 900）
+        padding-inline: 25px;
+      }
+    }
+  }
+
   &__lead {
     text-align: left;
     font-size: 18px;
-    color: #fff;
+    color: $color-white;
     line-height: 2;
-    margin-bottom: 60px;
+    margin-bottom: 30px;
     font-weight: 500;
     margin-top: -60px;
 
@@ -29,168 +38,223 @@
     }
   }
 
-  &__steps {
+  &__cards {
     display: flex;
     flex-direction: column;
-    gap: 48px;
-    align-items: flex-end;
-
-    @include sp {
-      align-items: stretch;
-      gap: 56px;
-    }
-  }
-
-  &__step {
-    position: relative;
-    display: grid;
-    grid-template-columns: 230px 1fr;
     gap: 30px;
+
+    @include sp {
+      gap: 48px;
+    }
+  }
+
+  &__card {
+    position: relative;
+    padding-top: clamp(48px, 8vw, 72px);
+    overflow: visible;
+  }
+
+  &__card-head {
+    position: absolute;
+    top: clamp(16px, 2.5vw, 28px);
+    left: 0;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    width: max-content;
+    padding-left: clamp(12px, 3vw, 28px);
+    box-sizing: border-box;
+  }
+
+  &__card-title {
+    display: flex;
     align-items: flex-start;
-    background: $color-white;
-    border-radius: 30px;
-    padding: 30px 0 6px 80px;
-    box-shadow: 3px 3px 12px rgba(0, 0, 0, 0.25);
-    width: 100%;
-    max-width: 1000px;
-    @include transition(box-shadow);
+    height: clamp(48px, 10vw, 80px);
+    gap: 4px;
+    margin: 0;
+    line-height: 1;
+  }
 
-    &:hover { box-shadow: 0 6px 32px rgba(0,0,0,0.08); }
+  &__card-title-img {
+    display: block;
+    width: auto;
+    height: 100%;
+  }
 
-    @include lg {
-      grid-template-columns: 180px 1fr;
-    }
-    
-    @include tab {
-      padding: 20px;
-      gap: 20px;
-      grid-template-columns: 180px 1fr;
+  &__card-title-icon {
+    flex-shrink: 0;
+    width: clamp(60px, 6vw, 80px);
+    height: auto;
+    align-self: flex-end;
+  }
+
+  &__card-tagline {
+    align-self: flex-end;
+    margin: 4px 0 0;
+    font-family: $font-sub;
+    font-size: clamp(16px, 2vw, 24px);
+    font-weight: 900;
+    color: #000;
+    letter-spacing: 0.04em;
+  }
+
+  &__card-box {
+    position: relative;
+    overflow: visible;
+    border: 1.5px solid $color-white;
+    border-radius: 20px;
+    padding: clamp(28px, 4vw, 40px) clamp(24px, 4vw, 30px);
+    padding-top: clamp(40px, 6vw, 56px);
+    padding-right: clamp(200px, 32vw, 340px);
+
+    @media (min-width: #{$breakpoint-tab + 1px}) {
+      width: 900px;
+      max-width: 900px;
+      height: 260px;
     }
 
     @include sp {
-      grid-template-columns: 1fr;
-      padding: 32px 20px 24px;
-      gap: 16px;
-    }
-
-    p {
-      font-size: 18px;
-      line-height: 2;
-      color: $color-text;
-      letter-spacing: 0.02em;
-
-      @include lg {
-        font-size: 16px;
-      }
-
-      @include sp {
-        font-size: 15px;
-        line-height: 1.8;
-      }
+      min-height: 140px;
+      padding-right: clamp(24px, 4vw, 40px);
+      padding-bottom: clamp(180px, 50vw, 240px);
     }
   }
 
-  &__step-body {
+  &__card-text {
+    margin: 40px 0 0;
+    font-size: clamp(15px, 2vw, 16px);
+    font-weight: 500;
+    line-height: 2;
+    color: $color-white;
+    letter-spacing: 0.02em;
+
     @include sp {
-      padding-top: 8px;
+      line-height: 1.9;
     }
   }
 
-  &__step-img {
-    max-width: 250px;
-    width: 100%;
-
-    @include lg {
-      max-width: 200px;
-    }
+  &__card-illust {
+    position: absolute;
+    top: clamp(-40px, -6vw, -24px);
+    right: clamp(-32px, -4vw, -12px);
+    width: clamp(280px, 40vw, 420px);
+    margin: 0;
+    pointer-events: none;
+    z-index: 1;
 
     img {
-      border-radius: 8px;
+      display: block;
       width: 100%;
       height: auto;
-
-      @include tab {
-        width: 80%;
-      }
-    }
-
-    @include tab {
-      margin-top: 40px;
     }
 
     @include sp {
-      margin-top: 0;
-      max-width: none;
-      margin-inline: auto;
-
-      img {
-        width: 100%;
-      }
+      right: 50%;
+      top: auto;
+      bottom: -8px;
+      transform: translate(50%, 0);
+      width: min(280px, 85%);
     }
   }
 
-  &__step-label {
-    position: absolute;
-    top: 0;
-    left: -140px;
+  &__card--oem &__card-illust {
+    top: clamp(-76px, -12vw, -56px);
+    right: clamp(-48px, -6vw, -24px);
+    width: clamp(340px, 48vw, 500px);
+  }
 
-    display: inline-block;
-    font-family: "Knewave", cursive;
-    font-size: 36px;
-    font-weight: 400;
-    font-style: italic;
-    letter-spacing: 0.1em;
+  &__card--sample &__card-illust {
+    top: 50%;
+    right: clamp(16px, 2.5vw, 32px);
+    transform: translateY(-50%);
+    width: clamp(150px, 20vw, 220px);
+  }
 
-    color: #343434;
-    background: #F28E55;
-
-    padding: 10px 22px;
-    border-radius: 10px;
-
-    @include lg {
-      font-size: 25px;
-      left: -40px;
+  &__card--sample &__card-box {
+    @media (min-width: #{$breakpoint-tab + 1px}) {
+      padding-right: clamp(170px, 19vw, 235px);
     }
+  }
 
-    @include tab {
-      font-size: 26px;
-      left: 20px;
-      top: -20px;
-    }
-
-    @include sp {
-      left: 50%;
-      top: -18px;
-      transform: translateX(-50%);
-      font-size: 22px;
-      padding: 8px 16px;
+  &__card--sample &__card-text {
+    @media (min-width: #{$breakpoint-tab + 1px}) {
       white-space: nowrap;
+      max-width: 640px;
     }
   }
 
-  &__step-title {
-    font-family: $font-sub;
-    font-size: 32px;
-    font-style: italic;
-    font-weight: 700;
-    letter-spacing: 0.05em;
-    color: $color-text;
+  &__card--oem &__card-title-icon {
+    width: clamp(72px, 7.5vw, 96px);
+  }
+
+  &__card--sample &__card-title-icon {
+    width: clamp(72px, 7.5vw, 96px);
+    transform: rotate(-10deg) translateY(15px);
+  }
+
+  &__card--design &__card-title-icon {
+    transform: rotate(-5deg) translateY(2px);
+  }
+
+  &__card--design &__card-box {
+    padding-right: clamp(24px, 4vw, 40px);
+  }
+
+  &__category {
+    margin: 40px 0 0;
+    padding: 10px 32px;
+    background: rgba(255, 255, 255, 0.34);
+    border-radius: 999px;
+    font-size: clamp(14px, 2vw, 16px);
+    font-weight: 500;
     line-height: 1.6;
-    margin-bottom: 12px;
+    color: $color-white;
+    text-align: center;
+    letter-spacing: 0.04em;
+    box-shadow: 3px 3px 12px rgba(0, 0, 0, 0.25);
+    transition: background-color 0.25s ease;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.5);
+    }
 
     @include sp {
-      font-size: 24px;
-      margin-bottom: 8px;
+      margin-top: 40px;
+      padding: 14px 20px;
+      border-radius: 16px;
     }
+  }
+
+  &__category-text {
+    display: block;
+
+    &--hover {
+      display: none;
+      font-size: clamp(13px, 1.1vw, 15px);
+      white-space: nowrap;
+      letter-spacing: 0.02em;
+
+      @include sp {
+        font-size: 10px;
+      }
+    }
+  }
+
+  &__category:hover &__category-text--default {
+    display: none;
+  }
+
+  &__category:hover &__category-text--hover {
+    display: block;
   }
 
   &__link {
     text-align: right;
-    margin-top: 20px;
+    margin-top: 32px;
 
     @include sp {
       text-align: center;
-      margin-top: 40px;
+      margin-top: 28px;
     }
   }
 }

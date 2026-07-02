@@ -7,7 +7,7 @@
 .contact {
   padding: $section-pad-v 0;
   position: relative;
-  background-color: #F1F1F1;
+  background-color: #C6DDEE;
 
   .section-label,
   .section-title {
@@ -17,11 +17,11 @@
   &__title-row {
     display: inline-flex;
     align-items: center;
-    gap: clamp(8px, 2vw, 16px);
+    gap: 0;
   }
 
   &__title-icon {
-    width: clamp(48px, 6vw, 80px);
+    width: clamp(60px, 8vw, 100px);
     height: auto;
     flex-shrink: 0;
   }
@@ -150,7 +150,7 @@
   &__textarea {
     width: 100%;
     border: none;
-    border-bottom: 4px solid #AEC5DF;
+    border-bottom: 4px solid #FFB5BC;
     border-radius: 4px;
     padding: 10px 14px;
     font-family: $font-ja;

@@ -8,6 +8,7 @@
 $footer-brand-width: 330px;
 $footer-brand-width-md: 240px;
 $footer-brand-width-sm: 200px;
+$footer-btn-width: 240px;
 $footer-contact-width: 220px;
 $footer-contact-inset: 200px;
 
@@ -47,7 +48,7 @@ $footer-contact-inset: 200px;
   height: 1px;
   background: #343434;
   margin-bottom: 40px;
-  max-width: 90%;
+  max-width: 100%;
   width: 100%;
 }
 
@@ -57,7 +58,7 @@ $footer-contact-inset: 200px;
     font-family: $font-sub;
     font-size: 24px;
     font-style: italic;
-    font-weight: 700;
+    font-weight: 500;
     letter-spacing: 0.08em;
     text-transform: uppercase;
     color: $color-text;
@@ -76,7 +77,7 @@ $footer-contact-inset: 200px;
   }
 
   a:not(.footer__title) {
-    font-size: 15px;
+    font-size: 16px;
     font-weight: 700;
     color: $color-text;
     transition: opacity 0.3s;
@@ -103,10 +104,6 @@ $footer-contact-inset: 200px;
 
 // ── フッターレイアウト ──────────────────────────────
 .footer {
-  .footer__line {
-    max-width: 100%;
-  }
-
   .footer__nav {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -201,10 +198,6 @@ $footer-contact-inset: 200px;
     font-size: 15px;
     font-weight: 700;
   }
-
-  .footer__copyright {
-    text-align: left;
-  }
 }
 
 @media (min-width: #{$breakpoint-tab + 1px}) and (max-width: #{$breakpoint-lg}) {
@@ -233,7 +226,7 @@ $footer-contact-inset: 200px;
       }
 
       a:not(.footer__title) {
-        font-size: 14px;
+        font-size: 16px;
       }
     }
 
@@ -386,7 +379,7 @@ $footer-contact-inset: 200px;
       opacity: 1;
 
       .page-top__circle {
-        fill: #fffcab;
+        fill: #F28E55;
       }
     }
   }
@@ -396,5 +389,266 @@ $footer-contact-inset: 200px;
     bottom: 30px;
     width: 56px;
     height: 56px;
+  }
+}
+
+// ── トップページフッター ──────────────────────────────
+.footer.footer--top {
+  overflow-x: clip;
+
+  .footer__inner {
+    padding-top: 80px;
+    box-sizing: border-box;
+  }
+
+  .footer__main {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: clamp(32px, 4vw, 64px);
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+  }
+
+  .footer__brand {
+    flex: 0 0 $footer-btn-width;
+    width: $footer-btn-width;
+    max-width: 100%;
+  }
+
+  .footer__logo {
+    display: block;
+    width: $footer-btn-width;
+    max-width: 100%;
+    margin-bottom: 24px;
+    transition: opacity 0.3s;
+
+    &:hover {
+      opacity: 0.8;
+    }
+
+    img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+  }
+
+  .footer__actions {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: $footer-btn-width;
+    max-width: 100%;
+  }
+
+  .footer__btn {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    width: $footer-btn-width;
+    max-width: 100%;
+    height: 60px;
+    padding: 0 20px;
+    border-radius: 4px;
+    font-family: $font-sub;
+    font-size: 24px;
+    font-weight: 500;
+    font-style: normal;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    transition: opacity 0.3s;
+
+    &:hover {
+      opacity: 0.85;
+    }
+
+    &--contact {
+      background: $color-primary;
+      color: $color-white;
+    }
+
+    &--recruit {
+      background: #e6e6e6;
+      color: $color-primary;
+    }
+  }
+
+  .footer__btn-icon {
+    flex-shrink: 0;
+    width: 36px;
+    height: 36px;
+
+    img,
+    svg {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+  }
+
+  .footer__btn--contact .footer__btn-icon {
+    width: 46px;
+    height: 31px;
+  }
+
+  .footer__btn--recruit .footer__btn-icon {
+    width: 48px;
+    height: 48px;
+  }
+
+  .footer__nav {
+    flex: 0 1 auto;
+    margin-left: auto;
+    min-width: 0;
+    max-width: 100%;
+    display: grid;
+    grid-template-columns: repeat(4, max-content);
+    column-gap: 56px;
+    width: auto;
+    margin-bottom: 0;
+  }
+
+  .footer__group {
+    a:not(.footer__title) {
+      font-size: 16px;
+    }
+  }
+
+  .footer__copyright {
+    margin-top: 80px;
+    padding-bottom: 40px;
+    text-align: center;
+
+    p {
+      font-size: 14px;
+      font-weight: 400;
+      color: $color-text-sub;
+    }
+  }
+
+  @media (min-width: #{$breakpoint-lg + 1px}) {
+    .footer__inner.container--side-offset {
+      max-width: min(
+        $container-width,
+        calc(100vw - #{$side-nav-gutter} - #{$container-side-offset-right})
+      );
+      margin-right: $container-side-offset-right;
+      margin-left: auto;
+    }
+
+    .footer__main {
+      gap: clamp(32px, 3vw, 48px);
+    }
+
+    .footer__nav {
+      column-gap: clamp(32px, 3vw, 48px);
+    }
+  }
+
+  @media (min-width: #{$breakpoint-tab + 1px}) and (max-width: #{$breakpoint-lg}) {
+    .footer__nav {
+      column-gap: 56px;
+    }
+  }
+
+  @media (min-width: #{$breakpoint-tab + 1px}) and (max-width: 1200px) {
+    .footer__btn {
+      height: 60px;
+      padding: 0 16px;
+    }
+
+    .footer__btn-icon {
+      width: 32px;
+      height: 32px;
+    }
+
+    .footer__btn--contact .footer__btn-icon {
+      width: 40px;
+      height: 27px;
+    }
+
+    .footer__btn--recruit .footer__btn-icon {
+      width: 44px;
+      height: 44px;
+    }
+
+    .footer__nav {
+      column-gap: 40px;
+    }
+
+    .footer__group {
+      .footer__title {
+        font-size: 20px;
+      }
+
+      a:not(.footer__title) {
+        font-size: 16px;
+      }
+    }
+  }
+
+  @include tab {
+    .footer__main {
+      flex-direction: column;
+      justify-content: flex-start;
+    }
+
+    .footer__brand {
+      width: $footer-btn-width;
+      max-width: 100%;
+    }
+
+    .footer__nav {
+      margin-left: 0;
+      grid-template-columns: repeat(2, 1fr);
+      row-gap: 48px;
+      column-gap: 56px;
+      width: 100%;
+    }
+  }
+
+  @include sp {
+    .footer__inner {
+      padding-top: 60px;
+    }
+
+    .footer__brand {
+      width: $footer-btn-width;
+      max-width: 100%;
+      margin-inline: auto;
+    }
+
+    .footer__nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 32px 32px;
+    }
+
+    .footer__col {
+      flex: 1 1 calc(50% - 10px);
+      min-width: calc(50% - 10px);
+    }
+
+    .footer__group {
+      .footer__title {
+        font-size: 20px;
+      }
+
+      a:not(.footer__title) {
+        font-size: 16px;
+      }
+    }
+
+    .footer__copyright {
+      margin-top: 60px;
+      padding-bottom: 32px;
+
+      p {
+        font-size: 12px;
+      }
+    }
   }
 }

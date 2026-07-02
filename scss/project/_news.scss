@@ -9,8 +9,25 @@ $news-visible-count: 3;
 //  NEWS SECTION
 // ============================================================
 .news {
+  position: relative;
   padding: $section-pad-v 0;
-  background-color: #FFCDC7;
+  background-color: rgba(159, 210, 172, 0.8);
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: url("../images/news-back02.png");
+    background-repeat: repeat;
+    background-position: center;
+    mix-blend-mode: screen;
+    pointer-events: none;
+  }
+
+  > * {
+    position: relative;
+    z-index: 1;
+  }
 
   @include sp {
     margin-top: 0;

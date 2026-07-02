@@ -12,6 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initDrawer();
   initSideNav();
   initWorksSlider();
+  initServiceStrengthsSlider();
   initScrollReveal();
   initPageTop();
   initContactForm();
@@ -308,6 +309,61 @@ function initWorksSlider() {
   update();
 }
 
+
+// ============================================================
+//  SERVICE PAGE - 強みスライダー（タブレット以下）
+// ============================================================
+function initServiceStrengthsSlider() {
+  const track = document.getElementById('strengthsTrack');
+  const btnPrev = document.getElementById('strengthsPrev');
+  const btnNext = document.getElementById('strengthsNext');
+  if (!track || !btnPrev || !btnNext) return;
+
+  const items = Array.from(track.querySelectorAll('.service-page__strengths-item'));
+  if (items.length === 0) return;
+
+  let currentIndex = 0;
+  const mq = window.matchMedia('(max-width: 1024px)');
+
+  const update = () => {
+    if (!mq.matches) {
+      items.forEach((item) => item.classList.add('is-active'));
+      btnPrev.disabled = true;
+      btnNext.disabled = true;
+      return;
+    }
+
+    items.forEach((item, i) => {
+      item.classList.toggle('is-active', i === currentIndex);
+    });
+
+    btnPrev.disabled = currentIndex === 0;
+    btnNext.disabled = currentIndex >= items.length - 1;
+  };
+
+  btnPrev.addEventListener('click', () => {
+    if (currentIndex > 0) {
+      currentIndex--;
+      update();
+    }
+  });
+
+  btnNext.addEventListener('click', () => {
+    if (currentIndex < items.length - 1) {
+      currentIndex++;
+      update();
+    }
+  });
+
+  mq.addEventListener('change', () => {
+    currentIndex = 0;
+    update();
+  });
+
+  update();
+}
+
+
 // ============================================================
 //  全セクション
 //  スクロールで要素をフェードイン（IntersectionObserver）
@@ -318,7 +374,8 @@ function initScrollReveal() {
   // 既存の要素に付与 + 各セクションの主要要素に自動付与
   const targets = [
     '.about__inner',
-    '.service__step',
+    '.service__card',
+    '.service-page__flow .service__step',
     '.clients__logo-item',
     '.contact__form',
   ];
@@ -383,6 +440,25 @@ function initPageTop() {
 
       if (document.body.classList.contains('page-philosophy')) {
         const blueSection = document.querySelector('.philosophy-page__body');
+        const footer = document.querySelector('.footer');
+
+        if (blueSection) {
+          const floatRect = floatActions.getBoundingClientRect();
+          const checkY = floatRect.top + floatRect.height * 0.5;
+          const blueRect = blueSection.getBoundingClientRect();
+          const isOnBlue =
+            checkY >= blueRect.top && checkY <= blueRect.bottom;
+          const isOverFooter =
+            footer &&
+            footer.getBoundingClientRect().top < floatRect.bottom;
+
+          floatActions.classList.toggle(
+            'is-on-blue-bg',
+            isOnBlue && !isOverFooter
+          );
+        }
+      } else if (document.body.classList.contains('page-service')) {
+        const blueSection = document.querySelector('.service-page__flow');
         const footer = document.querySelector('.footer');
 
         if (blueSection) {

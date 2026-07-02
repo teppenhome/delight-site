@@ -1,0 +1,561 @@
+@use "../foundation/variables" as *;
+@use "../foundation/mixin" as *;
+
+// ============================================================
+//  SERVICE PAGE（固定ページ専用）
+// ============================================================
+
+.service-page {
+  background: $color-white;
+
+  // ── パンくず ──────────────────────────────────────
+  &__breadcrumb {
+    max-width: $container-width;
+    margin: 0 auto 40px;
+    padding: 0 40px;
+    font-family: $font-en;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    color: $color-primary;
+
+    @include sp {
+      margin-bottom: 28px;
+      padding: 0 20px;
+      font-size: 12px;
+    }
+
+    a {
+      color: inherit;
+
+      &:hover {
+        opacity: 0.7;
+      }
+    }
+
+    span {
+      margin: 0 8px;
+    }
+  }
+
+  // ── ヒーロー ────────────────────────────────────
+  &__hero {
+    max-width: $container-width;
+    margin: 0 auto 64px;
+    padding: 0 40px;
+
+    @include sp {
+      margin-bottom: 48px;
+      padding: 0 20px;
+    }
+  }
+
+  &__intro {
+    max-width: 720px;
+    margin: 32px auto 0;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 2;
+    color: $color-text-sub;
+    text-align: center;
+
+    @include sp {
+      margin-top: 24px;
+      font-size: 15px;
+      line-height: 1.9;
+      text-align: left;
+    }
+  }
+
+  // ── セクション共通タイトル ──────────────────────
+  &__section-title {
+    margin: 0 0 40px;
+
+    @include sp {
+      margin-bottom: 28px;
+    }
+  }
+
+  &__section-title-ja {
+    display: block;
+    font-family: $font-ja;
+    font-size: clamp(28px, 5vw, 40px);
+    font-weight: 700;
+    color: $color-text;
+    line-height: 1.4;
+    letter-spacing: 0.04em;
+  }
+
+  &__section-title-en {
+    display: block;
+    margin-top: 8px;
+    font-family: $font-sub;
+    font-size: clamp(14px, 2.5vw, 18px);
+    font-weight: 600;
+    font-style: italic;
+    color: $color-primary;
+    letter-spacing: 0.06em;
+  }
+
+  // ── DELIGHTの強み ───────────────────────────────
+  &__strengths {
+    padding: $section-pad-v 0;
+    background: $color-bg;
+
+    @include sp {
+      padding: 56px 0;
+    }
+  }
+
+  &__strengths-inner {
+    max-width: $container-width;
+    margin: 0 auto;
+    padding: 0 40px;
+
+    @include sp {
+      padding: 0 20px;
+    }
+  }
+
+  &__strengths-body {
+    display: flex;
+    align-items: stretch;
+    gap: 24px;
+
+    @include tab {
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+
+  &__strengths-slider {
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+  }
+
+  &__strengths-track {
+    display: flex;
+    flex-direction: column;
+    gap: 48px;
+
+    @include tab {
+      gap: 0;
+    }
+  }
+
+  &__strengths-item {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
+    gap: 40px;
+    align-items: center;
+
+    @include tab {
+      display: none;
+      grid-template-columns: 1fr;
+      gap: 24px;
+
+      &.is-active {
+        display: grid;
+      }
+    }
+
+    @include sp {
+      gap: 20px;
+    }
+  }
+
+  &__strengths-figure {
+    margin: 0;
+    aspect-ratio: 3 / 2;
+    background: #d8dee6;
+    border-radius: 4px;
+    overflow: hidden;
+
+    img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  &__strengths-content {
+    min-width: 0;
+  }
+
+  &__strengths-title {
+    margin: 0 0 20px;
+    font-family: $font-sub;
+    font-size: clamp(24px, 4vw, 32px);
+    font-weight: 700;
+    font-style: italic;
+    letter-spacing: 0.06em;
+    color: $color-text;
+    line-height: 1.3;
+
+    @include sp {
+      margin-bottom: 14px;
+    }
+  }
+
+  &__strengths-text {
+    margin: 0;
+    font-size: 16px;
+    line-height: 2;
+    color: $color-text;
+
+    @include sp {
+      font-size: 15px;
+      line-height: 1.9;
+    }
+
+    mark {
+      background: $color-accent;
+      color: inherit;
+      padding: 0 2px;
+    }
+  }
+
+  &__strengths-nav {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    gap: 16px;
+    flex-shrink: 0;
+    padding-top: 40px;
+
+    @include tab {
+      display: flex;
+      flex-direction: row;
+      padding-top: 0;
+    }
+  }
+
+  &__strengths-arrow {
+    @include flex-center;
+    width: 52px;
+    height: 52px;
+    border: 2px solid $color-primary;
+    border-radius: 50%;
+    background: $color-white;
+    color: $color-primary;
+    cursor: pointer;
+    @include transition(opacity);
+
+    svg {
+      width: 22px;
+      height: 22px;
+    }
+
+    &:hover {
+      opacity: 0.75;
+    }
+
+    &:disabled {
+      opacity: 0.35;
+      cursor: default;
+    }
+  }
+
+  // ── 環境にやさしい取り組み ──────────────────────
+  &__environment {
+    padding: $section-pad-v 0;
+
+    @include sp {
+      padding: 56px 0;
+    }
+  }
+
+  &__environment-inner {
+    max-width: $container-width;
+    margin: 0 auto;
+    padding: 0 40px;
+
+    @include sp {
+      padding: 0 20px;
+    }
+  }
+
+  &__environment-lead {
+    max-width: 800px;
+    margin: 0 0 48px;
+    font-size: 16px;
+    line-height: 2;
+    color: $color-text;
+
+    @include sp {
+      margin-bottom: 36px;
+      font-size: 15px;
+      line-height: 1.9;
+    }
+  }
+
+  &__environment-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 32px;
+    margin-bottom: 48px;
+
+    @include sp {
+      grid-template-columns: 1fr;
+      gap: 24px;
+      margin-bottom: 36px;
+    }
+  }
+
+  &__environment-item {
+    margin: 0;
+    text-align: center;
+  }
+
+  &__environment-thumb {
+    aspect-ratio: 1;
+    margin-bottom: 12px;
+    background: #d8dee6;
+    border-radius: 4px;
+    overflow: hidden;
+
+    img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  &__environment-label {
+    font-size: 14px;
+    font-weight: 500;
+    color: $color-text;
+    letter-spacing: 0.04em;
+  }
+
+  &__environment-sdgs {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 24px 32px;
+  }
+
+  &__environment-sdgs-logo img {
+    display: block;
+    height: auto;
+    max-width: 200px;
+  }
+
+  &__environment-sdgs-icons {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+
+    img {
+      display: block;
+      width: 72px;
+      height: 72px;
+      object-fit: contain;
+
+      @include sp {
+        width: 60px;
+        height: 60px;
+      }
+    }
+  }
+
+  // ── ご依頼の流れ ────────────────────────────────
+  &__flow {
+    padding-bottom: 100px;
+
+    @include sp {
+      padding-bottom: 72px;
+    }
+
+    .section-title {
+      margin-bottom: 48px;
+
+      @include sp {
+        margin-bottom: 36px;
+      }
+    }
+  }
+}
+
+// 下層ページ：ご依頼の流れステップ
+.service-page__flow {
+  .service__steps {
+    display: flex;
+    flex-direction: column;
+    gap: 48px;
+    align-items: flex-end;
+
+    @include sp {
+      align-items: stretch;
+      gap: 56px;
+    }
+  }
+
+  .service__step {
+    position: relative;
+    display: grid;
+    grid-template-columns: 230px 1fr;
+    gap: 30px;
+    align-items: flex-start;
+    background: $color-white;
+    border-radius: 30px;
+    padding: 30px 0 6px 80px;
+    box-shadow: 3px 3px 12px rgba(0, 0, 0, 0.25);
+    width: 100%;
+    max-width: 1000px;
+    @include transition(box-shadow);
+
+    &:hover {
+      box-shadow: 0 6px 32px rgba(0, 0, 0, 0.08);
+    }
+
+    @include lg {
+      grid-template-columns: 180px 1fr;
+    }
+
+    @include tab {
+      padding: 20px;
+      gap: 20px;
+      grid-template-columns: 180px 1fr;
+    }
+
+    @include sp {
+      grid-template-columns: 1fr;
+      padding: 32px 20px 24px;
+      gap: 16px;
+    }
+
+    p {
+      font-size: 18px;
+      line-height: 2;
+      color: $color-text;
+      letter-spacing: 0.02em;
+
+      @include lg {
+        font-size: 16px;
+      }
+
+      @include sp {
+        font-size: 15px;
+        line-height: 1.8;
+      }
+    }
+  }
+
+  .service__step-body {
+    @include sp {
+      padding-top: 8px;
+    }
+  }
+
+  .service__step-img {
+    max-width: 250px;
+    width: 100%;
+
+    @include lg {
+      max-width: 200px;
+    }
+
+    img {
+      border-radius: 8px;
+      width: 100%;
+      height: auto;
+
+      @include tab {
+        width: 80%;
+      }
+    }
+
+    @include tab {
+      margin-top: 40px;
+    }
+
+    @include sp {
+      margin-top: 0;
+      max-width: none;
+      margin-inline: auto;
+
+      img {
+        width: 100%;
+      }
+    }
+  }
+
+  .service__step-label {
+    position: absolute;
+    top: 0;
+    left: -140px;
+    display: inline-block;
+    font-family: "Knewave", cursive;
+    font-size: 36px;
+    font-weight: 400;
+    font-style: italic;
+    letter-spacing: 0.1em;
+    color: #343434;
+    background: #f28e55;
+    padding: 10px 22px;
+    border-radius: 10px;
+
+    @include lg {
+      font-size: 25px;
+      left: -40px;
+    }
+
+    @include tab {
+      font-size: 26px;
+      left: 20px;
+      top: -20px;
+    }
+
+    @include sp {
+      left: 50%;
+      top: -18px;
+      transform: translateX(-50%);
+      font-size: 22px;
+      padding: 8px 16px;
+      white-space: nowrap;
+    }
+  }
+
+  .service__step-title {
+    font-family: $font-sub;
+    font-size: 32px;
+    font-style: italic;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    color: $color-text;
+    line-height: 1.6;
+    margin-bottom: 12px;
+
+    @include sp {
+      font-size: 24px;
+      margin-bottom: 8px;
+    }
+  }
+}
+
+// 下層ページヘッダー
+.page-service {
+  .header__nav-list {
+    align-items: flex-start;
+  }
+
+  .header__nav-list li a {
+    align-items: flex-start;
+    text-align: left;
+  }
+}
+
+// 青背景フローセクション上のフロートボタン
+body.page-service .c-float-actions.is-on-blue-bg {
+  .c-float-icon__circle {
+    fill: $color-white;
+  }
+
+  .c-float-icon__symbol {
+    stroke: $color-primary;
+  }
+}

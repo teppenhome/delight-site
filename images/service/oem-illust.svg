@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 280" fill="none" aria-hidden="true">
+  <!-- calendar -->
+  <rect x="20" y="30" width="70" height="80" rx="6" fill="#fff" stroke="#343434" stroke-width="2.5"/>
+  <rect x="20" y="30" width="70" height="18" rx="6" fill="#f28e55" stroke="#343434" stroke-width="2.5"/>
+  <line x1="38" y1="24" x2="38" y2="36" stroke="#343434" stroke-width="2.5" stroke-linecap="round"/>
+  <line x1="72" y1="24" x2="72" y2="36" stroke="#343434" stroke-width="2.5" stroke-linecap="round"/>
+  <circle cx="42" cy="68" r="5" fill="#b5de8e" stroke="#343434" stroke-width="1.5"/>
+  <circle cx="62" cy="68" r="5" fill="#fff" stroke="#343434" stroke-width="1.5"/>
+  <circle cx="82" cy="68" r="5" fill="#fff" stroke="#343434" stroke-width="1.5"/>
+
+  <!-- cap -->
+  <ellipse cx="130" cy="95" rx="42" ry="12" fill="#e74c3c" stroke="#343434" stroke-width="2.5"/>
+  <path d="M88 95c0-28 18-42 42-42s42 14 42 42" fill="#e74c3c" stroke="#343434" stroke-width="2.5"/>
+  <text x="130" y="82" text-anchor="middle" font-family="Arial,sans-serif" font-size="11" font-weight="700" fill="#fff" stroke="#343434" stroke-width="0.5">RED BIRD</text>
+
+  <!-- bear mug -->
+  <rect x="170" y="55" width="55" height="60" rx="8" fill="#c49a6c" stroke="#343434" stroke-width="2.5"/>
+  <circle cx="197" cy="52" r="14" fill="#c49a6c" stroke="#343434" stroke-width="2.5"/>
+  <circle cx="192" cy="50" r="2" fill="#343434"/>
+  <circle cx="202" cy="50" r="2" fill="#343434"/>
+  <path d="M192 58q5 4 10 0" stroke="#343434" stroke-width="2" fill="none" stroke-linecap="round"/>
+  <path d="M225 75h12a8 8 0 0 1 0 16h-12" stroke="#343434" stroke-width="2.5" fill="none"/>
+
+  <!-- lion -->
+  <circle cx="75" cy="175" r="28" fill="#f5d76e" stroke="#343434" stroke-width="2.5"/>
+  <circle cx="65" cy="168" r="4" fill="#343434"/>
+  <circle cx="85" cy="168" r="4" fill="#343434"/>
+  <path d="M68 182q7 6 14 0" stroke="#343434" stroke-width="2" fill="none" stroke-linecap="round"/>
+  <path d="M47 155l-8-10M103 155l8-10M50 190l-10 4M100 190l10 4" stroke="#f28e55" stroke-width="2.5" stroke-linecap="round"/>
+
+  <!-- dog keychain -->
+  <circle cx="175" cy="185" r="22" fill="#fff" stroke="#343434" stroke-width="2.5"/>
+  <circle cx="168" cy="180" r="3" fill="#343434"/>
+  <circle cx="182" cy="180" r="3" fill="#343434"/>
+  <ellipse cx="175" cy="190" rx="5" ry="3" fill="#343434"/>
+  <rect x="168" y="155" width="14" height="10" rx="3" fill="#888" stroke="#343434" stroke-width="2"/>
+
+  <!-- backpack -->
+  <rect x="215" y="130" width="80" height="95" rx="12" fill="#5cb85c" stroke="#343434" stroke-width="2.5"/>
+  <rect x="235" y="115" width="40" height="22" rx="6" fill="#5cb85c" stroke="#343434" stroke-width="2.5"/>
+  <text x="255" y="185" text-anchor="middle" font-family="Arial,sans-serif" font-size="14" font-weight="700" fill="#fff">DELIGHT</text>
+  <rect x="240" y="200" width="30" height="18" rx="4" fill="#4a9e4a" stroke="#343434" stroke-width="2"/>
+</svg>

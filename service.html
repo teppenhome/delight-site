@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SERVICE | DELIGHT</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=Knewave&family=Montserrat:ital,wght@0,500;0,600;0,700;1,600;1,700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./css/style.css">
+</head>
+<body class="page-service">
+
+  <div class="drawer" id="drawer" aria-hidden="true" role="dialog" aria-modal="true" aria-label="メニュー">
+    <div class="drawer__backdrop" id="drawerBackdrop" aria-hidden="true"></div>
+    <div class="drawer__panel" id="drawerPanel" tabindex="-1">
+      <nav class="drawer__nav" aria-label="ドロワーメニュー">
+        <ul class="drawer__list">
+          <li class="drawer__item">
+            <a href="about.html" class="drawer__link">
+              <span class="drawer__en">ABOUT US</span>
+              <span class="drawer__ja">会社概要</span>
+            </a>
+          </li>
+          <li class="drawer__item">
+            <a href="work.html" class="drawer__link">
+              <span class="drawer__en">WORKS</span>
+              <span class="drawer__ja">制作実績</span>
+            </a>
+          </li>
+          <li class="drawer__item">
+            <a href="service.html" class="drawer__link">
+              <span class="drawer__en">SERVICE</span>
+              <span class="drawer__ja">できること</span>
+            </a>
+          </li>
+          <li class="drawer__item">
+            <a href="news.html" class="drawer__link">
+              <span class="drawer__en">NEWS</span>
+              <span class="drawer__ja">お知らせ</span>
+            </a>
+          </li>
+          <li class="drawer__item drawer__item--contact">
+            <a href="index.html#contact" class="drawer__link drawer__link--contact">
+              <img src="images/contact.png" alt="お問い合わせ">
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+
+  <header class="header" id="header">
+    <div class="header__inner">
+      <h1 class="header__logo">
+        <a href="index.html">
+          <img src="images/logo.png" alt="DELIGHT">
+        </a>
+      </h1>
+      <nav class="header__nav" id="globalNav" aria-label="メインナビゲーション">
+        <ul class="header__nav-list">
+          <li>
+            <a href="about.html">
+              <span class="header__nav-en">ABOUT US</span>
+            </a>
+          </li>
+          <li>
+            <a href="work.html">
+              <span class="header__nav-en">WORK</span>
+            </a>
+          </li>
+          <li>
+            <a href="service.html">
+              <span class="header__nav-en __is-active">SERVICE</span>
+            </a>
+          </li>
+          <li>
+            <a href="news.html">
+              <span class="header__nav-en">NEWS</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+      <button
+        class="header__hamburger"
+        id="hamburger"
+        type="button"
+        aria-label="メニューを開く"
+        aria-expanded="false"
+        aria-controls="drawerPanel">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <main class="service-page" id="top">
+
+    <div class="service-page__breadcrumb">
+      <a href="index.html">TOP</a>
+      <span>&gt;</span>
+      <span>SERVICE</span>
+    </div>
+
+    <div class="service-page__hero c-page-hero c-page-hero--center">
+      <h2 class="c-page-title">SERVICE</h2>
+      <p class="c-page-subtitle">サービス</p>
+      <p class="service-page__intro">
+        私たちは、お客様の想いをもとにオリジナル商品を企画・制作しています。<br>
+        「何か面白い商品を作りたい」というご相談からでも大丈夫です。<br>
+        企画・デザインから生産、納品まで一貫してサポートします。
+      </p>
+    </div>
+
+    <!-- DELIGHTの強み -->
+    <section class="service-page__strengths" id="strengths" aria-labelledby="strengths-heading">
+      <div class="service-page__strengths-inner">
+        <div class="service-page__strengths-head">
+          <h2 class="service-page__section-title" id="strengths-heading">
+            <span class="service-page__section-title-ja">DELIGHTの強み</span>
+            <span class="service-page__section-title-en">Our Strengths</span>
+          </h2>
+        </div>
+
+        <div class="service-page__strengths-body">
+          <div class="service-page__strengths-slider" id="strengthsSlider">
+            <div class="service-page__strengths-track" id="strengthsTrack">
+
+              <article class="service-page__strengths-item is-active">
+                <figure class="service-page__strengths-figure">
+                  <img src="https://placehold.co/480x320/e8ecf0/9aa5b1?text=IMAGE" alt="" width="480" height="320" decoding="async">
+                </figure>
+                <div class="service-page__strengths-content">
+                  <h3 class="service-page__strengths-title">PRODUCT PLANNING</h3>
+                  <p class="service-page__strengths-text">
+                    市場調査やトレンド分析を踏まえ、<mark>お客様の想いを形にする企画</mark>をご提案します。ターゲットや販売チャネルに合わせた商品コンセプトづくりから、企画書の作成まで一貫してサポート。イメージが固まっていなくても、お気軽にご相談ください。
+                  </p>
+                </div>
+              </article>
+
+              <article class="service-page__strengths-item">
+                <figure class="service-page__strengths-figure">
+                  <img src="https://placehold.co/480x320/e8ecf0/9aa5b1?text=IMAGE" alt="" width="480" height="320" decoding="async">
+                </figure>
+                <div class="service-page__strengths-content">
+                  <h3 class="service-page__strengths-title">DESIGN</h3>
+                  <p class="service-page__strengths-text">
+                    ヒアリング内容をもとに、<mark>オリジナリティと品質を兼ね備えたデザイン</mark>をご提案します。キャラクターグッズからコーポレートアイテムまで、幅広いジャンルに対応。細部までこだわり、お客様のブランド価値を高めるビジュアルを創り上げます。
+                  </p>
+                </div>
+              </article>
+
+              <article class="service-page__strengths-item">
+                <figure class="service-page__strengths-figure">
+                  <img src="https://placehold.co/480x320/e8ecf0/9aa5b1?text=IMAGE" alt="" width="480" height="320" decoding="async">
+                </figure>
+                <div class="service-page__strengths-content">
+                  <h3 class="service-page__strengths-title">QUALITY</h3>
+                  <p class="service-page__strengths-text">
+                    国内外の協力工場と連携し、<mark>厳格な品質管理</mark>のもとで製造を行います。サンプル確認から量産、検品、物流まで一貫して管理。お客様に安心してお届けできる商品づくりを徹底しています。
+                  </p>
+                </div>
+              </article>
+
+            </div>
+          </div>
+
+          <div class="service-page__strengths-nav" aria-label="強みスライダー操作">
+            <button type="button" class="service-page__strengths-arrow service-page__strengths-arrow--prev" id="strengthsPrev" aria-label="前へ">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 6 L6 12 L12 18 M6 12 H18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" transform="rotate(-90 12 12)"/></svg>
+            </button>
+            <button type="button" class="service-page__strengths-arrow service-page__strengths-arrow--next" id="strengthsNext" aria-label="次へ">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 6 L6 12 L12 18 M6 12 H18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" transform="rotate(90 12 12)"/></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 環境にやさしい取り組み -->
+    <section class="service-page__environment" id="environment" aria-labelledby="environment-heading">
+      <div class="service-page__environment-inner">
+        <h2 class="service-page__section-title" id="environment-heading">
+          <span class="service-page__section-title-ja">環境にやさしい取り組み</span>
+          <span class="service-page__section-title-en">Environmentally Friendly Initiatives</span>
+        </h2>
+
+        <p class="service-page__environment-lead">
+          私たちは、ものづくりを通じて持続可能な社会の実現に貢献することを目指しています。環境に配慮した素材の選定や、SDGsの達成に向けた取り組みを積極的に推進しています。
+        </p>
+
+        <div class="service-page__environment-grid">
+          <figure class="service-page__environment-item">
+            <div class="service-page__environment-thumb">
+              <img src="https://placehold.co/200x200/e8ecf0/9aa5b1?text=IMAGE" alt="" width="200" height="200" decoding="async">
+            </div>
+            <figcaption class="service-page__environment-label">リサイクル素材の活用</figcaption>
+          </figure>
+          <figure class="service-page__environment-item">
+            <div class="service-page__environment-thumb">
+              <img src="https://placehold.co/200x200/e8ecf0/9aa5b1?text=IMAGE" alt="" width="200" height="200" decoding="async">
+            </div>
+            <figcaption class="service-page__environment-label">エコパッケージ</figcaption>
+          </figure>
+          <figure class="service-page__environment-item">
+            <div class="service-page__environment-thumb">
+              <img src="https://placehold.co/200x200/e8ecf0/9aa5b1?text=IMAGE" alt="" width="200" height="200" decoding="async">
+            </div>
+            <figcaption class="service-page__environment-label">省エネ生産体制</figcaption>
+          </figure>
+        </div>
+
+        <div class="service-page__environment-sdgs">
+          <div class="service-page__environment-sdgs-logo">
+            <img src="https://placehold.co/200x60/e8ecf0/9aa5b1?text=SDGs" alt="SUSTAINABLE DEVELOPMENT GOALS" width="200" height="60" decoding="async">
+          </div>
+          <div class="service-page__environment-sdgs-icons">
+            <img src="https://placehold.co/80x80/e8ecf0/9aa5b1?text=9" alt="SDG Goal 9" width="80" height="80" decoding="async">
+            <img src="https://placehold.co/80x80/e8ecf0/9aa5b1?text=12" alt="SDG Goal 12" width="80" height="80" decoding="async">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ご依頼の流れ -->
+    <section class="service service-page__flow" id="flow" aria-labelledby="flow-heading">
+      <div class="service__inner container container--side-offset">
+        <h2 class="section-title" id="flow-heading">
+          <span class="section-title__ruby section-title__ruby__white">ご依頼の流れ</span>
+        </h2>
+
+        <div class="service__steps">
+
+          <div class="service__step">
+            <div class="service__step-img">
+              <img src="https://placehold.co/250x200/ffffff/0F65A3?text=Step+01" alt="PLANNING">
+            </div>
+            <div class="service__step-body">
+              <span class="service__step-label">Step.01</span>
+              <h3 class="service__step-title">PLANNING</h3>
+              <p>しっかりとヒアリングとリサーチをした後、企画案をご提出。<br>イメージが固まっていなくてもお気軽にご相談ください。</p>
+            </div>
+          </div>
+
+          <div class="service__step">
+            <div class="service__step-img">
+              <img src="https://placehold.co/250x200/ffffff/0F65A3?text=Step+02" alt="DESIGN">
+            </div>
+            <div class="service__step-body">
+              <span class="service__step-label">Step.02</span>
+              <h3 class="service__step-title">DESIGN</h3>
+              <p>ヒアリング内容をもとに、<br>商品の企画提案からデザイン制作まで一貫して行います。<br>オリジナリティと品質を兼ね備えたデザインをご提案します。</p>
+            </div>
+          </div>
+
+          <div class="service__step">
+            <div class="service__step-img">
+              <img src="https://placehold.co/250x200/ffffff/0F65A3?text=Step+03" alt="SAMPLE">
+            </div>
+            <div class="service__step-body">
+              <span class="service__step-label">Step.03</span>
+              <h3 class="service__step-title">SAMPLE</h3>
+              <p>完成イメージをより具体的に確認いただけるよう、サンプル制作を行います。<br>細部まで調整しながら、理想の仕上がりへ近づけていきます。</p>
+            </div>
+          </div>
+
+          <div class="service__step">
+            <div class="service__step-img">
+              <img src="https://placehold.co/250x200/ffffff/0F65A3?text=Step+04" alt="ORDER &amp; PRODUCTION">
+            </div>
+            <div class="service__step-body">
+              <span class="service__step-label">Step.04</span>
+              <h3 class="service__step-title">ORDER &amp; PRODUCTION</h3>
+              <p>サンプル確認後、正式にご発注いただき量産に入ります。<br>国内外の協力工場と連携し、品質管理を徹底しながら製造を進めます。</p>
+            </div>
+          </div>
+
+          <div class="service__step">
+            <div class="service__step-img">
+              <img src="https://placehold.co/250x200/ffffff/0F65A3?text=Step+05" alt="DELIVER">
+            </div>
+            <div class="service__step-body">
+              <span class="service__step-label">Step.05</span>
+              <h3 class="service__step-title">DELIVER</h3>
+              <p>完成した商品をお届けし、カタチになった瞬間の喜びを、お客様と一緒に分かち合えることが私たちの楽しみです。<br>追加製作や新しい企画のご相談など、その後も気軽にご相談ください。</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+
+    <div class="footer__inner container">
+
+      <div class="footer__head">
+        <p class="footer__index">INDEX</p>
+      </div>
+
+      <div class="footer__line"></div>
+
+      <div class="footer__nav">
+
+        <div class="footer__col">
+          <div class="footer__group">
+            <a href="about.html" class="footer__title">ABOUT US</a>
+            <ul>
+              <li><a href="company.html">会社概要</a></li>
+              <li><a href="philosophy.html">企業理念</a></li>
+              <li><a href="message.html">代表挨拶</a></li>
+              <li><a href="access.html">アクセス</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="footer__col">
+          <div class="footer__group">
+            <a href="work.html" class="footer__title">WORK</a>
+            <ul>
+              <li><a href="work.html">業務実績一覧</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="footer__col">
+          <div class="footer__group">
+            <a href="service.html" class="footer__title">SERVICE</a>
+            <ul>
+              <li><a href="service.html#strengths">DELIGHTの強み</a></li>
+              <li><a href="service.html#environment">環境への取り組み</a></li>
+              <li><a href="service.html#flow">仕事の流れ</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="footer__col">
+          <div class="footer__group">
+            <a href="news.html" class="footer__title">NEWS</a>
+            <ul>
+              <li><a href="news.html">お知らせ一覧</a></li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="footer__bottom">
+        <a href="index.html" class="footer__logo">
+          <img src="images/logo.png" alt="DELIGHT">
+        </a>
+        <div class="footer__contact">
+          <a href="index.html#contact" class="footer__contact-link">
+            <span class="footer__contact-icon" aria-hidden="true">
+              <img class="footer__contact-icon-img" src="images/footer-contact-icon.png" alt="" width="64" height="64">
+            </span>
+            <span class="footer__contact-body">
+              <span class="footer__contact-title">CONTACT</span>
+              <span class="footer__contact-text">相談してみる 🙌</span>
+            </span>
+          </a>
+        </div>
+      </div>
+
+      <div class="footer__copyright">
+        <p>&copy; 2022 DELIGHT All rights reserved</p>
+      </div>
+
+    </div>
+
+  </footer>
+  <div class="c-float-actions">
+    <a href="index.html#contact" class="c-float-contact" aria-label="お問い合わせ">
+      <svg class="c-float-icon c-float-contact__icon" viewBox="0 0 52 52" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+        <circle class="c-float-icon__circle" cx="26" cy="26" r="24"/>
+        <path class="c-float-icon__symbol" d="M15.5 19 H36.5 Q38 19 38 20.5 V32.5 Q38 34 36.5 34 H15.5 Q14 34 14 32.5 V20.5 Q14 19 15.5 19 Z"/>
+        <path class="c-float-icon__symbol" d="M15 19.5 L26 27.5 L37 19.5"/>
+      </svg>
+    </a>
+    <a href="#top" id="pageTop" class="page-top" aria-label="ページ上部へ戻る">
+      <svg class="c-float-icon page-top__icon" viewBox="0 0 52 52" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+        <circle class="c-float-icon__circle" cx="26" cy="26" r="24"/>
+        <path class="c-float-icon__symbol" d="M16 30 L26 18 L36 30"/>
+      </svg>
+    </a>
+  </div>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
