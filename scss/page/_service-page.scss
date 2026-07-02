@@ -53,10 +53,10 @@
   &__intro {
     max-width: 720px;
     margin: 32px auto 0;
-    font-size: 16px;
+    font-size: 15px;
     font-weight: 500;
     line-height: 2;
-    color: $color-text-sub;
+    color: #343434;
     text-align: center;
 
     @include sp {
@@ -79,20 +79,18 @@
   &__section-title-ja {
     display: block;
     font-family: $font-ja;
-    font-size: clamp(28px, 5vw, 40px);
+    font-size: clamp(28px, 5vw, 36px);
     font-weight: 700;
     color: $color-text;
     line-height: 1.4;
-    letter-spacing: 0.04em;
+    letter-spacing: 0.1em;
   }
 
   &__section-title-en {
     display: block;
-    margin-top: 8px;
     font-family: $font-sub;
-    font-size: clamp(14px, 2.5vw, 18px);
-    font-weight: 600;
-    font-style: italic;
+    font-size: clamp(14px, 2.5vw, 15px);
+    font-weight: 700;
     color: $color-primary;
     letter-spacing: 0.06em;
   }
@@ -108,13 +106,93 @@
   }
 
   &__strengths-inner {
-    max-width: $container-width;
+    max-width: 910px;
     margin: 0 auto;
-    padding: 0 40px;
+    padding: 0;
 
     @include sp {
       padding: 0 20px;
     }
+  }
+
+  &__section-nav {
+    position: fixed;
+    left: $side-nav-left;
+    top: 60px;
+    z-index: 100;
+    width: fit-content;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: translateY(20px) translateX(-16px);
+    transition:
+      opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+      transform 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+      visibility 0s linear 0.7s;
+
+    &.is-visible {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+      transform: translateY(0) translateX(0);
+      transition:
+        opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+        transform 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+        visibility 0s linear 0s;
+    }
+
+    &.is-on-blue-section {
+      .service-page__section-nav-link {
+        color: $color-white;
+      }
+
+      .service-page__section-nav-marker {
+        color: rgba($color-white, 0.85);
+      }
+    }
+
+    @include tab {
+      display: none;
+    }
+  }
+
+  &__section-nav-list {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  &__section-nav-link {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    font-family: $font-ja;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.5;
+    letter-spacing: 0.04em;
+    color: $color-text;
+    text-decoration: none;
+    white-space: nowrap;
+    @include transition(color);
+
+    &:hover {
+      opacity: 0.7;
+    }
+
+    &:not(.is-current) .service-page__section-nav-marker {
+      visibility: hidden;
+    }
+  }
+
+  &__section-nav-marker {
+    flex-shrink: 0;
+    font-size: 10px;
+    line-height: 1.9;
+    color: $color-primary;
   }
 
   &__strengths-body {
@@ -146,9 +224,9 @@
 
   &__strengths-item {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
+    grid-template-columns: auto minmax(0, 1fr);
     gap: 40px;
-    align-items: center;
+    align-items: start;
 
     @include tab {
       display: none;
@@ -167,10 +245,12 @@
 
   &__strengths-figure {
     margin: 0;
-    aspect-ratio: 3 / 2;
+    aspect-ratio: 327 / 214;
     background: #d8dee6;
     border-radius: 4px;
     overflow: hidden;
+    width: 327px;
+    max-width: 100%;
 
     img {
       display: block;
@@ -185,24 +265,56 @@
   }
 
   &__strengths-title {
-    margin: 0 0 20px;
-    font-family: $font-sub;
-    font-size: clamp(24px, 4vw, 32px);
-    font-weight: 700;
-    font-style: italic;
-    letter-spacing: 0.06em;
-    color: $color-text;
-    line-height: 1.3;
+    display: flex;
+    align-items: flex-end;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin: 0 0 15px;
 
     @include sp {
       margin-bottom: 14px;
+      gap: 8px;
+    }
+  }
+
+  &__strengths-title-en {
+    font-family: "Knewave", cursive;
+    font-size: clamp(24px, 4vw, 32px);
+    font-weight: 400;
+    letter-spacing: 0.06em;
+    color: $color-text;
+    line-height: 1;
+  }
+
+  &__strengths-title-ruby {
+    font-family: $font-ja;
+    font-size: clamp(12px, 2vw, 14px);
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    color: $color-text;
+    line-height: 1;
+    margin-bottom: 0.35em;
+  }
+
+  &__strengths-lead {
+    margin: 0 0 4px;
+    font-family: $font-sub;
+    font-size: clamp(14px, 2.5vw, 16px);
+    font-weight: 900;
+    line-height: 1.6;
+    letter-spacing: 0.04em;
+    color: $color-text;
+
+    @include sp {
+      margin-bottom: 12px;
+      font-size: 15px;
     }
   }
 
   &__strengths-text {
     margin: 0;
-    font-size: 16px;
-    line-height: 2;
+    font-size: 15px;
+    line-height: 1.9;
     color: $color-text;
 
     @include sp {
@@ -211,9 +323,11 @@
     }
 
     mark {
-      background: $color-accent;
+      background: linear-gradient(transparent 55%, rgba(255, 214, 0, 0.35) 55%);
       color: inherit;
-      padding: 0 2px;
+      padding: 0;
+      -webkit-box-decoration-break: clone;
+      box-decoration-break: clone;
     }
   }
 
@@ -260,7 +374,7 @@
 
   // ── 環境にやさしい取り組み ──────────────────────
   &__environment {
-    padding: $section-pad-v 0;
+    padding: $section-pad-v 0 200px;
 
     @include sp {
       padding: 56px 0;
@@ -268,9 +382,10 @@
   }
 
   &__environment-inner {
-    max-width: $container-width;
+    max-width: 910px;
+    width: 100%;
     margin: 0 auto;
-    padding: 0 40px;
+    padding: 0;
 
     @include sp {
       padding: 0 20px;
@@ -278,9 +393,10 @@
   }
 
   &__environment-lead {
-    max-width: 800px;
+    width: 100%;
     margin: 0 0 48px;
-    font-size: 16px;
+    font-size: 15px;
+    font-weight: 500;
     line-height: 2;
     color: $color-text;
 
@@ -332,32 +448,62 @@
   }
 
   &__environment-sdgs {
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 24px 32px;
+    --sdgs-height: clamp(72px, 11vw, 132px);
+    display: grid;
+    grid-template-columns: minmax(0, 1.8fr) minmax(0, 1fr) minmax(0, 1fr);
+    gap: clamp(12px, 2vw, 24px);
+    align-items: stretch;
+    width: 100%;
+    height: var(--sdgs-height);
+    margin-top: 80px;
   }
 
-  &__environment-sdgs-logo img {
-    display: block;
-    height: auto;
-    max-width: 200px;
-  }
-
-  &__environment-sdgs-icons {
-    display: flex;
-    align-items: center;
-    gap: 16px;
+  &__environment-sdgs-logo {
+    min-width: 0;
+    height: 100%;
 
     img {
       display: block;
-      width: 72px;
-      height: 72px;
+      width: 100%;
+      height: 100%;
       object-fit: contain;
+      object-position: left center;
+    }
+  }
 
-      @include sp {
-        width: 60px;
-        height: 60px;
+  &__environment-sdgs-icons {
+    display: contents;
+
+    img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+  }
+
+  @include sp {
+    &__environment-sdgs {
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: auto auto;
+      height: auto;
+      gap: 16px;
+    }
+
+    &__environment-sdgs-logo {
+      grid-column: 1 / -1;
+      height: clamp(72px, 20vw, 100px);
+
+      img {
+        object-position: center center;
+      }
+    }
+
+    &__environment-sdgs-icons {
+      display: contents;
+
+      img {
+        height: clamp(72px, 28vw, 120px);
       }
     }
   }

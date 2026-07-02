@@ -13,6 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initSideNav();
   initWorksSlider();
   initServiceStrengthsSlider();
+  initServiceSectionNav();
   initScrollReveal();
   initPageTop();
   initContactForm();
@@ -360,6 +361,102 @@ function initServiceStrengthsSlider() {
     update();
   });
 
+  update();
+}
+
+
+// ============================================================
+//  SERVICE PAGE - ページ内ナビのスクロール連動
+// ============================================================
+function initServiceSectionNav() {
+  const nav = document.getElementById('serviceSectionNav');
+  if (!nav) return;
+
+  const hero = document.querySelector('.service-page__hero');
+  const footer = document.querySelector('.footer');
+  const flowSection = document.querySelector('.service-page__flow');
+
+  const links = Array.from(
+    nav.querySelectorAll('.service-page__section-nav-link')
+  );
+  const sections = links
+    .map((link) => {
+      const href = link.getAttribute('href');
+      if (!href || !href.startsWith('#')) return null;
+      return document.querySelector(href);
+    })
+    .filter(Boolean);
+
+  if (sections.length === 0) return;
+
+  const footerThreshold = () => window.innerHeight * 0.2;
+
+  const getCheckY = () => {
+    const header = document.getElementById('header');
+    const headerHeight = header ? header.offsetHeight : 64;
+    return window.scrollY + headerHeight + 80;
+  };
+
+  const setActive = (sectionId) => {
+    links.forEach((link) => {
+      const isCurrent = link.getAttribute('href') === `#${sectionId}`;
+      link.classList.toggle('is-current', isCurrent);
+
+      if (isCurrent) {
+        link.setAttribute('aria-current', 'location');
+      } else {
+        link.removeAttribute('aria-current');
+      }
+    });
+  };
+
+  const syncVisibility = () => {
+    if (!hero) {
+      nav.classList.add('is-visible');
+      return;
+    }
+
+    const heroRect = hero.getBoundingClientRect();
+    const heroVisible = heroRect.bottom > 0 && heroRect.top < window.innerHeight;
+    const reachedFooter =
+      footer && footer.getBoundingClientRect().top < footerThreshold();
+
+    nav.classList.toggle('is-visible', !heroVisible && !reachedFooter);
+  };
+
+  const syncBlueTheme = () => {
+    if (!flowSection || !nav.classList.contains('is-visible')) {
+      nav.classList.remove('is-on-blue-section');
+      return;
+    }
+
+    const checkY = nav.getBoundingClientRect().top + 80;
+    const flowRect = flowSection.getBoundingClientRect();
+    const isOnFlow = flowRect.top <= checkY && flowRect.bottom > checkY;
+
+    nav.classList.toggle('is-on-blue-section', isOnFlow);
+  };
+
+  const update = () => {
+    syncVisibility();
+    syncBlueTheme();
+
+    const checkY = getCheckY();
+    let activeId = sections[0].id;
+
+    sections.forEach((section) => {
+      if (section.offsetTop <= checkY) {
+        activeId = section.id;
+      }
+    });
+
+    setActive(activeId);
+  };
+
+  window.addEventListener('scroll', update, { passive: true });
+  window.addEventListener('resize', update, { passive: true });
+  window.addEventListener('load', update);
+  window.addEventListener('pageshow', update);
   update();
 }
 

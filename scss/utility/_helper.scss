@@ -1,3 +1,4 @@
+@use "../foundation/variables" as *;
 @use "../foundation/mixin" as *;
 
 // ============================================================
@@ -31,6 +32,11 @@
       display: none;
     }
   }
+}
+
+// 英字部分に Montserrat を適用
+.font-sub {
+  font-family: $font-sub;
 }
 
 .sr-only {
