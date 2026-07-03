@@ -201,6 +201,8 @@
   }
 
   &__category {
+    display: grid;
+    place-items: center;
     width: 100%;
     max-width: 100%;
     margin: 40px 0 0;
@@ -216,6 +218,8 @@
     box-shadow: 3px 3px 12px rgba(0, 0, 0, 0.25);
     transition: background-color 0.25s ease;
     box-sizing: border-box;
+    cursor: default;
+    user-select: none;
 
     @media (min-width: #{$breakpoint-tab + 1px}) {
       width: 900px;
@@ -235,10 +239,13 @@
   }
 
   &__category-text {
-    display: block;
+    grid-area: 1 / 1;
+    width: 100%;
+    transition: opacity 0.5s ease, visibility 0.5s ease;
 
     &--hover {
-      display: none;
+      opacity: 0;
+      visibility: hidden;
       font-size: 13px;
       white-space: nowrap;
       letter-spacing: 0.02em;
@@ -256,11 +263,13 @@
   }
 
   &__category:hover &__category-text--default {
-    display: none;
+    opacity: 0;
+    visibility: hidden;
   }
 
   &__category:hover &__category-text--hover {
-    display: block;
+    opacity: 1;
+    visibility: visible;
   }
 
   &__link {
