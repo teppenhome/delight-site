@@ -10,17 +10,27 @@
 
   .section-label,
   .section-title {
-    text-align: center;
+    text-align: left;
+  }
+
+  .section-title {
+    .section-title__ruby {
+      margin-bottom: -6px;
+
+      @include sp {
+        margin-bottom: -4px;
+      }
+    }
   }
 
   &__logos {
     display: flex;
     flex-direction: column;
-    gap: 30px;
+    gap: 36px;
     margin-top: 60px;
     margin-left: auto;
     margin-right: auto;
-    max-width: 900px;
+    max-width: 1060px;
     width: 100%;
 
     @include sp {
@@ -30,27 +40,22 @@
   }
 
   &__row {
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 16px 20px;
     align-items: center;
+    justify-items: center;
     width: 100%;
 
     @include sp {
-      display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 20px 12px;
-      justify-items: center;
     }
   }
 
   &__logo-item {
-    flex: 0 0 auto;
+    width: 100%;
     @include flex-center;
-
-    @include sp {
-      width: 100%;
-      min-width: 0;
-    }
 
     img {
       width: auto;
@@ -60,12 +65,21 @@
     }
   }
 
-  &__row--top &__logo-item img {
-    max-width: 100%;
-    max-height: 100px;
+  &__row--top &__logo-item {
+    &:nth-child(-n + 2) img {
+      max-height: 130px;
 
-    @include sp {
-      max-height: 64px;
+      @include sp {
+        max-height: 88px;
+      }
+    }
+
+    &:nth-child(n + 3) img {
+      max-height: 90px;
+
+      @include sp {
+        max-height: 64px;
+      }
     }
   }
 

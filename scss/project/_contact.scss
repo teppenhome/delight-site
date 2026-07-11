@@ -7,138 +7,179 @@
 .contact {
   padding: $section-pad-v 0;
   position: relative;
-  background-color: #C6DDEE;
+  background-color: $color-white;
 
-  .section-label,
-  .section-title {
+  @include sp {
+    padding: $section-pad-v 20px;
+  }
+
+  &__inner {
+    position: relative;
+    max-width: 870px;
+    padding: 56px 64px 48px;
+    background-color: #FFF6F2;
+    border: 4px solid #FFB6AD;
+    border-radius: 24px;
+
+    @include sp {
+      padding: 40px 20px 32px;
+      border-radius: 16px;
+    }
+  }
+
+  &__illust {
+    position: absolute;
+    top: -70px;
+    right: 100px;
+    width: 160px;
+    height: 160px;
+    pointer-events: none;
+    z-index: 1;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    @include sp {
+      top: -28px;
+      right: -8px;
+      width: 100px;
+      height: 100px;
+    }
+  }
+
+  &__title {
     text-align: center;
-  }
+    margin-bottom: 16px;
 
-  &__title-row {
-    display: inline-flex;
-    align-items: center;
-    gap: 0;
-  }
+    .section-title__ruby {
+      margin-bottom: 4px;
+      font-size: 18px;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      color: $color-text;
 
-  &__title-icon {
-    width: clamp(60px, 8vw, 100px);
-    height: auto;
-    flex-shrink: 0;
+      @include sp {
+        font-size: 14px;
+        line-height: 1.4;
+      }
+    }
+
+    .section-title__en__blue {
+      display: block;
+      font-size: 48px;
+      font-weight: 700;
+      line-height: 1.2;
+      letter-spacing: 0.08em;
+
+      &.__middle {
+        font-size: 48px;
+      }
+
+      @include sp {
+        font-size: 32px;
+
+        &.__middle {
+          font-size: 32px;
+        }
+      }
+    }
   }
 
   &__lead {
     text-align: center;
     font-size: 14px;
-    font-weight: bold;
+    font-weight: 500;
     color: $color-text;
     line-height: 1.9;
-    margin-bottom: 48px;
-    margin-top: -40px;
+    margin-bottom: 40px;
 
-    @include sp { 
-      text-align: left; 
-      margin-bottom: 20px;
+    @include sp {
+      font-size: 13px;
+      margin-bottom: 28px;
     }
   }
 
   &__form {
-    max-width: 900px;
     width: 100%;
     margin: 0 auto;
-
-
-    padding: 0;
-
-    @include sp { padding: 24px 0; }
   }
 
   &__row {
-    display: grid;
-    grid-template-columns: 200px 1fr;
-    gap: 16px;
-    margin-bottom: 24px;
-    align-items: flex-start;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 28px;
 
     @include sp {
-      grid-template-columns: 1fr;
-      gap: 8px;
+      margin-bottom: 20px;
+      gap: 6px;
     }
 
     &--privacy {
-      grid-template-columns: 1fr;
-      justify-items: center;
-      margin-top: 40px;
-      margin-bottom: 16px;
+      align-items: center;
+      margin-top: 36px;
+      margin-bottom: 20px;
     }
   }
 
   &__label {
-    font-size: 16px;
+    font-size: 15px;
     font-weight: 700;
     color: $color-text;
-    padding-top: 10px;
+    line-height: 1.4;
 
-    @include sp { padding-top: 0; }
-  }
-
-  &__row:has(.contact__checkboxes) .contact__label {
-    padding-top: 0;
-  }
-
-  .required {
-    display: inline-block;
-    font-size: 10px;
-    font-weight: 700;
-    color: $color-white;
-    background: #e53935;
-    padding: 2px 6px;
-    border-radius: 2px;
-    margin-left: 8px;
-    vertical-align: middle;
+    @include sp {
+      font-size: 14px;
+    }
   }
 
   &__checkboxes {
     display: flex;
     flex-wrap: wrap;
-    gap: 16px 24px;
+    gap: 12px 28px;
+    padding-top: 4px;
+
+    @include sp {
+      gap: 10px 16px;
+    }
 
     label {
       display: flex;
       align-items: center;
       gap: 8px;
+      font-size: 14px;
+      font-weight: 500;
+      color: $color-text;
       cursor: pointer;
     }
 
     input[type="radio"] {
       appearance: none;
       -webkit-appearance: none;
-
-      width: 20px;
-      height: 20px;
-
-      border: 2px solid #8B8B8B;
+      width: 18px;
+      height: 18px;
+      border: 2px solid #8b8b8b;
       border-radius: 50%;
       background: $color-white;
-
       position: relative;
       cursor: pointer;
       flex-shrink: 0;
 
       &:checked {
-        border-color: #3AA0FF;
-        background: #3AA0FF;
+        border-color: $color-primary;
+        background: $color-primary;
       }
 
       &:checked::after {
         content: "";
         position: absolute;
-   
-        width: 10px;
-        height: 10px;
-
-        background: #ffffff;
+        width: 8px;
+        height: 8px;
+        background: $color-white;
         border-radius: 50%;
-
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
@@ -150,57 +191,56 @@
   &__textarea {
     width: 100%;
     border: none;
-    border-bottom: 4px solid #FFB5BC;
-    border-radius: 4px;
-    padding: 10px 14px;
+    border-bottom: 2px solid $color-primary;
+    border-radius: 2px 2px 0 0;
+    padding: 12px 14px;
     font-family: $font-ja;
     font-size: 14px;
     color: $color-text;
-    background: #fff;
+    background: $color-white;
     @include transition(border-color, box-shadow);
     outline: none;
 
     &:focus {
       border-color: $color-primary;
       box-shadow: 0 0 0 3px rgba($color-primary, 0.08);
-      background: $color-white;
     }
 
-    &::placeholder { color: #bbb; }
+    &::placeholder {
+      color: #bbb;
+    }
   }
 
-  &__textarea { resize: vertical; }
+  &__textarea {
+    min-height: 160px;
+    resize: vertical;
+  }
 
   &__privacy-check {
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 10px;
-    font-size: 16px;
-    font-weight: 400;
+    font-size: 14px;
+    font-weight: 500;
     color: $color-text;
     cursor: pointer;
-    font-weight: 700;
 
     input[type="checkbox"] {
       appearance: none;
       -webkit-appearance: none;
-
-      width: 20px;
-      height: 20px;
-
-      border: 1px solid #8B8B8B;
+      width: 18px;
+      height: 18px;
+      border: 1.5px solid $color-primary;
       border-radius: 2px;
-      background: $color-white;
-
+      background: #e8f3fb;
       position: relative;
       cursor: pointer;
       flex-shrink: 0;
-      margin-top: 2px;
 
       &:checked {
-        border-color: #A2D2FF;
-        background: #A2D2FF;
+        border-color: $color-primary;
+        background: #a2d2ff;
       }
 
       &:checked::after {
@@ -209,8 +249,8 @@
         left: 50%;
         top: 45%;
         width: 5px;
-        height: 10px;
-        border: solid $color-text;
+        height: 9px;
+        border: solid $color-primary;
         border-width: 0 2px 2px 0;
         transform: translate(-50%, -50%) rotate(45deg);
       }
@@ -218,7 +258,7 @@
   }
 
   &__submit-wrap {
-    max-width: 340px;
+    max-width: 280px;
     margin: 0 auto;
   }
 
@@ -227,22 +267,84 @@
     align-items: center;
     justify-content: center;
     width: 100%;
-    padding: 18px 24px;
+    padding: 14px 32px;
     background: $color-white;
-    color: $color-text;
+    color: $color-primary;
     font-family: $font-ja;
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 700;
-    border: 1px solid $color-text;
-    border-radius: 5px;
+    border: 1.5px solid $color-primary;
+    border-radius: 999px;
     cursor: pointer;
-    @include transition(background, opacity);
+    @include transition(background, color, opacity);
 
     &:hover {
-      background: #0F65A3;
+      background: $color-primary;
       color: $color-white;
     }
 
-    &:active { opacity: 0.85; }
+    &:active {
+      opacity: 0.85;
+    }
+
+    &:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+  }
+
+  &__notes {
+    margin-top: 48px;
+    padding-top: 8px;
+    padding-left: 40px;
+
+    @include sp {
+      margin-top: 36px;
+    }
+  }
+
+  &__notes-title {
+    font-size: 13px;
+    font-weight: 700;
+    color: $color-text;
+    margin-bottom: 8px;
+  }
+
+  &__notes-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+
+    li {
+      position: relative;
+      padding-left: 1.1em;
+      font-size: 12px;
+      font-weight: 500;
+      line-height: 1.8;
+      color: $color-text;
+
+      &::before {
+        content: "■";
+        position: absolute;
+        left: 0;
+        top: 0;
+        font-size: 0.75em;
+        line-height: 2.2;
+      }
+
+      & + li {
+        margin-top: 2px;
+      }
+
+      a {
+        color: $color-text;
+        text-decoration: underline;
+        text-underline-offset: 2px;
+
+        &:hover {
+          color: $color-primary;
+        }
+      }
+    }
   }
 }

@@ -4,24 +4,47 @@
 $news-item-size: 80px;
 $news-item-gap: 20px;
 $news-visible-count: 3;
+$news-wave-unit-width: 120px;
+$news-wave-height: clamp(18px, 2.5vw, 30px);
+$news-wave-top: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 30'%3E%3Cpath fill='%23006FD3' d='M0 0h120v15c-20 15-40 15-60 0s-40-15-60 0V0z'/%3E%3C/svg%3E");
+$news-wave-bottom: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 30'%3E%3Cpath fill='%23ffffff' d='M0 30h120V15c-20-15-40-15-60 0s-40 15-60 0V30z'/%3E%3C/svg%3E");
 
 // ============================================================
 //  NEWS SECTION
 // ============================================================
 .news {
   position: relative;
-  padding: $section-pad-v 0;
-  background-color: rgba(159, 210, 172, 0.8);
+  padding: $section-pad-v 0 160px;
+  overflow: visible;
+  background-color: #EBE08C;
+  background-image: url("../images/news-back02.png");
+  background-repeat: repeat;
+  background-position: center;
+  background-blend-mode: screen;
 
-  &::before {
+  &::before,
+  &::after {
     content: "";
     position: absolute;
-    inset: 0;
-    background-image: url("../images/news-back02.png");
-    background-repeat: repeat;
-    background-position: center;
-    mix-blend-mode: screen;
+    left: 0;
+    width: 100%;
+    height: $news-wave-height;
+    background-repeat: repeat-x;
+    background-size: $news-wave-unit-width $news-wave-height;
     pointer-events: none;
+    z-index: 0;
+  }
+
+  &::before {
+    top: 0;
+    background-image: $news-wave-top;
+    background-position: top center;
+  }
+
+  &::after {
+    bottom: 0;
+    background-image: $news-wave-bottom;
+    background-position: bottom center;
   }
 
   > * {

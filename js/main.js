@@ -17,6 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initScrollReveal();
   initPageTop();
   initContactForm();
+  initQaAccordion();
   initSmoothScroll();
 });
 
@@ -599,6 +600,66 @@ function initPageTop() {
 
 
 // ============================================================
+//  Q&A SECTION
+//  アコーディオン開閉
+// ============================================================
+function initQaAccordion() {
+  const items = document.querySelectorAll('.qa__item');
+  if (!items.length) return;
+
+  items.forEach((item) => {
+    const trigger = item.querySelector('.qa__question');
+    const panel = item.querySelector('.qa__answer');
+    if (!trigger || !panel) return;
+
+    let onTransitionEnd = null;
+
+    const clearTransitionEnd = () => {
+      if (!onTransitionEnd) return;
+      panel.removeEventListener('transitionend', onTransitionEnd);
+      onTransitionEnd = null;
+    };
+
+    const setExpanded = (open) => {
+      trigger.setAttribute('aria-expanded', String(open));
+      panel.setAttribute('aria-hidden', String(!open));
+      panel.inert = !open;
+    };
+
+    panel.style.height = '0px';
+    setExpanded(false);
+
+    trigger.addEventListener('click', () => {
+      clearTransitionEnd();
+      const isOpen = item.classList.contains('is-open');
+
+      if (isOpen) {
+        item.classList.remove('is-open');
+        setExpanded(false);
+        panel.style.height = `${panel.scrollHeight}px`;
+        panel.getBoundingClientRect();
+        panel.style.height = '0px';
+        return;
+      }
+
+      item.classList.add('is-open');
+      setExpanded(true);
+      panel.style.height = `${panel.scrollHeight}px`;
+
+      onTransitionEnd = (e) => {
+        if (e.target !== panel || e.propertyName !== 'height') return;
+        if (item.classList.contains('is-open')) {
+          panel.style.height = 'auto';
+        }
+        clearTransitionEnd();
+      };
+      panel.addEventListener('transitionend', onTransitionEnd);
+    });
+  });
+}
+
+
+// ============================================================
 //  CONTACT SECTION
 //  お問い合わせフォームのバリデーション & 送信処理
 //  WordPress では Contact Form 7 / WPForms に置き換え想定
@@ -629,7 +690,7 @@ function initContactForm() {
     let valid = true;
 
     // 名前（必須）
-    const nameInput = form.querySelector('#company_name');
+    const nameInput = form.querySelector('#contact-name');
     if (nameInput && !nameInput.value.trim()) {
       showError(nameInput, 'お名前を入力してください');
       valid = false;
@@ -638,7 +699,7 @@ function initContactForm() {
     }
 
     // メールアドレス（必須 + 形式チェック）
-    const emailInput = form.querySelector('#email');
+    const emailInput = form.querySelector('#contact-email');
     const emailReg   = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (emailInput) {
       if (!emailInput.value.trim()) {
