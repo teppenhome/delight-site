@@ -5,14 +5,41 @@
 //  SERVICE PAGE（固定ページ専用）
 // ============================================================
 
+// サイドナビ被りを避けたコンテンツ幅（950px）
+@mixin service-page-content-width {
+  max-width: $container-side-offset-width-lg;
+  margin-left: auto;
+  margin-right: auto;
+  box-sizing: border-box;
+
+  @media (min-width: #{$breakpoint-tab + 1px}) {
+    margin-right: $container-side-offset-right;
+
+    @include lg {
+      margin-right: $container-side-offset-right-lg;
+      margin-left: min(
+        max(
+          $side-nav-gutter,
+          calc((100vw - #{$container-side-offset-width-lg} - #{$container-side-offset-right-lg}) / 2)
+        ),
+        calc(100vw - #{$container-side-offset-width-lg} - #{$container-side-offset-right-lg})
+      );
+    }
+  }
+
+  @include sp {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+}
+
 .service-page {
   background: $color-white;
 
   // ── パンくず ──────────────────────────────────────
   &__breadcrumb {
-    max-width: $container-width;
-    margin: 0 auto 40px;
-    padding: 0 40px;
+    @include service-page-content-width;
+    margin-bottom: 40px;
     font-family: $font-en;
     font-size: 13px;
     font-weight: 500;
@@ -21,7 +48,6 @@
 
     @include sp {
       margin-bottom: 28px;
-      padding: 0 20px;
       font-size: 12px;
     }
 
@@ -40,30 +66,48 @@
 
   // ── ヒーロー ────────────────────────────────────
   &__hero {
-    max-width: $container-width;
-    margin: 0 auto 64px;
-    padding: 0 40px;
+    @include service-page-content-width;
+    margin-bottom: 64px;
 
     @include sp {
       margin-bottom: 48px;
-      padding: 0 20px;
+    }
+  }
+
+  &__hero-heading {
+    display: flex;
+    align-items: baseline;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    gap: 16px 20px;
+
+    .c-page-subtitle {
+      font-size: 16px;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      color: $color-text-sub;
+    }
+
+    @include sp {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 8px;
     }
   }
 
   &__intro {
     max-width: 720px;
-    margin: 32px auto 0;
+    margin: 32px 0 0;
     font-size: 15px;
     font-weight: 500;
     line-height: 2;
     color: #343434;
-    text-align: center;
+    text-align: left;
 
     @include sp {
       margin-top: 24px;
       font-size: 15px;
       line-height: 1.9;
-      text-align: left;
     }
   }
 
@@ -76,6 +120,16 @@
     }
   }
 
+  &__section-title-en {
+    display: block;
+    margin-bottom: 4px;
+    font-family: $font-sub;
+    font-size: clamp(14px, 2.5vw, 15px);
+    font-weight: 700;
+    color: $color-primary;
+    letter-spacing: 0.06em;
+  }
+
   &__section-title-ja {
     display: block;
     font-family: $font-ja;
@@ -86,35 +140,12 @@
     letter-spacing: 0.1em;
   }
 
-  &__section-title-en {
-    display: block;
-    font-family: $font-sub;
-    font-size: clamp(14px, 2.5vw, 15px);
-    font-weight: 700;
-    color: $color-primary;
-    letter-spacing: 0.06em;
+  &__section-title-num {
+    font-size: 1.5em;
+    letter-spacing: 0.04em;
   }
 
-  // ── DELIGHTの強み ───────────────────────────────
-  &__strengths {
-    padding: $section-pad-v 0;
-    background: $color-bg;
-
-    @include sp {
-      padding: 56px 0;
-    }
-  }
-
-  &__strengths-inner {
-    max-width: 910px;
-    margin: 0 auto;
-    padding: 0;
-
-    @include sp {
-      padding: 0 20px;
-    }
-  }
-
+  // ── ページ内ナビ ────────────────────────────────
   &__section-nav {
     position: fixed;
     left: $side-nav-left;
@@ -146,16 +177,6 @@
         visibility 0s linear 0s;
     }
 
-    &.is-on-blue-section {
-      .service-page__section-nav-link {
-        color: $color-white;
-      }
-
-      .service-page__section-nav-marker {
-        color: rgba($color-white, 0.85);
-      }
-    }
-
     @include tab {
       display: none;
     }
@@ -179,7 +200,7 @@
     font-weight: 500;
     line-height: 1.5;
     letter-spacing: 0.04em;
-    color: $color-text;
+    color: $color-primary;
     text-decoration: none;
     white-space: nowrap;
     @include transition(color);
@@ -200,395 +221,276 @@
     color: $color-primary;
   }
 
-  &__strengths-body {
-    display: flex;
-    align-items: stretch;
-    gap: 24px;
-
-    @include tab {
-      flex-direction: column;
-      align-items: center;
-    }
-  }
-
-  &__strengths-slider {
-    flex: 1;
-    min-width: 0;
-    overflow: hidden;
-  }
-
-  &__strengths-track {
-    display: flex;
-    flex-direction: column;
-    gap: 48px;
-
-    @include tab {
-      gap: 0;
-    }
-  }
-
-  &__strengths-item {
-    display: grid;
-    grid-template-columns: auto minmax(0, 1fr);
-    gap: 40px;
-    align-items: start;
-
-    @include tab {
-      display: none;
-      grid-template-columns: 1fr;
-      gap: 24px;
-
-      &.is-active {
-        display: grid;
-      }
-    }
-
-    @include sp {
-      gap: 20px;
-    }
-  }
-
-  &__strengths-figure {
-    margin: 0;
-    aspect-ratio: 327 / 214;
-    background: #d8dee6;
-    border-radius: 4px;
-    overflow: hidden;
-    width: 327px;
-    max-width: 100%;
-
-    img {
-      display: block;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-  }
-
-  &__strengths-content {
-    min-width: 0;
-  }
-
-  &__strengths-title {
-    display: flex;
-    align-items: flex-end;
-    gap: 12px;
-    flex-wrap: wrap;
-    margin: 0 0 15px;
-
-    @include sp {
-      margin-bottom: 14px;
-      gap: 8px;
-    }
-  }
-
-  &__strengths-title-en {
-    font-family: "Knewave", cursive;
-    font-size: clamp(24px, 4vw, 32px);
-    font-weight: 400;
-    letter-spacing: 0.06em;
-    color: $color-text;
-    line-height: 1;
-  }
-
-  &__strengths-title-ruby {
-    font-family: $font-ja;
-    font-size: clamp(12px, 2vw, 14px);
-    font-weight: 500;
-    letter-spacing: 0.08em;
-    color: $color-text;
-    line-height: 1;
-    margin-bottom: 0.35em;
-  }
-
-  &__strengths-lead {
-    margin: 0 0 4px;
-    font-family: $font-sub;
-    font-size: clamp(14px, 2.5vw, 16px);
-    font-weight: 900;
-    line-height: 1.6;
-    letter-spacing: 0.04em;
-    color: $color-text;
-
-    @include sp {
-      margin-bottom: 12px;
-      font-size: 15px;
-    }
-  }
-
-  &__strengths-text {
-    margin: 0;
-    font-size: 15px;
-    line-height: 1.9;
-    color: $color-text;
-
-    @include sp {
-      font-size: 15px;
-      line-height: 1.9;
-    }
-
-    mark {
-      background: linear-gradient(transparent 55%, rgba(255, 214, 0, 0.35) 55%);
-      color: inherit;
-      padding: 0;
-      -webkit-box-decoration-break: clone;
-      box-decoration-break: clone;
-    }
-  }
-
-  &__strengths-nav {
-    display: none;
-    flex-direction: column;
-    justify-content: center;
-    gap: 16px;
-    flex-shrink: 0;
-    padding-top: 40px;
-
-    @include tab {
-      display: flex;
-      flex-direction: row;
-      padding-top: 0;
-    }
-  }
-
-  &__strengths-arrow {
-    @include flex-center;
-    width: 52px;
-    height: 52px;
-    border: 2px solid $color-primary;
-    border-radius: 50%;
-    background: $color-white;
-    color: $color-primary;
-    cursor: pointer;
-    @include transition(opacity);
-
-    svg {
-      width: 22px;
-      height: 22px;
-    }
-
-    &:hover {
-      opacity: 0.75;
-    }
-
-    &:disabled {
-      opacity: 0.35;
-      cursor: default;
-    }
-  }
-
-  // ── 環境にやさしい取り組み ──────────────────────
-  &__environment {
-    padding: $section-pad-v 0 200px;
+  // ── DELIGHTの3つの強み ──────────────────────────
+  &__strengths {
+    padding: 0 0 $section-pad-v;
+    background: #FFFCF5;
 
     @include sp {
       padding: 56px 0;
     }
   }
 
-  &__environment-inner {
-    max-width: 910px;
-    width: 100%;
-    margin: 0 auto;
-    padding: 0;
+  &__strengths-inner {
+    @include service-page-content-width;
+  }
 
-    @include sp {
-      padding: 0 20px;
+  &__strengths-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    column-gap: 20px;
+    row-gap: 0;
+    align-items: stretch;
+
+    @include tab {
+      grid-template-columns: 1fr;
+      gap: 20px;
     }
   }
 
-  &__environment-lead {
+  &__strengths-card {
+    display: grid;
+    grid-template-rows: subgrid;
+    grid-row: span 4;
+    row-gap: 0;
+    padding: 32px 28px 36px;
+    border: 2px solid #0F65A3;
+    border-radius: 20px;
+    background: $color-white;
+    box-sizing: border-box;
+
+    @include tab {
+      display: flex;
+      flex-direction: column;
+      grid-row: auto;
+    }
+
+    @include sp {
+      padding: 28px 22px 32px;
+      border-radius: 16px;
+    }
+  }
+
+  &__strengths-title {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+    margin: 0 0 8px;
+    text-align: left;
+  }
+
+  &__strengths-title-ja {
+    font-family: $font-ja;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    color: $color-text;
+    line-height: 1.4;
+  }
+
+  &__strengths-title-en {
+    font-family: $font-sub;
+    font-size: clamp(18px, 2vw, 25px);
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    color: $color-text;
+    line-height: 1.2;
+  }
+
+  &__strengths-figure {
+    margin: 0;
     width: 100%;
-    margin: 0 0 48px;
+    overflow: hidden;
+
+    img {
+      display: block;
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+    }
+  }
+
+  // 2・3枚目はタイトルが短いため、画像を上に寄せる（1枚目は維持）
+  &__strengths-card:nth-child(2),
+  &__strengths-card:nth-child(3) {
+    .service-page__strengths-figure {
+      margin-top: -28px;
+    }
+  }
+
+  &__strengths-catch {
+    margin: 0 0 12px;
+    font-family: $font-ja;
+    font-size: 16px;
+    font-weight: 900;
+    line-height: 1.6;
+    letter-spacing: 0.01em;
+    color: $color-text;
+  }
+
+  &__strengths-text {
+    margin: 0;
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 1.9;
+    color: $color-text;
+    letter-spacing: 0.02em;
+
+    @include sp {
+      font-size: 14px;
+    }
+  }
+
+  // ── こんな取り組みも… ───────────────────────────
+  &__initiatives {
+    padding: $section-pad-v 0;
+    background: #FFFCF5;
+
+    @include sp {
+      padding: 56px 0;
+    }
+  }
+
+  &__initiatives-inner {
+    @include service-page-content-width;
+  }
+
+  &__initiative {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 40px;
+    align-items: center;
+    margin-bottom: 64px;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    @include tab {
+      grid-template-columns: 1fr;
+      gap: 28px;
+      margin-bottom: 48px;
+    }
+  }
+
+  &__initiative-title {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin: 0 0 20px;
+  }
+
+  &__initiative-title-ja {
+    font-family: $font-ja;
+    font-size: clamp(22px, 3vw, 36px);
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    color: $color-text;
+    line-height: 1.4;
+  }
+
+  &__initiative-title-en {
+    font-family: $font-sub;
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: $color-primary;
+    line-height: 1.4;
+  }
+
+  &__initiative-text {
+    margin: 0;
     font-size: 15px;
     font-weight: 500;
     line-height: 2;
     color: $color-text;
 
     @include sp {
-      margin-bottom: 36px;
       font-size: 15px;
       line-height: 1.9;
     }
   }
 
-  &__environment-grid {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 32px;
-    margin-bottom: 48px;
-
-    @include sp {
-      grid-template-columns: 1fr;
-      gap: 24px;
-      margin-bottom: 36px;
-    }
-  }
-
-  &__environment-item {
+  &__initiative-media {
     margin: 0;
-    text-align: center;
-  }
-
-  &__environment-thumb {
-    aspect-ratio: 1;
-    margin-bottom: 12px;
-    background: #d8dee6;
-    border-radius: 4px;
+    aspect-ratio: 16 / 11;
+    width: 100%;
+    border-radius: 12px;
     overflow: hidden;
 
     img {
       display: block;
       width: 100%;
       height: 100%;
-      object-fit: cover;
-    }
-  }
-
-  &__environment-label {
-    font-size: 14px;
-    font-weight: 500;
-    color: $color-text;
-    letter-spacing: 0.04em;
-  }
-
-  &__environment-sdgs {
-    --sdgs-height: clamp(72px, 11vw, 132px);
-    display: grid;
-    grid-template-columns: minmax(0, 1.8fr) minmax(0, 1fr) minmax(0, 1fr);
-    gap: clamp(12px, 2vw, 24px);
-    align-items: stretch;
-    width: 100%;
-    height: var(--sdgs-height);
-    margin-top: 80px;
-  }
-
-  &__environment-sdgs-logo {
-    min-width: 0;
-    height: 100%;
-
-    img {
-      display: block;
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-      object-position: left center;
-    }
-  }
-
-  &__environment-sdgs-icons {
-    display: contents;
-
-    img {
-      display: block;
-      width: 100%;
-      height: 100%;
       object-fit: contain;
     }
-  }
 
-  @include sp {
-    &__environment-sdgs {
-      grid-template-columns: 1fr 1fr;
-      grid-template-rows: auto auto;
-      height: auto;
-      gap: 16px;
-    }
-
-    &__environment-sdgs-logo {
-      grid-column: 1 / -1;
-      height: clamp(72px, 20vw, 100px);
-
-      img {
-        object-position: center center;
-      }
-    }
-
-    &__environment-sdgs-icons {
-      display: contents;
-
-      img {
-        height: clamp(72px, 28vw, 120px);
-      }
+    &--environment {
+      aspect-ratio: 16 / 12;
     }
   }
 
   // ── ご依頼の流れ ────────────────────────────────
   &__flow {
-    padding-bottom: 100px;
+    padding: $section-pad-v 0 16px;
+    background: #FFFCF5;
 
     @include sp {
-      padding-bottom: 72px;
-    }
-
-    .service-page__section-title-ja {
-      color: $color-white;
-    }
-
-    .service-page__section-title-en {
-      color: rgba($color-white, 0.9);
+      padding: 56px 0;
     }
   }
-}
 
-// 下層ページ：ご依頼の流れステップ
-.service-page__flow {
-  .service__steps {
+  &__flow-inner {
+    @include service-page-content-width;
+  }
+
+  &__steps {
     display: flex;
     flex-direction: column;
-    gap: 48px;
-    align-items: flex-end;
+    gap: 14px;
+    padding-left: 24px;
 
     @include sp {
-      align-items: stretch;
-      gap: 56px;
+      gap: 40px;
+      padding-left: 0;
     }
   }
 
-  .service__step {
+  &__step {
     position: relative;
     display: grid;
-    grid-template-columns: 230px 1fr;
-    gap: 30px;
-    align-items: flex-start;
-    background: $color-white;
-    border-radius: 30px;
-    padding: 34px 14px 0 110px;
-    box-shadow: 3px 3px 12px rgba(0, 0, 0, 0.25);
+    grid-template-columns: minmax(140px, 200px) minmax(0, 1fr);
+    gap: 40px;
+    align-items: center;
     width: 100%;
-    max-width: 1000px;
-    min-height: 250px;
-    @include transition(box-shadow);
-
-    &:hover {
-      box-shadow: 0 6px 32px rgba(0, 0, 0, 0.08);
-    }
-
-    @include lg {
-      grid-template-columns: 180px 1fr;
-    }
+    padding: 28px 50px 28px 120px;
+    background: $color-white;
+    border-radius: 24px;
+    box-shadow: 3px 3px 16px rgba(0, 0, 0, 0.12);
+    box-sizing: border-box;
+    overflow: visible;
 
     @include tab {
-      padding: 20px;
+      grid-template-columns: minmax(120px, 160px) minmax(0, 1fr);
       gap: 20px;
-      grid-template-columns: 180px 1fr;
+      padding: 24px 24px 24px 96px;
     }
 
     @include sp {
       grid-template-columns: 1fr;
-      padding: 32px 20px 24px;
       gap: 16px;
+      padding: 40px 20px 24px;
+      border-radius: 20px;
     }
 
     p {
-      font-size: 18px;
-      line-height: 2;
+      margin: 0;
+      font-size: 15px;
+      font-weight: 500;
+      line-height: 2.5;
       color: $color-text;
-      letter-spacing: 0.02em;
-
-      @include lg {
-        font-size: 16px;
-      }
+      letter-spacing: 0.05em;
 
       @include sp {
         font-size: 15px;
@@ -597,92 +499,235 @@
     }
   }
 
-  .service__step-body {
-    @include sp {
-      padding-top: 8px;
-    }
-  }
-
-  .service__step-img {
-    max-width: 250px;
-    width: 100%;
-
-    @include lg {
-      max-width: 200px;
-    }
-
-    img {
-      border-radius: 8px;
-      width: 100%;
-      height: auto;
-
-      @include tab {
-        width: 80%;
-      }
-    }
-
-    @include tab {
-      margin-top: 40px;
-    }
-
-    @include sp {
-      margin-top: 0;
-      max-width: none;
-      margin-inline: auto;
-
-      img {
-        width: 100%;
-      }
-    }
-  }
-
-  .service__step-label {
+  &__step-label {
     position: absolute;
-    top: 50%;     
-    left: -140px;
-    transform: translateY(-50%);
-    display: inline-block;
-    font-family: "Knewave", cursive;
-    font-size: 36px;
-    font-weight: 400;
-    letter-spacing: 0.1em;
-    color: #343434;
-    background: #F28E55;
-    padding: 10px 22px;
+    left: -20px;
+    top: 50%;
+    z-index: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    padding: 10px 18px;
     border-radius: 10px;
-
-    @include lg {
-      font-size: 25px;
-      left: -40px;
-    }
-
-    @include tab {
-      font-size: 26px;
-      left: 20px;
-      top: -20px;
-    }
+    background: #f28e55;
+    font-family: "Knewave", cursive;
+    font-size: 22px;
+    font-weight: 400;
+    letter-spacing: 0.06em;
+    color: #343434;
+    white-space: nowrap;
+    line-height: 1;
+    transform: translateY(-50%);
 
     @include sp {
       left: 50%;
-      top: -18px;
+      top: -16px;
       transform: translateX(-50%);
-      font-size: 22px;
-      padding: 8px 16px;
-      white-space: nowrap;
+      font-size: 18px;
+      padding: 8px 14px;
     }
   }
 
-  .service__step-title {
-    font-family: $font-sub;
-    font-size: 32px;
-    font-style: italic;
-    font-weight: 700;
-    letter-spacing: 0.05em;
-    color: $color-text;
-    line-height: 1.6;
+  &__step-img {
+    width: 100%;
+    max-width: 200px;
+    aspect-ratio: 1 / 1;
+    margin: 0;
+    border-radius: 8px;
+    overflow: hidden;
 
     @include sp {
-      font-size: 24px;
+      max-width: none;
+      aspect-ratio: 16 / 10;
+    }
+
+    img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+  }
+
+  &__step-body {
+    min-width: 0;
+  }
+
+  &__step-title {
+    margin: 0 0 10px;
+    font-family: $font-sub;
+    font-size: clamp(22px, 3vw, 32px);
+    font-style: italic;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    color: $color-text;
+    line-height: 1.3;
+  }
+
+  // ── CTA ─────────────────────────────────────────
+  &__cta {
+    padding: 0 0 120px;
+    background: #FFFCF5;
+
+    @include sp {
+      padding: 28px 0 96px;
+    }
+  }
+
+  &__cta-inner {
+    @include service-page-content-width;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 28px;
+    padding-left: 20px;
+
+    @include sp {
+      grid-template-columns: 1fr;
+      gap: 64px;
+      padding-left: 16px;
+    }
+  }
+
+  &__cta-btn {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 12px;
+    min-height: 88px;
+    padding: 20px 80px 20px 108px;
+    border-radius: 12px;
+    color: $color-white;
+    text-decoration: none;
+    overflow: visible;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+    @include transition(opacity);
+
+    &:hover {
+      opacity: 0.88;
+    }
+
+    @include sp {
+      min-height: 76px;
+      padding: 18px 70px 18px 88px;
+    }
+  }
+
+  &__cta-btn--contact {
+    background: #006fd3;
+  }
+
+  &__cta-btn--works {
+    background: #e53935;
+  }
+
+  &__cta-illust {
+    position: absolute;
+    left: 8px;
+    bottom: -44px;
+    top: auto;
+    z-index: 1;
+    display: block;
+    width: auto;
+    height: 124px;
+    pointer-events: none;
+
+    img {
+      display: block;
+      width: auto;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    @include sp {
+      left: 6px;
+      bottom: -36px;
+      height: 100px;
+    }
+  }
+
+  &__cta-btn--contact &__cta-illust {
+    height: 140px;
+    left: 6px;
+    bottom: -52px;
+
+    @include sp {
+      height: 116px;
+      left: 4px;
+      bottom: -40px;
+    }
+  }
+
+  &__cta-btn--works &__cta-illust {
+    height: 112px;
+    left: 12px;
+    bottom: -40px;
+
+    @include sp {
+      height: 92px;
+      left: 8px;
+      bottom: -32px;
+    }
+  }
+
+  &__cta-text {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2px;
+  }
+
+  &__cta-en {
+    font-family: $font-sub;
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    line-height: 1.2;
+    color: #f0d45c;
+  }
+
+  &__cta-ja {
+    font-family: $font-ja;
+    font-size: clamp(15px, 2vw, 20px);
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    line-height: 1.4;
+  }
+
+  &__cta-arrow {
+    position: absolute;
+    right: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: $color-white;
+    color: #006fd3;
+    flex-shrink: 0;
+
+    .service-page__cta-btn--works & {
+      color: #e53935;
+    }
+
+    svg {
+      width: 22px;
+      height: 22px;
+    }
+
+    @include sp {
+      width: 42px;
+      height: 42px;
+      right: 12px;
+
+      svg {
+        width: 18px;
+        height: 18px;
+      }
     }
   }
 }
@@ -696,31 +741,5 @@
   .header__nav-list li a {
     align-items: flex-start;
     text-align: left;
-  }
-}
-
-// 青背景フローセクション上のフロートボタン
-body.page-service .c-float-actions.is-on-blue-bg {
-  .c-float-icon__circle {
-    fill: $color-white;
-    stroke: $color-white;
-  }
-
-  .c-float-icon__symbol {
-    stroke: $color-primary;
-  }
-
-  .c-float-contact:hover,
-  .page-top:hover {
-    opacity: 1;
-
-    .c-float-icon__circle {
-      fill: $color-primary;
-      stroke: $color-primary;
-    }
-
-    .c-float-icon__symbol {
-      stroke: $color-white;
-    }
   }
 }

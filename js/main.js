@@ -375,7 +375,6 @@ function initServiceSectionNav() {
 
   const hero = document.querySelector('.service-page__hero');
   const footer = document.querySelector('.footer');
-  const flowSection = document.querySelector('.service-page__flow');
 
   const links = Array.from(
     nav.querySelectorAll('.service-page__section-nav-link')
@@ -425,22 +424,8 @@ function initServiceSectionNav() {
     nav.classList.toggle('is-visible', !heroVisible && !reachedFooter);
   };
 
-  const syncBlueTheme = () => {
-    if (!flowSection || !nav.classList.contains('is-visible')) {
-      nav.classList.remove('is-on-blue-section');
-      return;
-    }
-
-    const checkY = nav.getBoundingClientRect().top + 80;
-    const flowRect = flowSection.getBoundingClientRect();
-    const isOnFlow = flowRect.top <= checkY && flowRect.bottom > checkY;
-
-    nav.classList.toggle('is-on-blue-section', isOnFlow);
-  };
-
   const update = () => {
     syncVisibility();
-    syncBlueTheme();
 
     const checkY = getCheckY();
     let activeId = sections[0].id;
@@ -473,7 +458,8 @@ function initScrollReveal() {
   const targets = [
     '.about__inner',
     '.service__card',
-    '.service-page__flow .service__step',
+    '.service-page__flow .service-page__step',
+    '.service-page__cta .service-page__cta-btn',
     '.clients__logo-item',
     '.contact__form',
   ];
@@ -538,25 +524,6 @@ function initPageTop() {
 
       if (document.body.classList.contains('page-philosophy')) {
         const blueSection = document.querySelector('.philosophy-page__body');
-        const footer = document.querySelector('.footer');
-
-        if (blueSection) {
-          const floatRect = floatActions.getBoundingClientRect();
-          const checkY = floatRect.top + floatRect.height * 0.5;
-          const blueRect = blueSection.getBoundingClientRect();
-          const isOnBlue =
-            checkY >= blueRect.top && checkY <= blueRect.bottom;
-          const isOverFooter =
-            footer &&
-            footer.getBoundingClientRect().top < floatRect.bottom;
-
-          floatActions.classList.toggle(
-            'is-on-blue-bg',
-            isOnBlue && !isOverFooter
-          );
-        }
-      } else if (document.body.classList.contains('page-service')) {
-        const blueSection = document.querySelector('.service-page__flow');
         const footer = document.querySelector('.footer');
 
         if (blueSection) {
