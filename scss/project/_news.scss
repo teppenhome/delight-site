@@ -4,10 +4,11 @@
 $news-item-size: 80px;
 $news-item-gap: 20px;
 $news-visible-count: 3;
-$news-wave-unit-width: 120px;
+// viewBox 120x30 → 幅は高さの4倍。+1px でタイル継ぎ目の隙間を潰す
 $news-wave-height: clamp(18px, 2.5vw, 30px);
-$news-wave-top: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 30'%3E%3Cpath fill='%23006FD3' d='M0 0h120v15c-20 15-40 15-60 0s-40-15-60 0V0z'/%3E%3C/svg%3E");
-$news-wave-bottom: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 30'%3E%3Cpath fill='%23ffffff' d='M0 30h120V15c-20-15-40-15-60 0s-40 15-60 0V30z'/%3E%3C/svg%3E");
+$news-wave-size: calc(#{$news-wave-height} * 4 + 1px) 100%;
+$news-wave-top: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 30' width='120' height='30' preserveAspectRatio='none'%3E%3Cpath fill='%23006FD3' d='M0 0h120v15c-20 15-40 15-60 0s-40-15-60 0V0z'/%3E%3C/svg%3E");
+$news-wave-bottom: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 30' width='120' height='30' preserveAspectRatio='none'%3E%3Cpath fill='%23ffffff' d='M0 30h120V15c-20-15-40-15-60 0s-40 15-60 0V30z'/%3E%3C/svg%3E");
 
 // ============================================================
 //  NEWS SECTION
@@ -30,7 +31,7 @@ $news-wave-bottom: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/
     width: 100%;
     height: $news-wave-height;
     background-repeat: repeat-x;
-    background-size: $news-wave-unit-width $news-wave-height;
+    background-size: $news-wave-size;
     pointer-events: none;
     z-index: 0;
   }
@@ -38,13 +39,13 @@ $news-wave-bottom: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/
   &::before {
     top: 0;
     background-image: $news-wave-top;
-    background-position: top center;
+    background-position: left top;
   }
 
   &::after {
     bottom: 0;
     background-image: $news-wave-bottom;
-    background-position: bottom center;
+    background-position: left bottom;
   }
 
   > * {
