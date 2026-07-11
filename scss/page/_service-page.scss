@@ -122,12 +122,13 @@
 
   &__section-title-en {
     display: block;
-    margin-bottom: 4px;
+    margin-bottom: -6px;
     font-family: $font-sub;
     font-size: clamp(14px, 2.5vw, 15px);
     font-weight: 700;
     color: $color-primary;
     letter-spacing: 0.06em;
+    line-height: 1;
   }
 
   &__section-title-ja {
@@ -136,7 +137,7 @@
     font-size: clamp(28px, 5vw, 36px);
     font-weight: 700;
     color: $color-text;
-    line-height: 1.4;
+    line-height: 1.05;
     letter-spacing: 0.1em;
   }
 
@@ -223,7 +224,7 @@
 
   // ── DELIGHTの3つの強み ──────────────────────────
   &__strengths {
-    padding: 0 0 $section-pad-v;
+    padding: 40px 0 $section-pad-v;
     background: #FFFCF5;
 
     @include sp {

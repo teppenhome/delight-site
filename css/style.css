@@ -5402,12 +5402,13 @@ body.page-philosophy .c-float-actions.is-on-blue-bg .page-top:hover .c-float-ico
 }
 .service-page__section-title-en {
   display: block;
-  margin-bottom: 4px;
+  margin-bottom: -6px;
   font-family: "Montserrat", sans-serif;
   font-size: clamp(14px, 2.5vw, 15px);
   font-weight: 700;
   color: #0F65A3;
   letter-spacing: 0.06em;
+  line-height: 1;
 }
 .service-page__section-title-ja {
   display: block;
@@ -5415,7 +5416,7 @@ body.page-philosophy .c-float-actions.is-on-blue-bg .page-top:hover .c-float-ico
   font-size: clamp(28px, 5vw, 36px);
   font-weight: 700;
   color: #343434;
-  line-height: 1.4;
+  line-height: 1.05;
   letter-spacing: 0.1em;
 }
 .service-page__section-title-num {
@@ -5487,7 +5488,7 @@ body.page-philosophy .c-float-actions.is-on-blue-bg .page-top:hover .c-float-ico
   color: #0F65A3;
 }
 .service-page__strengths {
-  padding: 0 0 80px;
+  padding: 40px 0 80px;
   background: #FFFCF5;
 }
 @media (max-width: 768px) {
