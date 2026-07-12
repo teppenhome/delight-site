@@ -5,26 +5,22 @@
 //  SERVICE PAGE（固定ページ専用）
 // ============================================================
 
-// サイドナビ被りを避けたコンテンツ幅（950px）
+// コンテンツ幅（950px）／lg超は中央、tab〜lgはサイドナビ回避で右寄せ
 @mixin service-page-content-width {
   max-width: $container-side-offset-width-lg;
   margin-left: auto;
   margin-right: auto;
   box-sizing: border-box;
 
-  @media (min-width: #{$breakpoint-tab + 1px}) {
-    margin-right: $container-side-offset-right;
-
-    @include lg {
-      margin-right: $container-side-offset-right-lg;
-      margin-left: min(
-        max(
-          $side-nav-gutter,
-          calc((100vw - #{$container-side-offset-width-lg} - #{$container-side-offset-right-lg}) / 2)
-        ),
-        calc(100vw - #{$container-side-offset-width-lg} - #{$container-side-offset-right-lg})
-      );
-    }
+  @media (min-width: #{$breakpoint-tab + 1px}) and (max-width: #{$breakpoint-lg}) {
+    margin-right: $container-side-offset-right-lg;
+    margin-left: min(
+      max(
+        $side-nav-gutter,
+        calc((100vw - #{$container-side-offset-width-lg} - #{$container-side-offset-right-lg}) / 2)
+      ),
+      calc(100vw - #{$container-side-offset-width-lg} - #{$container-side-offset-right-lg})
+    );
   }
 
   @include sp {
