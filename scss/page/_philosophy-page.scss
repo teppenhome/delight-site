@@ -57,6 +57,8 @@ body.page-philosophy {
 
   // ── 青背景メイン領域 ──────────────────────────────
   &__body {
+    position: relative;
+    overflow: hidden;
     background-color: $color-primary;
     padding: 90px 0 0;
 
@@ -66,6 +68,8 @@ body.page-philosophy {
   }
 
   &__body-inner {
+    position: relative;
+    z-index: 2;
     max-width: 960px;
     margin: 0 auto;
     padding: 0 40px;
@@ -75,8 +79,59 @@ body.page-philosophy {
     }
   }
 
+  // ── 線イラスト（philosophy05 / 06） ───────────────
+  &__line {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    overflow: visible;
+  }
+
+  &__line-track {
+    position: absolute;
+    top: 280px;
+    left: 50%;
+    width: min(1400px, 115vw);
+    max-width: none;
+    transform: translateX(-50%);
+
+    @include sp {
+      top: 140px;
+      width: min(800px, 140vw);
+    }
+  }
+
+  &__line-img {
+    display: block;
+    user-select: none;
+    pointer-events: none;
+
+    &--main {
+      position: relative;
+      width: 100%;
+      height: auto;
+    }
+
+    &--end {
+      position: absolute;
+      left: 4%;
+      bottom: 4%;
+      z-index: 2;
+      width: 28%;
+      height: auto;
+
+      @include sp {
+        left: 0;
+        bottom: 6%;
+        width: 36%;
+      }
+    }
+  }
+
   // ── イントロ（黄雲 + キャッチコピー） ─────────────
   &__intro {
+    position: relative;
     margin-bottom: 80px;
     overflow: visible;
 
@@ -90,33 +145,6 @@ body.page-philosophy {
     display: grid;
     width: 100%;
     overflow: visible;
-
-    // イントロ左イラスト（親要素基準の%指定。vwだと1600px超で文字に被る）
-    &::before {
-      content: "";
-      position: absolute;
-      left: 0;
-      bottom: 0;
-      z-index: 2;
-      width: clamp(200px, 38%, 360px);
-      aspect-ratio: 1;
-      background-image: url("../../images/philosophy/philosophy01.png");
-      background-repeat: no-repeat;
-      background-position: center bottom;
-      background-size: contain;
-      pointer-events: none;
-      transform: translateX(-30%) translateY(-30px);
-
-      @media (min-width: 1600px) {
-        width: 360px;
-        transform: translateX(-45%) translateY(-30px);
-      }
-
-      @include sp {
-        width: min(160px, 40vw);
-        transform: translateX(-8%);
-      }
-    }
 
     > * {
       grid-area: 1 / 1;
@@ -188,16 +216,21 @@ body.page-philosophy {
       font-size: 16px;
       font-weight: 700;
       line-height: 2.2;
-      color: $color-text;
+      color: $color-pink;
       text-align: left;
 
       &:last-child {
         margin-bottom: 0;
       }
+
+      @include sp {
+        font-size: 14px;
+        line-height: 2;
+      }
     }
   }
 
-  // ── イラスト枠（画像は後から挿入） ────────────────
+  // ── イラスト枠 ───────────────────────────────────
   &__figure {
     margin: 0;
 
@@ -205,6 +238,26 @@ body.page-philosophy {
       display: block;
       width: 100%;
       height: auto;
+    }
+
+    &--intro {
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      z-index: 3;
+      width: clamp(200px, 38%, 360px);
+      transform: translateX(-30%) translateY(10%);
+      pointer-events: none;
+
+      @media (min-width: 1600px) {
+        width: 360px;
+        transform: translateX(-45%) translateY(10%);
+      }
+
+      @include sp {
+        width: min(160px, 40vw);
+        transform: translateX(-8%) translateY(8%);
+      }
     }
 
     &--section {
@@ -261,7 +314,7 @@ body.page-philosophy {
       gap: 20px;
     }
 
-    &--no-figure {
+    &--future {
       .philosophy-page__section-col--head {
         align-self: start;
       }
@@ -282,7 +335,7 @@ body.page-philosophy {
 
   &__section-heading {
     display: flex;
-    flex-direction: column;   
+    flex-direction: column;
     gap: 8px;
   }
 
@@ -293,8 +346,7 @@ body.page-philosophy {
     font-weight: 700;
     line-height: 1.5;
     letter-spacing: 0.03em;
-    color: rgba($color-white, 0.6);
-    white-space: nowrap;
+    color: $color-white;
   }
 
   &__section-ja {
@@ -312,7 +364,6 @@ body.page-philosophy {
   }
 
   &__section-body {
-
     p {
       margin: 0;
       font-size: 16px;
@@ -334,6 +385,8 @@ body.page-philosophy {
 
   // ── 下部イラスト ─────────────────────────────────
   &__outro {
+    position: relative;
+    z-index: 2;
     width: 100%;
     margin-bottom: 0;
     margin-top: -60px;
