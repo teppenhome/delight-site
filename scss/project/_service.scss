@@ -196,6 +196,15 @@
     transform: rotate(-5deg) translateY(2px);
   }
 
+  &__card--design &__card-illust {
+    right: clamp(8px, 2vw, 24px);
+    width: clamp(200px, 28vw, 300px);
+
+    @include sp {
+      width: min(220px, 70%);
+    }
+  }
+
   &__card--design &__card-box {
     padding-right: clamp(24px, 4vw, 40px);
   }
@@ -273,12 +282,158 @@
   }
 
   &__link {
-    text-align: right;
-    margin-top: 32px;
+    margin-top: 48px;
+    // イラストのはみ出し用
+    padding-block: 40px;
+    margin-block: 8px;
 
     @include sp {
-      text-align: center;
-      margin-top: 28px;
+      margin-top: 40px;
+      padding-block: 28px;
+    }
+  }
+
+  &__cta {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 24px;
+    width: 100%;
+    min-height: 88px;
+    padding: 20px 88px;
+    background: #F28E55;
+    border-radius: 16px;
+    color: $color-white;
+    text-decoration: none;
+    overflow: visible;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+    transition: opacity 0.25s ease, transform 0.25s ease;
+    box-sizing: border-box;
+
+    &:hover {
+      opacity: 0.92;
+      transform: scale(0.99);
+    }
+
+    @media (min-width: #{$breakpoint-tab + 1px}) {
+      width: 900px;
+      max-width: 900px;
+    }
+
+    @include sp {
+      min-height: 76px;
+      padding: 18px 72px;
+      gap: 16px;
+      border-radius: 14px;
+    }
+  }
+
+  &__cta-illust {
+    position: absolute;
+    z-index: 1;
+    display: block;
+    pointer-events: none;
+
+    img {
+      display: block;
+      width: auto;
+      height: 100%;
+      object-fit: contain;
+
+      // src 未設定時は非表示（土台のみ）
+      &:not([src]),
+      &[src=""] {
+        display: none;
+      }
+    }
+
+    &--left {
+      left: 8px;
+      bottom: 0;
+      height: 140px;
+
+      @include sp {
+        left: 4px;
+        height: 110px;
+      }
+    }
+
+    &--right {
+      right: 96px;
+      bottom: 0;
+      height: 120px;
+
+      @include sp {
+        right: 78px;
+        height: 96px;
+      }
+    }
+  }
+
+  &__cta-text {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+    text-align: left;
+    transform: translateX(24px);
+
+    @include sp {
+      transform: translateX(12px);
+    }
+  }
+
+  &__cta-en {
+    font-family: $font-sub;
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    line-height: 1.2;
+    color: #FFFCAB;
+  }
+
+  &__cta-ja {
+    font-family: $font-ja;
+    font-size: clamp(15px, 2vw, 24px);
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    line-height: 1.4;
+    color: $color-white;
+  }
+
+  &__cta-arrow {
+    position: absolute;
+    right: 32px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background: $color-white;
+    color: #F28E55;
+
+    svg {
+      width: 22px;
+      height: 22px;
+    }
+
+    @include sp {
+      right: 24px;
+      width: 44px;
+      height: 44px;
+
+      svg {
+        width: 18px;
+        height: 18px;
+      }
     }
   }
 }

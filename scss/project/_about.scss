@@ -6,7 +6,11 @@
 // ============================================================
 .about {
   padding: $section-pad-v 0;
-  background: $color-white;
+  background-color: $color-white;
+  background-image: url("../images/top-about-background.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
 
   .section-title {
     margin-top: -20px;

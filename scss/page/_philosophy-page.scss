@@ -427,14 +427,6 @@ body.page-philosophy {
   }
 }
 
-body.page-philosophy .footer {
-  padding-top: 32px;
-
-  @include sp {
-    padding-top: 28px;
-  }
-}
-
 body.page-philosophy .c-float-actions.is-on-blue-bg {
   .c-float-icon__circle {
     fill: $color-white;

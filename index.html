@@ -481,6 +481,9 @@
                 ポップで親しみやすいデザインから、シンプルで洗練されたデザインまで。<br>
                 商品の用途やターゲットに合わせて、最適なデザインをご提案します。
               </p>
+              <figure class="service__card-illust">
+                <img src="images/top-service-design.png" alt="" decoding="async">
+              </figure>
             </div>
           </article>
 
@@ -492,8 +495,24 @@
         </p>
 
         <div class="service__link">
-          <a href="service.html" class="c-more-btn">
-            SERVICE DETAIL
+          <a href="service.html" class="service__cta">
+            <span class="service__cta-illust service__cta-illust--left" aria-hidden="true">
+              <!-- 左イラスト: images/top-service-cta-left.png など -->
+              <img src="images/service-button01.png" alt="">
+            </span>
+            <span class="service__cta-text">
+              <span class="service__cta-en">CONTACT</span>
+              <span class="service__cta-ja">強みとサービスの流れはこちら</span>
+            </span>
+            <span class="service__cta-arrow" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M9 6L15 12L9 18" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </span>
+            <span class="service__cta-illust service__cta-illust--right" aria-hidden="true">
+              <!-- 右イラスト: images/top-service-cta-right.png など -->
+              <img src="images/service-button02.png" alt="">
+            </span>
           </a>
         </div>
       </div>
@@ -1090,26 +1109,6 @@
 
       <div class="footer__main">
 
-        <div class="footer__brand">
-          <a href="#top" class="footer__logo">
-            <img src="images/logo.png" alt="DELIGHT">
-          </a>
-          <div class="footer__actions">
-            <a href="#contact" class="footer__btn footer__btn--contact">
-              <span class="footer__btn-icon" aria-hidden="true">
-                <img src="images/footer-mail.svg" alt="" width="46" height="31">
-              </span>
-              <span class="footer__btn-text">CONTACT</span>
-            </a>
-            <a href="recruit.html" class="footer__btn footer__btn--recruit">
-              <span class="footer__btn-icon" aria-hidden="true">
-                <img src="images/footer-recruit.svg" alt="" width="56" height="56">
-              </span>
-              <span class="footer__btn-text">RECRUIT</span>
-            </a>
-          </div>
-        </div>
-
         <div class="footer__nav">
 
           <div class="footer__col">
@@ -1154,10 +1153,35 @@
 
         </div>
 
+        <div class="footer__actions">
+          <a href="#contact" class="footer__btn footer__btn--contact">
+            <span class="footer__btn-icon" aria-hidden="true">
+              <img src="images/footer-icon-mail.png" alt="" width="64" height="64">
+            </span>
+            <span class="footer__btn-body">
+              <span class="footer__btn-en">CONTACT</span>
+              <span class="footer__btn-ja">相談してみる 🙌</span>
+            </span>
+          </a>
+          <a href="recruit.html" class="footer__btn footer__btn--recruit">
+            <span class="footer__btn-icon" aria-hidden="true">
+              <img src="images/footer-icon-contact.png" alt="" width="64" height="64">
+            </span>
+            <span class="footer__btn-body">
+              <span class="footer__btn-en">RECRUIT</span>
+              <span class="footer__btn-ja">応募はこちらから</span>
+            </span>
+          </a>
+        </div>
+
       </div>
 
+      <a href="#top" class="footer__logo">
+        <img src="images/logo.png" alt="DELIGHT">
+      </a>
+
       <div class="footer__copyright">
-        <p>&copy; 2022 DELIGHT All rights reserved</p>
+        <p>&copy;DELIGHT All rights reserved</p>
       </div>
 
     </div>
