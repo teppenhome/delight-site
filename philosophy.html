@@ -54,7 +54,8 @@
     <div class="header__inner">
       <h1 class="header__logo">
         <a href="index.html">
-          <img src="images/logo.png" alt="DELIGHT">
+          <img class="header__logo-img header__logo-img--color" src="images/logo.png" alt="DELIGHT">
+          <img class="header__logo-img header__logo-img--white" src="images/logo_white.png" alt="" aria-hidden="true">
         </a>
       </h1>
       <nav class="header__nav" id="globalNav" aria-label="メインナビゲーション">
@@ -119,27 +120,60 @@
     <div class="philosophy-page__body">
 
       <div class="philosophy-page__line" aria-hidden="true">
-        <div class="philosophy-page__line-track">
-          <img
-            class="philosophy-page__line-img philosophy-page__line-img--main"
-            src="images/philosophy/philosophy05.png"
-            alt=""
-            width="2160"
-            height="3969"
-            decoding="async">
-          <img
-            class="philosophy-page__line-img philosophy-page__line-img--end"
-            src="images/philosophy/philosophy06.png"
-            alt=""
-            width="773"
-            height="773"
-            decoding="async">
-        </div>
+        <svg
+          class="philosophy-page__line-svg"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 1400 2800.31"
+          preserveAspectRatio="xMidYMin meet"
+          focusable="false">
+          <path d="M1104.3,4.51s-43.05-2.43-12.19,56.38c30.78,58.64,13.71,64-16.76,86.86" fill="none" stroke="#fff" stroke-linecap="round" stroke-miterlimit="10" stroke-width="9"/>
+          <path class="philosophy-page__line-path--main" d="M292.6,9.6C257.7,12.3,222.77,15.03,222.77,15.03S-46.68,35.79,13.18,300.5c8.68,38.4,34.59,70.75,70.23,87.47,39.31,18.44,103.19,34.9,205.64,33.91,0,0,65.78-6.37,65.47,63.71-.03,6.27-2.63,12.32-7.32,16.48s-11,7.31-17.28,2.7c-2.37-1.74-3.88-4.44-4.25-7.35-.83-6.47-.25-19.05,15.2-24.3,0,0,.47-.18,1.35-.46,25.01-8.19,52.27,3.27,64.06,26.79,15.71,31.35,48.51,81.95,96.35,81.42,61.71-.68,71.48,60.96,72.41,92.76.32,10.98-11.2,65.34-14.7,75.75-12.03,35.76-28.33,103.12-97.7,152.8-13.57,9.72-28.8,16.89-44.85,21.5-38.9,11.19-159.6,41.27-211.32,56.05-68,19.43-149.71,64.57-143.43,184.57s146.87,167.98,236.01,222.83,167.38-67.08,282.29,123.43c63.11,104.63,144,144.57,240,164,61.37,12.42,94.01-2.01,109.58-14.04,8.12-6.27,11.47-18.93,7.05-28.19-4.57-9.55-13.95-13.94-24.63-9.19-24.97,11.08-15.43,37.53-7.43,56.19s72.31,66.11,146.86,74.67c64.71,7.43,146.77,87.07,178.29,120.08,18.06,18.91,30.17,42.83,33.96,68.7,3.56,24.25,6.83,59.71-20.82,83.79-52.7,45.9-61.5,8.72-56-3.43,4.57-10.1,30.22-32.44,54.29,22.29,27.59,62.76-38.79,146.41-114.86,183.43-31.17,15.17-104,14.54-156,70.29-42.98,53.21,6.03,89.52-89.71,164.57-65.44,51.29-313.71,1.14-331.43,16.57" fill="none" stroke="#fff" stroke-linecap="round" stroke-miterlimit="10" stroke-width="9"/>
+        </svg>
+      </div>
+
+      <div class="philosophy-page__line philosophy-page__line--end" aria-hidden="true">
+        <svg
+          class="philosophy-page__line-svg"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 1400 2800.31"
+          preserveAspectRatio="xMidYMin meet"
+          focusable="false">
+          <path d="M468.77,2459.7s-119.24,5.51-207.43,91.44c-29.34,28.59-47.54,66.77-51.87,107.51-7.68,72.35,11.94,114.52,46.16,115.91,28.57,1.16,28.45-16.46,25.36-28.01-2.1-7.87-8.87-13.79-16.99-14.38-7.83-.57-15.51,4.06-11.8,26.97,2.82,17.37,17.1,26.54,32.96,31.32,22.86,6.89,47.54,3.88,68.5-7.57,33.73-18.43,105.62-47.07,175.68-6.61,96,55.43,145.71-24.57,149.14-26.29" fill="none" stroke="#fff" stroke-linecap="round" stroke-miterlimit="10" stroke-width="9"/>
+        </svg>
+      </div>
+
+      <img
+        class="philosophy-page__deco-cloud"
+        src="images/philosophy/philosophy-deco-cloud.png"
+        alt=""
+        decoding="async"
+        aria-hidden="true">
+
+      <div class="philosophy-page__dots" aria-hidden="true">
+        <img class="dots dots--1" src="images/philosophy/dot-white-s.png" alt="" decoding="async">
+        <img class="dots dots--2" src="images/philosophy/dot-white-l.png" alt="" decoding="async">
+        <img class="dots dots--3" src="images/philosophy/dot-white-m.png" alt="" decoding="async">
+        <img class="dots dots--3_1" src="images/philosophy/dot-yellow-s.png" alt="" decoding="async">
+        <img class="dots dots--4" src="images/philosophy/dot-white-m.png" alt="" decoding="async">
+        <span class="dots dots--circle" aria-hidden="true"></span>
+        <img class="dots dots--5" src="images/philosophy/dot-yellow-ss.png" alt="" decoding="async">
+        <img class="dots dots--m1" src="images/philosophy/dot-white-l.png" alt="" decoding="async">
+        <img class="dots dots--6" src="images/philosophy/dot-white-m.png" alt="" decoding="async">
       </div>
 
       <div class="philosophy-page__body-inner">
 
         <section class="philosophy-page__intro" aria-labelledby="philosophy-intro-heading">
+          <img class="goods goods--note01" src="images/philosophy/philosophy-deco01.png" alt="" decoding="async">
+          <img class="goods goods--cloud-white" src="images/philosophy/philosophy-deco-cloud-white.png" alt="" width="125" height="171" decoding="async" aria-hidden="true">
+          <img class="goods goods--note02" src="images/philosophy/philosophy-deco02.png" alt="" decoding="async">
+          <img class="goods goods--note03" src="images/philosophy/philosophy-deco03.png" alt="" decoding="async">
+          <img class="goods goods--note04" src="images/philosophy/philosophy-deco04.png" alt="" decoding="async">
+          <img class="goods goods--pen" src="images/philosophy/philosophy-deco-pen.png" alt="" width="233" height="226" decoding="async" aria-hidden="true">
+          <img class="goods goods--kirakira goods--kirakira-l" src="images/philosophy/philosophy-kirakira.png" alt="" width="196" height="257" decoding="async" aria-hidden="true">
+          <img class="goods goods--kirakira goods--kirakira-r" src="images/philosophy/philosophy-kirakira.png" alt="" width="196" height="257" decoding="async" aria-hidden="true">
+          <img class="goods goods--kirakira02" src="images/philosophy/philosophy-kirakira02.png" alt="" width="74" height="74" decoding="async" aria-hidden="true">
+
           <div class="philosophy-page__intro-cloud">
             <img
               class="philosophy-page__intro-cloud-bg"
@@ -170,14 +204,22 @@
         <div class="philosophy-page__sections">
 
           <section class="philosophy-page__section" aria-labelledby="philosophy-section-1">
+            <img class="goods goods--note05" src="images/philosophy/philosophy-deco05.png" alt="" decoding="async">
+            <img class="goods goods--note06" src="images/philosophy/philosophy-deco06.png" alt="" decoding="async">
+            <img class="goods goods--note07" src="images/philosophy/philosophy-deco07.png" alt="" decoding="async">
+            <img class="goods goods--note08" src="images/philosophy/philosophy-deco08.png" alt="" decoding="async">
+            <img class="goods goods--star01" src="images/philosophy/philosophy-star01.png" alt="" width="212" height="183" decoding="async" aria-hidden="true">
             <div class="philosophy-page__section-col philosophy-page__section-col--head">
-              <div class="philosophy-page__section-heading" id="philosophy-section-1">
-                <p class="philosophy-page__section-en">1. OUR OWN DELIGHT</p>
+            <div class="philosophy-page__section-heading" id="philosophy-section-1">
+              <span class="philosophy-page__section-num">1.</span>
+              <div class="philosophy-page__section-titles">
+                <p class="philosophy-page__section-en">OUR OWN DELIGHT</p>
                 <p class="philosophy-page__section-ja">私たち自身の DELIGHT</p>
               </div>
-              <figure class="philosophy-page__figure philosophy-page__figure--section">
-                <img src="images/philosophy/philosophy02.png" alt="" width="520" height="378" decoding="async">
-              </figure>
+            </div>
+            <figure class="philosophy-page__figure philosophy-page__figure--section">
+              <img src="images/philosophy/philosophy02.png" alt="" width="520" height="378" decoding="async">
+            </figure>
             </div>
             <div class="philosophy-page__section-col philosophy-page__section-col--body">
               <div class="philosophy-page__section-body">
@@ -187,10 +229,14 @@
           </section>
 
           <section class="philosophy-page__section" aria-labelledby="philosophy-section-2">
+            <img class="goods goods--star02" src="images/philosophy/philosophy-star02.png" alt="" width="376" height="245" decoding="async" aria-hidden="true">
             <div class="philosophy-page__section-col philosophy-page__section-col--head">
               <div class="philosophy-page__section-heading" id="philosophy-section-2">
-                <p class="philosophy-page__section-en">2. CUSTOMER DELIGHT</p>
-                <p class="philosophy-page__section-ja">お客様の DELIGHT</p>
+                <span class="philosophy-page__section-num">2.</span>
+                <div class="philosophy-page__section-titles">
+                  <p class="philosophy-page__section-en">CUSTOMER DELIGHT</p>
+                  <p class="philosophy-page__section-ja">お客様の DELIGHT</p>
+                </div>
               </div>
               <figure class="philosophy-page__figure philosophy-page__figure--section">
                 <img src="images/philosophy/philosophy03.png" alt="" width="562" height="550" decoding="async">
@@ -206,8 +252,11 @@
           <section class="philosophy-page__section philosophy-page__section--future" aria-labelledby="philosophy-section-3">
             <div class="philosophy-page__section-col philosophy-page__section-col--head">
               <div class="philosophy-page__section-heading" id="philosophy-section-3">
-                <p class="philosophy-page__section-en">3. DELIGHT WILL EXPAND<br>INTO THE FUTURE.</p>
-                <p class="philosophy-page__section-ja">未来へ広がる DELIGHT</p>
+                <span class="philosophy-page__section-num">3.</span>
+                <div class="philosophy-page__section-titles">
+                  <p class="philosophy-page__section-en">DELIGHT WILL EXPAND<br>INTO THE FUTURE.</p>
+                  <p class="philosophy-page__section-ja">未来へ広がる DELIGHT</p>
+                </div>
               </div>
             </div>
             <div class="philosophy-page__section-col philosophy-page__section-col--body">
@@ -223,12 +272,28 @@
 
       <div class="philosophy-page__outro">
         <div class="philosophy-page__outro-cloud">
+          <img
+            class="philosophy-page__outro-back"
+            src="images/philosophy/philosophy-earth-back.png"
+            alt=""
+            width="1200"
+            height="800"
+            decoding="async"
+            aria-hidden="true">
+          <img class="outro-dots outro-dots--ul" src="images/philosophy/dot-yellow-m.png" alt="" decoding="async" aria-hidden="true">
+          <img class="outro-dots outro-dots--ur" src="images/philosophy/dot-white-s.png" alt="" decoding="async" aria-hidden="true">
+          <img class="outro-dots outro-dots--ll" src="images/philosophy/dot-white-m.png" alt="" decoding="async" aria-hidden="true">
+          <img class="outro-dots outro-dots--lr" src="images/philosophy/dot-yellow-m.png" alt="" decoding="async" aria-hidden="true">
+          <img class="outro-stars outro-stars--tl" src="images/philosophy/philosophy-star03.png" alt="" width="281" height="277" decoding="async" aria-hidden="true">
+          <img class="outro-stars outro-stars--ml" src="images/philosophy/philosophy-star03.png" alt="" width="281" height="277" decoding="async" aria-hidden="true">
+          <img class="outro-stars outro-stars--tr" src="images/philosophy/philosophy-star03.png" alt="" width="281" height="277" decoding="async" aria-hidden="true">
+          <img class="outro-stars outro-stars--br" src="images/philosophy/philosophy-star03.png" alt="" width="281" height="277" decoding="async" aria-hidden="true">
           <figure class="philosophy-page__figure philosophy-page__figure--outro">
-            <img src="images/philosophy/philosophy04.png" alt="" width="2406" height="1666" decoding="async">
+            <img src="images/philosophy/philosophy-earth.png" alt="" width="2406" height="1666" decoding="async">
           </figure>
-          <div class="philosophy-page__actions">
-            <a href="index.html" class="c-sub-btn philosophy-page__top-back">TOPにもどる</a>
-          </div>
+        </div>
+        <div class="philosophy-page__actions">
+          <a href="index.html" class="c-sub-btn philosophy-page__top-back">TOPにもどる</a>
         </div>
       </div>
 

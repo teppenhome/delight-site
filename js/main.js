@@ -19,6 +19,9 @@ document.addEventListener('DOMContentLoaded', () => {
   initContactForm();
   initQaAccordion();
   initSmoothScroll();
+  initPhilosophyShootingStars();
+  initPhilosophyLineDraw();
+  initPhilosophyCursor();
 });
 
 
@@ -720,6 +723,268 @@ function initContactForm() {
       `;
     }, 1200);
   });
+}
+
+
+// ============================================================
+//  PHILOSOPHY
+//  流れ星（star01 / star02 / star03）をスクロール連動で流す
+// ============================================================
+function initPhilosophyShootingStars() {
+  if (!document.body.classList.contains('page-philosophy')) return;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  const stars = [
+    // 軌跡が右上 → 左下へ
+    { sel: '.goods--star01', dx: -1, dy: 0.7, dist: 180, lag: 0 },
+    // 軌跡が左上 → 右下へ
+    { sel: '.goods--star02', dx: 1, dy: 0.55, dist: 220, lag: 0.05 },
+    // star03 ×4: すべて同じ向き（軌跡が右上 → 左下へ流れる）
+    { sel: '.outro-stars--tl', dx: -1, dy: 0.7, dist: 160, lag: 0 },
+    { sel: '.outro-stars--ml', dx: -1, dy: 0.65, dist: 150, lag: 0.12 },
+    { sel: '.outro-stars--tr', dx: -1, dy: 0.65, dist: 180, lag: 0.06 },
+    { sel: '.outro-stars--br', dx: -1, dy: 0.7, dist: 150, lag: 0.18 },
+  ]
+    .map((cfg) => {
+      const el = document.querySelector(cfg.sel);
+      return el ? { ...cfg, el } : null;
+    })
+    .filter(Boolean);
+
+  if (!stars.length) return;
+
+  const easeInOut = (t) =>
+    t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+
+  const clamp01 = (v) => Math.min(1, Math.max(0, v));
+
+  // 要素がビューポートを通過する間の進捗（0〜1）
+  const getProgress = (el, lag) => {
+    const rect = el.getBoundingClientRect();
+    const vh = window.innerHeight || 1;
+    const center = rect.top + rect.height * 0.5;
+    const start = vh * 1.05;
+    const end = vh * -0.1;
+    const raw = (start - center) / (start - end);
+    const delayed = (raw - lag) / (1 - lag || 1);
+    return clamp01(delayed);
+  };
+
+  // 出現〜消失のフェード（中央付近で最も明るく）
+  const getOpacity = (p) => {
+    if (p < 0.12) return p / 0.12;
+    if (p > 0.88) return (1 - p) / 0.12;
+    return 1;
+  };
+
+  let ticking = false;
+
+  const update = () => {
+    ticking = false;
+
+    stars.forEach(({ el, dx, dy, dist, lag }) => {
+      const p = easeInOut(getProgress(el, lag));
+      // 配置位置を中点として、前後に流す（progress 0.5 = デザイン上の位置）
+      const t = p - 0.5;
+      const x = Math.round(t * dist * dx * 10) / 10;
+      const y = Math.round(t * dist * dy * 10) / 10;
+
+      el.style.setProperty('--shoot-x', `${x}px`);
+      el.style.setProperty('--shoot-y', `${y}px`);
+      el.style.setProperty('--shoot-opacity', String(Math.round(getOpacity(p) * 1000) / 1000));
+    });
+  };
+
+  const onScroll = () => {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(update);
+  };
+
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onScroll, { passive: true });
+  update();
+}
+
+
+// ============================================================
+//  PHILOSOPHY
+//  SVGの線をスクロールに応じて描いていく
+//  （ゼロから開始。1本目完了後に2本目…。描画先端は画面の描画ラインに追従）
+// ============================================================
+function initPhilosophyLineDraw() {
+  if (!document.body.classList.contains('page-philosophy')) return;
+
+  const paths = Array.from(
+    document.querySelectorAll('.philosophy-page__line-svg path')
+  );
+  if (!paths.length) return;
+
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  const pathData = paths.map((path) => {
+    const length = path.getTotalLength() + 1;
+    path.style.strokeDasharray = String(length);
+    path.style.strokeDashoffset = reducedMotion ? '0' : String(length);
+    return { path, length };
+  });
+
+  if (reducedMotion) return;
+
+  const clamp01 = (v) => Math.min(1, Math.max(0, v));
+
+  // 描画の先端が乗るビューポート上の基準線（早め＆スクロールに追従）
+  const getDrawLine = () => (window.innerHeight || 1) * 0.62;
+
+  // 2本目以降: アンロック時点から「残り距離」で 0→1（遅れを出さない）
+  const unlockState = pathData.map(() => null);
+
+  const setOffset = (item, progress) => {
+    const p = clamp01(progress);
+    item.path.style.strokeDashoffset = String(item.length * (1 - p));
+  };
+
+  let ticking = false;
+
+  const update = () => {
+    ticking = false;
+    const scrollY = window.scrollY || window.pageYOffset || 0;
+    const drawLine = getDrawLine();
+    const vh = window.innerHeight || 1;
+
+    let prevDone = true;
+
+    pathData.forEach((item, i) => {
+      if (!prevDone) {
+        setOffset(item, 0);
+        return;
+      }
+
+      let progress;
+
+      if (i === 0) {
+        // 短い1本目は高さだけでは速すぎるので最低スクロール幅を確保
+        const rect = item.path.getBoundingClientRect();
+        if (rect.top >= drawLine) {
+          progress = 0;
+        } else {
+          const travel = Math.max(rect.height, vh * 0.36);
+          progress = clamp01((drawLine - rect.top) / travel);
+        }
+      } else {
+        if (unlockState[i] === null) {
+          const rect = item.path.getBoundingClientRect();
+          // 下端が描画ラインに達するまでの残りスクロール ≈ 描画完了タイミング
+          const remaining = Math.max(rect.bottom - drawLine, vh * 0.45);
+          unlockState[i] = { scrollY, remaining };
+        }
+        const { scrollY: startY, remaining } = unlockState[i];
+        progress = clamp01((scrollY - startY) / remaining);
+      }
+
+      setOffset(item, progress);
+      prevDone = progress >= 0.999;
+
+      if (!prevDone) {
+        for (let j = i + 1; j < unlockState.length; j += 1) {
+          unlockState[j] = null;
+        }
+      }
+    });
+  };
+
+  const onScroll = () => {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(update);
+  };
+
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onScroll, { passive: true });
+  update();
+}
+
+
+// ============================================================
+//  PHILOSOPHY
+//  カスタムカーソル（理念テキスト上で拡大・黄色く発光）
+// ============================================================
+function initPhilosophyCursor() {
+  if (!document.body.classList.contains('page-philosophy')) return;
+  if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+
+  const HOTSPOT_X = 21;
+  const HOTSPOT_Y = 42;
+  const TEXT_SELECTOR = [
+    '.philosophy-page__catch-en',
+    '.philosophy-page__catch-ja',
+    '.philosophy-page__intro-text',
+    '.philosophy-page__section-heading',
+    '.philosophy-page__section-body',
+    '.philosophy-page__section-en',
+    '.philosophy-page__section-ja',
+    '.philosophy-page__section-num',
+  ].join(',');
+
+  const cursor = document.createElement('div');
+  cursor.className = 'philosophy-cursor';
+  cursor.setAttribute('aria-hidden', 'true');
+  cursor.innerHTML =
+    '<img class="philosophy-cursor__img" src="images/philosophy/philosophy-cursor.png" alt="" width="72" height="72" decoding="async">';
+  document.body.appendChild(cursor);
+
+  let visible = false;
+  let onText = false;
+  let ticking = false;
+  let lastX = 0;
+  let lastY = 0;
+
+  const setPos = (x, y) => {
+    cursor.style.setProperty('--cursor-x', `${x - HOTSPOT_X}px`);
+    cursor.style.setProperty('--cursor-y', `${y - HOTSPOT_Y}px`);
+  };
+
+  const setOnText = (next) => {
+    if (onText === next) return;
+    onText = next;
+    cursor.classList.toggle('is-on-text', next);
+  };
+
+  const updateFromPoint = (x, y) => {
+    lastX = x;
+    lastY = y;
+    setPos(x, y);
+
+    // カーソル自身は pointer-events:none なので下の要素を取得できる
+    const el = document.elementFromPoint(x, y);
+    setOnText(Boolean(el && el.closest(TEXT_SELECTOR)));
+  };
+
+  const onMove = (e) => {
+    if (!visible) {
+      visible = true;
+      cursor.classList.add('is-visible');
+    }
+
+    lastX = e.clientX;
+    lastY = e.clientY;
+
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(() => {
+      ticking = false;
+      updateFromPoint(lastX, lastY);
+    });
+  };
+
+  const onLeave = () => {
+    visible = false;
+    cursor.classList.remove('is-visible');
+    setOnText(false);
+  };
+
+  document.addEventListener('mousemove', onMove, { passive: true });
+  document.documentElement.addEventListener('mouseleave', onLeave);
 }
 
 

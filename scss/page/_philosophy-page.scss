@@ -8,10 +8,80 @@
 
 body.page-philosophy {
   position: relative;
+  background-color: $color-primary;
+
+  // カスタムカーソル（JS）用にネイティブを隠す
+  @media (hover: hover) and (pointer: fine) {
+    &,
+    a,
+    button,
+    [role="button"],
+    input,
+    textarea,
+    select,
+    label,
+    .header__hamburger {
+      cursor: none;
+    }
+  }
 
   .header {
-    @media (min-width: #{$breakpoint-tab + 1px}) {
-      background-color: transparent;
+    background-color: transparent;
+
+    .header__logo a {
+      position: relative;
+    }
+
+    .header__logo-img {
+      display: block;
+      height: 48px;
+      width: auto;
+      max-width: 100%;
+
+      @include sp {
+        height: 30px;
+      }
+    }
+
+    .header__logo-img--color {
+      position: absolute;
+      top: 0;
+      left: 0;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .header__logo-img--white {
+      position: relative;
+      opacity: 1;
+    }
+
+    .header__hamburger span {
+      background: $color-white;
+    }
+
+    &.is-menu-open {
+      @include tab {
+        background: $color-white;
+
+        .header__logo-img--color {
+          position: relative;
+          opacity: 1;
+          pointer-events: auto;
+        }
+
+        .header__logo-img--white {
+          position: absolute;
+          top: 0;
+          left: 0;
+          opacity: 0;
+          pointer-events: none;
+        }
+
+        .header__hamburger span {
+          background: $color-text;
+        }
+      }
     }
   }
 }
@@ -21,7 +91,7 @@ body.page-philosophy {
   position: absolute;
   top: 0;
   right: 0;
-  z-index: 8;
+  z-index: 6;
   // 1230px幅時の 62vw（≒763px）以上は広げない
   width: clamp(600px, 62vw, 1230px * 0.62);
   aspect-ratio: 860 / 640;
@@ -38,27 +108,36 @@ body.page-philosophy {
 
 .philosophy-page {
   padding: 0;
-  background: $color-white;
+  background: $color-primary;
 
-  // ── 白背景ヘッダー領域 ────────────────────────────
+  // ── ヘッダー領域（青背景・白文字） ────────────────
   &__breadcrumb {
     @include about.about-subpage-breadcrumb;
+    color: $color-white;
   }
 
   &__content {
     position: relative;
     z-index: 9;
-    @include about.about-subpage-content;
+    max-width: 960px;
+    width: 100%;
+    margin: 0 auto;
   }
 
   &__hero {
     margin-bottom: 10px;
+
+    .c-page-title,
+    .c-page-subtitle,
+    .c-page-subtitle.__mini {
+      color: $color-white;
+    }
   }
 
   // ── 青背景メイン領域 ──────────────────────────────
   &__body {
     position: relative;
-    overflow: hidden;
+    overflow: visible; // 装飾画像のビューポート端配置を許可
     background-color: $color-primary;
     padding: 90px 0 0;
 
@@ -67,9 +146,143 @@ body.page-philosophy {
     }
   }
 
+  // ── ドット装飾（デザイン画像準拠） ───────────────
+  // 積み順: deco-cloud(5) < 黄雲bg(7) < ドット(8) < テキスト・装飾(9) < header(10)
+  &__deco-cloud {
+    position: absolute;
+    z-index: 5; // ドット円より下
+    // body 基準（section 基準ではない）。負の left は overflow-x: clip で消える
+    top: 38%;
+    left: 0;
+    width: 180px;
+    height: auto;
+    pointer-events: none;
+    user-select: none;
+    
+    @media (min-width: #{$breakpoint-tab + 1}) and (max-width: #{$breakpoint-lg}) {
+      left: -5%;
+    }
+  }
+
+  &__dots {
+    position: absolute;
+    inset: 0;
+    z-index: 8;
+    pointer-events: none;
+    overflow: visible;
+  }
+
+  .dots {
+    position: absolute;
+    display: block;
+    width: auto;
+    height: auto;
+    max-width: none;
+    pointer-events: none;
+    user-select: none;
+
+    // 1. 上部・黄雲付近（左）
+    &--1 {
+      top: 170px;
+      left: 35%;
+    }
+
+    // 2. 上部・黄雲付近（右）
+    &--2 {
+      top: 270px;
+      left: auto; // left 指定が残っていると right が効かない
+      right: 25%;
+    }
+
+    // 3. 上部・黄雲付近（右）
+    &--3 {
+      top: 120px;
+      left: auto; // left 指定が残っていると right が効かない
+      right: 5%;
+    }
+
+    // 3.1. 上部・黄雲付近（右）
+    &--3_1 {
+      top: 26%;
+      left: auto; // left 指定が残っていると right が効かない
+      right: 35%;
+    }
+
+    // 4. 上部・黄雲付近（右）
+    &--4 {
+      top: 26%;
+      left: 3%;
+    }
+
+    // 4と5の間・白塗り正円
+    &--circle {
+      top: 29.5%;
+      left: 10%;
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background-color: $color-white;
+    }
+
+    // 5. 上部・黄雲付近（右）
+    &--5 {
+      top: 35%;
+      left: 10%;
+    }
+
+    // 6. 上部・黄雲付近（右）
+    &--6 {
+      top: 47%;
+      left: 3%;
+
+      @media (min-width: #{$breakpoint-tab + 1}) and (max-width: #{$breakpoint-lg}) {
+        left: -5%;
+      }
+    }
+
+    // 2. 中部・左（ワニ付近）
+    &--m1 {
+      top: 38%;
+      left: -10%;
+
+      @media (min-width: #{$breakpoint-tab + 1}) and (max-width: #{$breakpoint-lg}) {
+        left: -14%;
+      }
+    }
+
+    // 3. 中部・右（メガホン付近）
+    &--s1 {
+      top: 42%;
+      right: clamp(8px, 4vw, 48px);
+    }
+
+    @include sp {
+      &--l {
+        top: 24px;
+        left: 0;
+      }
+
+      &--m1 {
+        top: 36%;
+      }
+
+      &--s1 {
+        top: 40%;
+      }
+
+      &--m2 {
+        top: 56%;
+      }
+
+      &--s2 {
+        top: 60%;
+      }
+    }
+  }
+
   &__body-inner {
     position: relative;
-    z-index: 2;
+    // z-index は付けない（付けないと黄雲とドット・テキストの挟み込みができる）
     max-width: 960px;
     margin: 0 auto;
     padding: 0 40px;
@@ -79,53 +292,54 @@ body.page-philosophy {
     }
   }
 
-  // ── 線イラスト（philosophy05 / 06） ───────────────
+  // ── 線イラスト（SVG・viewBox 1400×2800.31 準拠） ─
+  // 積み: 黄雲bg(7) < deco03 / earth-back(8) < 線1・2(9) < earth(10) < 線3(11) < actions(12)
   &__line {
     position: absolute;
     inset: 0;
-    z-index: 1;
+    z-index: 9;
     pointer-events: none;
     overflow: visible;
+
+    // 3本目だけ地球イラストより上
+    &--end {
+      z-index: 11;
+    }
   }
 
-  &__line-track {
+  &__line-svg {
     position: absolute;
-    top: 280px;
+    // 新SVGはアートボード余白なしのため、黄雲下あたりから開始
+    top: 350px;
     left: 50%;
-    width: min(1400px, 115vw);
+    display: block;
+    width: 1475px;
+    height: auto;
     max-width: none;
-    transform: translateX(-50%);
+    overflow: visible; // viewBox外・translateではみ出した線を切らない
+    transform: translateX(calc(-50% + 40px));
+    pointer-events: none;
+    user-select: none;
+
+    path {
+      stroke-width: 6;
+      // JS 起動前に線全体を隠す（パス長より大きい値）
+      stroke-dasharray: 50000;
+      stroke-dashoffset: 50000;
+      transition: none;
+    }
+
+    // 2本目の長い線だけ右へ
+    .philosophy-page__line-path--main {
+      transform: translate(20px, 0);
+      transform-box: view-box;
+      transform-origin: 0 0;
+    }
 
     @include sp {
-      top: 140px;
-      width: min(800px, 140vw);
-    }
-  }
-
-  &__line-img {
-    display: block;
-    user-select: none;
-    pointer-events: none;
-
-    &--main {
-      position: relative;
-      width: 100%;
-      height: auto;
-    }
-
-    &--end {
-      position: absolute;
-      left: 4%;
-      bottom: 4%;
-      z-index: 2;
-      width: 28%;
-      height: auto;
-
-      @include sp {
-        left: 0;
-        bottom: 6%;
-        width: 36%;
-      }
+      // SPはレイアウト比率に合わせて width / top を同じ係数で縮める
+      width: min(900px, 160vw);
+      top: calc(350 / 1475 * min(900px, 160vw));
     }
   }
 
@@ -137,6 +351,307 @@ body.page-philosophy {
 
     @include sp {
       margin-bottom: 56px;
+    }
+  }
+
+  // ── 装飾画像（absolute配置） ───────────────────
+  .goods {
+    position: absolute;
+    z-index: 9;
+    display: block;
+    width: auto;
+    height: auto;
+    max-width: none;
+    pointer-events: none;
+    user-select: none;
+
+    // note系: 少し回転しながらユラユラ
+    &--note01,
+    &--note02,
+    &--note03,
+    &--note04,
+    &--note05,
+    &--note06,
+    &--note07,
+    &--note08 {
+      transform-origin: center center;
+      animation: philosophy-note-sway 5.5s ease-in-out infinite;
+      will-change: transform;
+    }
+
+    &--note01 { animation-duration: 5.2s; animation-delay: 0s; }
+    &--note02 { animation-duration: 6s; animation-delay: -1.2s; }
+    &--note03 { animation-duration: 5.6s; animation-delay: -0.6s; }
+    &--note04 { animation-duration: 6.4s; animation-delay: -2s; }
+    &--note05 { animation-duration: 5.8s; animation-delay: -0.3s; }
+    &--note06 { animation-duration: 6.2s; animation-delay: -1.6s; }
+    &--note07 { animation-duration: 5.4s; animation-delay: -2.4s; }
+    &--note08 { animation-duration: 6.6s; animation-delay: -0.9s; }
+
+    // intro 周り
+    &--note01 {
+      top: -40px;
+      right: -2%;
+      max-width: 230px;
+      width: 100%;
+    }
+
+    &--note02 {
+      top: 0;
+      left: -10%;
+      max-width: 160px;
+      width: 100%;
+    }
+
+    // intro 左上: 緑ノート（note02）の背後
+    &--cloud-white {
+      top: 90px;
+      left: -14%;
+      z-index: 8;
+      max-width: 120px;
+      width: 100%;
+
+      @include sp {
+        top: 4px;
+        left: -6%;
+        max-width: 48px;
+      }
+    }
+
+    &--note03 {
+      bottom: 0;
+      left: -16%;
+      // philosophy-back(7) より上、線(9) より下
+      z-index: 8;
+      max-width: 420px;
+      width: 100%;
+    }
+
+    &--note04 {
+      bottom: 0;
+      right: -10%;
+      max-width: 320px;
+      width: 100%;
+    }
+
+    // intro 右: 黄雲の外・ノート下の青い余白
+    &--pen {
+      top: 19%;
+      right: -15%;
+      max-width: 130px;
+      width: 100%;
+
+      @include sp {
+        top: 36%;
+        right: -4%;
+        max-width: 72px;
+      }
+    }
+
+    // intro: 黄雲左右のキラキラ（×マーク）
+    &--kirakira {
+      max-width: 120px;
+      width: 100%;
+      animation: philosophy-twinkle 2.4s ease-in-out infinite;
+
+      @include sp {
+        max-width: 36px;
+      }
+    }
+
+    &--kirakira-l {
+      top: 10%;
+      left: 8%;
+      animation-delay: 0s;
+      animation-duration: 2.2s;
+
+      @include sp {
+        top: 24%;
+        left: 2%;
+      }
+    }
+
+    &--kirakira-r {
+      top: 22%;
+      right: 2%;
+      max-width: 90px;
+      animation-delay: 0.7s;
+      animation-duration: 2.8s;
+
+      @include sp {
+        top: 40%;
+        right: 8%;
+      }
+    }
+
+    // intro 下部: 白い線のループ右・黄雲（note04）の左
+    &--kirakira02 {
+      bottom: -3%;
+      left: 15%;
+      max-width: 60px;
+      width: 100%;
+      animation: philosophy-twinkle 1.8s ease-in-out infinite;
+      animation-delay: 0.35s;
+
+      @include sp {
+        bottom: 8%;
+        left: 48%;
+        max-width: 28px;
+      }
+    }
+
+    // sections 周り（位置・サイズは各修飾子で調整）
+    &--note05 {
+      top: 150px;
+      // 親（section）基準からブラウザ右端へ突き出す
+      right: calc(50% - 50vw);
+      max-width: 320px;
+      width: 100%;
+    }
+
+    &--note06 {
+      top: 260px;
+      left: -20%;
+      max-width: 200px;
+      width: 100%;
+    }
+
+    &--note07 {
+      top: 700px;
+      left: -26%;
+      max-width: 230px;
+      width: 100%;
+    }
+
+    &--note08 {
+      top: 850px;
+      right: -20%;
+      max-width: 220px;
+      width: 100%;
+    }
+
+    // セクション1: ワニと女の子の間・白い線の上
+    // 元画像: 星が左・軌跡が右上 → 左下方向へ流れる
+    &--star01 {
+      top: 75%;
+      left: -2%;
+      max-width: 120px;
+      width: 100%;
+      --shoot-x: 0px;
+      --shoot-y: 0px;
+      --shoot-opacity: 1;
+      opacity: var(--shoot-opacity);
+      transform: translate3d(var(--shoot-x), var(--shoot-y), 0);
+      will-change: transform, opacity;
+
+      @include sp {
+        top: 58%;
+        left: 28%;
+        max-width: 56px;
+      }
+    }
+
+    // セクション2: 人物イラストとウサギの間（線のループ付近）
+    // 元画像: 星が右下・軌跡が左上 → 右下方向へ流れる
+    &--star02 {
+      top: 120%;
+      left: 55%;
+      max-width: 220px;
+      width: 100%;
+      --shoot-x: 0px;
+      --shoot-y: 0px;
+      --shoot-opacity: 1;
+      opacity: var(--shoot-opacity);
+      transform: translate3d(var(--shoot-x), var(--shoot-y), 0);
+      will-change: transform, opacity;
+
+      @include sp {
+        top: 48%;
+        left: auto;
+        right: 4%;
+        max-width: 100px;
+      }
+    }
+
+    // 中間幅（1025px〜1439px）: 左右はみ出しを抑えて収める
+    @media (min-width: #{$breakpoint-tab + 1}) and (max-width: #{$breakpoint-lg}) {
+      &--note01 {
+        right: 0;
+        max-width: 200px;
+      }
+
+      &--note02 {
+        left: -4%;
+        max-width: 160px;
+      }
+
+      &--cloud-white {
+        left: -10%;
+        max-width: 100px;
+      }
+
+      &--note03 {
+        left: -6%;
+        max-width: 340px;
+      }
+
+      &--note04 {
+        right: -4%;
+        max-width: 280px;
+      }
+
+      &--pen {
+        top: 22%;
+        right: -12%;
+        max-width: 96px;
+      }
+
+      &--kirakira {
+        max-width: 72px;
+      }
+
+      &--kirakira-r {
+        max-width: 64px;
+        right: 6%;
+        top: 24%;
+      }
+
+      &--kirakira-l {
+        top: 18%;
+        left: 12%;
+      }
+
+      &--kirakira02 {
+        max-width: 44px;
+      }
+
+      &--note05 {
+        right: calc(50% - 50vw + 24px);
+        max-width: 280px;
+      }
+
+      &--note06 {
+        left: -20%;
+        max-width: 180px;
+      }
+
+      &--note07 {
+        left: -25%;
+        max-width: 200px;
+      }
+
+      &--note08 {
+        right: -20%;
+        max-width: 200px;
+      }
+
+      &--star01 {
+        max-width: 88px;
+      }
+
+      &--star02 {
+        max-width: 210px;
+      }
     }
   }
 
@@ -152,6 +667,8 @@ body.page-philosophy {
   }
 
   &__intro-cloud-bg {
+    position: relative;
+    z-index: 7; // ドットより下
     display: block;
     width: 100%;
     height: auto;
@@ -165,7 +682,7 @@ body.page-philosophy {
 
   &__intro-cloud-inner {
     position: relative;
-    z-index: 1;
+    z-index: 9; // ドットより上
     align-self: center;
     width: 100%;
     box-sizing: border-box;
@@ -195,7 +712,7 @@ body.page-philosophy {
   &__catch-ja {
     margin: 0 0 28px;
     font-size: clamp(16px, 2vw, 24px);
-    font-weight: 400;
+    font-weight: 700;
     letter-spacing: 0.12em;
     color: $color-pink;
     text-align: center;
@@ -214,7 +731,7 @@ body.page-philosophy {
     p {
       margin: 0 0 1.6em;
       font-size: 16px;
-      font-weight: 700;
+      font-weight: 500;
       line-height: 2.2;
       color: $color-pink;
       text-align: left;
@@ -264,14 +781,18 @@ body.page-philosophy {
       width: 100%;
       max-width: 260px;
       min-height: 180px;
+      margin-top: -24px;
 
       @include sp {
         max-width: 220px;
         min-height: 140px;
+        margin-top: -16px;
       }
     }
 
     &--outro {
+      position: relative;
+      z-index: 10;
       width: 100%;
       max-width: none;
       min-height: 0;
@@ -290,12 +811,14 @@ body.page-philosophy {
 
   // ── 理念3セクション ─────────────────────────────
   &__sections {
+    position: relative;
+    z-index: 9;
     display: flex;
     flex-direction: column;
-    gap: 64px;
+    gap: 220px;
     max-width: 850px;
     width: 100%;
-    margin: 0 auto 72px;
+    margin: 200px auto 72px;
 
     @include sp {
       gap: 48px;
@@ -304,9 +827,10 @@ body.page-philosophy {
   }
 
   &__section {
+    position: relative;
     display: grid;
     grid-template-columns: minmax(0, 300px) 1fr;
-    gap: 32px 68px;
+    gap: 32px 80px;
     align-items: start;
 
     @include sp {
@@ -317,6 +841,35 @@ body.page-philosophy {
     &--future {
       .philosophy-page__section-col--head {
         align-self: start;
+      }
+    }
+
+    &:nth-child(1) {
+      .philosophy-page__section-en,
+      .philosophy-page__section-num {
+        color: #A9E4FF;
+      }
+
+      // 枠サイズは維持し、画像だけ縮小して右寄せ（線の位置ずれ防止）
+      .philosophy-page__figure--section img {
+        width: 80%;
+        margin-left: auto;
+        position: relative;
+        left: 20px;
+      }
+    }
+
+    &:nth-child(2) {
+      .philosophy-page__section-en,
+      .philosophy-page__section-num {
+        color: #9FD2AC;
+      }
+    }
+
+    &:nth-child(3) {
+      .philosophy-page__section-en,
+      .philosophy-page__section-num {
+        color: #FFCDC7;
       }
     }
   }
@@ -335,8 +888,25 @@ body.page-philosophy {
 
   &__section-heading {
     display: flex;
+    align-items: flex-start;
+    gap: 0.35em;
+  }
+
+  &__section-num {
+    flex-shrink: 0;
+    font-family: $font-sub;
+    font-size: clamp(18px, 2.2vw, 24px);
+    font-weight: 700;
+    line-height: 1.5;
+    letter-spacing: 0.03em;
+    white-space: nowrap;
+  }
+
+  &__section-titles {
+    display: flex;
     flex-direction: column;
     gap: 8px;
+    min-width: 0;
   }
 
   &__section-en {
@@ -346,7 +916,7 @@ body.page-philosophy {
     font-weight: 700;
     line-height: 1.5;
     letter-spacing: 0.03em;
-    color: $color-white;
+    white-space: nowrap;
   }
 
   &__section-ja {
@@ -356,11 +926,6 @@ body.page-philosophy {
     line-height: 1.6;
     letter-spacing: 0.06em;
     color: $color-white;
-    padding-left: 24px;
-
-    @include sp {
-      padding-left: 16px;
-    }
   }
 
   &__section-body {
@@ -384,12 +949,20 @@ body.page-philosophy {
   }
 
   // ── 下部イラスト ─────────────────────────────────
+  // 積み: earth-back(8) < 線1・2(9) < outro-dots / outro-stars / earth(10) < 線3(11) < actions(12)
   &__outro {
     position: relative;
-    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     width: 100%;
-    margin-bottom: 0;
     margin-top: -60px;
+    margin-bottom: 0;
+    padding-bottom: 40px;
+
+    @include sp {
+      padding-bottom: 48px;
+    }
   }
 
   &__outro-cloud {
@@ -408,22 +981,294 @@ body.page-philosophy {
     }
   }
 
+  // 地球イラスト背後のオーラ（線より下）
+  &__outro-back {
+    position: relative;
+    z-index: 8;
+    display: block;
+    width: min(1200px, 115%);
+    height: auto;
+    justify-self: center;
+    align-self: start;
+    margin-top: 0;
+    pointer-events: none;
+    user-select: none;
+    object-fit: contain;
+
+    @include sp {
+      width: min(720px, 110%);
+      margin-top: 4%;
+    }
+  }
+
+  // 地球周辺のドット円（線より上・地球イラストの下）
+  .outro-dots {
+    position: absolute;
+    z-index: 10;
+    display: block;
+    width: auto;
+    height: auto;
+    pointer-events: none;
+    user-select: none;
+
+    // 左上（人物肩付近）
+    &--ul {
+      top: 28%;
+      left: 5%;
+    }
+
+    // 右上（人物頭付近）
+    &--ur {
+      top: 45%;
+      right: 25%;
+    }
+
+    // 左下（地球の地平線付近）
+    &--ll {
+      top: 52%;
+      left: -5%;
+    }
+
+    // 右下（地球の地平線付近）
+    &--lr {
+      top: 60%;
+      right: 10%;
+    }
+
+    @media (min-width: #{$breakpoint-tab + 1}) and (max-width: #{$breakpoint-lg}) {
+      &--ll {
+        left: 0;
+      }
+    }
+
+    @include sp {
+      &--ul {
+        top: 30%;
+        left: 8%;
+      }
+
+      &--ur {
+        top: 32%;
+        right: 8%;
+      }
+
+      &--ll {
+        top: 54%;
+        left: 4%;
+      }
+
+      &--lr {
+        top: 56%;
+        right: 6%;
+      }
+    }
+  }
+
+  // 地球周辺の流星クラスター
+  // 元画像: 星が左下・軌跡が右上 → 4つとも同じ向き（左下へ流れる）
+  .outro-stars {
+    position: absolute;
+    z-index: 10;
+    display: block;
+    width: 150px;
+    height: auto;
+    pointer-events: none;
+    user-select: none;
+    --shoot-x: 0px;
+    --shoot-y: 0px;
+    --shoot-opacity: 1;
+    opacity: var(--shoot-opacity);
+    transform: translate3d(var(--shoot-x), var(--shoot-y), 0);
+    will-change: transform, opacity;
+
+    &--tl {
+      top: 5%;
+      left: 16%;
+    }
+
+    &--ml {
+      top: 38%;
+      left: -5%;
+    }
+
+    &--tr {
+      top: 5%;
+      right: 0;
+      width: 170px;
+
+      @media (min-width: #{$breakpoint-tab + 1}) and (max-width: #{$breakpoint-lg}) {
+        right: 3%;
+        top: 10%;
+      }
+    }
+
+    &--br {
+      top: 48%;
+      right: 6%;
+    }
+
+    @include sp {
+      width: clamp(40px, 12vw, 64px);
+
+      &--tl {
+        top: 16%;
+        left: 4%;
+      }
+
+      &--ml {
+        top: 40%;
+        left: 0;
+      }
+
+      &--tr {
+        top: 18%;
+        right: 2%;
+        width: clamp(48px, 14vw, 76px);
+      }
+
+      &--br {
+        top: 44%;
+        right: 4%;
+      }
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .goods--star01,
+    .goods--star02,
+    .outro-stars {
+      --shoot-x: 0px !important;
+      --shoot-y: 0px !important;
+      --shoot-opacity: 1 !important;
+    }
+
+    .goods--kirakira,
+    .goods--kirakira02 {
+      animation: none;
+      opacity: 1;
+    }
+
+    .goods--note01,
+    .goods--note02,
+    .goods--note03,
+    .goods--note04,
+    .goods--note05,
+    .goods--note06,
+    .goods--note07,
+    .goods--note08 {
+      animation: none;
+    }
+  }
+
   // ── ナビゲーションボタン ────────────────────────
   &__actions {
     position: relative;
-    z-index: 2;
-    align-self: end;
-    justify-self: center;
+    z-index: 12;
     display: flex;
     flex-direction: column;
     align-items: center;
-    transform: translateY(-40%);
+    margin-top: 28px;
+
+    @include sp {
+      margin-top: 20px;
+    }
   }
 
   &__top-back {
     width: auto;
     min-width: 295px;
     background: $color-white;
+  }
+}
+
+// 理念ページ専用カスタムカーソル
+.philosophy-cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 10000;
+  width: 72px;
+  height: 72px;
+  margin: 0;
+  padding: 0;
+  pointer-events: none;
+  opacity: 0;
+  transform: translate3d(var(--cursor-x, -100px), var(--cursor-y, -100px), 0);
+  transition: opacity 0.15s ease, filter 0.28s ease;
+  will-change: transform, filter;
+  filter: drop-shadow(0 0 0 transparent);
+
+  &.is-visible {
+    opacity: 1;
+  }
+
+  // 理念テキスト上: 拡大 + 黄色く発光
+  &.is-on-text {
+    filter:
+      drop-shadow(0 0 6px rgba(255, 214, 0, 0.95))
+      drop-shadow(0 0 16px rgba(255, 214, 0, 0.75))
+      drop-shadow(0 0 28px rgba(255, 214, 0, 0.45));
+
+    .philosophy-cursor__img {
+      transform: scale(1.55);
+      filter:
+        brightness(1.25)
+        sepia(0.85)
+        saturate(6)
+        hue-rotate(2deg);
+    }
+  }
+
+  &__img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    transform: scale(1);
+    transform-origin: 30% 60%; // 星の中心付近
+    transition: transform 0.28s ease, filter 0.28s ease;
+    user-select: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .philosophy-cursor,
+  .philosophy-cursor__img {
+    transition: none;
+  }
+
+  .philosophy-cursor.is-on-text .philosophy-cursor__img {
+    transform: scale(1.2);
+  }
+}
+
+@keyframes philosophy-twinkle {
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  40% {
+    opacity: 0.25;
+  }
+
+  55% {
+    opacity: 1;
+  }
+
+  70% {
+    opacity: 0.45;
+  }
+}
+
+@keyframes philosophy-note-sway {
+  0%,
+  100% {
+    transform: rotate(-3.5deg) translateY(0);
+  }
+
+  50% {
+    transform: rotate(3.5deg) translateY(-6px);
   }
 }
 
