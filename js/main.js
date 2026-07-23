@@ -21,6 +21,8 @@ document.addEventListener('DOMContentLoaded', () => {
   initSmoothScroll();
   initPhilosophyShootingStars();
   initPhilosophyLineDraw();
+  initPhilosophyGoodsReveal();
+  initPhilosophyEarthRotate();
   initPhilosophyCursor();
 });
 
@@ -826,71 +828,153 @@ function initPhilosophyLineDraw() {
     const length = path.getTotalLength() + 1;
     path.style.strokeDasharray = String(length);
     path.style.strokeDashoffset = reducedMotion ? '0' : String(length);
-    return { path, length };
+    return { path, length, drawn: false };
   });
 
   if (reducedMotion) return;
 
+  // パス長に応じた描画時間（短すぎ／長すぎを抑える）
+  const getDuration = (length) => Math.min(7.5, Math.max(2, length / 650));
+
+  const drawPath = (item) => {
+    if (item.drawn) return Promise.resolve();
+    item.drawn = true;
+    observer.unobserve(item.path);
+
+    const duration = getDuration(item.length);
+
+    return new Promise((resolve) => {
+      let settled = false;
+
+      const finish = () => {
+        if (settled) return;
+        settled = true;
+        item.path.style.strokeDashoffset = '0';
+        resolve();
+      };
+
+      const onEnd = (e) => {
+        if (e.propertyName !== 'stroke-dashoffset') return;
+        item.path.removeEventListener('transitionend', onEnd);
+        finish();
+      };
+
+      item.path.addEventListener('transitionend', onEnd);
+      item.path.style.transition = `stroke-dashoffset ${duration}s ease-out`;
+      item.path.getBoundingClientRect();
+      item.path.style.strokeDashoffset = '0';
+      window.setTimeout(finish, duration * 1000 + 80);
+    });
+  };
+
+  // 1本目 → 2本目（先頭セグメント）は順番に描画
+  let firstDraw = null;
+  const startFirst = () => {
+    if (!firstDraw) firstDraw = drawPath(pathData[0]);
+    return firstDraw;
+  };
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        const index = pathData.findIndex((d) => d.path === entry.target);
+        if (index < 0 || pathData[index].drawn) return;
+
+        if (index === 0) {
+          startFirst();
+        } else if (index === 1) {
+          // 1本目の完了後に2本目を開始
+          startFirst().then(() => drawPath(pathData[1]));
+        } else {
+          // 2本目の分割セグメント以降・終点は、その場所に来たら独立描画
+          drawPath(pathData[index]);
+        }
+      });
+    },
+    {
+      threshold: 0,
+      rootMargin: '0px 0px -38% 0px',
+    }
+  );
+
+  pathData.forEach((item) => observer.observe(item.path));
+}
+
+
+// ============================================================
+//  PHILOSOPHY
+//  浮遊イラスト（note）を左右からふわっと出現
+// ============================================================
+function initPhilosophyGoodsReveal() {
+  if (!document.body.classList.contains('page-philosophy')) return;
+
+  const notes = Array.from(
+    document.querySelectorAll(
+      '.goods--note01, .goods--note02, .goods--note03, .goods--note04, .goods--note05, .goods--note06, .goods--note07, .goods--note08'
+    )
+  );
+  if (!notes.length) return;
+
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    notes.forEach((el) => el.classList.add('is-appeared'));
+    return;
+  }
+
+  const notesIo = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add('is-appeared');
+        notesIo.unobserve(entry.target);
+      });
+    },
+    {
+      threshold: 0.15,
+      rootMargin: '0px 0px -8% 0px',
+    }
+  );
+  notes.forEach((el) => notesIo.observe(el));
+}
+
+
+// ============================================================
+//  PHILOSOPHY
+//  地球イラストをスクロールに合わせて左右に少し回転
+// ============================================================
+function initPhilosophyEarthRotate() {
+  if (!document.body.classList.contains('page-philosophy')) return;
+
+  const earth = document.querySelector('.philosophy-page__figure--outro img');
+  if (!earth) return;
+
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    earth.style.setProperty('--earth-rotate', '0deg');
+    return;
+  }
+
+  const MAX_DEG = 7; // 左右の最大回転角
   const clamp01 = (v) => Math.min(1, Math.max(0, v));
+  const easeInOut = (t) =>
+    t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
 
-  // 描画の先端が乗るビューポート上の基準線（早め＆スクロールに追従）
-  const getDrawLine = () => (window.innerHeight || 1) * 0.62;
-
-  // 2本目以降: アンロック時点から「残り距離」で 0→1（遅れを出さない）
-  const unlockState = pathData.map(() => null);
-
-  const setOffset = (item, progress) => {
-    const p = clamp01(progress);
-    item.path.style.strokeDashoffset = String(item.length * (1 - p));
+  const getProgress = () => {
+    const rect = earth.getBoundingClientRect();
+    const vh = window.innerHeight || 1;
+    const center = rect.top + rect.height * 0.55;
+    const start = vh * 1.05;
+    const end = vh * 0.15;
+    return clamp01((start - center) / (start - end));
   };
 
   let ticking = false;
 
   const update = () => {
     ticking = false;
-    const scrollY = window.scrollY || window.pageYOffset || 0;
-    const drawLine = getDrawLine();
-    const vh = window.innerHeight || 1;
-
-    let prevDone = true;
-
-    pathData.forEach((item, i) => {
-      if (!prevDone) {
-        setOffset(item, 0);
-        return;
-      }
-
-      let progress;
-
-      if (i === 0) {
-        // 短い1本目は高さだけでは速すぎるので最低スクロール幅を確保
-        const rect = item.path.getBoundingClientRect();
-        if (rect.top >= drawLine) {
-          progress = 0;
-        } else {
-          const travel = Math.max(rect.height, vh * 0.36);
-          progress = clamp01((drawLine - rect.top) / travel);
-        }
-      } else {
-        if (unlockState[i] === null) {
-          const rect = item.path.getBoundingClientRect();
-          // 下端が描画ラインに達するまでの残りスクロール ≈ 描画完了タイミング
-          const remaining = Math.max(rect.bottom - drawLine, vh * 0.45);
-          unlockState[i] = { scrollY, remaining };
-        }
-        const { scrollY: startY, remaining } = unlockState[i];
-        progress = clamp01((scrollY - startY) / remaining);
-      }
-
-      setOffset(item, progress);
-      prevDone = progress >= 0.999;
-
-      if (!prevDone) {
-        for (let j = i + 1; j < unlockState.length; j += 1) {
-          unlockState[j] = null;
-        }
-      }
-    });
+    // 0 → 1 で -MAX → +MAX へ（左右に少し回る）
+    const p = easeInOut(getProgress());
+    const deg = Math.round((-MAX_DEG + p * MAX_DEG * 2) * 100) / 100;
+    earth.style.setProperty('--earth-rotate', `${deg}deg`);
   };
 
   const onScroll = () => {

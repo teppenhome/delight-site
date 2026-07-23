@@ -365,7 +365,7 @@ body.page-philosophy {
     pointer-events: none;
     user-select: none;
 
-    // note系: 少し回転しながらユラユラ
+    // note系: 少し回転しながらユラユラ + 左右からふわっと出現
     &--note01,
     &--note02,
     &--note03,
@@ -375,18 +375,38 @@ body.page-philosophy {
     &--note07,
     &--note08 {
       transform-origin: center center;
+      opacity: 0;
       animation: philosophy-note-sway 5.5s ease-in-out infinite;
-      will-change: transform;
+      transition:
+        opacity 1.35s cubic-bezier(0.16, 1, 0.3, 1),
+        translate 1.45s cubic-bezier(0.16, 1, 0.3, 1);
+      will-change: transform, opacity, translate;
     }
 
-    &--note01 { animation-duration: 5.2s; animation-delay: 0s; }
-    &--note02 { animation-duration: 6s; animation-delay: -1.2s; }
-    &--note03 { animation-duration: 5.6s; animation-delay: -0.6s; }
-    &--note04 { animation-duration: 6.4s; animation-delay: -2s; }
-    &--note05 { animation-duration: 5.8s; animation-delay: -0.3s; }
-    &--note06 { animation-duration: 6.2s; animation-delay: -1.6s; }
-    &--note07 { animation-duration: 5.4s; animation-delay: -2.4s; }
-    &--note08 { animation-duration: 6.6s; animation-delay: -0.9s; }
+    // 左側から出現
+    &--note02,
+    &--note03,
+    &--note06,
+    &--note07 {
+      translate: -120px 16px;
+    }
+
+    // 右側から出現
+    &--note01,
+    &--note04,
+    &--note05,
+    &--note08 {
+      translate: 120px 16px;
+    }
+
+    &--note01 { animation-duration: 5.2s; animation-delay: 0s; transition-delay: 0.05s; }
+    &--note02 { animation-duration: 6s; animation-delay: -1.2s; transition-delay: 0.12s; }
+    &--note03 { animation-duration: 5.6s; animation-delay: -0.6s; transition-delay: 0.18s; }
+    &--note04 { animation-duration: 6.4s; animation-delay: -2s; transition-delay: 0.1s; }
+    &--note05 { animation-duration: 5.8s; animation-delay: -0.3s; transition-delay: 0.08s; }
+    &--note06 { animation-duration: 6.2s; animation-delay: -1.6s; transition-delay: 0.16s; }
+    &--note07 { animation-duration: 5.4s; animation-delay: -2.4s; transition-delay: 0.2s; }
+    &--note08 { animation-duration: 6.6s; animation-delay: -0.9s; transition-delay: 0.14s; }
 
     // intro 周り
     &--note01 {
@@ -440,11 +460,29 @@ body.page-philosophy {
       right: -15%;
       max-width: 130px;
       width: 100%;
+      transform-origin: center center;
+      animation: philosophy-note-sway 6.2s ease-in-out infinite;
+      animation-delay: -0.8s;
+      will-change: transform;
 
       @include sp {
         top: 36%;
         right: -4%;
         max-width: 72px;
+      }
+    }
+
+    &--note01,
+    &--note02,
+    &--note03,
+    &--note04,
+    &--note05,
+    &--note06,
+    &--note07,
+    &--note08 {
+      &.is-appeared {
+        opacity: 1;
+        translate: 0 0;
       }
     }
 
@@ -798,13 +836,19 @@ body.page-philosophy {
       min-height: 0;
       margin: 0;
       align-self: end;
+      overflow: hidden; // 拡大・回転時に地球下部の欠けを隠す
 
       img {
         display: block;
-        width: min(1100px, 100%);
+        width: min(1220px, 112%);
         margin-inline: auto;
+        margin-bottom: -6%;
         object-fit: contain;
         object-position: bottom center;
+        transform-origin: 50% 78%;
+        transform: scale(1.14) rotate(var(--earth-rotate, 0deg));
+        will-change: transform;
+        backface-visibility: hidden;
       }
     }
   }
@@ -1142,6 +1186,10 @@ body.page-philosophy {
       --shoot-opacity: 1 !important;
     }
 
+    .philosophy-page__figure--outro img {
+      transform: scale(1.14) rotate(0deg);
+    }
+
     .goods--kirakira,
     .goods--kirakira02 {
       animation: none;
@@ -1156,6 +1204,13 @@ body.page-philosophy {
     .goods--note06,
     .goods--note07,
     .goods--note08 {
+      animation: none;
+      opacity: 1;
+      translate: none;
+      transition: none;
+    }
+
+    .goods--pen {
       animation: none;
     }
   }
