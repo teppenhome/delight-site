@@ -542,7 +542,8 @@ body.page-philosophy {
     &--note05 {
       top: 150px;
       // 親（section）基準からブラウザ右端へ突き出す
-      right: calc(50% - 50vw);
+      // ふわふわ回転で右が切れないよう、少し外側（右）へ
+      right: calc(50% - 50vw - 36px);
       max-width: 320px;
       width: 100%;
     }
@@ -577,7 +578,7 @@ body.page-philosophy {
       width: 100%;
       --shoot-x: 0px;
       --shoot-y: 0px;
-      --shoot-opacity: 1;
+      --shoot-opacity: 0;
       opacity: var(--shoot-opacity);
       transform: translate3d(var(--shoot-x), var(--shoot-y), 0);
       will-change: transform, opacity;
@@ -598,7 +599,7 @@ body.page-philosophy {
       width: 100%;
       --shoot-x: 0px;
       --shoot-y: 0px;
-      --shoot-opacity: 1;
+      --shoot-opacity: 0;
       opacity: var(--shoot-opacity);
       transform: translate3d(var(--shoot-x), var(--shoot-y), 0);
       will-change: transform, opacity;
@@ -664,7 +665,7 @@ body.page-philosophy {
       }
 
       &--note05 {
-        right: calc(50% - 50vw + 24px);
+        right: calc(50% - 50vw - 12px);
         max-width: 280px;
       }
 
@@ -1120,7 +1121,7 @@ body.page-philosophy {
     user-select: none;
     --shoot-x: 0px;
     --shoot-y: 0px;
-    --shoot-opacity: 1;
+    --shoot-opacity: 0;
     opacity: var(--shoot-opacity);
     transform: translate3d(var(--shoot-x), var(--shoot-y), 0);
     will-change: transform, opacity;

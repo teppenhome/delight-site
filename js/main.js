@@ -734,7 +734,6 @@ function initContactForm() {
 // ============================================================
 function initPhilosophyShootingStars() {
   if (!document.body.classList.contains('page-philosophy')) return;
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
   const stars = [
     // 軌跡が右上 → 左下へ
@@ -749,11 +748,23 @@ function initPhilosophyShootingStars() {
   ]
     .map((cfg) => {
       const el = document.querySelector(cfg.sel);
-      return el ? { ...cfg, el } : null;
+      return el ? { ...cfg, el, maxP: 0, settled: false } : null;
     })
     .filter(Boolean);
 
   if (!stars.length) return;
+
+  // 到達位置（デザイン上の配置）で固定
+  const SETTLE_AT = 0.5;
+
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    stars.forEach(({ el }) => {
+      el.style.setProperty('--shoot-x', '0px');
+      el.style.setProperty('--shoot-y', '0px');
+      el.style.setProperty('--shoot-opacity', '1');
+    });
+    return;
+  }
 
   const easeInOut = (t) =>
     t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
@@ -772,33 +783,63 @@ function initPhilosophyShootingStars() {
     return clamp01(delayed);
   };
 
-  // 出現〜消失のフェード（中央付近で最も明るく）
-  const getOpacity = (p) => {
-    if (p < 0.12) return p / 0.12;
-    if (p > 0.88) return (1 - p) / 0.12;
-    return 1;
+  const apply = (star, p) => {
+    // p: 0（画面外・開始）→ 0.5（配置位置で停止）
+    const t = p - SETTLE_AT; // -0.5 → 0
+    const x = Math.round(t * star.dist * star.dx * 10) / 10;
+    const y = Math.round(t * star.dist * star.dy * 10) / 10;
+    const opacity =
+      p <= 0 ? 0 : Math.min(1, Math.round((p / 0.14) * 1000) / 1000);
+
+    star.el.style.setProperty('--shoot-x', `${x}px`);
+    star.el.style.setProperty('--shoot-y', `${y}px`);
+    star.el.style.setProperty('--shoot-opacity', String(opacity));
   };
 
+  const settle = (star) => {
+    star.settled = true;
+    star.el.style.setProperty('--shoot-x', '0px');
+    star.el.style.setProperty('--shoot-y', '0px');
+    star.el.style.setProperty('--shoot-opacity', '1');
+  };
+
+  // 初期は軌跡の手前・非表示
+  stars.forEach((star) => apply(star, 0));
+
   let ticking = false;
+  let active = true;
 
   const update = () => {
     ticking = false;
+    if (!active) return;
 
-    stars.forEach(({ el, dx, dy, dist, lag }) => {
-      const p = easeInOut(getProgress(el, lag));
-      // 配置位置を中点として、前後に流す（progress 0.5 = デザイン上の位置）
-      const t = p - 0.5;
-      const x = Math.round(t * dist * dx * 10) / 10;
-      const y = Math.round(t * dist * dy * 10) / 10;
+    let allSettled = true;
 
-      el.style.setProperty('--shoot-x', `${x}px`);
-      el.style.setProperty('--shoot-y', `${y}px`);
-      el.style.setProperty('--shoot-opacity', String(Math.round(getOpacity(p) * 1000) / 1000));
+    stars.forEach((star) => {
+      if (star.settled) return;
+
+      const p = easeInOut(getProgress(star.el, star.lag));
+      // 前進のみ（逆スクロールでは戻さない）
+      star.maxP = Math.max(star.maxP, p);
+
+      if (star.maxP >= SETTLE_AT) {
+        settle(star);
+        return;
+      }
+
+      allSettled = false;
+      apply(star, star.maxP);
     });
+
+    if (allSettled) {
+      active = false;
+      window.removeEventListener('scroll', onScroll);
+      window.removeEventListener('resize', onScroll);
+    }
   };
 
   const onScroll = () => {
-    if (ticking) return;
+    if (ticking || !active) return;
     ticking = true;
     requestAnimationFrame(update);
   };
