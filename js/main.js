@@ -730,7 +730,8 @@ function initContactForm() {
 
 // ============================================================
 //  PHILOSOPHY
-//  流れ星（star01 / star02 / star03）をスクロール連動で流す
+//  流れ星（star01 / star02 / star03）
+//  スクロールで位置に入ったら自動で流す
 // ============================================================
 function initPhilosophyShootingStars() {
   if (!document.body.classList.contains('page-philosophy')) return;
@@ -748,7 +749,7 @@ function initPhilosophyShootingStars() {
   ]
     .map((cfg) => {
       const el = document.querySelector(cfg.sel);
-      return el ? { ...cfg, el, maxP: 0, settled: false } : null;
+      return el ? { ...cfg, el, started: false } : null;
     })
     .filter(Boolean);
 
@@ -756,6 +757,7 @@ function initPhilosophyShootingStars() {
 
   // 到達位置（デザイン上の配置）で固定
   const SETTLE_AT = 0.5;
+  const DURATION = 1400; // 流れる時間（ms）
 
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
     stars.forEach(({ el }) => {
@@ -766,30 +768,14 @@ function initPhilosophyShootingStars() {
     return;
   }
 
-  const easeInOut = (t) =>
-    t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
-
-  const clamp01 = (v) => Math.min(1, Math.max(0, v));
-
-  // 要素がビューポートを通過する間の進捗（0〜1）
-  const getProgress = (el, lag) => {
-    const rect = el.getBoundingClientRect();
-    const vh = window.innerHeight || 1;
-    const center = rect.top + rect.height * 0.5;
-    const start = vh * 1.05;
-    const end = vh * -0.1;
-    const raw = (start - center) / (start - end);
-    const delayed = (raw - lag) / (1 - lag || 1);
-    return clamp01(delayed);
-  };
+  const easeOutCubic = (t) => 1 - Math.pow(1 - t, 3);
 
   const apply = (star, p) => {
-    // p: 0（画面外・開始）→ 0.5（配置位置で停止）
+    // p: 0（軌跡の手前）→ 0.5（配置位置）
     const t = p - SETTLE_AT; // -0.5 → 0
-    const x = Math.round(t * star.dist * star.dx * 10) / 10;
-    const y = Math.round(t * star.dist * star.dy * 10) / 10;
-    const opacity =
-      p <= 0 ? 0 : Math.min(1, Math.round((p / 0.14) * 1000) / 1000);
+    const x = t * star.dist * star.dx;
+    const y = t * star.dist * star.dy;
+    const opacity = p <= 0 ? 0 : Math.min(1, p / 0.14);
 
     star.el.style.setProperty('--shoot-x', `${x}px`);
     star.el.style.setProperty('--shoot-y', `${y}px`);
@@ -797,56 +783,57 @@ function initPhilosophyShootingStars() {
   };
 
   const settle = (star) => {
-    star.settled = true;
     star.el.style.setProperty('--shoot-x', '0px');
     star.el.style.setProperty('--shoot-y', '0px');
     star.el.style.setProperty('--shoot-opacity', '1');
   };
 
-  // 初期は軌跡の手前・非表示
-  stars.forEach((star) => apply(star, 0));
+  const animateStar = (star) => {
+    if (star.started) return;
+    star.started = true;
 
-  let ticking = false;
-  let active = true;
+    const delayMs = star.lag * 900;
+    const startAt = performance.now() + delayMs;
 
-  const update = () => {
-    ticking = false;
-    if (!active) return;
-
-    let allSettled = true;
-
-    stars.forEach((star) => {
-      if (star.settled) return;
-
-      const p = easeInOut(getProgress(star.el, star.lag));
-      // 前進のみ（逆スクロールでは戻さない）
-      star.maxP = Math.max(star.maxP, p);
-
-      if (star.maxP >= SETTLE_AT) {
-        settle(star);
+    const tick = (now) => {
+      if (now < startAt) {
+        requestAnimationFrame(tick);
         return;
       }
 
-      allSettled = false;
-      apply(star, star.maxP);
-    });
+      const t = Math.min(1, (now - startAt) / DURATION);
+      apply(star, easeOutCubic(t) * SETTLE_AT);
 
-    if (allSettled) {
-      active = false;
-      window.removeEventListener('scroll', onScroll);
-      window.removeEventListener('resize', onScroll);
+      if (t < 1) {
+        requestAnimationFrame(tick);
+      } else {
+        settle(star);
+      }
+    };
+
+    requestAnimationFrame(tick);
+  };
+
+  // 初期は軌跡の手前・非表示
+  stars.forEach((star) => apply(star, 0));
+
+  const io = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        const star = stars.find((s) => s.el === entry.target);
+        if (!star || star.started) return;
+        animateStar(star);
+        io.unobserve(entry.target);
+      });
+    },
+    {
+      threshold: 0.2,
+      rootMargin: '0px 0px -8% 0px',
     }
-  };
+  );
 
-  const onScroll = () => {
-    if (ticking || !active) return;
-    ticking = true;
-    requestAnimationFrame(update);
-  };
-
-  window.addEventListener('scroll', onScroll, { passive: true });
-  window.addEventListener('resize', onScroll, { passive: true });
-  update();
+  stars.forEach((star) => io.observe(star.el));
 }
 
 
@@ -981,52 +968,73 @@ function initPhilosophyGoodsReveal() {
 
 // ============================================================
 //  PHILOSOPHY
-//  地球イラストをスクロールに合わせて左右に少し回転
+//  地球のみをスクロールに合わせて大きく回転（人物は固定）
 // ============================================================
 function initPhilosophyEarthRotate() {
   if (!document.body.classList.contains('page-philosophy')) return;
 
-  const earth = document.querySelector('.philosophy-page__figure--outro img');
-  if (!earth) return;
+  const earth = document.querySelector('.philosophy-page__earth-globe');
+  const stage = document.querySelector('.philosophy-page__earth-stage');
+  if (!earth || !stage) return;
 
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
     earth.style.setProperty('--earth-rotate', '0deg');
     return;
   }
 
-  const MAX_DEG = 7; // 左右の最大回転角
+  const MAX_DEG = 48;
+  const LERP = 0.06; // 小さいほど慣性があり滑らか
   const clamp01 = (v) => Math.min(1, Math.max(0, v));
   const easeInOut = (t) =>
     t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
 
-  const getProgress = () => {
-    const rect = earth.getBoundingClientRect();
+  const getTargetDeg = () => {
+    const rect = stage.getBoundingClientRect();
     const vh = window.innerHeight || 1;
     const center = rect.top + rect.height * 0.55;
-    const start = vh * 1.05;
-    const end = vh * 0.15;
-    return clamp01((start - center) / (start - end));
+    // 回転区間を長めにして角度変化を緩やかに
+    const start = vh * 1.15;
+    const end = vh * 0.05;
+    const p = easeInOut(clamp01((start - center) / (start - end)));
+    return -MAX_DEG + p * MAX_DEG * 2;
   };
 
-  let ticking = false;
+  let currentDeg = getTargetDeg();
+  let running = false;
 
-  const update = () => {
-    ticking = false;
-    // 0 → 1 で -MAX → +MAX へ（左右に少し回る）
-    const p = easeInOut(getProgress());
-    const deg = Math.round((-MAX_DEG + p * MAX_DEG * 2) * 100) / 100;
-    earth.style.setProperty('--earth-rotate', `${deg}deg`);
+  earth.style.setProperty('--earth-rotate', `${currentDeg}deg`);
+
+  const tick = () => {
+    const targetDeg = getTargetDeg();
+    currentDeg += (targetDeg - currentDeg) * LERP;
+
+    if (Math.abs(targetDeg - currentDeg) < 0.02) {
+      currentDeg = targetDeg;
+    }
+
+    earth.style.setProperty('--earth-rotate', `${currentDeg}deg`);
+
+    const rect = stage.getBoundingClientRect();
+    const near =
+      rect.bottom > -120 && rect.top < (window.innerHeight || 0) + 120;
+    const settling = Math.abs(targetDeg - currentDeg) >= 0.02;
+
+    if (near || settling) {
+      requestAnimationFrame(tick);
+    } else {
+      running = false;
+    }
   };
 
-  const onScroll = () => {
-    if (ticking) return;
-    ticking = true;
-    requestAnimationFrame(update);
+  const start = () => {
+    if (running) return;
+    running = true;
+    requestAnimationFrame(tick);
   };
 
-  window.addEventListener('scroll', onScroll, { passive: true });
-  window.addEventListener('resize', onScroll, { passive: true });
-  update();
+  window.addEventListener('scroll', start, { passive: true });
+  window.addEventListener('resize', start, { passive: true });
+  start();
 }
 
 
