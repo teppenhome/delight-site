@@ -1002,7 +1002,8 @@ function initPhilosophyGoodsReveal() {
 
 // ============================================================
 //  PHILOSOPHY
-//  地球のみをスクロールに合わせて大きく回転（人物は固定）
+//  地球のみをスクロールに合わせて回転（人物は固定）
+//  ページ最下部ではホイール操作でさらに回転を継続
 // ============================================================
 function initPhilosophyEarthRotate() {
   if (!document.body.classList.contains('page-philosophy')) return;
@@ -1017,31 +1018,73 @@ function initPhilosophyEarthRotate() {
   }
 
   const MAX_DEG = 16;
-  const LERP = 0.035; // 小さいほど慣性があり、動き始めが鈍い
+  const EXTRA_MAX = 56; // 最下部ホイールで追加できる回転量
+  const LERP = 0.12; // 追従を速くし、到達付近で減速して見えないようにする
+  const EXTRA_DECAY = 0.08; // 最下部を離れたときの追加角の戻り
+  const START_RATIO = 1.15;
+  const END_RATIO = 0.05;
+  const SOFT_START = 0.1; // 動き始めだけ少し鈍く（終盤は等速）
   const clamp01 = (v) => Math.min(1, Math.max(0, v));
-  // 動き始め・終わりを強めに鈍らせる
-  const easeInOut = (t) =>
-    t < 0.5 ? 16 * Math.pow(t, 5) : 1 - Math.pow(-2 * t + 2, 5) / 2;
 
-  const getTargetDeg = () => {
+  const getScrollRangePx = () => {
+    const vh = window.innerHeight || 1;
+    return Math.max(1, (START_RATIO - END_RATIO) * vh);
+  };
+
+  // スクロールと同じ角速度になるよう、ホイール感度を距離から算出
+  const getWheelToDeg = () => (2 * MAX_DEG) / getScrollRangePx();
+
+  const getScrollDeg = () => {
     const rect = stage.getBoundingClientRect();
     const vh = window.innerHeight || 1;
     const center = rect.top + rect.height * 0.55;
-    // 回転区間を長めにして角度変化を緩やかに
-    const start = vh * 1.15;
-    const end = vh * 0.05;
+    const start = vh * START_RATIO;
+    const end = vh * END_RATIO;
     const raw = clamp01((start - center) / (start - end));
-    // 冒頭〜12%はほぼ動かず、そこから徐々に回り始める
-    const p = easeInOut(clamp01((raw - 0.12) / 0.88));
+
+    // 冒頭だけ ease-in、その後は線形（到達付近で速度を落とさない）
+    let p;
+    if (raw < SOFT_START) {
+      const u = raw / SOFT_START;
+      p = SOFT_START * u * u;
+    } else {
+      p = raw;
+    }
+
     return -MAX_DEG + p * MAX_DEG * 2;
   };
 
-  let currentDeg = getTargetDeg();
+  const isNearPageBottom = () => {
+    const scrollBottom = window.scrollY + window.innerHeight;
+    const docHeight = Math.max(
+      document.documentElement.scrollHeight,
+      document.body.scrollHeight
+    );
+    // 底の直前からホイール継続を始め、到達で一度止まって見えないようにする
+    return scrollBottom >= docHeight - 96;
+  };
+
+  const isStageNear = () => {
+    const rect = stage.getBoundingClientRect();
+    const vh = window.innerHeight || 0;
+    return rect.bottom > -120 && rect.top < vh + 120;
+  };
+
+  let extraDeg = 0;
+  let currentDeg = getScrollDeg();
   let running = false;
 
   earth.style.setProperty('--earth-rotate', `${currentDeg}deg`);
 
+  const getTargetDeg = () => getScrollDeg() + extraDeg;
+
   const tick = () => {
+    // 最下部を離れたら追加回転をゆっくり戻す
+    if (!isNearPageBottom() && extraDeg !== 0) {
+      extraDeg += (0 - extraDeg) * EXTRA_DECAY;
+      if (Math.abs(extraDeg) < 0.05) extraDeg = 0;
+    }
+
     const targetDeg = getTargetDeg();
     currentDeg += (targetDeg - currentDeg) * LERP;
 
@@ -1051,12 +1094,10 @@ function initPhilosophyEarthRotate() {
 
     earth.style.setProperty('--earth-rotate', `${currentDeg}deg`);
 
-    const rect = stage.getBoundingClientRect();
-    const near =
-      rect.bottom > -120 && rect.top < (window.innerHeight || 0) + 120;
-    const settling = Math.abs(targetDeg - currentDeg) >= 0.02;
+    const settling =
+      Math.abs(targetDeg - currentDeg) >= 0.02 || Math.abs(extraDeg) >= 0.05;
 
-    if (near || settling) {
+    if (isStageNear() || settling) {
       requestAnimationFrame(tick);
     } else {
       running = false;
@@ -1069,8 +1110,20 @@ function initPhilosophyEarthRotate() {
     requestAnimationFrame(tick);
   };
 
+  const onWheel = (e) => {
+    if (!isNearPageBottom() || !isStageNear()) return;
+    if (!e.deltaY) return;
+
+    extraDeg = Math.max(
+      -EXTRA_MAX,
+      Math.min(EXTRA_MAX, extraDeg + e.deltaY * getWheelToDeg())
+    );
+    start();
+  };
+
   window.addEventListener('scroll', start, { passive: true });
   window.addEventListener('resize', start, { passive: true });
+  window.addEventListener('wheel', onWheel, { passive: true });
   start();
 }
 
