@@ -842,6 +842,7 @@ body.page-philosophy {
         // scale(1.14) 後にちょうど親幅へ収まるよう逆算
         width: min(1220px, calc(100% / 1.14));
         margin-inline: auto;
+        margin-top: 72px;
         margin-bottom: -6%;
         transform: scale(1.14);
         transform-origin: 50% 78%;
