@@ -863,11 +863,14 @@ function initPhilosophyLineDraw() {
 
   // パス長に応じた描画時間（短すぎ／長すぎを抑える）
   const getDuration = (length) => Math.min(7.5, Math.max(2, length / 650));
+  const triggerLineY = () => (window.innerHeight || 1) * 0.62;
+
+  let observer = null;
 
   const drawPath = (item) => {
     if (item.drawn) return Promise.resolve();
     item.drawn = true;
-    observer.unobserve(item.path);
+    if (observer) observer.unobserve(item.path);
 
     const duration = getDuration(item.length);
 
@@ -902,22 +905,25 @@ function initPhilosophyLineDraw() {
     return firstDraw;
   };
 
-  const observer = new IntersectionObserver(
+  const runIndex = (index) => {
+    if (index < 0 || !pathData[index] || pathData[index].drawn) return;
+    if (index === 0) {
+      startFirst();
+    } else if (index === 1) {
+      // 1本目の完了後に2本目を開始
+      startFirst().then(() => drawPath(pathData[1]));
+    } else {
+      // 2本目の分割セグメント以降・終点は、その場所に来たら独立描画
+      drawPath(pathData[index]);
+    }
+  };
+
+  observer = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
         if (!entry.isIntersecting) return;
         const index = pathData.findIndex((d) => d.path === entry.target);
-        if (index < 0 || pathData[index].drawn) return;
-
-        if (index === 0) {
-          startFirst();
-        } else if (index === 1) {
-          // 1本目の完了後に2本目を開始
-          startFirst().then(() => drawPath(pathData[1]));
-        } else {
-          // 2本目の分割セグメント以降・終点は、その場所に来たら独立描画
-          drawPath(pathData[index]);
-        }
+        runIndex(index);
       });
     },
     {
@@ -927,6 +933,34 @@ function initPhilosophyLineDraw() {
   );
 
   pathData.forEach((item) => observer.observe(item.path));
+
+  // Safariで IntersectionObserver が取りこぼすケースのフォールバック
+  let fallbackTicking = false;
+  const checkFallback = () => {
+    fallbackTicking = false;
+    if (pathData.every((item) => item.drawn)) {
+      window.removeEventListener('scroll', onFallbackScroll);
+      window.removeEventListener('resize', onFallbackScroll);
+      return;
+    }
+
+    const lineY = triggerLineY();
+    pathData.forEach((item, index) => {
+      if (item.drawn) return;
+      const rect = item.path.getBoundingClientRect();
+      if (rect.top <= lineY && rect.bottom >= lineY) runIndex(index);
+    });
+  };
+
+  const onFallbackScroll = () => {
+    if (fallbackTicking) return;
+    fallbackTicking = true;
+    requestAnimationFrame(checkFallback);
+  };
+
+  window.addEventListener('scroll', onFallbackScroll, { passive: true });
+  window.addEventListener('resize', onFallbackScroll, { passive: true });
+  checkFallback();
 }
 
 
@@ -982,7 +1016,7 @@ function initPhilosophyEarthRotate() {
     return;
   }
 
-  const MAX_DEG = 48;
+  const MAX_DEG = 16;
   const LERP = 0.06; // 小さいほど慣性があり滑らか
   const clamp01 = (v) => Math.min(1, Math.max(0, v));
   const easeInOut = (t) =>
