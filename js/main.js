@@ -1017,10 +1017,11 @@ function initPhilosophyEarthRotate() {
   }
 
   const MAX_DEG = 16;
-  const LERP = 0.06; // 小さいほど慣性があり滑らか
+  const LERP = 0.035; // 小さいほど慣性があり、動き始めが鈍い
   const clamp01 = (v) => Math.min(1, Math.max(0, v));
+  // 動き始め・終わりを強めに鈍らせる
   const easeInOut = (t) =>
-    t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+    t < 0.5 ? 16 * Math.pow(t, 5) : 1 - Math.pow(-2 * t + 2, 5) / 2;
 
   const getTargetDeg = () => {
     const rect = stage.getBoundingClientRect();
@@ -1029,7 +1030,9 @@ function initPhilosophyEarthRotate() {
     // 回転区間を長めにして角度変化を緩やかに
     const start = vh * 1.15;
     const end = vh * 0.05;
-    const p = easeInOut(clamp01((start - center) / (start - end)));
+    const raw = clamp01((start - center) / (start - end));
+    // 冒頭〜12%はほぼ動かず、そこから徐々に回り始める
+    const p = easeInOut(clamp01((raw - 0.12) / 0.88));
     return -MAX_DEG + p * MAX_DEG * 2;
   };
 
