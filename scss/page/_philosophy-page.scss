@@ -293,7 +293,7 @@ body.page-philosophy {
   }
 
   // ── 線イラスト（SVG・viewBox 1400×2800.31 準拠） ─
-  // 積み: 黄雲bg(7) < deco03 / earth-back(8) < 線1・2(9) < earth(10) < 線3(11) < actions(12)
+  // 積み: 黄雲bg(7) < deco03 / earth-back(8) < 線1・2(9) < 地球(10) < 線3(11) < 人物(12) < actions(12)
   &__line {
     position: absolute;
     inset: 0;
@@ -301,7 +301,7 @@ body.page-philosophy {
     pointer-events: none;
     overflow: visible;
 
-    // 3本目だけ地球イラストより上
+    // 3本目: 地球より上・人物より下
     &--end {
       z-index: 11;
     }
@@ -824,8 +824,9 @@ body.page-philosophy {
     }
 
     &--outro {
+      // z-index は付けない（地球 / 線3 / 人物の挟み込みを可能にする）
       position: relative;
-      z-index: 10;
+      display: grid;
       // 正円の地球が左右で切れないよう、ビューポート幅まで広げる
       width: 100vw;
       max-width: none;
@@ -838,6 +839,7 @@ body.page-philosophy {
       padding-bottom: 12%;
 
       .philosophy-page__earth-stage {
+        grid-area: 1 / 1;
         position: relative;
         // scale(1.14) 後にちょうど親幅へ収まるよう逆算
         width: min(1220px, calc(100% / 1.14));
@@ -846,11 +848,19 @@ body.page-philosophy {
         margin-bottom: -6%;
         transform: scale(1.14);
         transform-origin: 50% 78%;
+
+        // 線3(11) を挟む: 地球(10) < 線3(11) < 人物(12)
+        &--globe {
+          z-index: 10;
+        }
+
+        &--people {
+          z-index: 12;
+        }
       }
 
       .philosophy-page__earth-people {
         position: relative;
-        z-index: 2;
         display: block;
         width: 100%;
         height: auto;
@@ -859,7 +869,6 @@ body.page-philosophy {
       // 正円の地球のみ回転（人物の足元付近に上端を合わせる）
       .philosophy-page__earth-globe {
         position: absolute;
-        z-index: 1;
         left: 50%;
         top: 58%;
         width: 92%;
@@ -1014,7 +1023,7 @@ body.page-philosophy {
   }
 
   // ── 下部イラスト ─────────────────────────────────
-  // 積み: earth-back(8) < 線1・2(9) < outro-dots / outro-stars / earth(10) < 線3(11) < actions(12)
+  // 積み: earth-back(8) < 線1・2(9) < outro-dots / outro-stars / 地球(10) < 線3(11) < 人物 / actions(12)
   &__outro {
     position: relative;
     display: flex;
@@ -1034,10 +1043,19 @@ body.page-philosophy {
     position: relative;
     display: grid;
     width: min(1200px, 100%);
-    margin: 0 auto;
+    // 線はそのまま。幅縮小で地球・人物の高さが減る分だけ下へ押し戻す
+    // earth-stage 最大幅 1220px・人物比 1166/1685・基準点（足元付近）≈ 70%
+    margin: calc(
+        40px + max(0px, 1220px - min(1220px, 100vw / 1.14)) * 1166 / 1685 * 0.7
+      )
+      auto 0;
     padding: 0 40px;
 
     @include sp {
+      // SP は線も縮小するため補正を弱める
+      margin-top: calc(
+        40px + max(0px, 1220px - min(1220px, 100vw / 1.14)) * 1166 / 1685 * 0.25
+      );
       padding: 0 20px;
     }
 
