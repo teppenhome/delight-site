@@ -329,12 +329,8 @@ body.page-philosophy {
       transition: none;
     }
 
-    // 2本目の長い線だけ右へ
-    .philosophy-page__line-path--main {
-      transform: translate(20px, 0);
-      transform-box: view-box;
-      transform-origin: 0 0;
-    }
+    // 2本目の右ずらしは HTML 側の <g transform="translate(20,0)"> で行う
+    // （CSS transform + stroke-dash は Safari で線が途切れることがある）
 
     @include sp {
       // SPはレイアウト比率に合わせて width / top を同じ係数で縮める

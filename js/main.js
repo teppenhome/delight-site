@@ -854,7 +854,8 @@ function initPhilosophyLineDraw() {
 
   const pathData = paths.map((path) => {
     const length = path.getTotalLength() + 1;
-    path.style.strokeDasharray = String(length);
+    // 単一値より length length の方が Safari の dash 描画が安定する
+    path.style.strokeDasharray = `${length} ${length}`;
     path.style.strokeDashoffset = reducedMotion ? '0' : String(length);
     return { path, length, drawn: false };
   });
