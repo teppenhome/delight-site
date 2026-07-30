@@ -853,10 +853,11 @@ function initPhilosophyLineDraw() {
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   const pathData = paths.map((path) => {
-    const length = path.getTotalLength() + 1;
-    // 単一値より length length の方が Safari の dash 描画が安定する
-    path.style.strokeDasharray = `${length} ${length}`;
-    path.style.strokeDashoffset = reducedMotion ? '0' : String(length);
+    const length = path.getTotalLength();
+    // pathLength 正規化で Safari の dash 途切れ（浮動小数のずれ）を避ける
+    path.setAttribute('pathLength', '1');
+    path.style.strokeDasharray = '1 1';
+    path.style.strokeDashoffset = reducedMotion ? '0' : '1';
     return { path, length, drawn: false };
   });
 
@@ -865,6 +866,8 @@ function initPhilosophyLineDraw() {
   // パス長に応じた描画時間（短すぎ／長すぎを抑える）
   const getDuration = (length) => Math.min(7.5, Math.max(2, length / 650));
   const triggerLineY = () => (window.innerHeight || 1) * 0.62;
+  // CSS ease-out 相当（cubic-bezier(0,0,0.58,1) の近似）
+  const easeOut = (t) => 1 - Math.pow(1 - t, 3);
 
   let observer = null;
 
@@ -873,29 +876,25 @@ function initPhilosophyLineDraw() {
     item.drawn = true;
     if (observer) observer.unobserve(item.path);
 
-    const duration = getDuration(item.length);
+    const durationMs = getDuration(item.length) * 1000;
 
     return new Promise((resolve) => {
-      let settled = false;
+      // CSS transition ではなく rAF で更新（Safari の stroke-dash 描画割れ対策）
+      const start = performance.now();
+      item.path.style.transition = 'none';
 
-      const finish = () => {
-        if (settled) return;
-        settled = true;
+      const tick = (now) => {
+        const t = Math.min(1, (now - start) / durationMs);
+        item.path.style.strokeDashoffset = String(1 - easeOut(t));
+        if (t < 1) {
+          requestAnimationFrame(tick);
+          return;
+        }
         item.path.style.strokeDashoffset = '0';
         resolve();
       };
 
-      const onEnd = (e) => {
-        if (e.propertyName !== 'stroke-dashoffset') return;
-        item.path.removeEventListener('transitionend', onEnd);
-        finish();
-      };
-
-      item.path.addEventListener('transitionend', onEnd);
-      item.path.style.transition = `stroke-dashoffset ${duration}s ease-out`;
-      item.path.getBoundingClientRect();
-      item.path.style.strokeDashoffset = '0';
-      window.setTimeout(finish, duration * 1000 + 80);
+      requestAnimationFrame(tick);
     });
   };
 

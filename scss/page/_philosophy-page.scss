@@ -310,31 +310,31 @@ body.page-philosophy {
   &__line-svg {
     position: absolute;
     // 新SVGはアートボード余白なしのため、黄雲下あたりから開始
+    // CSS transform は Safari の stroke-dash 描画を壊すことがあるため使わない
     top: 350px;
-    left: 50%;
+    left: calc(50% - 1475px / 2 + 40px);
     display: block;
     width: 1475px;
     height: auto;
     max-width: none;
     overflow: visible; // viewBox外・translateではみ出した線を切らない
-    transform: translateX(calc(-50% + 40px));
     pointer-events: none;
     user-select: none;
 
     path {
       stroke-width: 6;
-      // JS 起動前に線全体を隠す（パス長より大きい値）
-      stroke-dasharray: 50000;
-      stroke-dashoffset: 50000;
+      // JS 起動前に線全体を隠す（pathLength=1 基準）
+      stroke-dasharray: 1 1;
+      stroke-dashoffset: 1;
       transition: none;
     }
 
     // 2本目の右ずらしは HTML 側の <g transform="translate(20,0)"> で行う
-    // （CSS transform + stroke-dash は Safari で線が途切れることがある）
 
     @include sp {
       // SPはレイアウト比率に合わせて width / top を同じ係数で縮める
       width: min(900px, 160vw);
+      left: calc(50% - min(900px, 160vw) / 2 + 40px);
       top: calc(350 / 1475 * min(900px, 160vw));
     }
   }
