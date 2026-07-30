@@ -329,8 +329,6 @@ body.page-philosophy {
       transition: none;
     }
 
-    // 2本目の右ずらしは HTML 側の <g transform="translate(20,0)"> で行う
-
     @include sp {
       // SPはレイアウト比率に合わせて width / top を同じ係数で縮める
       width: min(900px, 160vw);
