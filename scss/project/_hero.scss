@@ -10,19 +10,35 @@
   background-color: #005AAB;
 
   &__bg {
+    position: relative;
     width: 100%;
     height: 100%;
     background-color: #005AAB;
+    overflow: hidden;
+  }
 
-    img {
-      display: block;
-      width: 100%;
-      height: 100%;
-      max-width: 1400px;
-      margin: 0 auto;
-      object-fit: contain;
-      object-position: top center;
-    }
+  &__bg-pattern {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: bottom center;
+    pointer-events: none;
+  }
+
+  &__bg-main {
+    position: relative;
+    z-index: 1;
+    display: block;
+    width: 100%;
+    height: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    object-fit: contain;
+    object-position: top center;
   }
 
   &__text {

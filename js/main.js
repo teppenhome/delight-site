@@ -23,7 +23,6 @@ document.addEventListener('DOMContentLoaded', () => {
   initPhilosophyLineDraw();
   initPhilosophyGoodsReveal();
   initPhilosophyEarthRotate();
-  initPhilosophyCursor();
 });
 
 
@@ -1125,89 +1124,6 @@ function initPhilosophyEarthRotate() {
   window.addEventListener('resize', start, { passive: true });
   window.addEventListener('wheel', onWheel, { passive: true });
   start();
-}
-
-
-// ============================================================
-//  PHILOSOPHY
-//  カスタムカーソル（理念テキスト上で拡大・黄色く発光）
-// ============================================================
-function initPhilosophyCursor() {
-  if (!document.body.classList.contains('page-philosophy')) return;
-  if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
-
-  const HOTSPOT_X = 21;
-  const HOTSPOT_Y = 42;
-  const TEXT_SELECTOR = [
-    '.philosophy-page__catch-en',
-    '.philosophy-page__catch-ja',
-    '.philosophy-page__intro-text',
-    '.philosophy-page__section-heading',
-    '.philosophy-page__section-body',
-    '.philosophy-page__section-en',
-    '.philosophy-page__section-ja',
-    '.philosophy-page__section-num',
-  ].join(',');
-
-  const cursor = document.createElement('div');
-  cursor.className = 'philosophy-cursor';
-  cursor.setAttribute('aria-hidden', 'true');
-  cursor.innerHTML =
-    '<img class="philosophy-cursor__img" src="images/philosophy/philosophy-cursor.png" alt="" width="72" height="72" decoding="async">';
-  document.body.appendChild(cursor);
-
-  let visible = false;
-  let onText = false;
-  let ticking = false;
-  let lastX = 0;
-  let lastY = 0;
-
-  const setPos = (x, y) => {
-    cursor.style.setProperty('--cursor-x', `${x - HOTSPOT_X}px`);
-    cursor.style.setProperty('--cursor-y', `${y - HOTSPOT_Y}px`);
-  };
-
-  const setOnText = (next) => {
-    if (onText === next) return;
-    onText = next;
-    cursor.classList.toggle('is-on-text', next);
-  };
-
-  const updateFromPoint = (x, y) => {
-    lastX = x;
-    lastY = y;
-    setPos(x, y);
-
-    // カーソル自身は pointer-events:none なので下の要素を取得できる
-    const el = document.elementFromPoint(x, y);
-    setOnText(Boolean(el && el.closest(TEXT_SELECTOR)));
-  };
-
-  const onMove = (e) => {
-    if (!visible) {
-      visible = true;
-      cursor.classList.add('is-visible');
-    }
-
-    lastX = e.clientX;
-    lastY = e.clientY;
-
-    if (ticking) return;
-    ticking = true;
-    requestAnimationFrame(() => {
-      ticking = false;
-      updateFromPoint(lastX, lastY);
-    });
-  };
-
-  const onLeave = () => {
-    visible = false;
-    cursor.classList.remove('is-visible');
-    setOnText(false);
-  };
-
-  document.addEventListener('mousemove', onMove, { passive: true });
-  document.documentElement.addEventListener('mouseleave', onLeave);
 }
 
 

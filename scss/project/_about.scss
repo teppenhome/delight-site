@@ -6,14 +6,16 @@
 // ============================================================
 .about {
   padding: $section-pad-v 0;
-  background-color: $color-white;
-  background-image: url("../images/top-about-background.png");
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
+  background-color: #005AAB;
+
+  .section-label,
+  .section-title {
+    color: #fff;
+  }
 
   .section-title {
     margin-top: -20px;
+    margin-bottom: 0;
   }
 
   &__inner {
@@ -25,7 +27,62 @@
     }
   }
 
+  &__heading {
+    position: relative;
+    width: fit-content;
+    margin: 0 auto;
+  }
+
+  &__kira {
+    position: absolute;
+    display: block;
+    pointer-events: none;
+    z-index: 1;
+
+    &--01 {
+      left: -120px;
+      top: 40px;
+      width: 140px;
+      height: auto;
+
+      @include sp {
+        left: -36px;
+        top: 16px;
+        width: 40px;
+      }
+    }
+
+    &--02 {
+      right: -100px;
+      top: -20px;
+      width: 140px;
+      height: auto;
+
+      @include sp {
+        right: -28px;
+        top: -4px;
+        width: 40px;
+      }
+    }
+
+    &--03 {
+      position: relative;
+      display: inline-block;
+      vertical-align: middle;
+      width: 100px;
+      height: auto;
+      margin-left: -40px;
+      margin-top: -50px;
+
+      @include sp {
+        width: 20px;
+        margin-left: 6px;
+      }
+    }
+  }
+
   &__text {
+    position: relative;
     width: fit-content;
     margin: 0 auto;
     padding-top: 40px;
@@ -37,12 +94,16 @@
     p {
       font-size: 16px;
       line-height: 38px;
-      color: #0F65A3;
+      color: #fff;
       margin-bottom: 30px;
       font-weight: 500;
 
       @include sp {
         font-size: 16px;
+      }
+
+      &:last-child {
+        margin-bottom: 0;
       }
     }
   }

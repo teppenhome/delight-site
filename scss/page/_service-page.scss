@@ -348,6 +348,14 @@
     padding: $section-pad-v 0;
     background: #FFFCF5;
 
+    .service-page__section-title {
+      margin-bottom: 24px;
+
+      @include sp {
+        margin-bottom: 20px;
+      }
+    }
+
     @include sp {
       padding: 56px 0;
     }
@@ -362,7 +370,7 @@
     grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
     gap: 40px;
     align-items: center;
-    margin-bottom: 64px;
+    padding-left: 20px;
 
     &:last-child {
       margin-bottom: 0;
@@ -415,7 +423,7 @@
 
   &__initiative-media {
     margin: 0;
-    aspect-ratio: 16 / 11;
+    aspect-ratio: 16 / 9;
     width: 100%;
     border-radius: 12px;
     overflow: hidden;
@@ -428,7 +436,7 @@
     }
 
     &--environment {
-      aspect-ratio: 16 / 12;
+      aspect-ratio: 16 / 11;
     }
   }
 
@@ -603,10 +611,21 @@
     text-decoration: none;
     overflow: visible;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
-    @include transition(opacity);
+    transition: opacity 0.25s ease, transform 0.25s ease;
 
     &:hover {
-      opacity: 0.88;
+      opacity: 0.92;
+      transform: scale(0.97);
+    }
+
+    // js-reveal の transform / opacity より詳細度を上げてホバーを優先
+    &.js-reveal.is-visible {
+      transition: opacity 0.25s ease, transform 0.25s ease;
+
+      &:hover {
+        opacity: 0.92;
+        transform: translateY(0) scale(0.97);
+      }
     }
 
     @include sp {

@@ -15,11 +15,17 @@
   
   <nav class="side-nav" id="sideNav" aria-label="サイドナビゲーション">
     <ul>
-      <li>
+      <li class="side-nav__item side-nav__item--has-child">
         <a href="about.html">
           <span class="side-nav__en">ABOUT US</span>
           <span class="side-nav__ja">会社概要</span>
         </a>
+        <ul class="side-nav__child">
+          <li><a href="company.html">会社概要</a></li>
+          <li><a href="philosophy.html">企業理念</a></li>
+          <li><a href="message.html">代表挨拶</a></li>
+          <li><a href="access.html">アクセス</a></li>
+        </ul>
       </li>
       <li>
         <a href="work.html">
@@ -27,11 +33,15 @@
           <span class="side-nav__ja">制作実績</span>
         </a>
       </li>
-      <li>
-        <a href="#service">
+      <li class="side-nav__item side-nav__item--has-child">
+        <a href="service.html">
           <span class="side-nav__en">SERVICE</span>
           <span class="side-nav__ja">できること</span>
         </a>
+        <ul class="side-nav__child">
+          <li><a href="service.html#strengths">強み</a></li>
+          <li><a href="service.html#flow">ご依頼の流れ</a></li>
+        </ul>
       </li>
       <li>
         <a href="news.html">
@@ -97,7 +107,8 @@
     ============================================================ -->
     <section class="hero" id="top">
       <div class="hero__bg">
-        <img src="images/hero-image_color03.png" alt="">
+        <img class="hero__bg-pattern" src="images/check-pattern.png" alt="" aria-hidden="true">
+        <img class="hero__bg-main" src="images/hero-image_color04.png" alt="">
       </div>
 
       <header class="header" id="header">
@@ -109,11 +120,17 @@
           </h1>
           <nav class="header__nav" id="globalNav" aria-label="メインナビゲーション">
             <ul class="header__nav-list">
-              <li>
+              <li class="header__nav-item header__nav-item--has-child">
                 <a href="about.html">
                   <span class="header__nav-en">ABOUT US</span>
                   <span class="header__nav-ja">会社概要</span>
                 </a>
+                <ul class="header__nav-child">
+                  <li><a href="company.html">会社概要</a></li>
+                  <li><a href="philosophy.html">企業理念</a></li>
+                  <li><a href="message.html">代表挨拶</a></li>
+                  <li><a href="access.html">アクセス</a></li>
+                </ul>
               </li>
               <li>
                 <a href="work.html">
@@ -122,11 +139,15 @@
                 </a>
               </li>
           
-              <li>
-                <a href="#service">
+              <li class="header__nav-item header__nav-item--has-child">
+                <a href="service.html">
                   <span class="header__nav-en">SERVICE</span>
                   <span class="header__nav-ja">サービス</span>
                 </a>
+                <ul class="header__nav-child">
+                  <li><a href="service.html#strengths">強み</a></li>
+                  <li><a href="service.html#flow">ご依頼の流れ</a></li>
+                </ul>
               </li>
               <li>
                 <a href="news.html">
@@ -175,17 +196,21 @@
     <!-- ============================================================
       ABOUT SECTION (DELIGHTとは)
     ============================================================ -->
-    <section class="about" id="about" data-side-nav-theme="light">
+    <section class="about" id="about" data-side-nav-theme="blue">
       <div class="about__inner container">
-        <p class="section-label">What is DELIGHT ?</p>
-        <h2 class="section-title">
-          <span class="section-title__en">DELIGHT</span>とは
-        </h2>
+        <div class="about__heading">
+          <img class="about__kira about__kira--01" src="images/about-kira01.png" alt="" width="240" height="240" decoding="async" aria-hidden="true">
+          <img class="about__kira about__kira--02" src="images/about-kira02.png" alt="" width="240" height="240" decoding="async" aria-hidden="true">
+          <p class="section-label">What is DELIGHT ?</p>
+          <h2 class="section-title">
+            <span class="section-title__en">DELIGHT</span>とは
+          </h2>
+        </div>
         <div class="about__body">
           <div class="about__text u-no-br-sp">
             <p>私たちは、たのしいと高品質なものを提供する、<br />販売商品、グッズの企画、製造販売会社です。<br />第一にお客様が楽しむこと、第二に私たち自身も楽しむこと。<br />たのしみながらものづくりを行うことを大切にしています。</p>
 
-            <p>さまざまな企業から依頼を受け、<br />企画提案・デザイン・サンプル制作・量産・検品、物流までを<br />一括でお任せいただいております。<br />冒険的なものから堅実的なデザインまで幅広く対応可能です。</p>
+            <p>さまざまな企業から依頼を受け、<br />企画提案・デザイン・サンプル制作・量産・検品、物流までを<br />一括でお任せいただいております。<br />冒険的なものから堅実的なデザインまで幅広く対応可能です。<img class="about__kira about__kira--03" src="images/about-kira03.png" alt="" width="119" height="119" decoding="async" aria-hidden="true"></p>
           </div>
           <div class="about__link">
             <a href="about.html" class="c-more-btn">
@@ -1022,7 +1047,29 @@
             <span class="section-title__ruby">お問い合わせ</span>
             <span class="section-title__en__blue __middle">CONTACT</span>
           </h2>
-          <p class="contact__lead">お仕事や取材のご相談・ご依頼など<br>どのようなことでもお気軽にご相談ください。</p>
+          <div class="contact__intro">
+            <p class="contact__lead">
+              こちらはグッズ制作・お仕事のご依頼に関するお問い合わせ窓口です。<br>
+              ご質問、お見積りのご依頼などお気軽にご相談ください。
+            </p>
+            <p class="contact__lead-note">弊社商品をご購入されたお客様のお問い合わせは下記専用フォームからお問い合わせください</p>
+            <a href="#" class="contact__items-btn">
+              <img src="images/contact-item.png" alt="">
+              <span class="contact__items-btn-body">
+                <span class="contact__items-btn-en">ITEMS CONTACT</span>
+                <span class="contact__items-btn-ja">商品についてのお問い合わせはこちら</span>
+              </span>
+            </a>
+          </div>
+
+          <div class="contact__notes">
+            <p class="contact__notes-title">＜ご注意＞</p>
+            <ul class="contact__notes-list">
+              <li>休業日のお問合せに対しては、翌営業日以降のご対応となります。</li>
+              <li>内容によってはご回答にお時間を要する場合、またはご回答ができない場合もございます。</li>
+              <li>電話やメール、当サイトのフォームを利用した当社への売り込みの一切をお断りしています。</li>
+            </ul>
+          </div>
 
           <!-- WordPressではContact Form 7やWPFormsなどで置き換え -->
           <form class="contact__form" id="contactForm" novalidate>
@@ -1040,37 +1087,37 @@
 
           <div class="contact__row">
             <label class="contact__label" for="contact-name">お名前</label>
-            <input type="text" id="contact-name" name="name" class="contact__input" placeholder="例）横浜 太郎">
+            <input type="text" id="contact-name" name="name" class="contact__input">
           </div>
 
           <div class="contact__row">
             <label class="contact__label" for="contact-furigana">ふりがな</label>
-            <input type="text" id="contact-furigana" name="furigana" class="contact__input" placeholder="例）よこはまたろう">
+            <input type="text" id="contact-furigana" name="furigana" class="contact__input">
           </div>
 
           <div class="contact__row">
             <label class="contact__label" for="contact-company">会社名・団体名</label>
-            <input type="text" id="contact-company" name="company" class="contact__input" placeholder="例）株式会社DELIGHT">
+            <input type="text" id="contact-company" name="company" class="contact__input">
           </div>
 
           <div class="contact__row">
             <label class="contact__label" for="contact-address">住所</label>
-            <input type="text" id="contact-address" name="address" class="contact__input" placeholder="例）神奈川県横浜市…">
+            <input type="text" id="contact-address" name="address" class="contact__input">
           </div>
 
           <div class="contact__row">
             <label class="contact__label" for="contact-tel">電話番号</label>
-            <input type="tel" id="contact-tel" name="tel" class="contact__input" placeholder="例）00-0000-0000">
+            <input type="tel" id="contact-tel" name="tel" class="contact__input">
           </div>
 
           <div class="contact__row">
             <label class="contact__label" for="contact-email">メールアドレス</label>
-            <input type="email" id="contact-email" name="email" class="contact__input" placeholder="例）delight@example.com">
+            <input type="email" id="contact-email" name="email" class="contact__input">
           </div>
 
           <div class="contact__row">
             <label class="contact__label" for="contact-message">お問合せ内容</label>
-            <textarea id="contact-message" name="message" class="contact__textarea" rows="6" placeholder="お問い合わせ内容をご記入ください"></textarea>
+            <textarea id="contact-message" name="message" class="contact__textarea" rows="6"></textarea>
           </div>
 
           <div class="contact__row contact__row--privacy">
@@ -1085,15 +1132,6 @@
           </div>
 
         </form>
-
-        <div class="contact__notes">
-          <p class="contact__notes-title">＜ご注意＞</p>
-          <ul class="contact__notes-list">
-            <li>休業日のお問合せに対しては、翌営業日以降のご対応となります。</li>
-            <li>内容によってはご回答にお時間を要する場合、またはご回答ができない場合もございます。</li>
-            <li>ご購入いただいた商品についてのお問い合わせは<a href="#">こちら</a>からお願いいたします。</li>
-          </ul>
-        </div>
         </div>
       </div>
     </section>

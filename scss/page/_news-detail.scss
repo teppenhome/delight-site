@@ -6,9 +6,56 @@
 //  トップの .news / 一覧の .news-archive とは独立した命名
 // ============================================================
 
+// サイド装飾（deco02=左 / deco01=右 ※一覧の deco04/03 の短い版）
+$news-detail-side-deco-scale: 0.5;
+$news-detail-side-deco-left-w: 195px * $news-detail-side-deco-scale;
+$news-detail-side-deco-right-w: 275px * $news-detail-side-deco-scale;
+$news-detail-title-offset: 120px;
+$news-detail-side-deco-lift: 40px;
+$news-detail-side-deco-top: calc(32px + 1.5em + 40px + #{$news-detail-title-offset} - #{$news-detail-side-deco-lift});
+
 .news-detail {
+  position: relative;
   padding: 0 0 100px;
   background: $color-white;
+
+  // 左右サイド装飾（波打ちイエロー）
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    top: $news-detail-side-deco-top;
+    bottom: 0;
+    background-repeat: no-repeat;
+    background-size: 100% auto;
+    pointer-events: none;
+    z-index: 0;
+
+    @include sp {
+      display: none;
+    }
+  }
+
+  // 左：news-side-deco02（外側が直線・内側が波）
+  &::before {
+    left: 0;
+    width: $news-detail-side-deco-left-w;
+    background-image: url("../images/news/news-side-deco02.png");
+    background-position: left top;
+  }
+
+  // 右：news-side-deco01（外側が直線・内側が波）
+  &::after {
+    right: 0;
+    width: $news-detail-side-deco-right-w;
+    background-image: url("../images/news/news-side-deco01.png");
+    background-position: right top;
+  }
+
+  > * {
+    position: relative;
+    z-index: 1;
+  }
 
   @include sp {
     padding: 0 0 72px;
@@ -48,6 +95,11 @@
   // ── 記事本文 ────────────────────────────────────
   &__hero {
     padding: 0 40px;
+
+    // header__nav 表示時はタイトル〜コンテンツを下げて重なりを回避
+    @media (min-width: #{$breakpoint-tab + 1px}) {
+      margin-top: $news-detail-title-offset;
+    }
 
     @include sp {
       padding: 0 20px;

@@ -59,20 +59,30 @@
         </h1>
         <nav class="header__nav" id="globalNav" aria-label="メインナビゲーション">
           <ul class="header__nav-list">
-            <li>
+            <li class="header__nav-item header__nav-item--has-child">
               <a href="about.html">
                 <span class="header__nav-en">ABOUT US</span>
               </a>
+              <ul class="header__nav-child">
+                <li><a href="company.html">会社概要</a></li>
+                <li><a href="philosophy.html">企業理念</a></li>
+                <li><a href="message.html">代表挨拶</a></li>
+                <li><a href="access.html">アクセス</a></li>
+              </ul>
             </li>
             <li>
               <a href="work.html">
                 <span class="header__nav-en">WORK</span>
               </a>
             </li>
-            <li>
-              <a href="index.html#service">
+            <li class="header__nav-item header__nav-item--has-child">
+              <a href="service.html">
                 <span class="header__nav-en">SERVICE</span>
               </a>
+              <ul class="header__nav-child">
+                <li><a href="service.html#strengths">強み</a></li>
+                <li><a href="service.html#flow">ご依頼の流れ</a></li>
+              </ul>
             </li>
             <li>
               <a href="news.html">
@@ -95,17 +105,17 @@
 
 
   <main class="news-detail" id="top">
-<div class="news-detail__hero c-page-hero c-page-hero--center">
-      <h1 class="c-page-title">NEWS</h1>
-      <p class="c-page-subtitle">お知らせ</p>
-    </div>
-
     <div class="news-detail__breadcrumb">
       <a href="index.html">TOP</a>
       <span>&gt;</span>
       <a href="news.html">NEWS</a>
       <span>&gt;</span>
       <span>【〇〇】あああああああああああああああ</span>
+    </div>
+
+    <div class="news-detail__hero c-page-hero c-page-hero--center">
+      <h1 class="c-page-title">NEWS</h1>
+      <p class="c-page-subtitle">お知らせ</p>
     </div>
 
     <article class="news-detail__inner">

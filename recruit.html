@@ -59,20 +59,30 @@
         </h1>
         <nav class="header__nav" id="globalNav" aria-label="メインナビゲーション">
           <ul class="header__nav-list">
-            <li>
+            <li class="header__nav-item header__nav-item--has-child">
               <a href="about.html">
                 <span class="header__nav-en">ABOUT US</span>
               </a>
+              <ul class="header__nav-child">
+                <li><a href="company.html">会社概要</a></li>
+                <li><a href="philosophy.html">企業理念</a></li>
+                <li><a href="message.html">代表挨拶</a></li>
+                <li><a href="access.html">アクセス</a></li>
+              </ul>
             </li>
             <li>
               <a href="work.html">
                 <span class="header__nav-en">WORK</span>
               </a>
             </li>
-            <li>
-              <a href="index.html#service">
+            <li class="header__nav-item header__nav-item--has-child">
+              <a href="service.html">
                 <span class="header__nav-en">SERVICE</span>
               </a>
+              <ul class="header__nav-child">
+                <li><a href="service.html#strengths">強み</a></li>
+                <li><a href="service.html#flow">ご依頼の流れ</a></li>
+              </ul>
             </li>
             <li>
               <a href="news.html">

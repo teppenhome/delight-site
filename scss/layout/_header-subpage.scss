@@ -22,49 +22,6 @@ body[class*="page-"] {
     top: 60px;
   }
 
-  .header__nav-list li a {
-    color: $color-text;
-  }
-
-  .header__nav-en {
-    color: $color-text;
-    font-style: normal;
-
-    &.__is-active {
-      color: $color-primary;
-    }
-  }
-
-  .header__nav-ja {
-    color: $color-primary;
-    opacity: 0.85;
-  }
-}
-
-// WORK / NEWS 一覧・詳細：ナビ左揃え
-.page-work,
-.page-work-detail,
-.page-news,
-.page-news-detail,
-.page-recruit,
-.page-privacy,
-.page-service {
-  .header__nav-list {
-    align-items: flex-start;
-  }
-
-  .header__nav-list li a {
-    align-items: flex-start;
-    text-align: left;
-  }
-}
-
-// ABOUT 配下：ナビ左揃え + 子メニュー
-.page-about,
-.page-company,
-.page-philosophy,
-.page-message,
-.page-access {
   .header__nav-list {
     align-items: flex-start;
   }
@@ -72,18 +29,69 @@ body[class*="page-"] {
   .header__nav-list > li > a {
     align-items: flex-start;
     text-align: left;
+    color: $color-text;
+
+    &:hover {
+      color: $color-text;
+      opacity: 1;
+
+      .header__nav-en {
+        color: $color-text;
+      }
+
+      .header__nav-en::after {
+        transform: scaleX(1);
+      }
+    }
+  }
+
+  .header__nav-en {
+    position: relative;
+    display: inline-block;
+    color: $color-text;
+    font-style: normal;
+
+    &.__is-active {
+      color: $color-primary;
+      font-weight: 700;
+    }
+
+    &::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -4px;
+      width: 100%;
+      height: 1px;
+      background-color: $color-primary;
+      transform: scaleX(0);
+      transform-origin: left center;
+      transition: transform 0.35s ease;
+    }
+  }
+
+  .header__nav-ja {
+    color: $color-primary;
+    opacity: 0.85;
   }
 
   .header__nav-item--has-child {
     display: inline-block;
     vertical-align: top;
     text-align: left;
-  }
 
-  .header__nav-en.__is-active {
-    display: block;
-    font-weight: 700;
-    color: $color-primary;
+    > .header__nav-en {
+      display: block;
+    }
+
+    &:hover .header__nav-child,
+    &:focus-within .header__nav-child {
+      max-height: 200px;
+      margin-top: 14px;
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+    }
   }
 
   .header__nav-list .header__nav-child {
@@ -93,10 +101,20 @@ body[class*="page-"] {
     gap: 10px;
     width: 0;
     min-width: 100%;
-    margin-top: 14px;
+    max-height: 0;
+    margin-top: 0;
     padding: 0;
+    overflow: hidden;
     list-style: none;
     text-align: right;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition:
+      max-height 0.3s ease,
+      margin-top 0.3s ease,
+      opacity 0.3s ease,
+      visibility 0.3s ease;
 
     li {
       width: 100%;

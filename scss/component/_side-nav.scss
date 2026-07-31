@@ -20,7 +20,7 @@
     visibility 0s linear 0.7s;
 
   &.is-on-blue-section {
-    a:not(.header__nav-contact) {
+    > ul > li > a:not(.header__nav-contact) {
       color: $color-white;
     }
 
@@ -30,6 +30,14 @@
 
     .side-nav__ja {
       color: rgba($color-white, 0.85);
+    }
+
+    .side-nav__child li a {
+      color: rgba($color-white, 0.75);
+
+      &:hover {
+        color: #fffcab;
+      }
     }
 
     .header__logo--side__img--default {
@@ -87,7 +95,67 @@
     gap: 28px;
   }
 
-  a:not(.header__nav-contact) {
+  &__item--has-child {
+    display: inline-block;
+    vertical-align: top;
+    text-align: left;
+
+    &:hover .side-nav__child,
+    &:focus-within .side-nav__child {
+      max-height: 200px;
+      margin-top: 14px;
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+    }
+  }
+
+  &__child {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    width: 0;
+    min-width: 100%;
+    max-height: 0;
+    margin-top: 0;
+    padding: 0;
+    overflow: hidden;
+    list-style: none;
+    text-align: left;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition:
+      max-height 0.3s ease,
+      margin-top 0.3s ease,
+      opacity 0.3s ease,
+      visibility 0.3s ease;
+
+    li {
+      width: 100%;
+    }
+
+    li a {
+      display: block;
+      font-family: $font-ja;
+      font-size: 0.875rem;
+      font-weight: 400;
+      color: $color-text-sub;
+      line-height: 1.4;
+      letter-spacing: 0.04em;
+      white-space: nowrap;
+      text-align: left;
+      transition: color 0.3s ease;
+
+      &:hover {
+        color: $color-primary;
+        opacity: 1;
+      }
+    }
+  }
+
+  > ul > li > a:not(.header__nav-contact) {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
