@@ -226,10 +226,12 @@
     padding: 10px 24px;
     border-radius: 10px;
     color: $color-white;
-    @include transition(opacity);
+    text-decoration: none;
+    transition: opacity 0.25s ease, transform 0.25s ease;
 
     &:hover {
-      opacity: 0.85;
+      opacity: 0.92;
+      transform: scale(0.97);
     }
 
     &--items {

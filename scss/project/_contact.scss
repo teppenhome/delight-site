@@ -141,10 +141,12 @@
     border-radius: 8px;
     color: $color-text;
     text-align: left;
-    @include transition(opacity, background);
+    text-decoration: none;
+    transition: opacity 0.25s ease, transform 0.25s ease;
 
     &:hover {
-      opacity: 0.75;
+      opacity: 0.92;
+      transform: scale(0.97);
     }
 
     @include sp {

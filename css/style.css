@@ -2861,10 +2861,12 @@ body[class*=page-] .page-top:hover .c-float-icon__symbol {
   border-radius: 8px;
   color: #343434;
   text-align: left;
-  transition: opacity background ease;
+  text-decoration: none;
+  transition: opacity 0.25s ease, transform 0.25s ease;
 }
 .contact__items-btn:hover {
-  opacity: 0.75;
+  opacity: 0.92;
+  transform: scale(0.97);
 }
 @media (max-width: 768px) {
   .contact__items-btn {
@@ -7528,10 +7530,12 @@ body.page-philosophy .c-float-actions.is-on-blue-bg .page-top:hover .c-float-ico
   padding: 10px 24px;
   border-radius: 10px;
   color: #ffffff;
-  transition: opacity 0.3s ease;
+  text-decoration: none;
+  transition: opacity 0.25s ease, transform 0.25s ease;
 }
 .contact-page__cta:hover {
-  opacity: 0.85;
+  opacity: 0.92;
+  transform: scale(0.97);
 }
 .contact-page__cta--items {
   background: #8b8b8b;
