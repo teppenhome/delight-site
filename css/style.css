@@ -1333,7 +1333,7 @@ body[class*=page-] main > [class$=__breadcrumb]:first-child {
   height: 100%;
 }
 .c-float-icon__circle {
-  fill: transparent;
+  fill: #ffffff;
   stroke: #0F65A3;
   stroke-width: 1.5;
   transition: fill 0.3s ease, stroke 0.3s ease;
@@ -1409,12 +1409,8 @@ body[class*=page-] .page-top {
 }
 body[class*=page-] .c-float-contact:hover .c-float-icon__circle,
 body[class*=page-] .page-top:hover .c-float-icon__circle {
-  fill: #0F65A3;
+  fill: #F28E55;
   stroke: #0F65A3;
-}
-body[class*=page-] .c-float-contact:hover .c-float-icon__symbol,
-body[class*=page-] .page-top:hover .c-float-icon__symbol {
-  stroke: #ffffff;
 }
 
 .side-nav {
@@ -4931,6 +4927,9 @@ body.page-philosophy .header .header__hamburger span {
   pointer-events: none;
   overflow: visible;
 }
+.philosophy-page__line--under-cloud {
+  z-index: 6;
+}
 .philosophy-page__line--end {
   z-index: 11;
 }
@@ -5133,7 +5132,7 @@ body.page-philosophy .header .header__hamburger span {
   width: 100%;
 }
 .philosophy-page .goods--note07 {
-  top: 700px;
+  top: 760px;
   left: -26%;
   max-width: 230px;
   width: 100%;
@@ -5315,6 +5314,7 @@ body.page-philosophy .header .header__hamburger span {
   max-width: 100%;
   margin-inline: auto;
   text-align: left;
+  padding-left: 40px;
 }
 .philosophy-page__intro-text p {
   margin: 0 0 1.6em;
@@ -5772,12 +5772,12 @@ body.page-philosophy .c-float-actions.is-on-blue-bg .page-top:hover {
 }
 body.page-philosophy .c-float-actions.is-on-blue-bg .c-float-contact:hover .c-float-icon__circle,
 body.page-philosophy .c-float-actions.is-on-blue-bg .page-top:hover .c-float-icon__circle {
-  fill: transparent;
+  fill: #F28E55;
   stroke: #ffffff;
 }
 body.page-philosophy .c-float-actions.is-on-blue-bg .c-float-contact:hover .c-float-icon__symbol,
 body.page-philosophy .c-float-actions.is-on-blue-bg .page-top:hover .c-float-icon__symbol {
-  stroke: #ffffff;
+  stroke: #0F65A3;
 }
 
 .message-page {

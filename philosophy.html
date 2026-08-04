@@ -123,6 +123,7 @@
 
     <div class="philosophy-page__body">
 
+      <!-- 1本目（短い導入線）: deco03 より上 -->
       <div class="philosophy-page__line" aria-hidden="true">
         <svg
           class="philosophy-page__line-svg"
@@ -131,7 +132,50 @@
           preserveAspectRatio="xMidYMin meet"
           focusable="false">
           <path d="M1104.3,6s-43.1-2.4-12.2,56.4c30.8,58.6,13.7,64-16.8,86.9" fill="none" stroke="#fff" stroke-linecap="round" stroke-miterlimit="10" stroke-width="9"/>
-          <path class="philosophy-page__line-path--main" d="M345,10.9c-34.9,2.7-313.6,26.8-275.9,284.5,5.7,39,27.2,81,62.9,97.7,39.3,18.4,74.7,31.2,177.1,30.2,0,0,65.8-6.4,65.5,63.7,0,6.3-2.6,12.3-7.3,16.5-4.7,4.2-11,7.3-17.3,2.7-2.4-1.7-3.9-4.4-4.2-7.4-.8-6.5-.2-19,15.2-24.3,0,0,.5-.2,1.4-.5,25-8.2,52.3,3.3,64.1,26.8,15.7,31.4,48.5,82,96.3,81.4,61.7-.7,71.5,61,72.4,92.8.3,11-11.2,65.3-14.7,75.8-12,35.8-28.3,103.1-97.7,152.8-6.4,4.6-13.2,8.6-20.3,12.1" fill="none" stroke="#fff" stroke-linecap="round" stroke-miterlimit="10" stroke-width="9"/>
+        </svg>
+      </div>
+
+      <!-- 2本目・始点のみ: intro cloud より下（deco03 より手前に出ないよう上部のみクリップ） -->
+      <div class="philosophy-page__line philosophy-page__line--under-cloud" aria-hidden="true">
+        <svg
+          class="philosophy-page__line-svg"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 1400 2800.31"
+          preserveAspectRatio="xMidYMin meet"
+          focusable="false">
+          <defs>
+            <clipPath id="philosophy-line-clip-under" clipPathUnits="userSpaceOnUse">
+              <rect x="-80" y="-80" width="1560" height="280"/>
+            </clipPath>
+          </defs>
+          <path
+            class="philosophy-page__line-path--main"
+            data-line-pair="main-2"
+            clip-path="url(#philosophy-line-clip-under)"
+            d="M345,10.9c-34.9,2.7-313.6,26.8-275.9,284.5,5.7,39,27.2,81,62.9,97.7,39.3,18.4,74.7,31.2,177.1,30.2,0,0,65.8-6.4,65.5,63.7,0,6.3-2.6,12.3-7.3,16.5-4.7,4.2-11,7.3-17.3,2.7-2.4-1.7-3.9-4.4-4.2-7.4-.8-6.5-.2-19,15.2-24.3,0,0,.5-.2,1.4-.5,25-8.2,52.3,3.3,64.1,26.8,15.7,31.4,48.5,82,96.3,81.4,61.7-.7,71.5,61,72.4,92.8.3,11-11.2,65.3-14.7,75.8-12,35.8-28.3,103.1-97.7,152.8-6.4,4.6-13.2,8.6-20.3,12.1"
+            fill="none" stroke="#fff" stroke-linecap="round" stroke-miterlimit="10" stroke-width="9"/>
+        </svg>
+      </div>
+
+      <!-- 2本目・以降: 黄雲 < deco03(8) < 線(9) -->
+      <div class="philosophy-page__line" aria-hidden="true">
+        <svg
+          class="philosophy-page__line-svg"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 1400 2800.31"
+          preserveAspectRatio="xMidYMin meet"
+          focusable="false">
+          <defs>
+            <clipPath id="philosophy-line-clip-over" clipPathUnits="userSpaceOnUse">
+              <rect x="-80" y="180" width="1560" height="2700"/>
+            </clipPath>
+          </defs>
+          <path
+            class="philosophy-page__line-path--main"
+            data-line-pair="main-2"
+            clip-path="url(#philosophy-line-clip-over)"
+            d="M345,10.9c-34.9,2.7-313.6,26.8-275.9,284.5,5.7,39,27.2,81,62.9,97.7,39.3,18.4,74.7,31.2,177.1,30.2,0,0,65.8-6.4,65.5,63.7,0,6.3-2.6,12.3-7.3,16.5-4.7,4.2-11,7.3-17.3,2.7-2.4-1.7-3.9-4.4-4.2-7.4-.8-6.5-.2-19,15.2-24.3,0,0,.5-.2,1.4-.5,25-8.2,52.3,3.3,64.1,26.8,15.7,31.4,48.5,82,96.3,81.4,61.7-.7,71.5,61,72.4,92.8.3,11-11.2,65.3-14.7,75.8-12,35.8-28.3,103.1-97.7,152.8-6.4,4.6-13.2,8.6-20.3,12.1"
+            fill="none" stroke="#fff" stroke-linecap="round" stroke-miterlimit="10" stroke-width="9"/>
           <path class="philosophy-page__line-path--main" d="M462.3,915.7c-7.9,3.8-16.1,7-24.5,9.4-38.9,11.2-159.6,41.3-211.3,56-68,19.4-149.7,64.6-143.4,184.6s146.9,168,236,222.8c33.4,20.6,65.3,16.3,98.2,12.9" fill="none" stroke="#fff" stroke-linecap="round" stroke-miterlimit="10" stroke-width="9"/>
           <path class="philosophy-page__line-path--main" d="M417.2,1401.5c54.8-5.6,112.3-8.6,184.1,110.5,63.1,104.6,144,144.6,240,164,61.4,12.4,94-2,109.6-14,8.1-6.3,11.5-18.9,7-28.2-4.6-9.6-14-13.9-24.6-9.2-25,11.1-15.4,37.5-7.4,56.2s72.3,66.1,146.9,74.7c64.7,7.4,146.8,87.1,178.3,120.1,18.1,18.9,30.2,42.8,34,68.7,3.6,24.2,6.8,59.7-20.8,83.8-52.7,45.9-61.5,8.7-56-3.4,4.6-10.1,30.2-32.4,54.3,22.3,27.6,62.8-38.8,146.4-114.9,183.4-31.2,15.2-104,14.5-156,70.3-43,53.2,6,89.5-89.7,164.6-65.4,51.3-350,8-390,10" fill="none" stroke="#fff" stroke-linecap="round" stroke-miterlimit="10" stroke-width="9"/>
         </svg>

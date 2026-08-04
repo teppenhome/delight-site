@@ -872,24 +872,40 @@ function initPhilosophyLineDraw() {
 
   const drawPath = (item) => {
     if (item.drawn) return Promise.resolve();
-    item.drawn = true;
-    if (observer) observer.unobserve(item.path);
+
+    // 同じ data-line-pair のパスは同期描画（2本目の上下クリップ分割用）
+    const pair = item.path.getAttribute('data-line-pair');
+    const cohort = pair
+      ? pathData.filter((d) => d.path.getAttribute('data-line-pair') === pair)
+      : [item];
+
+    cohort.forEach((d) => {
+      d.drawn = true;
+      if (observer) observer.unobserve(d.path);
+    });
 
     const durationMs = getDuration(item.length) * 1000;
 
     return new Promise((resolve) => {
       // CSS transition ではなく rAF で更新（Safari の stroke-dash 描画割れ対策）
       const start = performance.now();
-      item.path.style.transition = 'none';
+      cohort.forEach((d) => {
+        d.path.style.transition = 'none';
+      });
 
       const tick = (now) => {
         const t = Math.min(1, (now - start) / durationMs);
-        item.path.style.strokeDashoffset = String(1 - easeOut(t));
+        const offset = String(1 - easeOut(t));
+        cohort.forEach((d) => {
+          d.path.style.strokeDashoffset = offset;
+        });
         if (t < 1) {
           requestAnimationFrame(tick);
           return;
         }
-        item.path.style.strokeDashoffset = '0';
+        cohort.forEach((d) => {
+          d.path.style.strokeDashoffset = '0';
+        });
         resolve();
       };
 
@@ -904,13 +920,15 @@ function initPhilosophyLineDraw() {
     return firstDraw;
   };
 
+  const isSecondLine = (item) => item.path.getAttribute('data-line-pair') === 'main-2';
+
   const runIndex = (index) => {
     if (index < 0 || !pathData[index] || pathData[index].drawn) return;
     if (index === 0) {
       startFirst();
-    } else if (index === 1) {
-      // 1本目の完了後に2本目を開始
-      startFirst().then(() => drawPath(pathData[1]));
+    } else if (isSecondLine(pathData[index])) {
+      // 1本目の完了後に2本目（上下ペア）を開始
+      startFirst().then(() => drawPath(pathData[index]));
     } else {
       // 2本目の分割セグメント以降・終点は、その場所に来たら独立描画
       drawPath(pathData[index]);

@@ -278,13 +278,18 @@ body.page-philosophy {
   }
 
   // ── 線イラスト（SVG・viewBox 1400×2800.31 準拠） ─
-  // 積み: 黄雲bg(7) < deco03 / earth-back(8) < 線1・2(9) < 地球(10) < 線3(11) < 人物(12) < actions(12)
+  // 積み: 線2始点(6) < 黄雲bg(7) < deco03 / earth-back(8) < 線2以降(9) < 地球(10) < 線3(11) < 人物(12) < actions(12)
   &__line {
     position: absolute;
     inset: 0;
     z-index: 9;
     pointer-events: none;
     overflow: visible;
+
+    // 2本目の始点だけ: intro cloud（黄雲bg）より下
+    &--under-cloud {
+      z-index: 6;
+    }
 
     // 3本目: 地球より上・人物より下
     &--end {
@@ -418,7 +423,7 @@ body.page-philosophy {
     &--note03 {
       bottom: 0;
       left: -16%;
-      // philosophy-back(7) より上、線(9) より下
+      // 黄雲bg(7) より上、線(9) より下
       z-index: 8;
       max-width: 420px;
       width: 100%;
@@ -529,7 +534,7 @@ body.page-philosophy {
     }
 
     &--note07 {
-      top: 700px;
+      top: 760px;
       left: -26%;
       max-width: 230px;
       width: 100%;
@@ -739,6 +744,7 @@ body.page-philosophy {
     max-width: 100%;
     margin-inline: auto;
     text-align: left;
+    padding-left: 40px;
 
     p {
       margin: 0 0 1.6em;
@@ -1287,12 +1293,12 @@ body.page-philosophy .c-float-actions.is-on-blue-bg {
     opacity: 1;
 
     .c-float-icon__circle {
-      fill: transparent;
+      fill: #F28E55;
       stroke: $color-white;
     }
 
     .c-float-icon__symbol {
-      stroke: $color-white;
+      stroke: $color-primary;
     }
   }
 }

@@ -10,7 +10,7 @@
   height: 100%;
 
   &__circle {
-    fill: transparent;
+    fill: $color-white;
     stroke: $color-primary;
     stroke-width: 1.5;
     transition: fill 0.3s ease, stroke 0.3s ease;
@@ -101,12 +101,8 @@ body[class*="page-"] {
 
     &:hover {
       .c-float-icon__circle {
-        fill: $color-primary;
+        fill: #F28E55;
         stroke: $color-primary;
-      }
-
-      .c-float-icon__symbol {
-        stroke: $color-white;
       }
     }
   }
