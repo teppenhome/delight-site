@@ -302,4 +302,39 @@
     font-size: 16px;
     letter-spacing: 0.08em;
   }
+
+  // ── TOPへ戻る ────────────────────────────────────
+  .c-pagination {
+    margin-bottom: 24px;
+
+    @include sp {
+      margin-bottom: 20px;
+    }
+  }
+
+  &__back-to-top {
+    display: flex;
+    justify-content: center;
+    max-width: $container-width;
+    margin: 0 auto;
+    padding: 0 40px;
+
+    @include sp {
+      padding: 0 20px;
+    }
+  }
+
+  &__top-back {
+    min-width: 350px;
+    max-width: 350px;
+    width: 100%;
+    padding: 8px 40px;
+    border-width: 2px;
+    font-weight: 700;
+
+    @include sp {
+      min-width: 0;
+      max-width: 100%;
+    }
+  }
 }

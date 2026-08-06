@@ -81,7 +81,8 @@
 
   &__nav {
     position: absolute;
-    right: 48px;
+    // 子メニュー（ご依頼の流れ等）が右にはみ出る分を確保
+    right: 80px;
     top: 300px;
     z-index: 20;
 
@@ -118,48 +119,105 @@
   }
 
   &__nav-item--has-child {
-    display: inline-block;
-    vertical-align: top;
-    text-align: right;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    align-self: flex-end;
+    width: max-content;
+
+    // absolute の子メニュー分の縦スペース（項目数に合わせて確保）
+    $child-line: 0.875rem * 1.4;
+    $child-gap: 10px;
+    $child-top: 10px;
+
+    &:hover,
+    &:focus-within {
+      padding-bottom: calc(#{$child-top} + 2 * #{$child-line} + #{$child-gap});
+    }
+
+    &:hover:has(.header__nav-child > li:nth-child(3)),
+    &:focus-within:has(.header__nav-child > li:nth-child(3)) {
+      padding-bottom: calc(#{$child-top} + 3 * #{$child-line} + 2 * #{$child-gap});
+    }
+
+    &:hover:has(.header__nav-child > li:nth-child(4)),
+    &:focus-within:has(.header__nav-child > li:nth-child(4)) {
+      padding-bottom: calc(#{$child-top} + 4 * #{$child-line} + 3 * #{$child-gap});
+    }
 
     &:hover .header__nav-child,
     &:focus-within .header__nav-child {
       max-height: 200px;
-      margin-top: 14px;
       opacity: 1;
       visibility: visible;
       pointer-events: auto;
+      overflow: visible;
+    }
+  }
+
+  &__nav-parent {
+    display: block;
+    text-align: right;
+    color: #fff;
+    line-height: 1.2;
+    transition: opacity 0.3s ease, color 0.3s ease;
+
+    &:hover {
+      color: #fffcab;
+      opacity: 1;
+    }
+  }
+
+  // ja は右寄せ、子メニューは ja の文頭（左端）に揃えて右へ伸ばす
+  &__nav-sub {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    width: max-content;
+
+    > .header__nav-ja {
+      color: #fff;
+      text-decoration: none;
+      transition: color 0.3s ease, opacity 0.3s ease;
+
+      &:hover {
+        color: #fffcab;
+        opacity: 1;
+      }
     }
   }
 
   &__nav-child {
+    position: absolute;
+    top: calc(100% + 10px);
+    left: 0;
     display: flex;
     flex-direction: column;
-    align-items: flex-end;
+    align-items: flex-start;
     gap: 10px;
-    width: 0;
-    min-width: 100%;
+    width: max-content;
     max-height: 0;
-    margin-top: 0;
+    margin: 0;
     padding: 0;
     overflow: hidden;
     list-style: none;
-    text-align: right;
+    text-align: left;
     opacity: 0;
     visibility: hidden;
     pointer-events: none;
     transition:
       max-height 0.3s ease,
-      margin-top 0.3s ease,
       opacity 0.3s ease,
       visibility 0.3s ease;
 
     li {
-      width: 100%;
+      width: max-content;
     }
 
     li a {
       display: block;
+      padding-left: 0;
       font-family: $font-ja;
       font-size: 0.875rem;
       font-weight: 400;
@@ -167,7 +225,7 @@
       line-height: 1.4;
       letter-spacing: 0.04em;
       white-space: nowrap;
-      text-align: right;
+      text-align: left;
       transition: color 0.3s ease;
 
       &:hover {

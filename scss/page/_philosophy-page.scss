@@ -278,18 +278,13 @@ body.page-philosophy {
   }
 
   // ── 線イラスト（SVG・viewBox 1400×2800.31 準拠） ─
-  // 積み: 線2始点(6) < 黄雲bg(7) < deco03 / earth-back(8) < 線2以降(9) < 地球(10) < 線3(11) < 人物(12) < actions(12)
+  // 積み: 黄雲bg(7) < deco03 / earth-back(8) < 線1・2(9) < 地球(10) < 線3(11) < 人物(12) < actions(12)
   &__line {
     position: absolute;
     inset: 0;
     z-index: 9;
     pointer-events: none;
     overflow: visible;
-
-    // 2本目の始点だけ: intro cloud（黄雲bg）より下
-    &--under-cloud {
-      z-index: 6;
-    }
 
     // 3本目: 地球より上・人物より下
     &--end {

@@ -89,7 +89,7 @@
     }
   }
 
-  ul {
+  > ul {
     display: flex;
     flex-direction: column;
     gap: 28px;
@@ -102,11 +102,13 @@
 
     &:hover .side-nav__child,
     &:focus-within .side-nav__child {
+      width: max-content;
       max-height: 200px;
-      margin-top: 14px;
+      margin-top: 10px;
       opacity: 1;
       visibility: visible;
       pointer-events: auto;
+      overflow: visible;
     }
   }
 
@@ -133,16 +135,18 @@
       visibility 0.3s ease;
 
     li {
-      width: 100%;
+      width: max-content;
+      min-width: 100%;
     }
 
     li a {
       display: block;
+      padding-left: 1.5em;
       font-family: $font-ja;
       font-size: 0.875rem;
       font-weight: 400;
       color: $color-text-sub;
-      line-height: 1.4;
+      line-height: 1.2;
       letter-spacing: 0.04em;
       white-space: nowrap;
       text-align: left;

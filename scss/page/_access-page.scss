@@ -21,6 +21,7 @@
 
   &__content {
     @include about.about-subpage-content;
+    max-width: 1000px;
   }
 
   // ── 会社情報 + マップ ───────────────────────────

@@ -78,10 +78,10 @@
     gap: 16px 20px;
 
     .c-page-subtitle {
-      font-size: 16px;
-      font-weight: 500;
+      font-size: 20px;
+      font-weight: 700;
       letter-spacing: 0.12em;
-      color: $color-text-sub;
+      color: #343434;
     }
 
     @include sp {

@@ -7,6 +7,12 @@
 .qa {
   padding: 0;
 
+  &__title,
+  &__list {
+    max-width: 870px;
+    width: 100%;
+  }
+
   &__title {
     margin-bottom: 0;
     padding-bottom: 24px;

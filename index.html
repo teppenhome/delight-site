@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
@@ -39,7 +39,7 @@
           <span class="side-nav__ja">できること</span>
         </a>
         <ul class="side-nav__child">
-          <li><a href="service.html#strengths">強み</a></li>
+          <li><a href="service.html#strengths">３つの強み</a></li>
           <li><a href="service.html#flow">ご依頼の流れ</a></li>
         </ul>
       </li>
@@ -121,16 +121,18 @@
           <nav class="header__nav" id="globalNav" aria-label="メインナビゲーション">
             <ul class="header__nav-list">
               <li class="header__nav-item header__nav-item--has-child">
-                <a href="about.html">
+                <a href="about.html" class="header__nav-parent">
                   <span class="header__nav-en">ABOUT US</span>
-                  <span class="header__nav-ja">会社概要</span>
                 </a>
-                <ul class="header__nav-child">
-                  <li><a href="company.html">会社概要</a></li>
-                  <li><a href="philosophy.html">企業理念</a></li>
-                  <li><a href="message.html">代表挨拶</a></li>
-                  <li><a href="access.html">アクセス</a></li>
-                </ul>
+                <div class="header__nav-sub">
+                  <a href="about.html" class="header__nav-ja">会社概要</a>
+                  <ul class="header__nav-child">
+                    <li><a href="company.html">会社概要</a></li>
+                    <li><a href="philosophy.html">企業理念</a></li>
+                    <li><a href="message.html">代表挨拶</a></li>
+                    <li><a href="access.html">アクセス</a></li>
+                  </ul>
+                </div>
               </li>
               <li>
                 <a href="work.html">
@@ -140,14 +142,16 @@
               </li>
           
               <li class="header__nav-item header__nav-item--has-child">
-                <a href="service.html">
+                <a href="service.html" class="header__nav-parent">
                   <span class="header__nav-en">SERVICE</span>
-                  <span class="header__nav-ja">サービス</span>
                 </a>
-                <ul class="header__nav-child">
-                  <li><a href="service.html#strengths">強み</a></li>
-                  <li><a href="service.html#flow">ご依頼の流れ</a></li>
-                </ul>
+                <div class="header__nav-sub">
+                  <a href="service.html" class="header__nav-ja">サービス</a>
+                  <ul class="header__nav-child">
+                    <li><a href="service.html#strengths">３つの強み</a></li>
+                    <li><a href="service.html#flow">ご依頼の流れ</a></li>
+                  </ul>
+                </div>
               </li>
               <li>
                 <a href="news.html">
@@ -458,7 +462,7 @@
           <article class="service__card service__card--oem">
             <div class="service__card-head">
               <h3 class="service__card-title">
-                <img class="service__card-title-img" src="images/title-oem.svg" alt="OEM" width="244" height="80" decoding="async">
+                <img class="service__card-title-img" src="images/title-oem.png" alt="OEM" decoding="async">
                 <img class="service__card-title-icon" src="images/oem-icon.png" alt="" width="56" height="56" decoding="async">
               </h3>
               <p class="service__card-tagline">can be made</p>
@@ -476,8 +480,8 @@
           <article class="service__card service__card--sample">
             <div class="service__card-head">
               <h3 class="service__card-title">
-                <img class="service__card-title-img" src="images/title-sample.svg" alt="SAMPLE" width="442" height="80" decoding="async">
-                <img class="service__card-title-icon" src="images/sample-icon.png" alt="" width="48" height="48" decoding="async">
+                <img class="service__card-title-img" src="images/title-sample.png" alt="SAMPLE" decoding="async">
+                <img class="service__card-title-width="48" height="48" icon" src="images/sample-icon.png" alt="" decoding="async">
               </h3>
               <p class="service__card-tagline">can be made</p>
             </div>
@@ -494,7 +498,7 @@
           <article class="service__card service__card--design">
             <div class="service__card-head">
               <h3 class="service__card-title">
-                <img class="service__card-title-img" src="images/title-design.svg" alt="DESIGN" width="407" height="82" decoding="async">
+                <img class="service__card-title-img" src="images/title-design.png" alt="DESIGN" decoding="async">
                 <img class="service__card-title-icon" src="images/design-icon.png" alt="" width="48" height="48" decoding="async">
               </h3>
               <p class="service__card-tagline">can create a variety</p>
@@ -846,7 +850,7 @@
     ============================================================ -->
     <section class="clients" id="clients" data-side-nav-theme="light">
       <div class="clients__inner container container--side-offset">
-        <h2 class="section-title section-title">
+        <h2 class="section-title">
           <span class="section-title__ruby">お取引先企業</span>
           <span class="section-title__en__blue __middle">OUR CLIENTS</span>
         </h2>
