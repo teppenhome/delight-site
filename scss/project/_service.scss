@@ -89,7 +89,7 @@
   }
 
   &__card-tagline {
-    align-self: flex-end;
+    align-self: flex-start;
     margin: 4px 0 0;
     font-family: $font-sub;
     font-size: clamp(16px, 2vw, 24px);
@@ -122,8 +122,8 @@
 
   &__card-text {
     margin: 40px 0 0;
-    font-size: clamp(15px, 2vw, 16px);
-    font-weight: 500;
+    font-size: clamp(15px, 2vw, 15px);
+    font-weight: 400;
     line-height: 2;
     color: $color-white;
     letter-spacing: 0.02em;
