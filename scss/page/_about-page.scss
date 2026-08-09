@@ -11,7 +11,7 @@
   background: $color-white;
 
   @include sp {
-    padding: 0 0 72px;
+    padding: 20px 0 72px;
   }
 
   // ── パンくず ──────────────────────────────────────
@@ -133,7 +133,7 @@
 
     @include sp {
       min-height: 52px;
-      padding: 12px 40px;
+      padding: 12px 32px 12px 12px;
       font-size: 15px;
     }
 
@@ -153,6 +153,7 @@
   &__link-btn-text {
     text-align: center;
     line-height: 1.4;
+    white-space: nowrap;
   }
 
   &__link-btn-icon {

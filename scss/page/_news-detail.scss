@@ -223,6 +223,7 @@ $news-detail-side-deco-top: calc(32px + 1.5em + 40px + #{$news-detail-title-offs
     align-items: center;
 
     @include sp {
+      column-gap: 12px;
       row-gap: 20px;
     }
   }
@@ -239,6 +240,8 @@ $news-detail-side-deco-top: calc(32px + 1.5em + 40px + #{$news-detail-title-offs
     @include sp {
       min-width: 0;
       max-width: 100%;
+      padding: 8px 16px;
+      white-space: nowrap;
     }
   }
 

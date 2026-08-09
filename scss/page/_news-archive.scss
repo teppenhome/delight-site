@@ -61,7 +61,7 @@ $news-side-deco-top: calc(32px + 1.5em + 40px + #{$news-title-offset} - #{$news-
   }
 
   @include sp {
-    padding: 0 0 72px;
+    padding: 20px 0 72px;
   }
 
   // ── パンくず ──────────────────────────────────────
@@ -292,6 +292,10 @@ $news-side-deco-top: calc(32px + 1.5em + 40px + #{$news-title-offset} - #{$news-
     flex: 1;
     min-width: 0;
     padding-top: 30px;
+
+    @include sp {
+      padding-top: 0px;
+    }
   }
 
   &__item-date {
