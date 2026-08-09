@@ -4278,6 +4278,7 @@ body[class*=page-] .page-top:hover .c-float-icon__circle {
   grid-column: 2;
   grid-row: 1;
   font-family: "Montserrat", sans-serif;
+  font-weight: 600;
   letter-spacing: 0.08em;
 }
 .work-detail__top-back {
@@ -4878,6 +4879,7 @@ body[class*=page-] .page-top:hover .c-float-icon__circle {
   grid-column: 2;
   grid-row: 1;
   font-family: "Montserrat", sans-serif;
+  font-weight: 600;
   letter-spacing: 0.08em;
 }
 .news-detail__top-back {
