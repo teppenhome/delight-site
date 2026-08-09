@@ -3592,6 +3592,11 @@ body[class*=page-] .page-top:hover .c-float-icon__circle {
 .about-page__body p:last-child {
   margin-bottom: 0;
 }
+@media (max-width: 768px) {
+  .about-page__body p {
+    font-size: 14px;
+  }
+}
 .about-page__links {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));

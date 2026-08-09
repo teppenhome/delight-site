@@ -89,6 +89,10 @@
       &:last-child {
         margin-bottom: 0;
       }
+
+      @include sp {
+        font-size: 14px;
+      }
     }
   }
 
