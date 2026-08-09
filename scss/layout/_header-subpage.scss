@@ -16,6 +16,13 @@ body[class*="page-"] {
       width: auto;
       z-index: 300;
     }
+
+    // ドロワー(400)より手前に出し、閉じる×を見えるようにする
+    &.is-menu-open {
+      @include tab {
+        z-index: 410;
+      }
+    }
   }
 
   .header__nav {

@@ -311,8 +311,7 @@ $footer-contact-inset: 200px;
     }
 
     .footer__logo {
-      width: 60%;
-      margin-inline: auto;
+      display: none;
     }
 
     .footer__bottom {
@@ -638,10 +637,7 @@ $footer-contact-inset: 200px;
     }
 
     .footer__logo {
-      width: 70%;
-      max-width: 220px;
-      margin-top: 40px;
-      margin-inline: 0;
+      display: none;
     }
 
     .footer__copyright {
