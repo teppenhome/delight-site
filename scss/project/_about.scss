@@ -38,17 +38,20 @@
     display: block;
     pointer-events: none;
     z-index: 1;
+    animation: about-twinkle 2.4s ease-in-out infinite;
 
     &--01 {
       left: -120px;
       top: 40px;
       width: 140px;
       height: auto;
+      animation-delay: 0s;
+      animation-duration: 2.2s;
 
       @include sp {
-        left: -36px;
-        top: 16px;
-        width: 40px;
+        left: -56px;
+        top: 8px;
+        width: 72px;
       }
     }
 
@@ -57,11 +60,13 @@
       top: -20px;
       width: 140px;
       height: auto;
+      animation-delay: 0.7s;
+      animation-duration: 2.8s;
 
       @include sp {
-        right: -28px;
-        top: -4px;
-        width: 40px;
+        right: -48px;
+        top: -12px;
+        width: 72px;
       }
     }
 
@@ -73,10 +78,13 @@
       height: auto;
       margin-left: -40px;
       margin-top: -50px;
+      animation-delay: 0.35s;
+      animation-duration: 1.8s;
 
       @include sp {
-        width: 20px;
+        width: 56px;
         margin-left: 6px;
+        margin-top: 8px;
       }
     }
   }
@@ -116,5 +124,24 @@
       margin-top: 40px;
       text-align: center;
     }
+  }
+}
+
+@keyframes about-twinkle {
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  40% {
+    opacity: 0.25;
+  }
+
+  55% {
+    opacity: 1;
+  }
+
+  70% {
+    opacity: 0.45;
   }
 }
