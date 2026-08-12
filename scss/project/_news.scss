@@ -55,6 +55,33 @@ $news-wave-bottom: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/
 
   @include sp {
     margin-top: 0;
+    padding: $section-pad-v 0 60px;
+
+    // スマホのサブピクセルで波際に黄/青の横線が出るのを防ぐ
+    $sp-wave-h: 20px;
+
+    &::before,
+    &::after {
+      left: -1px;
+      width: calc(100% + 2px);
+      height: $sp-wave-h;
+      background-size: calc(#{$sp-wave-h} * 4 + 2px) calc(100% + 2px);
+    }
+
+    &::before {
+      top: -2px;
+      height: calc(#{$sp-wave-h} + 3px);
+      background-position: left -1px;
+      // service（青）との継ぎ目を青で埋める
+      box-shadow: 0 -2px 0 0 #006FD3;
+    }
+
+    &::after {
+      bottom: -2px;
+      height: calc(#{$sp-wave-h} + 3px);
+      background-position: left calc(100% + 1px);
+      box-shadow: 0 2px 0 0 #ffffff;
+    }
   }
 
   &__grid {
@@ -67,6 +94,11 @@ $news-wave-bottom: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/
     margin-top: -40px;
     max-width: 870px;
     width: 100%;
+
+    @include sp {
+      padding: 28px 16px 24px;
+      margin-top: -20px;
+    }
   }
 
   &__scroll {

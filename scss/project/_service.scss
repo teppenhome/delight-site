@@ -8,6 +8,10 @@
   padding: $section-pad-v 0;
   background-color: #006FD3;
 
+  @include sp {
+    padding: $section-pad-v 0 40px;
+  }
+
   .section-title {
     text-align: left;
   }
@@ -64,6 +68,11 @@
     width: max-content;
     padding-left: clamp(12px, 3vw, 28px);
     box-sizing: border-box;
+
+    @include sp {
+      max-width: 100%;
+      padding-left: 0;
+    }
   }
 
   &__card-title {
@@ -73,6 +82,10 @@
     gap: 4px;
     margin: 0;
     line-height: 1;
+
+    @include sp {
+      height: 42px;
+    }
   }
 
   &__card-title-img {
@@ -86,6 +99,10 @@
     width: clamp(60px, 6vw, 80px);
     height: auto;
     align-self: flex-end;
+
+    @include sp {
+      width: 50px;
+    }
   }
 
   &__card-tagline {
@@ -96,6 +113,10 @@
     font-weight: 900;
     color: #000;
     letter-spacing: 0.04em;
+
+    @include sp {
+      padding-left: 6px;
+    }
   }
 
   &__card-box {
@@ -103,7 +124,7 @@
     overflow: visible;
     border: 1.5px solid $color-white;
     border-radius: 20px;
-    padding: clamp(28px, 4vw, 40px) clamp(24px, 4vw, 30px);
+    padding: clamp(28px, 4vw, 40px) clamp(16px, 3vw, 20px);
     padding-top: clamp(40px, 6vw, 56px);
     padding-right: clamp(200px, 32vw, 340px);
 
@@ -115,8 +136,8 @@
 
     @include sp {
       min-height: 140px;
-      padding-right: clamp(24px, 4vw, 40px);
-      padding-bottom: clamp(180px, 50vw, 240px);
+      padding-right: 16px;
+      padding-bottom: clamp(200px, 54vw, 260px);
     }
   }
 
@@ -130,6 +151,7 @@
 
     @include sp {
       line-height: 1.9;
+      margin-top: 10px;
     }
   }
 
@@ -151,9 +173,11 @@
     @include sp {
       right: 50%;
       top: auto;
-      bottom: -8px;
+      bottom: 12px;
+      left: auto;
       transform: translate(50%, 0);
-      width: min(280px, 85%);
+      width: min(240px, 78%);
+      max-width: calc(100% - 32px);
     }
   }
 
@@ -161,6 +185,16 @@
     top: clamp(-76px, -12vw, -56px);
     right: clamp(-48px, -6vw, -24px);
     width: clamp(340px, 48vw, 500px);
+
+    @include sp {
+      right: 50%;
+      top: auto;
+      bottom: 12px;
+      left: auto;
+      transform: translate(50%, 0);
+      width: min(240px, 78%);
+      max-width: calc(100% - 32px);
+    }
   }
 
   &__card--sample &__card-illust {
@@ -168,6 +202,16 @@
     right: clamp(16px, 2.5vw, 32px);
     transform: translateY(-50%);
     width: clamp(150px, 20vw, 220px);
+
+    @include sp {
+      right: 50%;
+      top: auto;
+      bottom: 12px;
+      left: auto;
+      transform: translate(50%, 0);
+      width: min(180px, 60%);
+      max-width: calc(100% - 32px);
+    }
   }
 
   &__card--sample &__card-box {
@@ -185,11 +229,35 @@
 
   &__card--oem &__card-title-icon {
     width: clamp(72px, 7.5vw, 96px);
+
+    @include sp {
+      width: 58px;
+    }
+  }
+
+  &__card--sample &__card-title {
+    @include sp {
+      max-width: 100%;
+      align-items: flex-end;
+    }
+  }
+
+  &__card--sample &__card-title-img {
+    @include sp {
+      max-width: calc(100% - 58px);
+      height: auto;
+      max-height: 42px;
+    }
   }
 
   &__card--sample &__card-title-icon {
     width: clamp(72px, 7.5vw, 96px);
     transform: rotate(-10deg) translateY(15px);
+
+    @include sp {
+      width: 50px;
+      transform: rotate(-10deg) translateY(4px);
+    }
   }
 
   &__card--design &__card-title-icon {
@@ -201,12 +269,18 @@
     width: clamp(200px, 28vw, 300px);
 
     @include sp {
-      width: min(220px, 70%);
+      right: 50%;
+      top: auto;
+      bottom: 12px;
+      left: auto;
+      transform: translate(50%, 0);
+      width: min(200px, 70%);
+      max-width: calc(100% - 32px);
     }
   }
 
   &__card--design &__card-box {
-    padding-right: clamp(24px, 4vw, 40px);
+    padding-right: clamp(16px, 3vw, 20px);
   }
 
   &__category {
@@ -244,6 +318,11 @@
       margin-top: 40px;
       padding: 14px 20px;
       border-radius: 16px;
+      cursor: pointer;
+
+      &.is-toggled {
+        background: rgba(255, 255, 255, 0.5);
+      }
     }
   }
 
@@ -271,14 +350,29 @@
     }
   }
 
-  &__category:hover &__category-text--default {
-    opacity: 0;
-    visibility: hidden;
+  // PC: hover で切り替え / スマホ: .is-toggled でクリック切替
+  @media (min-width: #{$breakpoint-sp + 1px}) {
+    &__category:hover &__category-text--default {
+      opacity: 0;
+      visibility: hidden;
+    }
+
+    &__category:hover &__category-text--hover {
+      opacity: 1;
+      visibility: visible;
+    }
   }
 
-  &__category:hover &__category-text--hover {
-    opacity: 1;
-    visibility: visible;
+  @include sp {
+    &__category.is-toggled &__category-text--default {
+      opacity: 0;
+      visibility: hidden;
+    }
+
+    &__category.is-toggled &__category-text--hover {
+      opacity: 1;
+      visibility: visible;
+    }
   }
 
   &__link {
@@ -288,7 +382,6 @@
     margin-block: 8px;
 
     @include sp {
-      margin-top: 40px;
       padding-block: 28px;
     }
   }
@@ -322,9 +415,10 @@
     }
 
     @include sp {
-      min-height: 76px;
-      padding: 18px 72px;
-      gap: 16px;
+      justify-content: flex-start;
+      min-height: 72px;
+      padding: 16px 36px 16px 65px;
+      gap: 8px;
       border-radius: 14px;
     }
   }
@@ -354,8 +448,7 @@
       height: 140px;
 
       @include sp {
-        left: 4px;
-        height: 110px;
+        display: none;
       }
     }
 
@@ -365,8 +458,11 @@
       height: 120px;
 
       @include sp {
-        right: 78px;
-        height: 96px;
+        display: block;
+        left: -6px;
+        right: auto;
+        bottom: 0;
+        height: 68px;
       }
     }
   }
@@ -382,7 +478,9 @@
     transform: translateX(24px);
 
     @include sp {
-      transform: translateX(12px);
+      transform: none;
+      flex: 1;
+      min-width: 0;
     }
   }
 
@@ -393,6 +491,12 @@
     letter-spacing: 0.14em;
     line-height: 1.2;
     color: #FFFCAB;
+
+    @include sp {
+      font-size: 13px;
+      letter-spacing: 0.1em;
+      white-space: nowrap;
+    }
   }
 
   &__cta-ja {
@@ -402,6 +506,12 @@
     letter-spacing: 0.04em;
     line-height: 1.4;
     color: $color-white;
+
+    @include sp {
+      font-size: 13px;
+      letter-spacing: 0.02em;
+      white-space: nowrap;
+    }
   }
 
   &__cta-arrow {
@@ -426,13 +536,13 @@
     }
 
     @include sp {
-      right: 24px;
-      width: 44px;
-      height: 44px;
+      right: 10px;
+      width: 30px;
+      height: 30px;
 
       svg {
-        width: 18px;
-        height: 18px;
+        width: 12px;
+        height: 12px;
       }
     }
   }

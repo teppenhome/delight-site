@@ -32,7 +32,7 @@ const newFooter = `  <footer class="footer footer--sub">
               <a href="about.html" class="footer__title">ABOUT</a>
               <ul>
                 <li><a href="about.html">会社について</a></li>
-                <li><a href="index.html#service">仕事の流れ</a></li>
+                <li><a href="service.html#flow">仕事の流れ</a></li>
               </ul>
             </div>
             <div class="footer__group">
@@ -54,7 +54,7 @@ const newFooter = `  <footer class="footer footer--sub">
               </ul>
             </div>
             <div class="footer__group">
-              <a href="index.html#service" class="footer__title">SERVICE</a>
+              <a href="service.html" class="footer__title">SERVICE</a>
             </div>
           </div>
 

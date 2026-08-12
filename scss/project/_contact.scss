@@ -24,7 +24,7 @@
     box-sizing: border-box;
 
     @include sp {
-      padding: 40px 20px 32px;
+      padding: 40px 10px 32px;
       border-radius: 16px;
     }
   }
@@ -152,7 +152,7 @@
 
     @include sp {
       width: 100%;
-      gap: 12px;
+      gap: 22px;
       padding: 14px 16px;
     }
   }

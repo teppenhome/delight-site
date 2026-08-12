@@ -14,6 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initWorksSlider();
   initServiceStrengthsSlider();
   initServiceSectionNav();
+  initServiceCategoryToggle();
   initScrollReveal();
   initPageTop();
   initContactForm();
@@ -448,6 +449,33 @@ function initServiceSectionNav() {
   window.addEventListener('load', update);
   window.addEventListener('pageshow', update);
   update();
+}
+
+
+// ============================================================
+//  SERVICE CATEGORY
+//  スマホ時のみクリックでテキストを交互切替（PCはCSS hoverのまま）
+// ============================================================
+function initServiceCategoryToggle() {
+  const category = document.querySelector('.service__category');
+  if (!category) return;
+
+  const mq = window.matchMedia('(max-width: 768px)');
+
+  category.addEventListener('click', () => {
+    if (!mq.matches) return;
+    category.classList.toggle('is-toggled');
+  });
+
+  const onMqChange = (e) => {
+    if (!e.matches) category.classList.remove('is-toggled');
+  };
+
+  if (typeof mq.addEventListener === 'function') {
+    mq.addEventListener('change', onMqChange);
+  } else if (typeof mq.addListener === 'function') {
+    mq.addListener(onMqChange);
+  }
 }
 
 

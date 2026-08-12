@@ -34,6 +34,13 @@
   }
 }
 
+// インライン要素をスマホのみ非表示
+.u-hide-sp {
+  @include sp {
+    display: none;
+  }
+}
+
 // 英字部分に Montserrat を適用
 .font-sub {
   font-family: $font-sub;

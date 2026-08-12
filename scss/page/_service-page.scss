@@ -24,8 +24,8 @@
   }
 
   @include sp {
-    padding-left: 20px;
-    padding-right: 20px;
+    padding-left: 10px;
+    padding-right: 10px;
   }
 }
 
@@ -67,6 +67,7 @@
 
     @include sp {
       margin-bottom: 48px;
+      padding-top: 20px;
     }
   }
 
@@ -130,11 +131,15 @@
   &__section-title-ja {
     display: block;
     font-family: $font-ja;
-    font-size: clamp(28px, 5vw, 36px);
+    font-size: clamp(26px, 5vw, 36px);
     font-weight: 700;
     color: $color-text;
     line-height: 1.05;
     letter-spacing: 0.1em;
+
+    @include sp {
+      letter-spacing: 0.05em;
+    }
   }
 
   &__section-title-num {
@@ -224,7 +229,7 @@
     background: #FFFCF5;
 
     @include sp {
-      padding: 56px 0;
+      padding: 20px 0;
     }
   }
 
@@ -263,7 +268,7 @@
     }
 
     @include sp {
-      padding: 28px 22px 32px;
+      padding: 28px 10px 32px;
       border-radius: 16px;
     }
   }
@@ -288,7 +293,7 @@
 
   &__strengths-title-en {
     font-family: $font-sub;
-    font-size: clamp(18px, 2vw, 25px);
+    font-size: clamp(22px, 2vw, 25px);
     font-weight: 700;
     letter-spacing: 0.06em;
     color: $color-text;
@@ -308,11 +313,13 @@
     }
   }
 
-  // 2・3枚目はタイトルが短いため、画像を上に寄せる（1枚目は維持）
+  // 2・3枚目はPC subgrid 時のみ、タイトルが短い分画像を上に寄せる
   &__strengths-card:nth-child(2),
   &__strengths-card:nth-child(3) {
-    .service-page__strengths-figure {
-      margin-top: -28px;
+    @media (min-width: #{$breakpoint-tab + 1px}) {
+      .service-page__strengths-figure {
+        margin-top: -28px;
+      }
     }
   }
 
@@ -381,6 +388,17 @@
       gap: 28px;
       margin-bottom: 48px;
     }
+
+    @include sp {
+      padding-left: 0;
+      gap: 10px;
+    }
+  }
+
+  &__initiative-body {
+    @include tab {
+      display: contents;
+    }
   }
 
   &__initiative-title {
@@ -388,6 +406,11 @@
     flex-direction: column;
     gap: 4px;
     margin: 0 0 20px;
+
+    @include tab {
+      order: 1;
+      margin-bottom: 0;
+    }
   }
 
   &__initiative-title-ja {
@@ -415,6 +438,10 @@
     line-height: 2;
     color: $color-text;
 
+    @include tab {
+      order: 3;
+    }
+
     @include sp {
       font-size: 15px;
       line-height: 1.9;
@@ -427,6 +454,10 @@
     width: 100%;
     border-radius: 12px;
     overflow: hidden;
+
+    @include tab {
+      order: 2;
+    }
 
     img {
       display: block;
@@ -446,7 +477,7 @@
     background: #FFFCF5;
 
     @include sp {
-      padding: 56px 0;
+      padding: 0;
     }
   }
 
@@ -489,7 +520,7 @@
     @include sp {
       grid-template-columns: 1fr;
       gap: 16px;
-      padding: 40px 20px 24px;
+      padding: 40px 10px 24px;
       border-radius: 20px;
     }
 
@@ -593,7 +624,7 @@
 
     @include sp {
       grid-template-columns: 1fr;
-      gap: 64px;
+      gap: 40px;
       padding-left: 16px;
     }
   }
@@ -630,7 +661,7 @@
 
     @include sp {
       min-height: 76px;
-      padding: 18px 70px 18px 88px;
+      padding: 18px 50px 18px 78px;
     }
   }
 
@@ -663,7 +694,7 @@
     @include sp {
       left: 6px;
       bottom: -36px;
-      height: 100px;
+      height: 92px;
     }
   }
 
@@ -673,7 +704,7 @@
     bottom: -52px;
 
     @include sp {
-      height: 116px;
+      height: 104px;
       left: 4px;
       bottom: -40px;
     }
@@ -685,7 +716,7 @@
     bottom: -40px;
 
     @include sp {
-      height: 92px;
+      height: 84px;
       left: 8px;
       bottom: -32px;
     }

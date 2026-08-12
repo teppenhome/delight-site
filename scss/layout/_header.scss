@@ -380,3 +380,13 @@
 body.is-menu-open {
   overflow: hidden;
 }
+
+// トップページのみ：スマホの左右余白を 10px に統一
+body:not([class*="page-"]) {
+  .header__inner {
+    @include sp {
+      padding-left: 10px;
+      padding-right: 10px;
+    }
+  }
+}
