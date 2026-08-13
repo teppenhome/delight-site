@@ -2,7 +2,7 @@
 @use "../foundation/mixin" as *;
 
 // ============================================================
-//  DRAWER MENU（tab以下）
+//  DRAWER MENU（tab以下 / ハンバーガー表示時）
 // ============================================================
 .drawer {
   position: fixed;
@@ -33,15 +33,21 @@
       transform: translateY(0);
     }
 
+    .drawer__toggle {
+      opacity: 1;
+    }
+
     @for $i from 1 through 6 {
-      .drawer__item:nth-child(#{$i}) .drawer__link {
+      .drawer__item:nth-child(#{$i}) .drawer__link,
+      .drawer__item:nth-child(#{$i}) .drawer__toggle {
         transition-delay: #{0.2 + ($i - 1) * 0.08}s;
       }
     }
   }
 
   &:not(.is-open) {
-    .drawer__link {
+    .drawer__link,
+    .drawer__toggle {
       transition-delay: 0s;
     }
 
@@ -69,6 +75,7 @@
     background: $color-white;
     transform: translateX(100%);
     opacity: 0;
+    overflow-x: hidden;
     overflow-y: auto;
     transition:
       transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
@@ -98,6 +105,23 @@
       margin-top: 8px;
       border-bottom: none;
     }
+
+    &--has-child.is-open {
+      .drawer__toggle-icon {
+        transform: rotate(180deg);
+      }
+
+      .drawer__child {
+        max-height: 280px;
+      }
+    }
+  }
+
+  &__parent {
+    position: relative;
+    display: block;
+    width: 100%;
+    min-width: 0;
   }
 
   &__link {
@@ -105,6 +129,8 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    width: 100%;
+    min-width: 0;
     min-height: 72px;
     padding: 24px 16px;
     color: $color-text;
@@ -115,6 +141,12 @@
       color 0.45s cubic-bezier(0.16, 1, 0.3, 1),
       opacity 0.45s cubic-bezier(0.16, 1, 0.3, 1),
       transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+
+    .drawer__parent & {
+      // ▼ボタン分の左右対称パディングでテキストを中央維持
+      padding-left: 44px;
+      padding-right: 44px;
+    }
 
     &:hover,
     &:focus-visible {
@@ -135,6 +167,84 @@
         width: 72px;
         height: auto;
       }
+    }
+  }
+
+  &__toggle {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    z-index: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    width: 44px;
+    height: 44px;
+    min-width: 44px;
+    min-height: 44px;
+    margin: 0;
+    padding: 0;
+    border: none;
+    background: transparent;
+    color: $color-primary;
+    cursor: pointer;
+    appearance: none;
+    -webkit-appearance: none;
+    opacity: 0;
+    transform: translateY(-50%);
+    transition: opacity 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+
+    &:focus-visible {
+      outline: 2px solid rgba($color-primary, 0.25);
+      outline-offset: 2px;
+    }
+  }
+
+  &__toggle-icon {
+    display: block;
+    font-size: 12px;
+    line-height: 1;
+    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  // スライド開閉（max-height）
+  &__child {
+    max-height: 0;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    list-style: none;
+    transition: max-height 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+
+    > li {
+      margin: 0;
+      padding: 0;
+    }
+  }
+
+  &__child-link {
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
+    min-height: 44px;
+    padding: 10px 16px 10px 40px;
+    font-family: $font-ja;
+    font-size: 14px;
+    font-weight: 400;
+    letter-spacing: 0.04em;
+    color: $color-text-sub;
+    text-decoration: none;
+    transition: color 0.25s ease;
+
+    &:hover,
+    &:focus-visible {
+      color: $color-primary;
+    }
+
+    &:focus-visible {
+      outline: 2px solid rgba($color-primary, 0.25);
+      outline-offset: 2px;
     }
   }
 
@@ -161,7 +271,9 @@
 @media (prefers-reduced-motion: reduce) {
   .drawer__backdrop,
   .drawer__panel,
-  .drawer__link {
-    transition-duration: 0.15s;
+  .drawer__link,
+  .drawer__child,
+  .drawer__toggle-icon {
+    transition-duration: 0.01ms;
   }
 }

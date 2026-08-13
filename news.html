@@ -16,11 +16,27 @@
     <div class="drawer__panel" id="drawerPanel" tabindex="-1">
       <nav class="drawer__nav" aria-label="ドロワーメニュー">
         <ul class="drawer__list">
-          <li class="drawer__item">
-            <a href="about.html" class="drawer__link">
-              <span class="drawer__en">ABOUT US</span>
-              <span class="drawer__ja">会社概要</span>
-            </a>
+          <li class="drawer__item drawer__item--has-child">
+            <div class="drawer__parent">
+              <a href="about.html" class="drawer__link">
+                <span class="drawer__en">ABOUT US</span>
+                <span class="drawer__ja">会社概要</span>
+              </a>
+              <button
+                type="button"
+                class="drawer__toggle"
+                aria-expanded="false"
+                aria-controls="drawer-submenu-about"
+                aria-label="ABOUT USの子メニューを開閉">
+                <span class="drawer__toggle-icon" aria-hidden="true">▼</span>
+              </button>
+            </div>
+            <ul class="drawer__child" id="drawer-submenu-about">
+              <li><a href="company.html" class="drawer__child-link">会社概要</a></li>
+              <li><a href="philosophy.html" class="drawer__child-link">企業理念</a></li>
+              <li><a href="message.html" class="drawer__child-link">代表挨拶</a></li>
+              <li><a href="access.html" class="drawer__child-link">アクセス</a></li>
+            </ul>
           </li>
           <li class="drawer__item">
             <a href="work.html" class="drawer__link">
@@ -28,11 +44,25 @@
               <span class="drawer__ja">制作実績</span>
             </a>
           </li>
-          <li class="drawer__item">
-            <a href="service.html" class="drawer__link">
-              <span class="drawer__en">SERVICE</span>
-              <span class="drawer__ja">できること</span>
-            </a>
+          <li class="drawer__item drawer__item--has-child">
+            <div class="drawer__parent">
+              <a href="service.html" class="drawer__link">
+                <span class="drawer__en">SERVICE</span>
+                <span class="drawer__ja">できること</span>
+              </a>
+              <button
+                type="button"
+                class="drawer__toggle"
+                aria-expanded="false"
+                aria-controls="drawer-submenu-service"
+                aria-label="SERVICEの子メニューを開閉">
+                <span class="drawer__toggle-icon" aria-hidden="true">▼</span>
+              </button>
+            </div>
+            <ul class="drawer__child" id="drawer-submenu-service">
+              <li><a href="service.html#strengths" class="drawer__child-link">３つの強み</a></li>
+              <li><a href="service.html#flow" class="drawer__child-link">ご依頼の流れ</a></li>
+            </ul>
           </li>
           <li class="drawer__item">
             <a href="news.html" class="drawer__link">

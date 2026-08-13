@@ -7,8 +7,15 @@ body[class*="page-"] {
   main > [class$="__breadcrumb"]:first-child {
     padding-top: 32px;
 
+    // ヘッダーが fixed になるため、ヘッダー高さ分を確保してパンくずを表示
+    @include tab {
+      // header inner: padding 20×2 + logo 48 ≈ 88px + 余白
+      padding-top: 96px;
+    }
+
     @include sp {
-      padding-top: 20px;
+      // header inner: padding 16×2 + logo 30 ≈ 62px + 余白
+      padding-top: 60px;
     }
   }
 }

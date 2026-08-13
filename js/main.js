@@ -94,6 +94,36 @@ function initDrawer() {
     else openDrawer();
   };
 
+  const setAccordionOpen = (item, isOpen) => {
+    const toggle = item.querySelector('.drawer__toggle');
+    item.classList.toggle('is-open', isOpen);
+    if (toggle) toggle.setAttribute('aria-expanded', String(isOpen));
+  };
+
+  const initAccordion = () => {
+    const currentPage = (location.pathname.split('/').pop() || 'index.html').toLowerCase();
+    const items = drawer.querySelectorAll('.drawer__item--has-child');
+
+    items.forEach((item) => {
+      const toggle = item.querySelector('.drawer__toggle');
+      const childLinks = item.querySelectorAll('.drawer__child-link');
+      if (!toggle) return;
+
+      let shouldOpen = false;
+      childLinks.forEach((link) => {
+        const href = (link.getAttribute('href') || '').split('#')[0].toLowerCase();
+        if (href && href === currentPage) shouldOpen = true;
+      });
+      setAccordionOpen(item, shouldOpen);
+
+      toggle.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        setAccordionOpen(item, !item.classList.contains('is-open'));
+      });
+    });
+  };
+
   hamburger.addEventListener('click', toggleDrawer);
 
   drawerBackdrop?.addEventListener('click', closeDrawer);
@@ -102,7 +132,7 @@ function initDrawer() {
     if (e.target === drawerPanel) closeDrawer();
   });
 
-  drawer.querySelectorAll('.drawer__link').forEach(link => {
+  drawer.querySelectorAll('.drawer__link, .drawer__child-link').forEach((link) => {
     link.addEventListener('click', closeDrawer);
   });
 
@@ -113,6 +143,8 @@ function initDrawer() {
   mq.addEventListener('change', (e) => {
     if (!e.matches) closeDrawer();
   });
+
+  initAccordion();
 }
 
 
