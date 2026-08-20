@@ -21,14 +21,35 @@
 
   &__content {
     @include about.about-subpage-content;
+    max-width: 1100px;
+  }
+
+  .c-page-subtitle.__mini {
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+
+    @include sp {
+      font-size: 15px;
+    }
   }
 
   // ── OVERVIEW セクション ─────────────────────────
   &__overview {
-    margin-bottom: 48px;
+    display: grid;
+    grid-template-columns: minmax(140px, 200px) minmax(0, 1fr);
+    gap: 40px 56px;
+    align-items: start;
+    margin-bottom: 56px;
+
+    @include tab {
+      gap: 32px 40px;
+    }
 
     @include sp {
-      margin-bottom: 36px;
+      grid-template-columns: 1fr;
+      gap: 24px;
+      margin-bottom: 40px;
     }
   }
 
@@ -36,11 +57,6 @@
     display: flex;
     flex-direction: column;
     gap: 6px;
-    margin-bottom: 32px;
-
-    @include sp {
-      margin-bottom: 24px;
-    }
   }
 
   &__overview-en {
@@ -63,8 +79,11 @@
 
     @include sp {
       font-size: 15px;
-      padding-left: 20px;
     }
+  }
+
+  &__overview-body {
+    min-width: 0;
   }
 
   &__table {
@@ -132,14 +151,14 @@
 
   // ── 会社写真 ────────────────────────────────────
   &__photo {
-    margin: 0 0 56px;
+    margin: 48px 0 0;
     aspect-ratio: 16 / 9;
     background: #d9d9d9;
     border-radius: 4px;
     overflow: hidden;
 
     @include sp {
-      margin-bottom: 40px;
+      margin-top: 36px;
     }
 
     img {

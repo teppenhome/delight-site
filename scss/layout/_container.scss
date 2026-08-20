@@ -43,4 +43,17 @@ body:not([class*="page-"]) {
       padding-right: 10px;
     }
   }
+
+  // about / service / news / clients / qa / contact は 20px
+  .about__inner.container,
+  .service__inner.container,
+  .news__inner.container,
+  .clients__inner.container,
+  .qa__inner.container,
+  .contact__wrap.container {
+    @include sp {
+      padding-left: 20px;
+      padding-right: 20px;
+    }
+  }
 }

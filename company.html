@@ -119,15 +119,24 @@
             </li>
           </ul>
         </nav>
-        <button
-          class="header__hamburger"
-          id="hamburger"
-          type="button"
-          aria-label="メニューを開く"
-          aria-expanded="false"
-          aria-controls="drawerPanel">
-          <span></span><span></span><span></span>
-        </button>
+        <div class="header__actions">
+          <a href="contact.html" class="header__contact" aria-label="お問い合わせ">
+            <svg class="c-float-icon header__contact-icon" viewBox="0 0 52 52" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+              <circle class="c-float-icon__circle" cx="26" cy="26" r="24"/>
+              <path class="c-float-icon__symbol" d="M15.5 19 H36.5 Q38 19 38 20.5 V32.5 Q38 34 36.5 34 H15.5 Q14 34 14 32.5 V20.5 Q14 19 15.5 19 Z"/>
+              <path class="c-float-icon__symbol" d="M15 19.5 L26 27.5 L37 19.5"/>
+            </svg>
+          </a>
+          <button
+            class="header__hamburger"
+            id="hamburger"
+            type="button"
+            aria-label="メニューを開く"
+            aria-expanded="false"
+            aria-controls="drawerPanel">
+            <span></span><span></span><span></span>
+          </button>
+        </div>
       </div>
     </header>
 
@@ -154,62 +163,64 @@
           <p class="company-page__overview-ja">概要</p>
         </div>
 
-        <dl class="company-page__table">
-          <div class="company-page__row">
-            <dt class="company-page__term">社名</dt>
-            <dd class="company-page__desc">株式会社 DELIGHT（株式会社ディライト）</dd>
-          </div>
-          <div class="company-page__row">
-            <dt class="company-page__term">所在地</dt>
-            <dd class="company-page__desc">
-              〒222-0033<br>
-              神奈川県横浜市港北区新横浜3-1-4<br class="u-br-sp"> プラスタリアビル402<br />
-              <a href="access.html" class="company-page__map-link">アクセスマップ &gt;</a>
-            </dd>
-          </div>
-          <div class="company-page__row">
-            <dt class="company-page__term">電話</dt>
-            <dd class="company-page__desc">045-577-0268</dd>
-          </div>
-          <div class="company-page__row">
-            <dt class="company-page__term">FAX</dt>
-            <dd class="company-page__desc">045-577-0269</dd>
-          </div>
-          <div class="company-page__row">
-            <dt class="company-page__term">設立</dt>
-            <dd class="company-page__desc">令和4年9月16日</dd>
-          </div>
-          <div class="company-page__row">
-            <dt class="company-page__term">資本金</dt>
-            <dd class="company-page__desc">1000万円
-            </dd>
-          </div>
-          <div class="company-page__row">
-            <dt class="company-page__term">代表取締役</dt>
-            <dd class="company-page__desc">山藤 輝明</dd>
-          </div>
-          <div class="company-page__row">
-            <dt class="company-page__term">従業員数</dt>
-            <dd class="company-page__desc">11名（2026年7月1日時点）</dd>
-          </div>
-          <div class="company-page__row">
-            <dt class="company-page__term">営業種目</dt>
-            <dd class="company-page__desc">各種広告宣伝用品および<br />販売用品・グッズの企画・製造販売</dd>
-          </div>
-          <div class="company-page__row">
-            <dt class="company-page__term">取引銀行</dt>
-            <dd class="company-page__desc">横浜信用金庫<br />城南信用金庫</dd>
-          </div>
-          <div class="company-page__row">
-            <dt class="company-page__term">事業内容</dt>
-            <dd class="company-page__desc">スポーツ・アミューズメント業界へ、<br />各種広告宣伝用品および販売用品・グッズの企画、生産、販売を行う</dd>
-          </div>
-        </dl>
-      </section>
+        <div class="company-page__overview-body">
+          <dl class="company-page__table">
+            <div class="company-page__row">
+              <dt class="company-page__term">社名</dt>
+              <dd class="company-page__desc">株式会社 DELIGHT（株式会社ディライト）</dd>
+            </div>
+            <div class="company-page__row">
+              <dt class="company-page__term">所在地</dt>
+              <dd class="company-page__desc">
+                〒222-0033<br>
+                神奈川県横浜市港北区新横浜3-1-4<br class="u-br-sp"> プラスタリアビル402<br />
+                <a href="access.html" class="company-page__map-link">アクセスマップ &gt;</a>
+              </dd>
+            </div>
+            <div class="company-page__row">
+              <dt class="company-page__term">電話</dt>
+              <dd class="company-page__desc">045-577-0268</dd>
+            </div>
+            <div class="company-page__row">
+              <dt class="company-page__term">FAX</dt>
+              <dd class="company-page__desc">045-577-0269</dd>
+            </div>
+            <div class="company-page__row">
+              <dt class="company-page__term">設立</dt>
+              <dd class="company-page__desc">令和4年9月16日</dd>
+            </div>
+            <div class="company-page__row">
+              <dt class="company-page__term">資本金</dt>
+              <dd class="company-page__desc">1000万円
+              </dd>
+            </div>
+            <div class="company-page__row">
+              <dt class="company-page__term">代表取締役</dt>
+              <dd class="company-page__desc">山藤 輝明</dd>
+            </div>
+            <div class="company-page__row">
+              <dt class="company-page__term">従業員数</dt>
+              <dd class="company-page__desc">11名（2026年7月1日時点）</dd>
+            </div>
+            <div class="company-page__row">
+              <dt class="company-page__term">営業種目</dt>
+              <dd class="company-page__desc">各種広告宣伝用品および<br />販売用品・グッズの企画・製造販売</dd>
+            </div>
+            <div class="company-page__row">
+              <dt class="company-page__term">取引銀行</dt>
+              <dd class="company-page__desc">横浜信用金庫<br />城南信用金庫</dd>
+            </div>
+            <div class="company-page__row">
+              <dt class="company-page__term">事業内容</dt>
+              <dd class="company-page__desc">スポーツ・アミューズメント業界へ、<br />各種広告宣伝用品および販売用品・グッズの企画、生産、販売を行う</dd>
+            </div>
+          </dl>
 
-      <figure class="company-page__photo">
-        <span class="company-page__photo-placeholder" aria-hidden="true">会社の正面写真予定</span>
-      </figure>
+          <figure class="company-page__photo">
+            <span class="company-page__photo-placeholder" aria-hidden="true">会社の正面写真予定</span>
+          </figure>
+        </div>
+      </section>
 
       <div class="company-page__actions">
         <a href="index.html" class="c-sub-btn company-page__top-back">TOPにもどる</a>

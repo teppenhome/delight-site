@@ -1,15 +1,13 @@
 @use "../foundation/variables" as *;
 @use "../foundation/mixin" as *;
+@use "./news-side-deco" as *;
 
 // ============================================================
 //  NEWS DETAIL PAGE（詳細ページ専用）
 //  トップの .news / 一覧の .news-archive とは独立した命名
 // ============================================================
 
-// サイド装飾（deco02=左 / deco01=右 ※一覧の deco04/03 の短い版）
-$news-detail-side-deco-scale: 0.5;
-$news-detail-side-deco-left-w: 195px * $news-detail-side-deco-scale;
-$news-detail-side-deco-right-w: 275px * $news-detail-side-deco-scale;
+// サイド装飾位置（一覧と同じ幅・同じCSS+SVG波形）
 $news-detail-title-offset: 120px;
 $news-detail-side-deco-lift: 40px;
 $news-detail-side-deco-top: calc(32px + 1.5em + 40px + #{$news-detail-title-offset} - #{$news-detail-side-deco-lift});
@@ -19,37 +17,51 @@ $news-detail-side-deco-top: calc(32px + 1.5em + 40px + #{$news-detail-title-offs
   padding: 0 0 100px;
   background: $color-white;
 
-  // 左右サイド装飾（波打ちイエロー）
+  // 左右サイド装飾（波打ちイエロー）CSS+SVG版 ※一覧と同じ
   &::before,
   &::after {
     content: "";
     position: absolute;
     top: $news-detail-side-deco-top;
     bottom: 0;
-    background-repeat: no-repeat;
-    background-size: 100% auto;
     pointer-events: none;
     z-index: 0;
+    background-color: $deco-bg-color;
+    background-image: $deco-grid-bg;
+    background-size: $deco-grid-size $deco-grid-size;
 
     @include sp {
       display: none;
     }
   }
 
-  // 左：news-side-deco02（外側が直線・内側が波）
+  // 左：左端が直線・右端が波打ち
   &::before {
     left: 0;
-    width: $news-detail-side-deco-left-w;
-    background-image: url("../images/news/news-side-deco02.png");
-    background-position: left top;
+    width: $news-side-deco-left-w;
+    background-position: $deco-grid-offset-left-x 0;
+    -webkit-mask-image: $deco-mask-left;
+    mask-image: $deco-mask-left;
+    -webkit-mask-size: 100% 3000px;
+    mask-size: 100% 3000px;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-position: left top;
+    mask-position: left top;
   }
 
-  // 右：news-side-deco01（外側が直線・内側が波）
+  // 右：右端が直線・左端が波打ち
   &::after {
     right: 0;
-    width: $news-detail-side-deco-right-w;
-    background-image: url("../images/news/news-side-deco01.png");
-    background-position: right top;
+    width: $news-side-deco-right-w;
+    -webkit-mask-image: $deco-mask-right;
+    mask-image: $deco-mask-right;
+    -webkit-mask-size: 100% 3000px;
+    mask-size: 100% 3000px;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-position: left top;
+    mask-position: left top;
   }
 
   > * {

@@ -1,16 +1,12 @@
 @use "../foundation/variables" as *;
 @use "../foundation/mixin" as *;
+@use "./news-side-deco" as *;
 
 // ============================================================
 //  NEWS ARCHIVE PAGE（一覧ページ専用）
 //  トップの .news セクションとは独立した命名
 // ============================================================
 
-// サイド装飾の元画像サイズに対する表示スケール
-$news-side-deco-scale: 0.5;
-$news-side-deco-left-w: 195px * $news-side-deco-scale;  // deco04
-$news-side-deco-right-w: 275px * $news-side-deco-scale; // deco03
-// header__nav との重なりを避けるための余白（PCのみ）
 $news-title-offset: 120px;
 // パンくず分 + タイトル余白 → タイトル位置からサイド装飾を開始
 // 背景だけタイトルより少し上に出す
@@ -22,37 +18,51 @@ $news-side-deco-top: calc(32px + 1.5em + 40px + #{$news-title-offset} - #{$news-
   padding: 0 0 100px;
   background: $color-white;
 
-  // 左右サイド装飾（波打ちイエロー）
+  // 左右サイド装飾（波打ちイエロー）CSS+SVG版
   &::before,
   &::after {
     content: "";
     position: absolute;
     top: $news-side-deco-top;
     bottom: 0;
-    background-repeat: no-repeat;
-    background-size: 100% auto;
     pointer-events: none;
     z-index: 0;
+    background-color: $deco-bg-color;
+    background-image: $deco-grid-bg;
+    background-size: $deco-grid-size $deco-grid-size;
 
     @include sp {
       display: none;
     }
   }
 
-  // 左：news-side-deco04（外側が直線・内側が波）
+  // 左：左端が直線・右端が波打ち（単一SVG 3000px, no-repeat）
   &::before {
     left: 0;
     width: $news-side-deco-left-w;
-    background-image: url("../images/news/news-side-deco04.png");
-    background-position: left top;
+    background-position: $deco-grid-offset-left-x 0;
+    -webkit-mask-image: $deco-mask-left;
+    mask-image: $deco-mask-left;
+    -webkit-mask-size: 100% 3000px;
+    mask-size: 100% 3000px;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-position: left top;
+    mask-position: left top;
   }
 
-  // 右：news-side-deco03（外側が直線・内側が波）
+  // 右：右端が直線・左端が波打ち（単一SVG 3000px, no-repeat）
   &::after {
     right: 0;
     width: $news-side-deco-right-w;
-    background-image: url("../images/news/news-side-deco03.png");
-    background-position: right top;
+    -webkit-mask-image: $deco-mask-right;
+    mask-image: $deco-mask-right;
+    -webkit-mask-size: 100% 3000px;
+    mask-size: 100% 3000px;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-position: left top;
+    mask-position: left top;
   }
 
   > * {
