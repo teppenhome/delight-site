@@ -35,6 +35,10 @@ $works-arrow-size:    55px;
   position: relative;
   overflow-x: visible;
 
+  @include sp {
+    padding: 56px 0;
+  }
+
   &__inner {
     position: relative;
     overflow: visible;
@@ -130,6 +134,12 @@ $works-arrow-size:    55px;
     color: $color-text;
     margin-bottom: 16px;
     font-weight: 700;
+
+    @include sp {
+      font-size: $font-body-sp;
+      font-weight: 500;
+      margin-bottom: 10px;
+    }
   }
 
   &__title {
@@ -137,6 +147,12 @@ $works-arrow-size:    55px;
     font-weight: 700;
     line-height: 1.4;
     flex: 1;
+
+    @include sp {
+      font-size: $font-body-sp;
+      font-weight: 500;
+      line-height: 1.55;
+    }
   }
 
   &__footer {

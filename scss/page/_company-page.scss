@@ -11,7 +11,7 @@
   background: $color-white;
 
   @include sp {
-    padding: 20px 0 72px;
+    padding: 0 0 72px;
   }
 
   // ── パンくず ──────────────────────────────────────
@@ -114,7 +114,7 @@
     color: $color-primary;
 
     @include sp {
-      font-size: 14px;
+      font-size: $font-body-sp;
     }
   }
 
@@ -127,7 +127,7 @@
     color: $color-text;
 
     @include sp {
-      font-size: 14px;
+      font-size: $font-body-sp;
       line-height: 1.8;
     }
   }

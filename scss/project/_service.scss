@@ -9,11 +9,15 @@
   background-color: #006FD3;
 
   @include sp {
-    padding: $section-pad-v 0 40px;
+    padding: 48px 0 28px;
   }
 
   .section-title {
     text-align: left;
+
+    @include sp {
+      margin-bottom: 16px;
+    }
   }
 
   &__inner.container.container--side-offset {
@@ -37,8 +41,9 @@
     @include sp {
       margin-top: 0;
       margin-bottom: 40px;
-      font-size: 16px;
-      line-height: 1.8;
+      font-size: $font-body-sp;
+      font-weight: 400;
+      line-height: 2;
     }
   }
 
@@ -150,7 +155,8 @@
     letter-spacing: 0.02em;
 
     @include sp {
-      line-height: 1.9;
+      font-size: 13px;
+      line-height: 2;
       margin-top: 10px;
     }
   }
@@ -417,7 +423,7 @@
     @include sp {
       justify-content: flex-start;
       min-height: 72px;
-      padding: 16px 36px 16px 65px;
+      padding: 16px 36px 16px 76px;
       gap: 8px;
       border-radius: 14px;
     }
@@ -462,7 +468,7 @@
         left: -6px;
         right: auto;
         bottom: 0;
-        height: 68px;
+        height: 84px;
       }
     }
   }

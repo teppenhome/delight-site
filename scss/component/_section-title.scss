@@ -102,12 +102,28 @@
   }
 
   &--inline {
+    .section-title__en,
+    .section-title__en__blue,
+    .section-title__en__white {
+      display: inline-block;
+      line-height: 1;
+      vertical-align: bottom;
+    }
+
     .section-title__ruby {
       display: inline-block;
       margin-top: 0;
+      margin-bottom: 0;
       margin-left: 12px;
       letter-spacing: 0.1em;
-      vertical-align: middle;
+      line-height: 1;
+      vertical-align: bottom;
+      transform: translateY(-0.32em);
+
+      @include sp {
+        line-height: 1;
+        transform: translateY(-0.24em);
+      }
     }
   }
 

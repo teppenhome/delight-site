@@ -856,6 +856,8 @@ function initPhilosophyShootingStars() {
 
     const tick = (now) => {
       if (now < startAt) {
+        // 待機中は軌跡の手前へ置いておく（開始フレームから流れるように）
+        apply(star, 0);
         requestAnimationFrame(tick);
         return;
       }
@@ -873,8 +875,12 @@ function initPhilosophyShootingStars() {
     requestAnimationFrame(tick);
   };
 
-  // 初期は軌跡の手前・非表示
-  stars.forEach((star) => apply(star, 0));
+  // 初期は配置位置に透明で置く（軌跡手前へずらすと狭い画面で clip 外になり IO が発火しない）
+  stars.forEach((star) => {
+    star.el.style.setProperty('--shoot-x', '0px');
+    star.el.style.setProperty('--shoot-y', '0px');
+    star.el.style.setProperty('--shoot-opacity', '0');
+  });
 
   const io = new IntersectionObserver(
     (entries) => {
@@ -887,7 +893,7 @@ function initPhilosophyShootingStars() {
       });
     },
     {
-      threshold: 0.2,
+      threshold: 0.05,
       rootMargin: '0px 0px -8% 0px',
     }
   );
@@ -903,6 +909,8 @@ function initPhilosophyShootingStars() {
 // ============================================================
 function initPhilosophyLineDraw() {
   if (!document.body.classList.contains('page-philosophy')) return;
+  // ハンバーガーメニュー表示幅では線を出さない（CSS と同期）
+  if (window.matchMedia('(max-width: 1024px)').matches) return;
 
   const paths = Array.from(
     document.querySelectorAll('.philosophy-page__line-svg path')

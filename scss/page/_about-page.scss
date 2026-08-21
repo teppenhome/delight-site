@@ -11,7 +11,7 @@
   background: $color-white;
 
   @include sp {
-    padding: 20px 0 72px;
+    padding: 0 0 72px;
   }
 
   // ── パンくず ──────────────────────────────────────
@@ -27,7 +27,8 @@
 
     @include sp {
       margin-bottom: 28px;
-      padding: 0 20px;
+      padding-left: 30px;
+      padding-right: 30px;
       font-size: 12px;
     }
 
@@ -57,7 +58,7 @@
     @include tab {
       flex-direction: column;
       gap: 48px;
-      padding: 0 20px;
+      padding: 0 30px;
     }
   }
 
@@ -91,7 +92,7 @@
       }
 
       @include sp {
-        font-size: 14px;
+        font-size: $font-body-sp;
       }
     }
   }

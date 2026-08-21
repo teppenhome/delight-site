@@ -26,7 +26,8 @@
 
     @include sp {
       margin-bottom: 28px;
-      padding: 0 20px;
+      padding-left: 30px;
+      padding-right: 30px;
       font-size: 12px;
     }
 
@@ -50,7 +51,7 @@
     padding: 0 40px;
 
     @include sp {
-      padding: 0 20px;
+      padding: 0 30px;
     }
   }
 
@@ -67,6 +68,10 @@
       font-size: 15px;
       line-height: 2.2;
       color: $color-text;
+
+      @include sp {
+        font-size: $font-body-sp;
+      }
     }
   }
 
@@ -104,6 +109,10 @@
       font-size: 15px;
       line-height: 2.2;
       color: $color-text;
+
+      @include sp {
+        font-size: $font-body-sp;
+      }
     }
   }
 

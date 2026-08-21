@@ -37,7 +37,23 @@
     }
 
     @include sp {
+      display: flex;
+      align-items: flex-end;
+      flex-wrap: wrap;
+      gap: 8px;
       padding-bottom: 16px;
+
+      .section-title__ruby {
+        display: block;
+        margin-top: 0;
+        margin-bottom: 0.15em;
+        margin-left: 0;
+        font-size: 15px;
+        font-weight: 500;
+        line-height: 1.2;
+        letter-spacing: 0.06em;
+        transform: translateY(-0.28em);
+      }
     }
   }
 
@@ -136,7 +152,9 @@
     color: $color-text;
 
     @include sp {
-      font-size: 14px;
+      font-size: $font-body-sp;
+      font-weight: 400;
+      line-height: 1.85;
     }
   }
 
@@ -179,8 +197,9 @@
     color: $color-text;
 
     @include sp {
-      font-size: 14px;
-      line-height: 1.8;
+      font-size: $font-body-sp;
+      font-weight: 400;
+      line-height: 2;
     }
 
     p {

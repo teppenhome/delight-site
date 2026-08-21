@@ -324,6 +324,11 @@
       height: 100%;
     }
 
+    // ハンバーガー表示時（SP/タブ）の通常塗り。philosophy は青背景のため別指定
+    .c-float-icon__circle {
+      fill: #F28E55;
+    }
+
     &:hover {
       opacity: 1;
       transform: translateY(-1px);

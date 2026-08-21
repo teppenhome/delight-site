@@ -16,6 +16,15 @@
     transition: fill 0.3s ease, stroke 0.3s ease;
   }
 
+  // PCヘッダーのメールアイコンと同じ：封筒本体は白塗り
+  &__envelope {
+    fill: $color-white;
+    stroke: $color-primary;
+    stroke-width: 1.5;
+    stroke-linejoin: round;
+    transition: fill 0.3s ease, stroke 0.3s ease;
+  }
+
   &__symbol {
     fill: none;
     stroke: $color-primary;
@@ -38,7 +47,7 @@
 
 body[class*="page-"] {
   $float-size: 64px;
-  $float-size-sp: 56px;
+  $float-size-sp: 44px; // ヘッダーのメールアイコン（.header__contact）と同サイズ
   $float-gap: 16px;
   $float-bottom: 40px;
   $float-bottom-sp: 30px;

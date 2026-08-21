@@ -11,7 +11,7 @@
   background: $color-white;
 
   @include sp {
-    padding: 20px 0 72px;
+    padding: 0 0 72px;
   }
 
   &__breadcrumb {
@@ -26,7 +26,8 @@
 
     @include sp {
       margin-bottom: 28px;
-      padding: 0 20px;
+      padding-left: 30px;
+      padding-right: 30px;
       font-size: 12px;
     }
 
@@ -47,7 +48,7 @@
     padding: 0 40px;
 
     @include sp {
-      padding: 0 20px;
+      padding: 0 30px;
     }
   }
 
@@ -69,7 +70,7 @@
     @include sp {
       gap: 40px;
       margin-bottom: 56px;
-      padding: 0 20px;
+      padding: 0 30px;
 
       .work-detail__media {
         order: -1;
@@ -148,6 +149,10 @@
       &:last-child {
         margin-bottom: 0;
       }
+
+      @include sp {
+        font-size: $font-body-sp;
+      }
     }
   }
 
@@ -180,6 +185,10 @@
       font-weight: 500;
       letter-spacing: 0.08em;
       color: #7c7c7c;
+
+      @include sp {
+        font-size: $font-body-sp;
+      }
     }
 
     dd {
@@ -188,6 +197,10 @@
       line-height: 1.7;
       color: #7c7c7c;
       font-weight: 700;
+
+      @include sp {
+        font-size: $font-body-sp;
+      }
 
       a {
         color:#7c7c7c;
@@ -226,6 +239,10 @@
       line-height: 1.7;
       letter-spacing: 0.04em;
       color: #7c7c7c;
+
+      @include sp {
+        font-size: $font-body-sp;
+      }
     }
 
     p {
@@ -233,6 +250,10 @@
       font-size: 16px;
       line-height: 1.7;
       color: #7c7c7c;
+
+      @include sp {
+        font-size: $font-body-sp;
+      }
     }
   }
 
@@ -267,7 +288,7 @@
     padding: 0 40px;
 
     @include sp {
-      padding: 0 20px;
+      padding: 0 30px;
     }
   }
 

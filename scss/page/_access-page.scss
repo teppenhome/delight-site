@@ -11,7 +11,7 @@
   background: $color-white;
 
   @include sp {
-    padding: 20px 0 72px;
+    padding: 0 0 72px;
   }
 
   // ── パンくず ──────────────────────────────────────
@@ -55,6 +55,10 @@
     font-weight: 700;
     line-height: 1.6;
     color: $color-text;
+
+    @include sp {
+      font-size: $font-body-sp;
+    }
   }
 
   &__address {
@@ -64,6 +68,10 @@
     line-height: 1.9;
     color: $color-text;
     font-weight: 500;
+
+    @include sp {
+      font-size: $font-body-sp;
+    }
   }
 
   &__contact {
@@ -72,6 +80,10 @@
     line-height: 1.8;
     color: $color-text;
     font-weight: 500;
+
+    @include sp {
+      font-size: $font-body-sp;
+    }
   }
   
   &__map-btn {
@@ -218,6 +230,10 @@
     color: $color-text;
     font-weight: 500;
 
+    @include sp {
+      font-size: $font-body-sp;
+    }
+
     li {
       margin-bottom: 0.3em;
 
@@ -226,7 +242,7 @@
       }
 
       @include sp {
-        font-size: 14px;
+        font-size: $font-body-sp;
       }
     }
   }

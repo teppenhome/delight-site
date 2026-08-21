@@ -18,7 +18,16 @@
       margin-bottom: -6px;
 
       @include sp {
-        margin-bottom: -4px;
+        margin-bottom: -8px;
+        line-height: 1.2;
+      }
+    }
+
+    // スマホで「OUR CLIENTS」が折り返さないよう字間を詰める
+    .section-title__en__blue.__middle {
+      @include sp {
+        letter-spacing: 0.01em;
+        white-space: nowrap;
       }
     }
   }

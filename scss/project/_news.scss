@@ -53,6 +53,14 @@ $news-wave-bottom: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/
     z-index: 1;
   }
 
+  .section-title {
+    margin-bottom: 20px;
+
+    @include sp {
+      margin-bottom: 16px;
+    }
+  }
+
   @include sp {
     margin-top: 0;
     padding: $section-pad-v 0 60px;
@@ -91,13 +99,13 @@ $news-wave-bottom: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/
     padding: 28px 28px 24px;
     border: 1.5px solid $color-primary;
     border-radius: 16px;
-    margin-top: -40px;
+    margin-top: 0;
     max-width: 870px;
     width: 100%;
 
     @include sp {
       padding: 28px 16px 24px;
-      margin-top: -20px;
+      margin-top: 0;
     }
   }
 

@@ -126,8 +126,11 @@ body[class*="page-"] {
       padding-bottom: 0;
     }
 
+    // hover / focus に加え、該当セクション（__is-active）時は常時表示
     &:hover .header__nav-child,
-    &:focus-within .header__nav-child {
+    &:focus-within .header__nav-child,
+    &:has(.header__nav-en.__is-active) .header__nav-child,
+    &:has(.is-current) .header__nav-child {
       position: static;
       top: auto;
       left: auto;

@@ -14,8 +14,8 @@ body[class*="page-"] {
     }
 
     @include sp {
-      // header inner: padding 16×2 + logo 30 ≈ 62px + 余白
-      padding-top: 60px;
+      // header: padding 16×2 + actions 44 ≈ 76px + 余白
+      padding-top: 84px;
     }
   }
 }

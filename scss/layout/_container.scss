@@ -8,7 +8,7 @@
   max-width: $container-width;
   margin: 0 auto;
   padding: 0 40px;
-  @include sp { padding: 0 20px; }
+  @include sp { padding: 0 30px; }
 
   @include lg {
     max-width: 800px;
@@ -44,7 +44,7 @@ body:not([class*="page-"]) {
     }
   }
 
-  // about / service / news / clients / qa / contact は 20px
+  // about / service / news / clients / qa / contact は 30px
   .about__inner.container,
   .service__inner.container,
   .news__inner.container,
@@ -52,8 +52,8 @@ body:not([class*="page-"]) {
   .qa__inner.container,
   .contact__wrap.container {
     @include sp {
-      padding-left: 20px;
-      padding-right: 20px;
+      padding-left: 30px;
+      padding-right: 30px;
     }
   }
 }

@@ -71,7 +71,7 @@ $news-side-deco-top: calc(32px + 1.5em + 40px + #{$news-title-offset} - #{$news-
   }
 
   @include sp {
-    padding: 20px 0 72px;
+    padding: 0 0 72px;
   }
 
   // ── パンくず ──────────────────────────────────────
@@ -87,7 +87,8 @@ $news-side-deco-top: calc(32px + 1.5em + 40px + #{$news-title-offset} - #{$news-
 
     @include sp {
       margin-bottom: 28px;
-      padding: 0 20px;
+      padding-left: 30px;
+      padding-right: 30px;
       font-size: 12px;
     }
 
@@ -124,7 +125,7 @@ $news-side-deco-top: calc(32px + 1.5em + 40px + #{$news-title-offset} - #{$news-
       align-items: flex-start;
       gap: 24px;
       margin-bottom: 36px;
-      padding: 0 20px;
+      padding: 0 30px;
     }
   }
 
@@ -211,7 +212,7 @@ $news-side-deco-top: calc(32px + 1.5em + 40px + #{$news-title-offset} - #{$news-
       grid-template-columns: 1fr;
       column-gap: 0;
       margin-bottom: 48px;
-      padding: 0 20px;
+      padding: 0 30px;
     }
   }
 
@@ -371,7 +372,7 @@ $news-side-deco-top: calc(32px + 1.5em + 40px + #{$news-title-offset} - #{$news-
     padding: 0 40px;
 
     @include sp {
-      padding: 0 20px;
+      padding: 0 30px;
     }
   }
 

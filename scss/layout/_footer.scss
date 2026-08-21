@@ -386,8 +386,8 @@ $footer-contact-inset: 200px;
   @include sp {
     right: 20px;
     bottom: 30px;
-    width: 56px;
-    height: 56px;
+    width: 44px; // ヘッダーのメールアイコンと同サイズ
+    height: 44px;
   }
 }
 

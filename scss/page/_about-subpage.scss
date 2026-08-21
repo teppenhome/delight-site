@@ -17,7 +17,8 @@
 
   @include sp {
     margin-bottom: 28px;
-    padding: 0 20px;
+    padding-left: 30px;
+    padding-right: 30px;
     font-size: 12px;
   }
 
@@ -40,6 +41,10 @@
   padding: 0 40px;
 
   @include tab {
-    padding: 0 20px;
+    padding: 0 30px;
+  }
+
+  @include sp {
+    padding: 0 30px;
   }
 }
