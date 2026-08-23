@@ -967,21 +967,22 @@ body.page-philosophy {
       }
 
       &--note08 {
-        top: 1260px;
+        top: 1320px;
         right: 0;
         max-width: 120px;
       }
 
       &--star01 {
-        top: 58%;
-        left: 28%;
+        top: 24%;
+        left: auto;
+        right: 4%;
         max-width: 56px;
       }
 
       &--star02 {
-        top: 48%;
-        left: auto;
-        right: 4%;
+        top: 110%;
+        left: 6%;
+        right: auto;
         max-width: 100px;
       }
     }
@@ -1503,8 +1504,9 @@ body.page-philosophy {
       width: 100vw;
       max-width: 100vw;
       margin-left: calc(50% - 50vw);
+      // 地球・人物はここ（overflow なし）で上げる。figure 内の負マージンだと星が欠ける
       margin-top: calc(
-        24px + max(0px, 1220px - min(1220px, 100vw)) * 1166 / 1685 * 0.15
+        -56px + max(0px, 1220px - min(1220px, 100vw)) * 1166 / 1685 * 0.15
       );
       padding: 0;
       box-sizing: border-box;
