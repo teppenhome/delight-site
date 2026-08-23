@@ -6276,7 +6276,7 @@ body.page-philosophy .header .header__contact .c-float-icon__circle {
   }
   .philosophy-page .goods--note08 {
     top: 1320px;
-    right: 0;
+    right: calc(50% - 50vw);
     max-width: 120px;
   }
   .philosophy-page .goods--star01 {
