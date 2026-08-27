@@ -211,6 +211,13 @@
       opacity 0.3s ease,
       visibility 0.3s ease;
 
+    // ABOUT は ja「私たちについて」が長いため left:0 だと文頭が左に寄る。
+    // 右端基準にして SERVICE 子メニューの文頭位置に揃える。
+    &:has(> li:nth-child(4)) {
+      left: auto;
+      right: 0;
+    }
+
     li {
       width: max-content;
     }

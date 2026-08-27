@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
@@ -18,7 +18,7 @@
       <li class="side-nav__item side-nav__item--has-child">
         <a href="about.html">
           <span class="side-nav__en">ABOUT US</span>
-          <span class="side-nav__ja">会社概要</span>
+          <span class="side-nav__ja">私たちについて</span>
         </a>
         <ul class="side-nav__child">
           <li><a href="company.html">会社概要</a></li>
@@ -70,7 +70,7 @@
             <div class="drawer__parent">
               <a href="about.html" class="drawer__link">
                 <span class="drawer__en">ABOUT US</span>
-                <span class="drawer__ja">会社概要</span>
+                <span class="drawer__ja">私たちについて</span>
               </a>
               <button
                 type="button"
@@ -121,8 +121,12 @@
             </a>
           </li>
           <li class="drawer__item drawer__item--contact">
-            <a href="contact.html" class="drawer__link drawer__link--contact">
-              <img src="images/contact.png" alt="お問い合わせ">
+            <a href="contact.html" class="drawer__link drawer__link--contact" aria-label="お問い合わせ">
+              <svg class="c-float-icon drawer__contact-icon" viewBox="0 0 52 52" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+                <circle class="c-float-icon__circle" cx="26" cy="26" r="24"/>
+                <path class="c-float-icon__envelope" d="M15.5 19 H36.5 Q38 19 38 20.5 V32.5 Q38 34 36.5 34 H15.5 Q14 34 14 32.5 V20.5 Q14 19 15.5 19 Z"/>
+                <path class="c-float-icon__symbol" d="M15 19.5 L26 27.5 L37 19.5"/>
+              </svg>
             </a>
           </li>
         </ul>
@@ -155,7 +159,7 @@
                   <span class="header__nav-en">ABOUT US</span>
                 </a>
                 <div class="header__nav-sub">
-                  <a href="about.html" class="header__nav-ja">会社概要</a>
+                  <a href="about.html" class="header__nav-ja">私たちについて</a>
                   <ul class="header__nav-child">
                     <li><a href="company.html">会社概要</a></li>
                     <li><a href="philosophy.html">企業理念</a></li>
@@ -251,7 +255,7 @@
         </div>
         <div class="about__body">
           <div class="about__text u-no-br-sp">
-            <p>私たちは、たのしいと高品質なものを提供する、<br />販売商品、グッズの企画、製造販売会社です。<br />第一にお客様が楽しむこと、第二に私たち自身も楽しむこと。<br />たのしみながらものづくりを行うことを大切にしています。</p>
+            <p>私たちは、たのしいと高品質なものを提供する、<br />グッズの企画・製造販売会社です。<br />第一にお客様が楽しむこと、第二に私たち自身も楽しむこと。<br />たのしみながらものづくりを行うことを大切にしています。</p>
 
             <p>さまざまな企業から依頼を受け、<br />企画提案・デザイン・サンプル制作・量産・検品、物流までを<br />一括でお任せいただいております。<br />冒険的なものから堅実的なデザインまで幅広く対応可能です。<img class="about__kira about__kira--03" src="images/about-kira03.png" alt="" width="119" height="119" decoding="async" aria-hidden="true"></p>
           </div>
@@ -510,8 +514,13 @@
               <p class="service__card-text">
                 雑貨やアパレル、ノベルティなど幅広いアイテムに対応。<br>お客様のアイデアをもとに、企画から生産管理まで一貫して行い、<br class="u-br-pc">オリジナル商品の実現をお手伝いします。
               </p>
-              <figure class="service__card-illust">
-                <img src="images/oem-images.png" alt="" width="320" height="280" decoding="async">
+              <figure class="service__card-illust service__card-illust--collage" aria-hidden="true">
+                <img class="service__card-illust__item service__card-illust__item--01" src="images/service-item01.png" alt="" width="542" height="476" decoding="async">
+                <img class="service__card-illust__item service__card-illust__item--02" src="images/service-item02.png" alt="" width="589" height="589" decoding="async">
+                <img class="service__card-illust__item service__card-illust__item--03" src="images/service-item03.png" alt="" width="334" height="334" decoding="async">
+                <img class="service__card-illust__item service__card-illust__item--04" src="images/service-item04.png" alt="" width="521" height="521" decoding="async">
+                <img class="service__card-illust__item service__card-illust__item--05" src="images/service-item05.png" alt="" width="637" height="637" decoding="async">
+                <img class="service__card-illust__item service__card-illust__item--06" src="images/service-item06.png" alt="" width="474" height="452" decoding="async">
               </figure>
             </div>
           </article>
@@ -1067,7 +1076,7 @@
               <div class="qa__answer-inner">
                 <span class="qa__icon qa__icon--a" aria-hidden="true">A</span>
                 <div class="qa__answer-text">
-                  <p>納期は、商品や仕様、数量によって異なります。</p><p>例えばぬいぐるみの場合はサンプルのご承認後、ご発注から納品まで「約2～3か月」が目安です。<br>また、商品仕様やデザインが決定している場合は、サンプル制作後、量産開始から最短2～3週間で納品できる場合もございます。<br>ご希望の納期に合わせて最適なスケジュールをご提案いたしますので、お急ぎの場合もまずはお気軽にご相談ください。</p>
+                  <p>納期は、商品や仕様、数量によって異なります。</p><p>例えばぬいぐるみの場合はサンプルのご承認後、ご発注から納品まで「約2～3か月」が目安です。<br>また、商品によっては、仕様やデザインが決定している場合は、サンプル制作後、量産開始から最短2～3週間で納品できる場合もございます。<br>ご希望の納期に合わせて最適なスケジュールをご提案いたしますので、お急ぎの場合もまずはお気軽にご相談ください。</p>
                 </div>
               </div>
             </div>
@@ -1235,7 +1244,7 @@
         </div>
 
         <div class="footer__actions">
-          <a href="#contact" class="footer__btn footer__btn--contact">
+          <a href="contact.html" class="footer__btn footer__btn--contact">
             <span class="footer__btn-icon" aria-hidden="true">
               <img src="images/footer-icon-mail.png" alt="" width="64" height="64">
             </span>

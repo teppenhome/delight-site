@@ -69,7 +69,8 @@
     position: absolute;
     inset: 0;
     display: flex;
-    align-items: center;
+    // center だと子メニュー展開時に上下が均等にはみ出し、上部が切れて先頭へスクロールできない
+    align-items: flex-start;
     justify-content: center;
     padding: 96px 32px 48px;
     background: $color-white;
@@ -77,6 +78,8 @@
     opacity: 0;
     overflow-x: hidden;
     overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain;
     transition:
       transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
       opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1);
@@ -85,6 +88,9 @@
   &__nav {
     width: 100%;
     max-width: 320px;
+    flex-shrink: 0;
+    // 短いときは縦中央、溢れたときは margin が潰れて先頭からスクロール可能
+    margin-block: auto;
   }
 
   &__list {
@@ -162,10 +168,19 @@
       min-height: auto;
       padding: 16px;
 
-      img {
+      .drawer__contact-icon {
         display: block;
         width: 72px;
-        height: auto;
+        height: 72px;
+      }
+
+      // ヘッダー（.header__contact）と同じオレンジ円背景
+      .c-float-icon__circle {
+        fill: #F28E55;
+      }
+
+      &:hover .c-float-icon__circle {
+        fill: #F28E55;
       }
     }
   }

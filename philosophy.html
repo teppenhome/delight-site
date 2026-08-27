@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
@@ -20,7 +20,7 @@
             <div class="drawer__parent">
               <a href="about.html" class="drawer__link">
                 <span class="drawer__en">ABOUT US</span>
-                <span class="drawer__ja">会社概要</span>
+                <span class="drawer__ja">私たちについて</span>
               </a>
               <button
                 type="button"
@@ -71,8 +71,12 @@
             </a>
           </li>
           <li class="drawer__item drawer__item--contact">
-            <a href="contact.html" class="drawer__link drawer__link--contact">
-              <img src="images/contact.png" alt="お問い合わせ">
+            <a href="contact.html" class="drawer__link drawer__link--contact" aria-label="お問い合わせ">
+              <svg class="c-float-icon drawer__contact-icon" viewBox="0 0 52 52" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+                <circle class="c-float-icon__circle" cx="26" cy="26" r="24"/>
+                <path class="c-float-icon__envelope" d="M15.5 19 H36.5 Q38 19 38 20.5 V32.5 Q38 34 36.5 34 H15.5 Q14 34 14 32.5 V20.5 Q14 19 15.5 19 Z"/>
+                <path class="c-float-icon__symbol" d="M15 19.5 L26 27.5 L37 19.5"/>
+              </svg>
             </a>
           </li>
         </ul>
@@ -91,7 +95,9 @@
       <nav class="header__nav" id="globalNav" aria-label="メインナビゲーション">
         <ul class="header__nav-list">
           <li class="header__nav-item header__nav-item--has-child">
-            <span class="header__nav-en __is-active">ABOUT US</span>
+            <a href="about.html">
+              <span class="header__nav-en __is-active">ABOUT US</span>
+            </a>
             <ul class="header__nav-child">
               <li><a href="company.html">会社概要</a></li>
               <li><a href="philosophy.html" class="is-current">企業理念</a></li>
@@ -417,7 +423,7 @@
         </div>
 
         <div class="footer__actions">
-          <a href="index.html#contact" class="footer__btn footer__btn--contact">
+          <a href="contact.html" class="footer__btn footer__btn--contact">
             <span class="footer__btn-icon" aria-hidden="true">
               <img src="images/footer-icon-mail.png" alt="" width="64" height="64">
             </span>

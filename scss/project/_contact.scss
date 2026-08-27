@@ -8,24 +8,26 @@
   padding: 160px 0 $section-pad-v;
   position: relative;
   background-color: $color-white;
+  background-image: linear-gradient(#FFF6F2, #FFF6F2);
+  background-repeat: no-repeat;
+  background-position: center bottom;
+  background-size: 100% calc(100% - 160px);
 
   @include sp {
     padding: $section-pad-v 0;
+    background-size: 100% calc(100% - #{$section-pad-v});
   }
 
   &__inner {
     position: relative;
     width: 100%;
     max-width: 870px;
+    margin: 0 auto;
     padding: 56px 84px 48px;
-    background-color: #FFF6F3;
-    border: 4px solid #FFCDC7;
-    border-radius: 24px;
     box-sizing: border-box;
 
     @include sp {
       padding: 40px 10px 32px;
-      border-radius: 16px;
     }
   }
 
@@ -45,7 +47,7 @@
     }
 
     @include sp {
-      top: -28px;
+      top: -44px;
       right: -8px;
       width: 100px;
       height: 100px;

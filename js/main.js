@@ -588,6 +588,7 @@ function initPageTop() {
 
       if (document.body.classList.contains('page-philosophy')) {
         const blueSection = document.querySelector('.philosophy-page__body');
+        const whiteFloor = document.querySelector('.philosophy-page__actions');
         const footer = document.querySelector('.footer');
 
         if (blueSection) {
@@ -599,10 +600,13 @@ function initPageTop() {
           const isOverFooter =
             footer &&
             footer.getBoundingClientRect().top < floatRect.bottom;
+          const isOverWhiteFloor =
+            whiteFloor &&
+            checkY >= whiteFloor.getBoundingClientRect().top;
 
           floatActions.classList.toggle(
             'is-on-blue-bg',
-            isOnBlue && !isOverFooter
+            isOnBlue && !isOverFooter && !isOverWhiteFloor
           );
         }
       }

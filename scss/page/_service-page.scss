@@ -138,11 +138,14 @@
     letter-spacing: 0.1em;
 
     @include sp {
+      margin-top: 8px;
       letter-spacing: 0.05em;
     }
   }
 
   &__section-title-num {
+    position: relative;
+    top: 0.08em;
     font-size: 1.5em;
     letter-spacing: 0.04em;
   }
@@ -235,6 +238,18 @@
 
   &__strengths-inner {
     @include service-page-content-width;
+
+    @include sp {
+      padding-left: 16px;
+      padding-right: 16px;
+
+      .service-page__section-title {
+        margin-left: -16px;
+        margin-right: -16px;
+        padding-left: 30px;
+        padding-right: 30px;
+      }
+    }
   }
 
   &__strengths-grid {
@@ -268,7 +283,7 @@
     }
 
     @include sp {
-      padding: 28px 10px 32px;
+      padding: 28px 20px 32px;
       border-radius: 16px;
     }
   }
@@ -483,6 +498,34 @@
 
   &__flow-inner {
     @include service-page-content-width;
+
+    .service-page__section-title {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .service-page__section-title-en {
+      margin-bottom: 0;
+    }
+
+    .service-page__section-title-ja {
+      @include sp {
+        margin-top: 0;
+      }
+    }
+
+    @include sp {
+      padding-left: 16px;
+      padding-right: 16px;
+
+      .service-page__section-title {
+        margin-left: -16px;
+        margin-right: -16px;
+        padding-left: 30px;
+        padding-right: 30px;
+      }
+    }
   }
 
   &__steps {
@@ -520,7 +563,7 @@
     @include sp {
       grid-template-columns: 1fr;
       gap: 16px;
-      padding: 40px 10px 24px;
+      padding: 40px 20px 24px;
       border-radius: 20px;
     }
 

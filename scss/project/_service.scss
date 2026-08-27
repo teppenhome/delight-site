@@ -90,6 +90,7 @@
 
     @include sp {
       height: 42px;
+      padding-left: 14px;
     }
   }
 
@@ -114,13 +115,13 @@
     align-self: flex-start;
     margin: 4px 0 0;
     font-family: $font-sub;
-    font-size: clamp(16px, 2vw, 24px);
+    font-size: clamp(15px, 2vw, 24px);
     font-weight: 900;
     color: #000;
     letter-spacing: 0.04em;
 
     @include sp {
-      padding-left: 6px;
+      padding-left: 16px;
     }
   }
 
@@ -185,21 +186,92 @@
       width: min(240px, 78%);
       max-width: calc(100% - 32px);
     }
+
+    // OEM：個別イラストの重なりコラージュ
+    // ※各PNGに15〜25%前後の透過余白があるため、ボックス同士を大きく重ねて見た目の重なりを作る
+    &--collage {
+      aspect-ratio: 1.1 / 1;
+      overflow: visible;
+
+      .service__card-illust__item {
+        position: absolute;
+        display: block;
+        width: auto;
+        height: auto;
+        max-width: none;
+        filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.18));
+      }
+
+      .service__card-illust__item--01 {
+        // カレンダー（左上・背面寄り）
+        top: -5%;
+        left: -6%;
+        width: 56%;
+        transform: rotate(-14deg);
+        z-index: 2;
+      }
+
+      .service__card-illust__item--02 {
+        // キャップ（上中央・カレンダー／ライオンに被せる）
+        top: -12%;
+        left: 16%;
+        width: 60%;
+        transform: rotate(-18deg);
+        z-index: 5;
+      }
+
+      .service__card-illust__item--03 {
+        // マグカップ（右上・キャップに被る）
+        top: -4%;
+        left: auto;
+        right: -4%;
+        width: 54%;
+        transform: rotate(20deg);
+        z-index: 3;
+      }
+
+      .service__card-illust__item--04 {
+        // ライオン（左下アンカー・キャップの下）
+        top: 26%;
+        left: -4%;
+        width: 50%;
+        transform: rotate(-8deg);
+        z-index: 3;
+      }
+
+      .service__card-illust__item--05 {
+        // キーホルダー（中央・最前面）
+        top: 10%;
+        left: 20%;
+        width: 60%;
+        transform: rotate(-10deg);
+        z-index: 6;
+      }
+
+      .service__card-illust__item--06 {
+        // リュック（右下・ライオンに被せる）
+        top: 34%;
+        left: 38%;
+        width: 52%;
+        transform: rotate(10deg);
+        z-index: 4;
+      }
+    }
   }
 
   &__card--oem &__card-illust {
     top: clamp(-76px, -12vw, -56px);
-    right: clamp(-48px, -6vw, -24px);
+    right: clamp(-72px, -9vw, -40px);
     width: clamp(340px, 48vw, 500px);
 
     @include sp {
       right: 50%;
       top: auto;
-      bottom: 12px;
+      bottom: -72px;
       left: auto;
-      transform: translate(50%, 0);
-      width: min(240px, 78%);
-      max-width: calc(100% - 32px);
+      transform: translate(calc(50% + 12px), 0);
+      width: min(320px, 96%);
+      max-width: calc(100% - 8px);
     }
   }
 
