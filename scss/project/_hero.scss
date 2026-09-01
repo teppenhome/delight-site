@@ -29,41 +29,288 @@
     pointer-events: none;
   }
 
-  &__bg-main {
-    position: relative;
+  &__illust {
+    position: absolute;
     z-index: 1;
+    inset: 0;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    pointer-events: none;
+  }
+
+  &__illust-stage {
+    position: relative;
+    width: min(100%, 1400px, calc(100vh * 2118 / 1478));
+    aspect-ratio: 2118 / 1478;
+    flex-shrink: 0;
+  }
+
+  &__illust-item {
+    position: absolute;
     display: block;
-    width: 100%;
-    height: 100%;
-    max-width: 1400px;
-    margin: 0 auto;
-    object-fit: contain;
-    object-position: top center;
+    width: auto;
+    height: auto;
+    max-width: none;
+  }
+
+  &__illust-item--dot-siro-a {
+    top: 55%;
+    left: -5%;
+    width: 13%;
+    z-index: 1;
+  }
+
+  &__illust-item--dot-siro-b {
+    top: 25%;
+    left: 55%;
+    width: 14%;
+    z-index: 5;
+  }
+
+  &__illust-item--dot-siro-c {
+    top: 36%;
+    left: 78%;
+    width: 12%;
+    z-index: 1;
+  }
+
+  &__illust-item--dot-siro-d {
+    top: 3%;
+    right: -4%;
+    width: 13%;
+    z-index: 1;
+  }
+
+  &__illust-item--dot-yellow-a {
+    top: 20%;
+    left: -12%;
+    width: 15%;
+    z-index: 1;
+  }
+
+  &__illust-item--dot-yellow-b {
+    top: 58%;
+    left: 75%;
+    width: 14%;
+    z-index: 1;
+  }
+
+  &__illust-item--maru-2 {
+    top: 46%;
+    left: -5%;
+    width: 13%;
+    z-index: 1;
+    transform: rotate(-80deg);
+  }
+
+  &__illust-item--maru-3 {
+    top: 32%;
+    left: 82%;
+    width: 10%;
+    z-index: 1;
+  }
+
+  &__illust-item--maru-4 {
+    top: 10%;
+    left: 4%;
+    width: 8%;
+    z-index: 10;
+  }
+
+  &__illust-item--maru-5 {
+    top: 10%;
+    left: 10%;
+    width: 4%;
+    z-index: 10;
+  }
+
+  &__illust-item--maru-6 {
+    top: 40%;
+    left: 19%;
+    width: 8%;
+    z-index: 3;
+  }
+
+  &__illust-item--maru-7 {
+    top: 42%;
+    left: 65%;
+    width: 5%;
+    z-index: 3;
+  }
+
+  &__illust-item--mokomoko {
+    top: -4%;
+    left: -4%;
+    width: 110%;
+    z-index: 3;
+  }
+
+  &__illust-item--mokomoko-sp {
+    display: none;
+  }
+
+  &__illust-item--kira {
+    z-index: 4;
+    animation: hero-kira-twinkle 2.4s ease-in-out infinite;
+  }
+
+  &__illust-item--kira-top {
+    top: 8%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 8%;
+    animation-delay: 0s;
+    animation-duration: 2.2s;
+  }
+
+  &__illust-item--kira-bl {
+    bottom: 10%;
+    left: 0;
+    width: 6%;
+    animation-delay: 0.7s;
+    animation-duration: 2.8s;
+  }
+
+  &__illust-item--kira-br {
+    bottom: 10%;
+    right: 0;
+    width: 6%;
+    animation-delay: 0.35s;
+    animation-duration: 1.8s;
+  }
+
+  &__illust-item--kira-box {
+    top: 57%;
+    left: 46%;
+    width: 5%;
+    z-index: 8;
+    animation-delay: 0.5s;
+    animation-duration: 2s;
+  }
+
+  &__illust-item--sparkle {
+    top: 10%;
+    left: 25%;
+    width: 6%;
+    z-index: 4;
+  }
+
+  &__illust-item--hosi01 {
+    top: 22%;
+    right: 2%;
+    width: 8%;
+    z-index: 4;
+    transform: rotate(60deg);
+  }
+
+  &__illust-item--book-cake {
+    top: 25%;
+    left: 5%;
+    width: 18%;
+    z-index: 5;
+  }
+
+  &__illust-item--utiwa {
+    top: 12%;
+    left: 34%;
+    width: 11%;
+    z-index: 6;
+  }
+
+  &__illust-item--bag-green {
+    top: 10%;
+    left: 58%;
+    width: 16%;
+    z-index: 6;
+  }
+
+  &__illust-item--towel {
+    top: 10%;
+    left: 75%;
+    width: 16%;
+    z-index: 5;
+  }
+
+  &__illust-item--basketball {
+    top: 37%;
+    left: 22%;
+    width: 8%;
+    z-index: 6;
+  }
+
+  &__illust-item--book-hana {
+    top: 48%;
+    left: 32%;
+    width: 15%;
+    z-index: 6;
+  }
+
+  &__illust-item--tape {
+    top: 28%;
+    left: 74%;
+    width: 8%;
+    z-index: 6;
+  }
+
+  &__illust-item--tape-white {
+    top: 36%;
+    left: 70%;
+    width: 9%;
+    z-index: 5;
+  }
+
+  &__illust-item--pen {
+    top: 44%;
+    left: 68%;
+    width: 8%;
+    z-index: 7;
+  }
+
+  &__illust-item--megaphone {
+    top: 52%;
+    left: 78%;
+    width: 14%;
+    z-index: 6;
+  }
+
+  &__illust-item--girl {
+    bottom: 0;
+    left: 8%;
+    width: 30%;
+    z-index: 8;
+  }
+
+  &__illust-item--box {
+    top: 64%;
+    left: 34%;
+    width: 30%;
+    z-index: 7;
+  }
+
+  &__illust-item--boy {
+    bottom: 0;
+    left: 62%;
+    width: 28%;
+    z-index: 8;
   }
 
   &__text {
     position: absolute;
     left: 35%;
-    top: 35%;
-    z-index: 2;
+    top: 30%;
+    z-index: 4;
 
     display: flex;
     flex-direction: column;
     align-items: center;
-
-    @include sp {
-      left: 50%;
-      top: 28%;
-      transform: translateX(-50%);
-      width: 100%;
-    }
   }
 
   &__text-line {
     display: inline-block;
 
     font-family: "Knewave", cursive;
-    font-size: clamp(56px, 6vw, 88px);
+    font-size: clamp(56px, 6vw, 75px);
     line-height: .9;
     color: #D70C1E;
 
@@ -94,5 +341,386 @@
     font-size: clamp(18px, 1.5vw, 24px);
     font-weight: 700;
     letter-spacing: .15em;
+  }
+
+  // タブレット（769px〜1024px：SP/PCの間でステージが上に寄るのを防ぐ）
+  @include tab {
+    &__illust {
+      align-items: flex-end;
+    }
+
+    &__illust-stage {
+      width: min(100%, 960px);
+      margin-top: 0;
+    }
+
+    // 下揃えステージの上余白をモコモコで埋める
+    &__illust-item--mokomoko-pc {
+      top: calc(-4% - (100vh - 100%));
+      left: 50%;
+      width: 110%;
+      transform: translateX(-50%);
+    }
+
+    &__text {
+      left: 32%;
+      top: 28%;
+    }
+
+    &__text-line {
+      font-size: clamp(48px, 7vw, 68px);
+    }
+
+    &__catch {
+      margin-right: 24px;
+      font-size: clamp(16px, 2vw, 22px);
+    }
+
+    &__illust-item--dot-siro-c,
+    &__illust-item--dot-siro-d,
+    &__illust-item--dot-yellow-a {
+      display: none;
+    }
+
+    &__illust-item--dot-siro-a {
+      top: 58%;
+      left: -8%;
+      width: 12%;
+    }
+
+    &__illust-item--dot-yellow-b {
+      top: 60%;
+      left: 78%;
+      width: 12%;
+    }
+
+    &__illust-item--maru-2 {
+      top: 48%;
+      left: -8%;
+      width: 11%;
+    }
+
+    &__illust-item--towel {
+      top: 8%;
+      left: 72%;
+      width: 15%;
+    }
+
+    &__illust-item--tape-white,
+    &__illust-item--pen {
+      display: none;
+    }
+
+    &__illust-item--megaphone {
+      top: 54%;
+      left: 76%;
+      width: 12%;
+    }
+
+    &__illust-item--girl {
+      width: 28%;
+    }
+
+    &__illust-item--box {
+      top: 66%;
+      left: 32%;
+      width: 28%;
+    }
+
+    &__illust-item--kira-box {
+      top: 59%;
+      left: 43%;
+      width: 5%;
+    }
+
+    &__illust-item--boy {
+      width: 26%;
+      left: 64%;
+    }
+  }
+
+  // PC：画面が広がるにつれて外側の装飾を少しずつ左右へ（急な位置変化なし）
+  @media (min-width: #{$breakpoint-tab + 1px}) {
+    &__illust {
+      --hero-edge-spread: clamp(0px, calc((100vw - 1280px) * 0.15), 100px);
+    }
+
+    // 左側
+    &__illust-item--dot-siro-a,
+    &__illust-item--dot-yellow-a,
+    &__illust-item--kira-bl,
+    &__illust-item--book-cake {
+      transform: translateX(calc(var(--hero-edge-spread) * -1));
+    }
+
+    &__illust-item--maru-2 {
+      transform: rotate(-80deg) translateX(calc(var(--hero-edge-spread) * -1));
+    }
+
+    // 右側
+    &__illust-item--dot-siro-c,
+    &__illust-item--dot-siro-d,
+    &__illust-item--dot-yellow-b,
+    &__illust-item--maru-3,
+    &__illust-item--towel,
+    &__illust-item--tape,
+    &__illust-item--tape-white,
+    &__illust-item--pen,
+    &__illust-item--megaphone,
+    &__illust-item--kira-br {
+      transform: translateX(var(--hero-edge-spread));
+    }
+
+    &__illust-item--hosi01 {
+      transform: rotate(60deg) translateX(var(--hero-edge-spread));
+    }
+  }
+
+  // 狭いPC（1025px〜1280px：ステージがviewportより低く、上寄せになるのを防ぐ）
+  @media (min-width: 1025px) and (max-width: 1280px) {
+    &__illust {
+      align-items: flex-end;
+    }
+
+    &__illust-item--mokomoko-pc {
+      top: calc(-4% - (100vh - 100%));
+      left: 50%;
+      width: 110%;
+      transform: translateX(-50%);
+    }
+  }
+
+  // スマホ
+  @include sp {
+    height: 100svh;
+    min-height: 640px;
+
+    &__illust {
+      align-items: flex-start;
+      justify-content: center;
+      width: 100%;
+    }
+
+    &__illust-stage {
+      width: 100%;
+      max-width: none;
+      aspect-ratio: auto;
+      height: 100%;
+      margin-top: 0;
+    }
+
+    &__text {
+      left: 26%;
+      top: 35%;
+      transform: none;
+      width: auto;
+      padding: 0;
+    }
+
+    &__text-line {
+      font-size: clamp(36px, 9.5vw, 50px);
+    }
+
+    &__catch {
+      margin-top: 14px;
+      margin-right: 28px;
+      font-size: clamp(13px, 3.2vw, 16px);
+      letter-spacing: .12em;
+    }
+
+    // 装飾の整理（主要イラストは残す）
+    &__illust-item--dot-siro-a,
+    &__illust-item--dot-siro-b,
+    &__illust-item--dot-siro-c,
+    &__illust-item--dot-siro-d,
+    &__illust-item--dot-yellow-a,
+    &__illust-item--dot-yellow-b,
+    &__illust-item--maru-2,
+    &__illust-item--maru-3,
+    &__illust-item--maru-4,
+    &__illust-item--maru-5,
+    &__illust-item--maru-6,
+    &__illust-item--maru-7 {
+      display: none;
+    }
+
+    // SP専用モコモコ（386px幅基準のサイズ・位置を維持）
+    &__illust-item--mokomoko-pc {
+      display: none;
+    }
+
+    &__illust-item--mokomoko-sp {
+      display: block;
+      top: auto;
+      // box（bottom 10% / width 45%）の上端より下へ
+      bottom: calc(10% + 80px);
+      left: 50%;
+      width: 417px; // 386px × 108%
+      max-width: 108vw;
+      height: auto;
+      aspect-ratio: 914 / 1264;
+      transform: translateX(-50%);
+    }
+
+    &__illust-item--kira-top {
+      top: 10%;
+      width: 9%;
+    }
+
+    &__illust-item--kira-bl {
+      bottom: 22%;
+      left: 2%;
+      width: 11%;
+    }
+
+    &__illust-item--kira-br {
+      bottom: 35%;
+      right: 4%;
+      width: 10%;
+    }
+
+    &__illust-item--kira-box {
+      top: auto;
+      bottom: 34%;
+      left: 50%;
+      width: 8%;
+      z-index: 8;
+    }
+
+    &__illust-item--hosi01 {
+      top: 20%;
+      right: 2%;
+      width: 10%;
+    }
+
+    &__illust-item--book-cake {
+      top: 22%;
+      left: 0;
+      width: 30%;
+    }
+
+    &__illust-item--utiwa {
+      top: 14%;
+      left: 30%;
+      width: 20%;
+    }
+
+    &__illust-item--bag-green {
+      top: 12%;
+      left: 54%;
+      width: 30%;
+    }
+
+    &__illust-item--towel {
+      top: 30%;
+      left: auto;
+      right: 0;
+      width: 28%;
+    }
+
+    &__illust-item--basketball {
+      top: 45%;
+      left: 10%;
+      width: 14%;
+    }
+
+    &__illust-item--book-hana {
+      top: 55%;
+      left: 30%;
+      width: 22%;
+    }
+
+    &__illust-item--tape {
+      top: 55%;
+      left: auto;
+      right: 18%;
+      width: 14%;
+    }
+
+    &__illust-item--sparkle {
+      top: 18%;
+      left: 24%;
+      width: 8%;
+      z-index: 4;
+    }
+
+    &__illust-item--tape-white,
+    &__illust-item--pen,
+    &__illust-item--sparkle,
+    &__illust-item--megaphone {
+      display: block;
+    }
+
+    &__illust-item--tape-white {
+      top: auto;
+      bottom: 40%;
+      left: auto;
+      right: 30%;
+      width: 12%;
+      z-index: 12;
+    }
+
+    &__illust-item--pen {
+      top: auto;
+      bottom: 28%;
+      left: 5%;
+      width: 15%;
+      z-index: 12;
+      object-fit: contain;
+      object-position: bottom right;
+    }
+
+    &__illust-item--megaphone {
+      top: 65%;
+      left: auto;
+      right: 2%;
+      width: 18%;
+      z-index: 6;
+    }
+
+    &__illust-item--girl {
+      bottom: 0;
+      left: 0;
+      width: 45%;
+    }
+
+    &__illust-item--box {
+      top: auto;
+      bottom: 10%;
+      left: 25%;
+      width: 45%;
+    }
+
+    &__illust-item--boy {
+      bottom: 0;
+      right: 0;
+      left: auto;
+      width: 45%;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    &__illust-item--kira {
+      animation: none;
+    }
+  }
+}
+
+@keyframes hero-kira-twinkle {
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  40% {
+    opacity: 0.2;
+  }
+
+  55% {
+    opacity: 1;
+  }
+
+  70% {
+    opacity: 0.45;
   }
 }

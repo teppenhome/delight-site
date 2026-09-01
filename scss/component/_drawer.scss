@@ -37,7 +37,7 @@
       opacity: 1;
     }
 
-    @for $i from 1 through 6 {
+    @for $i from 1 through 5 {
       .drawer__item:nth-child(#{$i}) .drawer__link,
       .drawer__item:nth-child(#{$i}) .drawer__toggle {
         transition-delay: #{0.2 + ($i - 1) * 0.08}s;
@@ -107,11 +107,6 @@
       border-top: 1px solid transparent;
     }
 
-    &--contact {
-      margin-top: 8px;
-      border-bottom: none;
-    }
-
     &--has-child.is-open {
       .drawer__toggle-icon {
         transform: rotate(180deg);
@@ -164,25 +159,6 @@
       outline-offset: 4px;
     }
 
-    &--contact {
-      min-height: auto;
-      padding: 16px;
-
-      .drawer__contact-icon {
-        display: block;
-        width: 72px;
-        height: 72px;
-      }
-
-      // ヘッダー（.header__contact）と同じオレンジ円背景
-      .c-float-icon__circle {
-        fill: #F28E55;
-      }
-
-      &:hover .c-float-icon__circle {
-        fill: #F28E55;
-      }
-    }
   }
 
   &__toggle {
