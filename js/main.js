@@ -1042,15 +1042,38 @@ function initPhilosophyLineDraw() {
 function initPhilosophyGoodsReveal() {
   if (!document.body.classList.contains('page-philosophy')) return;
 
+  const megaphoneExtras = document.querySelectorAll(
+    '.goods--megaphone-dot, .goods--megaphone-dot-circle'
+  );
+  const towelDot = document.querySelector('.goods--towel-dot');
+  const rabbitDot = document.querySelector('.goods--rabbit-dot');
+  const rabbitKira = document.querySelector('.goods--rabbit-kira');
+
   const notes = Array.from(
     document.querySelectorAll(
-      '.goods--note01, .goods--note02, .goods--note03, .goods--note04, .goods--note05, .goods--note06, .goods--note07, .goods--note08'
+      '.goods--note01, .goods--note02, .goods--note03, .goods--note04, .goods--note04_1, .goods--note05, .goods--note05-megaphone, .goods--note06, .goods--note07, .goods--note08'
     )
   );
   if (!notes.length) return;
 
+  const revealNote = (el) => {
+    el.classList.add('is-appeared');
+    if (el.classList.contains('goods--note05-megaphone') && megaphoneExtras.length) {
+      megaphoneExtras.forEach((extra) => extra.classList.add('is-appeared'));
+    }
+    if (el.classList.contains('goods--note05') && towelDot) {
+      towelDot.classList.add('is-appeared');
+    }
+    if (el.classList.contains('goods--note08') && rabbitDot) {
+      rabbitDot.classList.add('is-appeared');
+    }
+    if (el.classList.contains('goods--note08') && rabbitKira) {
+      rabbitKira.classList.add('is-appeared');
+    }
+  };
+
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    notes.forEach((el) => el.classList.add('is-appeared'));
+    notes.forEach(revealNote);
     return;
   }
 
@@ -1058,7 +1081,7 @@ function initPhilosophyGoodsReveal() {
     (entries) => {
       entries.forEach((entry) => {
         if (!entry.isIntersecting) return;
-        entry.target.classList.add('is-appeared');
+        revealNote(entry.target);
         notesIo.unobserve(entry.target);
       });
     },
@@ -1067,7 +1090,17 @@ function initPhilosophyGoodsReveal() {
       rootMargin: '0px 0px -8% 0px',
     }
   );
-  notes.forEach((el) => notesIo.observe(el));
+
+  const isInViewport = (el) => {
+    const rect = el.getBoundingClientRect();
+    const vh = window.innerHeight || document.documentElement.clientHeight;
+    return rect.bottom > 0 && rect.top < vh;
+  };
+
+  notes.forEach((el) => {
+    notesIo.observe(el);
+    if (isInViewport(el)) revealNote(el);
+  });
 }
 
 
