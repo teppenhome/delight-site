@@ -260,41 +260,41 @@
   }
 
   &__card--oem &__card-illust {
-    top: clamp(-76px, -12vw, -56px);
-    right: clamp(-72px, -9vw, -40px);
-    width: clamp(340px, 48vw, 500px);
+    top: clamp(-28px, -5vw, -16px);
+    right: clamp(12px, 2vw, 32px);
+    width: clamp(240px, 33vw, 350px);
 
     @include sp {
       right: 50%;
       top: auto;
-      bottom: -72px;
+      bottom: -8px;
       left: auto;
-      transform: translate(calc(50% + 12px), 0);
-      width: min(320px, 96%);
+      transform: translate(calc(50% - 4px), 0);
+      width: min(260px, 82%);
       max-width: calc(100% - 8px);
     }
   }
 
   &__card--sample &__card-illust {
     top: 50%;
-    right: clamp(16px, 2.5vw, 32px);
+    right: clamp(28px, 3.5vw, 48px);
     transform: translateY(-50%);
-    width: clamp(150px, 20vw, 220px);
+    width: clamp(200px, 26vw, 290px);
 
     @include sp {
       right: 50%;
       top: auto;
       bottom: 12px;
       left: auto;
-      transform: translate(50%, 0);
-      width: min(180px, 60%);
+      transform: translate(calc(50% - 8px), 0);
+      width: min(230px, 72%);
       max-width: calc(100% - 32px);
     }
   }
 
   &__card--sample &__card-box {
     @media (min-width: #{$breakpoint-tab + 1px}) {
-      padding-right: clamp(170px, 19vw, 235px);
+      padding-right: clamp(220px, 26vw, 310px);
     }
   }
 

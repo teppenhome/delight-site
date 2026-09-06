@@ -22,19 +22,19 @@
     position: relative;
     width: 100%;
     max-width: 870px;
-    margin: 0 auto;
-    padding: 56px 84px 48px;
+    margin: 0;
+    padding: 56px 0 48px;
     box-sizing: border-box;
 
     @include sp {
-      padding: 40px 10px 32px;
+      padding: 40px 0 32px;
     }
   }
 
   &__illust {
     position: absolute;
     top: -70px;
-    right: 100px;
+    right: 16px;
     width: 160px;
     height: 160px;
     pointer-events: none;

@@ -104,6 +104,10 @@ body.page-philosophy {
   background-size: contain;
   pointer-events: none;
 
+  @media (min-width: #{$breakpoint-tab + 1}) and (max-width: #{$breakpoint-lg}) {
+    width: clamp(480px, 54vw, 640px);
+  }
+
   @include tab {
     display: none;
   }
@@ -181,7 +185,9 @@ body.page-philosophy {
     user-select: none;
 
     @media (min-width: #{$breakpoint-tab + 1}) and (max-width: #{$breakpoint-lg}) {
-      left: -5%;
+      left: 2%;
+      top: 45%;
+      width: 140px;
     }
 
     @include tab {
@@ -224,20 +230,29 @@ body.page-philosophy {
       top: 270px;
       left: auto; // left 指定が残っていると right が効かない
       right: 25%;
+
+      @media (min-width: #{$breakpoint-tab + 1}) and (max-width: #{$breakpoint-lg}) {
+        top: 240px;
+      }
     }
 
     // 3. 上部・黄雲付近（右）
     &--3 {
-      top: 120px;
+      top: 150px;
       left: auto; // left 指定が残っていると right が効かない
-      right: 5%;
+      right: 12%;
+
+      @media (min-width: #{$breakpoint-tab + 1}) and (max-width: #{$breakpoint-lg}) {
+        top: 130px;
+        right: 12%;
+      }
     }
 
     // 3.1. 上部・黄雲付近（右）
     &--3_1 {
-      top: 26%;
+      top: 25%;
       left: auto; // left 指定が残っていると right が効かない
-      right: 35%;
+      right: 30%;
     }
 
     // 4. 上部・黄雲付近（右）
@@ -284,6 +299,7 @@ body.page-philosophy {
 
       @media (min-width: #{$breakpoint-tab + 1}) and (max-width: #{$breakpoint-lg}) {
         left: -14%;
+        display: none;
       }
     }
 
@@ -366,8 +382,8 @@ body.page-philosophy {
 
       &--3 {
         top: 56px;
-        right: -10%;
-        width: 150px;
+        right: -5%;
+        width: 80px;
       }
 
       &--3_1 {
@@ -455,6 +471,11 @@ body.page-philosophy {
     // 3本目: 地球より上・人物より下
     &--end {
       z-index: 11;
+
+      .philosophy-page__line-svg {
+        top:260px; // 少し上へ
+        left: calc(50% - 1475px / 2 + 64px); // 少し右へ
+      }
     }
   }
 
@@ -499,6 +520,33 @@ body.page-philosophy {
       path {
         stroke-width: 4;
       }
+    }
+  }
+
+  // 1440px〜: 最終線・地球エリア余白の調整
+  @media (min-width: #{$breakpoint-lg + 1}) {
+    .philosophy-page__line-path--seg4 {
+      transform: translate(0, -16px) scaleY(0.91);
+      transform-box: fill-box;
+      transform-origin: top center;
+    }
+
+    .philosophy-page__sections {
+      margin-bottom: 36px;
+    }
+
+    .philosophy-page__outro {
+      margin-top: -84px;
+    }
+
+    .philosophy-page__outro-cloud {
+      margin-top: calc(
+        12px + max(0px, 1080px - min(1080px, 100vw / 1.04)) * 1166 / 1685 * 0.7
+      );
+    }
+
+    .philosophy-page__figure--outro .philosophy-page__earth-stage {
+      margin-top: 24px;
     }
   }
 
@@ -881,7 +929,7 @@ body.page-philosophy {
     }
 
     &--note08 {
-      top: 850px;
+      top: 830px;
       right: -20%;
       z-index: 10;
       max-width: 220px;
@@ -890,7 +938,7 @@ body.page-philosophy {
 
     // Rabbit 右下: 黄色ドット
     &--rabbit-dot {
-      top: 960px;
+      top: 940px;
       right: -25%;
       z-index: 8;
       max-width: 140px;
@@ -926,9 +974,9 @@ body.page-philosophy {
     // セクション2: 人物イラストとウサギの間（線のループ付近）
     // 元画像: 星が右下・軌跡が左上 → 右下方向へ流れる
     &--star02 {
-      top: 120%;
-      left: 55%;
-      max-width: 220px;
+      top: 105%;
+      left: 50%;
+      max-width: 200px;
       width: 100%;
       --shoot-x: 0px;
       --shoot-y: 0px;
@@ -960,8 +1008,12 @@ body.page-philosophy {
         max-width: 100px;
       }
 
+      &--note03 {
+        max-width: 320px;
+      }
+
       &--note04 {
-        right: -4%;
+        right: -14%;
         max-width: 280px;
       }
 
@@ -972,7 +1024,7 @@ body.page-philosophy {
       }
 
       &--pen {
-        top: 22%;
+        top: 24%;
         right: -12%;
         max-width: 96px;
       }
@@ -997,52 +1049,56 @@ body.page-philosophy {
       }
 
       &--note05 {
+        top: 320px;
         right: calc(50% - 50vw - 12px);
-        max-width: 280px;
+        max-width: 200px;
       }
 
       &--towel-dot {
-        top: 360px;
-        right: calc(50% - 50vw + 120px);
-        max-width: 120px;
+        top: 280px;
+        right: calc(50% - 50vw + 100px);
+        max-width: 100px;
       }
 
       &--note05-megaphone {
-        top: 200px;
+        top: 60px;
         right: calc(50% - 50vw - 8px);
         max-width: 160px;
       }
 
       &--megaphone-dot {
-        top: 240px;
-        right: calc(50% - 50vw - 20px);
-        max-width: 28px;
-      }
-
-      &--megaphone-dot-circle {
-        top: 300px;
-        right: calc(50% - 50vw + 24px);
-        width: 40px;
-        height: 40px;
-      }
-
-      &--note06 {
-        left: -20%;
+        top: 110px;
+        right: calc(50% - 50vw - 100px);
         max-width: 180px;
       }
 
+      &--megaphone-dot-circle {
+        top: 220px;
+        right: calc(50% - 50vw + 24px);
+        width: 56px;
+        height: 56px;
+      }
+
+      &--note06 {
+        left: -28%;
+        max-width: 180px;
+        top: 290px;
+      }
+
       &--note07 {
-        left: -25%;
+        left: -30%;
         max-width: 200px;
+        top: 660px;
       }
 
       &--note08 {
         right: -20%;
-        max-width: 200px;
+        max-width: 180px;
+        top: 680px;
       }
 
       &--rabbit-dot {
-        top: 900px;
+        top: 770px;
         right: -8%;
         max-width: 96px;
       }
@@ -1058,7 +1114,9 @@ body.page-philosophy {
       }
 
       &--star02 {
-        max-width: 210px;
+        max-width: 180px;
+        top: 95%;
+        left: 40%;
       }
     }
 
@@ -1371,11 +1429,12 @@ body.page-philosophy {
     width: fit-content;
     max-width: 100%;
     margin-inline: auto;
-    text-align: left;
-    padding-left: 40px;
+    text-align: center;
+    padding-left: 0;
 
     @include tab {
       padding-left: 16px;
+      text-align: left;
     }
 
     @include sp {
@@ -1392,10 +1451,14 @@ body.page-philosophy {
       font-weight: 500;
       line-height: 2.2;
       color: $color-pink;
-      text-align: left;
+      text-align: center;
 
       &:last-child {
         margin-bottom: 0;
+      }
+
+      @include tab {
+        text-align: left;
       }
 
       @include sp {
@@ -1468,7 +1531,7 @@ body.page-philosophy {
       align-self: end;
       overflow: hidden; // 拡大・回転時に地球下部の欠けを隠す
       // 人物位置はそのまま、表示領域だけ下に広げて地球下部を見せる
-      padding-bottom: 12%;
+      padding-bottom: 10%;
 
       @include tab {
         // 100vw + 負マージンは横スクロールの原因になるため、親幅基準に切り替え
@@ -1480,12 +1543,12 @@ body.page-philosophy {
       .philosophy-page__earth-stage {
         grid-area: 1 / 1;
         position: relative;
-        // scale(1.14) 後にちょうど親幅へ収まるよう逆算
-        width: min(1220px, calc(100% / 1.14));
+        // scale(1.04) 後にちょうど親幅へ収まるよう逆算
+        width: min(1080px, calc(100% / 1.04));
         margin-inline: auto;
-        margin-top: 72px;
+        margin-top: 40px;
         margin-bottom: -6%;
-        transform: scale(1.14);
+        transform: scale(1.04);
         transform-origin: 50% 78%;
 
         // 線3(11) を挟む: 地球(10) < 線3(11) < 人物(12)
@@ -1498,16 +1561,16 @@ body.page-philosophy {
         }
 
         @include tab {
-          margin-top: 48px;
-          transform: scale(1.08);
-          width: min(1220px, calc(100% / 1.08));
+          margin-top: 28px;
+          transform: scale(1.0);
+          width: min(1080px, 100%);
         }
 
         @include sp {
           // 左右いっぱい（スケールで余白が残らないようにする）
-          width: 100%;
+          width: 96%;
           max-width: none;
-          margin-top: 16px;
+          margin-top: 8px;
           margin-bottom: -2%;
           transform: none;
         }
@@ -1558,16 +1621,16 @@ body.page-philosophy {
     gap: 220px;
     max-width: 850px;
     width: 100%;
-    margin: 200px auto 72px;
+    margin: 200px auto 52px;
 
     @include tab {
       gap: 96px;
-      margin: 120px auto 56px;
+      margin: 120px auto 40px;
     }
 
     @include sp {
       gap: 56px;
-      margin: 72px auto 48px;
+      margin: 72px auto 36px;
     }
   }
 
@@ -1785,12 +1848,13 @@ body.page-philosophy {
     flex-direction: column;
     align-items: center;
     width: 100%;
-    margin-top: -60px;
+    margin-top: -68px;
     margin-bottom: 0;
     padding-bottom: 40px;
 
     @include sp {
       // 白背景は __actions 側へ移す
+      margin-top: -40px;
       padding-bottom: 0;
     }
   }
@@ -1798,18 +1862,18 @@ body.page-philosophy {
   &__outro-cloud {
     position: relative;
     display: grid;
-    width: min(1200px, 100%);
+    width: min(1060px, 100%);
     // 線はそのまま。幅縮小で地球・人物の高さが減る分だけ下へ押し戻す
-    // earth-stage 最大幅 1220px・人物比 1166/1685・基準点（足元付近）≈ 70%
+    // earth-stage 最大幅 1080px・人物比 1166/1685・基準点（足元付近）≈ 70%
     margin: calc(
-        40px + max(0px, 1220px - min(1220px, 100vw / 1.14)) * 1166 / 1685 * 0.7
+        28px + max(0px, 1080px - min(1080px, 100vw / 1.04)) * 1166 / 1685 * 0.7
       )
       auto 0;
     padding: 0 40px;
 
     @include tab {
       margin-top: calc(
-        32px + max(0px, 1220px - min(1220px, 100vw / 1.08)) * 1166 / 1685 * 0.4
+        20px + max(0px, 1080px - min(1080px, 100vw)) * 1166 / 1685 * 0.4
       );
       padding: 0 30px;
     }
@@ -1821,7 +1885,7 @@ body.page-philosophy {
       margin-left: calc(50% - 50vw);
       // 地球・人物はここ（overflow なし）で上げる。figure 内の負マージンだと星が欠ける
       margin-top: calc(
-        -56px + max(0px, 1220px - min(1220px, 100vw)) * 1166 / 1685 * 0.15
+        -64px + max(0px, 1080px - min(1080px, 100vw)) * 1166 / 1685 * 0.15
       );
       padding: 0;
       box-sizing: border-box;
@@ -1837,7 +1901,7 @@ body.page-philosophy {
     position: relative;
     z-index: 8;
     display: block;
-    width: min(1200px, 115%);
+    width: min(1060px, 100%);
     height: auto;
     justify-self: center;
     align-self: start;
@@ -1847,7 +1911,7 @@ body.page-philosophy {
     object-fit: contain;
 
     @include sp {
-      width: 100%;
+      width: 92%;
       max-width: none;
       margin-top: 0;
     }
@@ -1926,7 +1990,7 @@ body.page-philosophy {
     position: absolute;
     z-index: 10;
     display: block;
-    width: 150px;
+    width: 128px;
     height: auto;
     pointer-events: none;
     user-select: none;
@@ -1950,11 +2014,12 @@ body.page-philosophy {
     &--tr {
       top: 5%;
       right: 0;
-      width: 170px;
+      width: 145px;
 
       @media (min-width: #{$breakpoint-tab + 1}) and (max-width: #{$breakpoint-lg}) {
         right: 3%;
         top: 10%;
+        width: 100px;
       }
     }
 
@@ -2026,7 +2091,7 @@ body.page-philosophy {
     }
 
     .philosophy-page__earth-stage {
-      transform: scale(1.14);
+      transform: scale(1.04);
     }
 
     .philosophy-page__earth-globe {
@@ -2093,6 +2158,135 @@ body.page-philosophy {
       min-width: 0;
       width: min(295px, 100%);
       background: $color-white;
+    }
+  }
+
+  // ── 中間幅（1025px〜1439px）: 全体を一段階縮小 ──
+  @media (min-width: #{$breakpoint-tab + 1}) and (max-width: #{$breakpoint-lg}) {
+    .philosophy-page__content,
+    .philosophy-page__body-inner {
+      max-width: 840px;
+    }
+
+    .philosophy-page__body {
+      padding-top: 64px;
+    }
+
+    .philosophy-page__body-inner {
+      padding-left: 32px;
+      padding-right: 32px;
+    }
+
+    .philosophy-page__intro {
+      margin-bottom: 56px;
+    }
+
+    .philosophy-page__intro-cloud-bg {
+      max-width: 760px;
+    }
+
+    .philosophy-page__catch-en {
+      font-size: clamp(34px, 4.2vw, 52px);
+    }
+
+    .philosophy-page__catch-ja {
+      margin-bottom: 22px;
+      font-size: clamp(15px, 1.7vw, 20px);
+    }
+
+    .philosophy-page__intro-text {
+      padding-left: 0;
+
+      p {
+        font-size: 14px;
+        line-height: 2.05;
+      }
+    }
+
+    .philosophy-page__line-svg {
+      // vw 連動だとリサイズのたびに動くため、この帯は固定値にする
+      width: 1180px;
+      left: calc(50% - 1180px / 2 + 72px);
+      top: 304px; // 350/1475*1180 + 24
+
+      path {
+        stroke-width: 5.5;
+      }
+    }
+
+    .philosophy-page__line--end .philosophy-page__line-svg {
+      top: 280px; // 少し上へ
+      left: calc(50% - 1180px / 2 + 96px); // 少し右へ
+    }
+
+    // ペン横の1本目を少し左へ
+    .philosophy-page__line-path--seg1 {
+      transform: translate(-12px, 0);
+    }
+
+    // 2本目以降の線を同量左へ。SVG要素全体の transform は使わない
+    .philosophy-page__line-path--seg2,
+    .philosophy-page__line-path--seg3 {
+      transform: translate(-100px, 0);
+    }
+
+    .philosophy-page__line-path--seg4 {
+      transform: translate(-96px, -28px) scaleY(0.97);
+      transform-box: fill-box;
+      transform-origin: top center;
+    }
+
+    .philosophy-page__sections {
+      gap: 168px;
+      max-width: 740px;
+      margin: 132px auto 40px;
+    }
+
+    .philosophy-page__section {
+      grid-template-columns: minmax(0, 250px) 1fr;
+      gap: 28px 52px;
+    }
+
+    .philosophy-page__section-col--head {
+      gap: 20px;
+    }
+
+    .philosophy-page__section-en,
+    .philosophy-page__section-num {
+      font-size: clamp(16px, 1.8vw, 20px);
+    }
+
+    .philosophy-page__section-body p {
+      font-size: 14px;
+      line-height: 2.05;
+      letter-spacing: 0.06em;
+    }
+
+    .philosophy-page__outro-cloud {
+      width: min(920px, 100%);
+      padding: 0 32px;
+      margin-top: calc(
+        20px + max(0px, 980px - min(980px, 100vw / 0.98)) * 1166 / 1685 * 0.55
+      );
+    }
+
+    .philosophy-page__figure--section {
+      max-width: 220px;
+      min-height: 150px;
+    }
+
+    .philosophy-page__figure--outro {
+      padding-bottom: 8%;
+    }
+
+    .philosophy-page__earth-stage {
+      margin-top: 32px;
+      transform: scale(0.98);
+      width: min(980px, calc(100% / 0.98));
+    }
+
+    .philosophy-page__top-back {
+      min-width: 260px;
     }
   }
 }

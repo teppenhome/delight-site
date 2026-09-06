@@ -517,22 +517,57 @@ function initServiceCategoryToggle() {
 //  WordPress テーマ側でも同じクラス名で使い回し可
 // ============================================================
 function initScrollReveal() {
+  // 動きを減らす設定のときはアニメーションなしで即表示
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    document.querySelectorAll('.js-reveal').forEach(el => el.classList.add('is-visible'));
+    return;
+  }
+
   // js-reveal クラスが付いた要素を対象とする
-  // 既存の要素に付与 + 各セクションの主要要素に自動付与
+  // トップページ各セクションの主要ブロック + 下層ページ要素に自動付与
+  // ※ヒーロー・works__item（スライダー transform）は対象外
   const targets = [
-    '.about__inner',
+    // About
+    '.about__heading',
+    '.about__body',
+    // Works
+    '.works .section-title',
+    '.works__slider-wrap',
+    '.works__link',
+    // Service
+    '.service .section-title',
+    '.service__lead',
     '.service__card',
+    '.service__category',
+    '.service__link',
+    // News
+    '.news .section-title',
+    '.news__scroll',
+    '.news__link',
+    // Clients
+    '.clients .section-title',
+    '.clients__logo-item',
+    // Q&A
+    '.qa .section-title',
+    '.qa__item',
+    // Contact
+    '.contact__illust',
+    '.contact__title',
+    '.contact__intro',
+    '.contact__notes',
+    '.contact__form',
+    // Footer
+    '.footer--top .footer__inner',
+    // Service page
     '.service-page__flow .service-page__step',
     '.service-page__cta .service-page__cta-btn',
-    '.clients__logo-item',
-    '.contact__form',
   ];
 
   targets.forEach(selector => {
     document.querySelectorAll(selector).forEach((el, i) => {
       el.classList.add('js-reveal');
-      // アイテムが複数あるときは少しずつ遅延
-      el.style.transitionDelay = `${i * 0.08}s`;
+      // 同一セレクタ内の複数アイテムは少しずつ遅延（最大約0.4s）
+      el.style.transitionDelay = `${Math.min(i, 5) * 0.08}s`;
     });
   });
 
@@ -545,7 +580,7 @@ function initScrollReveal() {
     });
   }, {
     threshold: 0.12,
-    rootMargin: '0px 0px -40px 0px',
+    rootMargin: '0px 0px -48px 0px',
   });
 
   document.querySelectorAll('.js-reveal').forEach(el => observer.observe(el));
