@@ -196,9 +196,7 @@ body.page-philosophy {
     }
 
     @include sp {
-      width: 72px;
-      top: 41%;
-      left: 45%;
+      display: none;
     }
   }
 

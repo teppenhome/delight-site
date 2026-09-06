@@ -6192,9 +6192,7 @@ body.page-philosophy .header .header__contact .c-float-icon__circle {
 }
 @media (max-width: 768px) {
   .philosophy-page__deco-cloud {
-    width: 72px;
-    top: 41%;
-    left: 45%;
+    display: none;
   }
 }
 .philosophy-page__dots {
