@@ -5,8 +5,16 @@
 //  ABOUT SECTION
 // ============================================================
 .about {
-  padding: $section-pad-v 0;
+  position: relative;
+  z-index: 0;
+  // ヒーロー透過エリアとの重なりを考慮して、コンテンツを少し下げる
+  padding: calc(#{$section-pad-v} + 88px) 0 $section-pad-v;
   background-color: #005AAB;
+
+  @include sp {
+    // スマホは余白を抑えて少し上げる
+    padding: calc(#{$section-pad-v} + 32px) 0 $section-pad-v;
+  }
 
   .section-label,
   .section-title {

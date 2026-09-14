@@ -143,7 +143,8 @@
     @include sp {
       min-height: 140px;
       padding-right: 16px;
-      padding-bottom: clamp(200px, 54vw, 260px);
+      // イラスト分の下余白（375px付近で本文と被らないよう確保）
+      padding-bottom: clamp(224px, 64vw, 280px);
     }
   }
 
@@ -159,6 +160,8 @@
       font-size: 13px;
       line-height: 2;
       margin-top: 10px;
+      position: relative;
+      z-index: 2;
     }
   }
 
@@ -180,7 +183,7 @@
     @include sp {
       right: 50%;
       top: auto;
-      bottom: 12px;
+      bottom: 8px;
       left: auto;
       transform: translate(50%, 0);
       width: min(240px, 78%);
@@ -267,11 +270,18 @@
     @include sp {
       right: 50%;
       top: auto;
-      bottom: -8px;
+      bottom: 4px;
       left: auto;
-      transform: translate(calc(50% - 4px), 0);
+      transform: translate(calc(50% + 4px), 0);
       width: min(260px, 82%);
       max-width: calc(100% - 8px);
+    }
+  }
+
+  &__card--oem &__card-box {
+    @include sp {
+      // コラージュははみ出しが大きいので下余白を多めに
+      padding-bottom: clamp(252px, 72vw, 320px);
     }
   }
 
@@ -284,7 +294,7 @@
     @include sp {
       right: 50%;
       top: auto;
-      bottom: 12px;
+      bottom: 8px;
       left: auto;
       transform: translate(calc(50% - 8px), 0);
       width: min(230px, 72%);
@@ -349,7 +359,7 @@
     @include sp {
       right: 50%;
       top: auto;
-      bottom: 12px;
+      bottom: 28px;
       left: auto;
       transform: translate(50%, 0);
       width: min(200px, 70%);
