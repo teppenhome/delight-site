@@ -1431,8 +1431,8 @@ body.page-philosophy {
     padding-left: 0;
 
     @include tab {
-      padding-left: 16px;
-      text-align: left;
+      padding-left: 0;
+      text-align: center;
     }
 
     @include sp {
@@ -1456,7 +1456,7 @@ body.page-philosophy {
       }
 
       @include tab {
-        text-align: left;
+        text-align: center;
       }
 
       @include sp {
