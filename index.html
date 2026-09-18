@@ -10,8 +10,26 @@
   <link href="https://fonts.googleapis.com/css2?family=Knewave&family=Montserrat:ital,wght@0,500;0,600;0,700;0,900;1,500;1,600;1,700&family=Noto+Sans+JP:wght@400;500;700&family=Inter:ital,wght@0,200;0,300;0,400;0,500;0,700;0,800;0,900;1,900&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="./css/style.css">
+  <script>
+    // トップページ：オープニング用クラスを描画前に付与（JS無効時は未実行＝通常表示）
+    (function () {
+      try {
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+        document.documentElement.classList.add('is-hero-opening');
+        window.__heroOpeningSafety = window.setTimeout(function () {
+          document.documentElement.classList.remove('is-hero-opening');
+          var opening = document.getElementById('opening');
+          if (opening) opening.remove();
+        }, 5000);
+      } catch (e) {}
+    })();
+  </script>
 </head>
 <body>
+
+  <div class="opening" id="opening" aria-hidden="true">
+    <img class="opening__logo" src="images/logo-black.svg" alt="DELIGHT" width="200" height="60" decoding="async">
+  </div>
   
   <nav class="side-nav" id="sideNav" aria-label="サイドナビゲーション">
     <ul>

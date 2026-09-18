@@ -8,6 +8,7 @@
 
 // DOMContentLoaded 後に全処理を起動
 document.addEventListener('DOMContentLoaded', () => {
+  initHeroOpening();
   initHeader();
   initDrawer();
   initSideNav();
@@ -25,6 +26,157 @@ document.addEventListener('DOMContentLoaded', () => {
   initPhilosophyGoodsReveal();
   initPhilosophyEarthRotate();
 });
+
+
+// ============================================================
+//  HERO OPENING（トップページのみ）
+//  白背景ロゴ → 上へスライド → ヒーロー要素を順次表示
+// ============================================================
+function initHeroOpening() {
+  const opening = document.getElementById('opening');
+  const hero = document.querySelector('.hero#top');
+  if (!opening || !hero) return;
+
+  const html = document.documentElement;
+  const prefersReduced =
+    window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  const clearSafetyTimer = () => {
+    if (window.__heroOpeningSafety) {
+      clearTimeout(window.__heroOpeningSafety);
+      window.__heroOpeningSafety = null;
+    }
+  };
+
+  const unlockScroll = () => {
+    html.classList.remove('is-hero-opening');
+  };
+
+  const cleanupOpeningLayer = () => {
+    opening.remove();
+  };
+
+  const finish = () => {
+    clearSafetyTimer();
+    unlockScroll();
+    cleanupOpeningLayer();
+  };
+
+  // アクセシビリティ：長いアニメーションを省略
+  if (prefersReduced) {
+    finish();
+    return;
+  }
+
+  // インラインスクリプトが付与していない場合のフォールバック
+  html.classList.add('is-hero-opening');
+
+  const logo = opening.querySelector('.opening__logo');
+  const bg = hero.querySelector('.hero__bg');
+  const header = hero.querySelector('.header');
+
+  // 表示グループ（位置は動かさず opacity / clip-path のみ）
+  const decoSelectors = [
+    '.hero__illust-item--maru-2',
+    '.hero__illust-item--maru-3',
+    '.hero__illust-item--maru-4',
+    '.hero__illust-item--maru-5',
+    '.hero__illust-item--maru-6',
+    '.hero__illust-item--maru-7',
+    '.hero__illust-item--dot-siro-a',
+    '.hero__illust-item--dot-siro-b',
+    '.hero__illust-item--dot-siro-c',
+    '.hero__illust-item--dot-siro-d',
+    '.hero__illust-item--dot-yellow-a',
+    '.hero__illust-item--dot-yellow-b',
+    '.hero__illust-item--kira',
+    '.hero__illust-item--sparkle',
+    '.hero__illust-item--hosi01',
+  ].join(',');
+
+  // メインイラスト（ノート・グッズ・キャラ）※ transform は触らない
+  const illustSelectors = [
+    '.hero__illust-item--book-cake',
+    '.hero__illust-item--utiwa',
+    '.hero__illust-item--bag-green',
+    '.hero__illust-item--towel',
+    '.hero__illust-item--basketball',
+    '.hero__illust-item--book-hana',
+    '.hero__illust-item--tape',
+    '.hero__illust-item--tape-white',
+    '.hero__illust-item--pen',
+    '.hero__illust-item--megaphone',
+    '.hero__illust-item--girl',
+    '.hero__illust-item--box',
+    '.hero__illust-item--boy',
+  ].join(',');
+
+  const textLines = hero.querySelectorAll('.hero__text-line');
+  const catchCopy = hero.querySelector('.hero__catch');
+  const bgAccent = hero.querySelectorAll(
+    '.hero__illust-item--mokomoko-pc, .hero__illust-item--mokomoko-sp'
+  );
+  const decoItems = hero.querySelectorAll(decoSelectors);
+  const illustItems = hero.querySelectorAll(illustSelectors);
+
+  const show = (els) => {
+    els.forEach((el) => el.classList.add('is-opening-shown'));
+  };
+
+  const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
+  const run = async () => {
+    try {
+      // 1) ロゴフェードイン（約 0.6s）
+      await wait(30);
+      logo?.classList.add('is-visible');
+      await wait(600);
+
+      // 2) 静止（約 0.4s）
+      await wait(400);
+
+      // 3) 白レイヤーを上へ + ヒーロー要素を順次表示
+      opening.classList.add('is-exit');
+
+      // 青色・黄色の背景（パターン + モコモコ）
+      if (bg) show([bg]);
+      show(bgAccent);
+      await wait(120);
+
+      // 白い丸・ドットなどの背景装飾
+      show(decoItems);
+      await wait(140);
+
+      // ノート／メインイラスト
+      show(illustItems);
+      await wait(160);
+
+      // 「Live life in full color」
+      show(textLines);
+      await wait(150);
+
+      // 「彩り豊かな未来へ」
+      if (catchCopy) show([catchCopy]);
+      await wait(150);
+
+      // ヘッダーと右側ナビゲーション（header 内）
+      if (header) show([header]);
+
+      // カーテン（0.8s）と最後のフェード（0.45s）の両方を待つ
+      // カーテン開始からの累計待ちが約 1.17s になるよう調整
+      await wait(450);
+
+      finish();
+    } catch (err) {
+      finish();
+    }
+  };
+
+  // レイアウト確定後に開始（ちらつき防止）
+  requestAnimationFrame(() => {
+    requestAnimationFrame(run);
+  });
+}
 
 
 // ============================================================
