@@ -30,7 +30,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // ============================================================
 //  HERO OPENING（トップページのみ）
-//  白背景ロゴ → 上へスライド → ヒーロー要素を順次表示
+//  1) 白背景ロゴ → 上へスライド（既存・変更なし）
+//  2) 箱からモクモク・グッズが広がる（GSAP）
 // ============================================================
 function initHeroOpening() {
   const opening = document.getElementById('opening');
@@ -53,7 +54,7 @@ function initHeroOpening() {
   };
 
   const cleanupOpeningLayer = () => {
-    opening.remove();
+    if (opening.parentNode) opening.remove();
   };
 
   const finish = () => {
@@ -62,21 +63,89 @@ function initHeroOpening() {
     cleanupOpeningLayer();
   };
 
-  // アクセシビリティ：長いアニメーションを省略
+  const show = (els) => {
+    els.forEach((el) => {
+      if (el) el.classList.add('is-opening-shown');
+    });
+  };
+
+  const isDisplayed = (el) => {
+    const style = window.getComputedStyle(el);
+    return style.display !== 'none' && style.visibility !== 'hidden';
+  };
+
+  const waitForImages = () => {
+    const imgs = Array.from(hero.querySelectorAll('img'));
+    return Promise.all(
+      imgs.map(
+        (img) =>
+          new Promise((resolve) => {
+            if (img.complete) {
+              resolve();
+              return;
+            }
+            img.addEventListener('load', resolve, { once: true });
+            img.addEventListener('error', resolve, { once: true });
+          })
+      )
+    );
+  };
+
+  const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
   if (prefersReduced) {
+    hero.querySelector('.hero__illust-item--box')?.classList.add('is-box-open');
     finish();
     return;
   }
 
-  // インラインスクリプトが付与していない場合のフォールバック
   html.classList.add('is-hero-opening');
 
   const logo = opening.querySelector('.opening__logo');
   const bg = hero.querySelector('.hero__bg');
   const header = hero.querySelector('.header');
+  const box = hero.querySelector('.hero__illust-item--box');
+  const boxAnim = box?.querySelector('.hero__box-anim');
+  const girl = hero.querySelector('.hero__illust-item--girl');
+  const boy = hero.querySelector('.hero__illust-item--boy');
+  const textLines = hero.querySelectorAll('.hero__text-line');
+  const catchCopy = hero.querySelector('.hero__catch');
 
-  // 表示グループ（位置は動かさず opacity / clip-path のみ）
-  const decoSelectors = [
+  const ensureBoxComplete = () => {
+    if (!box) return;
+    box.classList.remove('is-box-half');
+    box.classList.add('is-box-open');
+    if (boxAnim && typeof gsap !== 'undefined') {
+      gsap.set(boxAnim, {
+        clearProps: 'x,y,scale,scaleX,scaleY,rotation,transform,transformOrigin',
+      });
+    } else if (boxAnim) {
+      boxAnim.style.transform = '';
+    }
+  };
+
+  const smokeEls = Array.from(
+    hero.querySelectorAll(
+      '.hero__illust-item--mokomoko-pc, .hero__illust-item--mokomoko-sp'
+    )
+  ).filter(isDisplayed);
+
+  const goodsEls = [
+    '.hero__illust-item--book-cake',
+    '.hero__illust-item--utiwa',
+    '.hero__illust-item--bag-green',
+    '.hero__illust-item--towel',
+    '.hero__illust-item--basketball',
+    '.hero__illust-item--book-hana',
+    '.hero__illust-item--tape',
+    '.hero__illust-item--tape-white',
+    '.hero__illust-item--pen',
+    '.hero__illust-item--megaphone',
+  ]
+    .map((sel) => hero.querySelector(sel))
+    .filter((el) => el && isDisplayed(el));
+
+  const decoEls = [
     '.hero__illust-item--maru-2',
     '.hero__illust-item--maru-3',
     '.hero__illust-item--maru-4',
@@ -89,90 +158,331 @@ function initHeroOpening() {
     '.hero__illust-item--dot-siro-d',
     '.hero__illust-item--dot-yellow-a',
     '.hero__illust-item--dot-yellow-b',
-    '.hero__illust-item--kira',
+    '.hero__illust-item--kira-top',
+    '.hero__illust-item--kira-bl',
+    '.hero__illust-item--kira-br',
+    '.hero__illust-item--kira-box',
     '.hero__illust-item--sparkle',
     '.hero__illust-item--hosi01',
-  ].join(',');
+  ]
+    .map((sel) => hero.querySelector(sel))
+    .filter((el) => el && isDisplayed(el));
 
-  // メインイラスト（ノート・グッズ・キャラ）※ transform は触らない
-  const illustSelectors = [
-    '.hero__illust-item--book-cake',
-    '.hero__illust-item--utiwa',
-    '.hero__illust-item--bag-green',
-    '.hero__illust-item--towel',
-    '.hero__illust-item--basketball',
-    '.hero__illust-item--book-hana',
-    '.hero__illust-item--tape',
-    '.hero__illust-item--tape-white',
-    '.hero__illust-item--pen',
-    '.hero__illust-item--megaphone',
-    '.hero__illust-item--girl',
-    '.hero__illust-item--box',
-    '.hero__illust-item--boy',
-  ].join(',');
-
-  const textLines = hero.querySelectorAll('.hero__text-line');
-  const catchCopy = hero.querySelector('.hero__catch');
-  const bgAccent = hero.querySelectorAll(
-    '.hero__illust-item--mokomoko-pc, .hero__illust-item--mokomoko-sp'
-  );
-  const decoItems = hero.querySelectorAll(decoSelectors);
-  const illustItems = hero.querySelectorAll(illustSelectors);
-
-  const show = (els) => {
-    els.forEach((el) => el.classList.add('is-opening-shown'));
+  const getBoxOrigin = () => {
+    if (!box) {
+      return {
+        x: window.innerWidth / 2,
+        y: window.innerHeight * 0.62,
+      };
+    }
+    const rect = box.getBoundingClientRect();
+    return {
+      x: rect.left + rect.width / 2,
+      y: rect.top + rect.height * 0.28,
+    };
   };
 
-  const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+  const getDeltaFromOrigin = (el, origin) => {
+    const rect = el.getBoundingClientRect();
+    const cx = rect.left + rect.width / 2;
+    const cy = rect.top + rect.height / 2;
+    return {
+      x: origin.x - cx,
+      y: origin.y - cy,
+      dist: Math.hypot(origin.x - cx, origin.y - cy),
+    };
+  };
+
+  // 既存 CSS transform を GSAP 値として読み取り、clearProps 時のジャンプを防ぐ
+  const readCssTransformAsGsap = (el) => {
+    gsap.set(el, { x: '+=0' });
+    return {
+      x: Number(gsap.getProperty(el, 'x')) || 0,
+      y: Number(gsap.getProperty(el, 'y')) || 0,
+      rotation: Number(gsap.getProperty(el, 'rotation')) || 0,
+      scaleX: Number(gsap.getProperty(el, 'scaleX')) || 1,
+      scaleY: Number(gsap.getProperty(el, 'scaleY')) || 1,
+    };
+  };
+
+  const clearAnimProps = (els) => {
+    if (typeof gsap === 'undefined') return;
+    gsap.set(els, {
+      clearProps:
+        'x,y,scale,scaleX,scaleY,rotation,transform,transformOrigin,opacity,clipPath',
+    });
+  };
+
+  const revealBaseLayer = () => {
+    if (bg) show([bg]);
+    show([box, girl, boy]);
+    show(textLines);
+    if (catchCopy) show([catchCopy]);
+    if (header) show([header]);
+    // カーテン直後は閉じた箱
+    if (box) {
+      box.classList.remove('is-box-half', 'is-box-open');
+    }
+  };
+
+  const runBurstTimeline = () =>
+    new Promise((resolve) => {
+      const completeBurst = () => {
+        const targets = [
+          boxAnim,
+          ...smokeEls,
+          ...goodsEls,
+          ...decoEls,
+        ].filter(Boolean);
+
+        smokeEls.forEach((el) => el.classList.add('is-opening-shown'));
+        goodsEls.forEach((el) => el.classList.add('is-opening-shown'));
+        decoEls.forEach((el) => el.classList.add('is-opening-shown'));
+        ensureBoxComplete();
+        clearAnimProps(targets);
+        smokeEls.forEach((el) => {
+          el.style.clipPath = '';
+          el.style.webkitClipPath = '';
+        });
+        resolve();
+      };
+
+      if (typeof gsap === 'undefined' || !box) {
+        [...smokeEls, ...goodsEls, ...decoEls].forEach((el) => {
+          el.style.opacity = '1';
+          el.style.clipPath = 'none';
+          el.classList.add('is-opening-shown');
+        });
+        ensureBoxComplete();
+        resolve();
+        return;
+      }
+
+      const isSp = window.matchMedia('(max-width: 768px)').matches;
+      const origin = getBoxOrigin();
+
+      // 箱・モクモクの時間（バースト開始 = 0.00）
+      const BOX_TIMING = {
+        windupAt: 0.2,
+        windupDur: 0.18,
+        halfAt: 0.38,
+        openAt: 0.68,
+        scaleBackDur: 0.3,
+        smokeAt: 0.74,
+        smokeDur: 1.0,
+        itemsFromSmoke: 0.6,
+      };
+
+      const smokeDur = BOX_TIMING.smokeDur;
+      const goodsDur = isSp ? 0.55 : 0.75;
+      const decoDur = isSp ? 0.4 : 0.5;
+      const goodsStagger = isSp ? 0.05 : 0.08;
+      const decoStagger = isSp ? 0.04 : 0.06;
+      const rotMax = isSp ? 8 : 12;
+      const smokeStart = BOX_TIMING.smokeAt;
+      const goodsStart =
+        smokeStart + smokeDur * BOX_TIMING.itemsFromSmoke;
+      const decoStart = goodsStart + 0.04;
+
+      const withDelta = (list) =>
+        list
+          .map((el) => ({ el, delta: getDeltaFromOrigin(el, origin) }))
+          .sort((a, b) => a.delta.dist - b.delta.dist);
+
+      const sortedSmoke = withDelta(smokeEls);
+      const sortedGoods = withDelta(goodsEls);
+      const sortedDeco = withDelta(decoEls);
+
+      const tl = gsap.timeline({
+        defaults: { force3D: true },
+        onComplete: completeBurst,
+      });
+
+      // --- 箱フレーム：閉じる→溜め→半開き→開く ---
+      // 0.00: closed（revealBaseLayer 済み）
+      if (boxAnim) {
+        tl.fromTo(
+          boxAnim,
+          { scaleX: 1, scaleY: 1, transformOrigin: 'center bottom' },
+          {
+            scaleX: 1.02,
+            scaleY: 0.97,
+            duration: BOX_TIMING.windupDur,
+            ease: 'power1.out',
+          },
+          BOX_TIMING.windupAt
+        );
+        tl.to(
+          boxAnim,
+          {
+            scaleX: 1,
+            scaleY: 1,
+            duration: BOX_TIMING.scaleBackDur,
+            ease: 'power1.inOut',
+          },
+          BOX_TIMING.halfAt
+        );
+      }
+
+      tl.call(
+        () => {
+          box?.classList.remove('is-box-open');
+          box?.classList.add('is-box-half');
+        },
+        null,
+        BOX_TIMING.halfAt
+      );
+
+      tl.call(
+        () => {
+          box?.classList.remove('is-box-half');
+          box?.classList.add('is-box-open');
+        },
+        null,
+        BOX_TIMING.openAt
+      );
+
+      // --- モクモク：下から上へ clip-path（位置は動かさない） ---
+      sortedSmoke.forEach(({ el }, i) => {
+        const end = readCssTransformAsGsap(el);
+        tl.fromTo(
+          el,
+          {
+            opacity: 0,
+            x: end.x,
+            y: end.y,
+            rotation: end.rotation,
+            scaleX: end.scaleX,
+            scaleY: end.scaleY,
+            clipPath: 'inset(100% 0 0 0)',
+          },
+          {
+            opacity: 1,
+            x: end.x,
+            y: end.y,
+            rotation: end.rotation,
+            scaleX: end.scaleX,
+            scaleY: end.scaleY,
+            clipPath: 'inset(0% 0% 0% 0%)',
+            duration: smokeDur,
+            ease: 'cubic-bezier(0.22, 1, 0.36, 1)',
+          },
+          smokeStart + i * 0.03
+        );
+      });
+
+      // --- グッズ飛び出し（モクモク中盤から） ---
+      sortedGoods.forEach(({ el, delta }, i) => {
+        const end = readCssTransformAsGsap(el);
+        const dir = delta.x >= 0 ? 1 : -1;
+        const rot = (5 + (i % 4) * 2.5) * (i % 2 === 0 ? dir : -dir);
+        const clampedRot = Math.max(-rotMax, Math.min(rotMax, rot));
+        const startScale = isSp ? 0.22 : 0.15;
+
+        tl.fromTo(
+          el,
+          {
+            opacity: 0,
+            x: end.x + delta.x,
+            y: end.y + delta.y,
+            rotation: end.rotation + clampedRot,
+            scaleX: end.scaleX * startScale,
+            scaleY: end.scaleY * startScale,
+            transformOrigin: '50% 50%',
+          },
+          {
+            opacity: 1,
+            x: end.x,
+            y: end.y,
+            rotation: end.rotation,
+            scaleX: end.scaleX,
+            scaleY: end.scaleY,
+            duration: goodsDur,
+            ease: 'back.out(1.5)',
+          },
+          goodsStart + i * goodsStagger
+        );
+      });
+
+      // --- 小さな装飾 ---
+      sortedDeco.forEach(({ el, delta }, i) => {
+        const end = readCssTransformAsGsap(el);
+        const rotSign = i % 2 === 0 ? 1 : -1;
+        const side = delta.x >= 0 ? 1 : -1;
+        const rot = (6 + (i % 3) * 3) * rotSign * side;
+        const moveScale = isSp ? 0.85 : 1;
+
+        tl.fromTo(
+          el,
+          {
+            opacity: 0,
+            x: end.x + delta.x * moveScale,
+            y: end.y + delta.y * moveScale,
+            rotation: end.rotation + Math.max(-rotMax, Math.min(rotMax, rot)),
+            scaleX: end.scaleX * 0.2,
+            scaleY: end.scaleY * 0.2,
+            transformOrigin: '50% 50%',
+          },
+          {
+            opacity: 1,
+            x: end.x,
+            y: end.y,
+            rotation: end.rotation,
+            scaleX: end.scaleX,
+            scaleY: end.scaleY,
+            duration: decoDur,
+            ease: 'back.out(1.35)',
+          },
+          decoStart + i * decoStagger
+        );
+      });
+    });
 
   const run = async () => {
     try {
-      // 1) ロゴフェードイン（約 0.6s）
       await wait(30);
       logo?.classList.add('is-visible');
       await wait(600);
-
-      // 2) 静止（約 0.4s）
       await wait(400);
 
-      // 3) 白レイヤーを上へ + ヒーロー要素を順次表示
       opening.classList.add('is-exit');
+      revealBaseLayer();
 
-      // 青色・黄色の背景（パターン + モコモコ）
-      if (bg) show([bg]);
-      show(bgAccent);
-      await wait(120);
+      await waitForImages();
+      await new Promise((r) =>
+        requestAnimationFrame(() => requestAnimationFrame(r))
+      );
 
-      // 白い丸・ドットなどの背景装飾
-      show(decoItems);
-      await wait(140);
+      if (typeof gsap !== 'undefined') {
+        await runBurstTimeline();
+      } else {
+        [...smokeEls, ...goodsEls, ...decoEls].forEach((el) => {
+          el.style.opacity = '1';
+          el.style.clipPath = 'none';
+          el.classList.add('is-opening-shown');
+        });
+        ensureBoxComplete();
+        await wait(800);
+      }
 
-      // ノート／メインイラスト
-      show(illustItems);
-      await wait(160);
-
-      // 「Live life in full color」
-      show(textLines);
-      await wait(150);
-
-      // 「彩り豊かな未来へ」
-      if (catchCopy) show([catchCopy]);
-      await wait(150);
-
-      // ヘッダーと右側ナビゲーション（header 内）
-      if (header) show([header]);
-
-      // カーテン（0.8s）と最後のフェード（0.45s）の両方を待つ
-      // カーテン開始からの累計待ちが約 1.17s になるよう調整
-      await wait(450);
-
+      ensureBoxComplete();
       finish();
     } catch (err) {
+      [...smokeEls, ...goodsEls, ...decoEls].forEach((el) => {
+        if (el) {
+          el.style.opacity = '1';
+          el.style.clipPath = 'none';
+          el.classList.add('is-opening-shown');
+        }
+      });
+      ensureBoxComplete();
+      clearAnimProps(
+        [boxAnim, ...smokeEls, ...goodsEls, ...decoEls].filter(Boolean)
+      );
       finish();
     }
   };
 
-  // レイアウト確定後に開始（ちらつき防止）
   requestAnimationFrame(() => {
     requestAnimationFrame(run);
   });

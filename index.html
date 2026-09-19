@@ -20,7 +20,7 @@
           document.documentElement.classList.remove('is-hero-opening');
           var opening = document.getElementById('opening');
           if (opening) opening.remove();
-        }, 5000);
+        }, 12000);
       } catch (e) {}
     })();
   </script>
@@ -184,7 +184,13 @@
             <img class="hero__illust-item hero__illust-item--pen" src="images/illust/pen.png" alt="" decoding="async">
             <img class="hero__illust-item hero__illust-item--megaphone" src="images/illust/megaphone.png" alt="" decoding="async">
             <img class="hero__illust-item hero__illust-item--girl" src="images/illust/girl.png" alt="" decoding="async">
-            <img class="hero__illust-item hero__illust-item--box" src="images/illust/box.png" alt="" decoding="async">
+            <div class="hero__illust-item hero__illust-item--box" aria-hidden="true">
+              <div class="hero__box-anim">
+                <img class="hero__box-frame hero__box-frame--closed" src="images/illust/box-before01.png" alt="" width="850" height="700" decoding="async">
+                <img class="hero__box-frame hero__box-frame--half" src="images/illust/box-before02.png" alt="" width="850" height="700" decoding="async">
+                <img class="hero__box-frame hero__box-frame--open" src="images/illust/box.png" alt="" width="850" height="700" decoding="async">
+              </div>
+            </div>
             <img class="hero__illust-item hero__illust-item--boy" src="images/illust/boy.png" alt="" decoding="async">
           </div>
         </div>
@@ -1330,6 +1336,7 @@
     </svg>
   </a>
 
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
   <script src="js/main.js"></script>
 </body>
 </html>

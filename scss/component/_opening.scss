@@ -33,6 +33,22 @@
   }
 }
 
+// ロゴフェードイン（変更しない）
+.opening__logo.is-visible {
+  opacity: 1;
+  transform: scale(1);
+  transition:
+    opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+// 白レイヤーを上へスライド（変更しない）
+.opening.is-exit {
+  transform: translate3d(0, -100%, 0);
+  transition: transform 0.8s cubic-bezier(0.76, 0, 0.24, 1);
+  pointer-events: none;
+}
+
 html.is-hero-opening {
   overflow: hidden;
   overflow-x: hidden;
@@ -51,16 +67,88 @@ html.is-hero-opening {
     opacity: 0;
   }
 
-  .hero__illust-item {
+  // 箱・人物もカーテン開始まで非表示
+  .hero__illust-item--box,
+  .hero__illust-item--girl,
+  .hero__illust-item--boy {
     opacity: 0;
-    // 既存のキラキラアニメと競合しないよう一時停止
+  }
+
+  // オープニング中の箱フレーム初期：閉じた箱のみ
+  .hero__illust-item--box {
+    .hero__box-frame--closed {
+      opacity: 1;
+    }
+
+    .hero__box-frame--half,
+    .hero__box-frame--open {
+      opacity: 0;
+    }
+
+    &.is-box-half {
+      .hero__box-frame--closed {
+        opacity: 0;
+      }
+
+      .hero__box-frame--half {
+        opacity: 1;
+      }
+
+      .hero__box-frame--open {
+        opacity: 0;
+      }
+    }
+
+    &.is-box-open {
+      .hero__box-frame--closed,
+      .hero__box-frame--half {
+        opacity: 0;
+      }
+
+      .hero__box-frame--open {
+        opacity: 1;
+      }
+    }
+  }
+
+  // モクモク・グッズ・小さな装飾（箱爆発対象）
+  .hero__illust-item--mokomoko,
+  .hero__illust-item--book-cake,
+  .hero__illust-item--utiwa,
+  .hero__illust-item--bag-green,
+  .hero__illust-item--towel,
+  .hero__illust-item--basketball,
+  .hero__illust-item--book-hana,
+  .hero__illust-item--tape,
+  .hero__illust-item--tape-white,
+  .hero__illust-item--pen,
+  .hero__illust-item--megaphone,
+  .hero__illust-item--maru-2,
+  .hero__illust-item--maru-3,
+  .hero__illust-item--maru-4,
+  .hero__illust-item--maru-5,
+  .hero__illust-item--maru-6,
+  .hero__illust-item--maru-7,
+  .hero__illust-item--dot-siro-a,
+  .hero__illust-item--dot-siro-b,
+  .hero__illust-item--dot-siro-c,
+  .hero__illust-item--dot-siro-d,
+  .hero__illust-item--dot-yellow-a,
+  .hero__illust-item--dot-yellow-b,
+  .hero__illust-item--kira,
+  .hero__illust-item--sparkle,
+  .hero__illust-item--hosi01 {
+    opacity: 0;
     animation: none !important;
+  }
+
+  .hero__illust-item--mokomoko {
+    clip-path: inset(100% 0 0 0);
   }
 
   .hero__text-line,
   .hero__catch {
     opacity: 0;
-    clip-path: inset(100% 0 0 0);
   }
 
   .hero > .header {
@@ -68,47 +156,16 @@ html.is-hero-opening {
   }
 }
 
-// 表示状態（グループごとに JS が付与）
+// カーテン開始時に即表示するベース要素 / 爆発完了後の確保
 html.is-hero-opening {
-  .hero__bg.is-opening-shown {
-    opacity: 1;
-    transition: opacity 0.45s cubic-bezier(0.22, 1, 0.36, 1);
-  }
-
-  .hero__illust-item.is-opening-shown {
-    opacity: 1;
-    transition: opacity 0.4s cubic-bezier(0.22, 1, 0.36, 1);
-  }
-
+  .hero__bg.is-opening-shown,
+  .hero__illust-item.is-opening-shown,
   .hero__text-line.is-opening-shown,
-  .hero__catch.is-opening-shown {
-    opacity: 1;
-    clip-path: inset(0 0 0 0);
-    transition:
-      opacity 0.45s cubic-bezier(0.22, 1, 0.36, 1),
-      clip-path 0.55s cubic-bezier(0.22, 1, 0.36, 1);
-  }
-
+  .hero__catch.is-opening-shown,
   .hero > .header.is-opening-shown {
     opacity: 1;
-    transition: opacity 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+    transition: none;
   }
-}
-
-// ロゴフェードイン
-.opening__logo.is-visible {
-  opacity: 1;
-  transform: scale(1);
-  transition:
-    opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1),
-    transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-// 白レイヤーを上へスライド
-.opening.is-exit {
-  transform: translate3d(0, -100%, 0);
-  transition: transform 0.8s cubic-bezier(0.76, 0, 0.24, 1);
-  pointer-events: none;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -131,6 +188,17 @@ html.is-hero-opening {
       opacity: 1 !important;
       clip-path: none !important;
       transition: none !important;
+    }
+
+    .hero__illust-item--box {
+      .hero__box-frame--closed,
+      .hero__box-frame--half {
+        opacity: 0 !important;
+      }
+
+      .hero__box-frame--open {
+        opacity: 1 !important;
+      }
     }
   }
 }
